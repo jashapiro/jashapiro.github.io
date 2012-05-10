@@ -18,7 +18,7 @@ h1{
   font-style: italic;
   font-size: 36px;
   margin-top: 10px;
-  margin-bottom: 6px;
+  margin-bottom: 0px;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -48,7 +48,8 @@ a:hover{
 p{
   padding-left: 14px;
   padding-right: 10px;
-  padding-bottom:12px;
+  padding-bottom: 6px;
+  padding-top: 6px;
   margin: 0px;
 }
 
@@ -66,17 +67,15 @@ a img {
     border: none;
 }
 
-.align-right {
-  float:right;
-  margin: 5px 5px 12px 12px;
+pre{
+  margin:0;
 }
-
 
 
 #container{
     position: relative;
   	min-width: 820px;
-	max-width: 1000px;
+	max-width: 1100px;
 	margin: 10px auto 10px auto;
 }
 
@@ -97,7 +96,7 @@ a img {
 
 #main {
     margin: 0;
-	padding: 0 200px 0 220px;
+	padding: 0 240px 0 220px;
     padding-top: 22px;
 }
 
@@ -105,7 +104,7 @@ a img {
   position: absolute;
   right: 0px;
   top: 10px;
-  width: 200px;
+  width: 240px;
 }
 
 
@@ -174,7 +173,29 @@ nav a{
 	padding: 0 10px 0 22px;
 }
 
+.highlight {
+  padding: 5px 10px 5px 14px;
+  background-color: #EDEDED;
+  overflow: auto;
+}
 
+.sideblock {	
+}
+
+.sideblock img{
+	max-width: 220px;
+}
+
+.align-right {
+  float:right;
+  margin: 5px 5px 10px 10px;
+}
+
+.align-center {
+	display:block;
+	margin: 10px auto;
+	
+}
 
 
 
@@ -203,5 +224,17 @@ nav a{
 }
 .pages{
 
+}
+
+@media print {
+	.noprint {
+		display:none;
+	}
+	#main {
+		padding-left: 10px;
+	}
+	body {font-size: 12px;} 
+	h1 {font-size: 24px;}
+	h2 {font-size: 14px;}
 }
 
