@@ -3,7 +3,7 @@ layout: Rmd
 title: knitr markdown test
 ---
 
-# Testing knitr and markdown
+# Knitr and markdown tests
 
 This is a minimal example of using **knitr** with in HTML pages. I am actually
 using markdown here since it is more convenient in GitHub.
@@ -23,12 +23,12 @@ render_jekyll()
 hook_plot_md_side <- function(x, options){
   if (!is.null(options$fig.sidebar)) {
     paste(sub("\\s+$", "", hook_plot_md(x, options)),
-          "{: .sidefig .align-right}\n",
+          "{: .sidefig}\n",
           sep = ""
           )
   }else{
     hook_plot_md(x, options)
-  } 
+  }
 }
 knit_hooks$set(plot = hook_plot_md_side)
 {% endhighlight %}
@@ -74,10 +74,20 @@ We can also produce plots:
 
 {% highlight r %}
 library(ggplot2)
-qplot(hp, mpg, data=mtcars)+geom_smooth()
 {% endhighlight %}
 
-![plot of chunk md-cars-scatter](/images/Rplot-md-cars-scatter.png){: .sidefig .align-right}
+
+
+{% highlight text %}
+## Warning message: package 'ggplot2' was built under R version 2.14.2
+{% endhighlight %}
+
+
+
+{% highlight r %}
+qplot(hp, mpg, data=mtcars)+geom_smooth()
+{% endhighlight %}
+![plot of chunk md-cars-scatter](/images/Rplot-md-cars-scatter.png){: .sidefig}
 
 
 
