@@ -2,7 +2,10 @@
 layout: Rmd
 title: knitr markdown test
 ---
-`r opts_chunk$set(tidy=FALSE, fig.path="images/Rplot-", fig.width=3, fig.height=3)`
+`r opts_chunk$set(tidy=FALSE, fig.path="images/Rplot-", fig.width=5, fig.height=5)`
+
+# Knitr and markdown tests
+
 This is a minimal example of using **knitr** with in HTML pages. I am actually
 using markdown here since it is more convenient in GitHub.
 
@@ -19,7 +22,7 @@ render_jekyll()
 hook_plot_md_side <- function(x, options){
   if (!is.null(options$fig.sidebar)) {
     paste(sub("\\s+$", "", hook_plot_md(x, options)),
-          "{: .sidefig .align-right}\n",
+          "{: .sidefig}\n",
           sep = ""
           )
   }else{
