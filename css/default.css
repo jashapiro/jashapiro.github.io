@@ -62,6 +62,10 @@ li{
 	margin: 0;
 	padding: 2px 10px;	
 }
+img {
+	display:block;
+	margin: 10px auto;
+}
 
 a img {
     border: none;
@@ -183,20 +187,20 @@ nav a{
 }
 
 .sideblock img{
+    display:block;
+	margin: 10px auto;
 	max-width: 220px;
 }
 
-.align-right {
+.sidefig {
   float:right;
   margin: 5px 5px 10px 10px;
 }
 
-.align-center {
-	display:block;
-	margin: 10px auto;
-	
+.align-right{
+  float:right;
+  margin: 5px 5px 10px 10px;
 }
-
 
 
 
