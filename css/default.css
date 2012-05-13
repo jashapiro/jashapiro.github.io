@@ -79,13 +79,13 @@ a:hover {
 }
 
 p {
-	padding: 0 14px 10px 12px;
+	padding: 0 10px 10px 16px;
 	margin: 0;
 }
 
 p.tight {
 	padding-bottom: 0;
-	padding-left: 20px;
+	padding-left: 16px;
 	text-indent: -10px;
 }
 
@@ -102,7 +102,7 @@ ul {
 }
 
 ul.bullets {
-	padding-left: 26px;
+	padding-left: 32px;
 	color: #3049A6;
 	list-style-type: disc;
 	text-indent: -16px;
@@ -125,6 +125,11 @@ li.pub {
 
 a img {
 	border: none;
+}
+
+img {
+	display:block;
+	margin: 10px auto;
 }
 
 .align-right {
@@ -194,6 +199,33 @@ nav a {
 	padding: 0 10px 0 22px;
 }
 
+.sideblock{
+	padding:10px;
+}
+
+.sideblock img{
+	max-width: 220px;
+}
+
+.sidefig{
+	float:right;
+	padding:0;
+	margin: 5px -10px 10px 10px;
+	max-width: 220px;
+}
+
+
+.highlight{
+	background-color: #E0E0E0;
+	overflow:auto;
+	padding: 8px 16px;
+}
+
+pre{
+	margin:0;
+}
+
+
 .species {
 	font-style: italic;
 }
@@ -223,3 +255,7 @@ nav a {
 .phone {
   letter-spacing: 1px;
 }
+
+
+
+
