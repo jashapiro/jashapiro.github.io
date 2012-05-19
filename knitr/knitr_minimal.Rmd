@@ -2,7 +2,39 @@
 layout: Rmd
 title: knitr markdown test
 ---
-`r opts_chunk$set(tidy=FALSE, fig.path="images/Rplot-", fig.width=5, fig.height=5)`
+```{r setup, include=FALSE, cache=FALSE}
+render_jekyll()
+opts_chunk$set(tidy=FALSE, fig.path="images/Rplot-", fig.width=5, fig.height=5)
+hook_plot_md_side <- function(x, options){
+  if (options$fig.align== 'sidebar') {
+    ## sidebar figures
+    ## remove terminal space from hook_plot_md 
+    paste(sub("\\s+$", "", hook_plot_md(x, options)),
+          "{: .sidefig}\n",
+          sep = ""
+          )
+  }else if (options$fig.show == 'asis' ||
+            options$fig.num == 1L || 
+            options$fig.cur == options$fig.num){
+    ## alignment class at end of list of figures: will apply to their paragraph
+    if(options$fig.align %in% c('center', 'left', 'right')){
+      div_class <- paste("{: .align-", options$fig.align, "}", sep="")
+      paste(sub("\\s+$", "", hook_plot_md(x, options)),
+          "\n", div_class, "\n", 
+          sep = ""
+          )
+    } else {
+      hook_plot_md(x, options)
+    }
+  } else {
+    hook_plot_md(x, options)
+  }
+}
+knit_hooks$set(plot = hook_plot_md_side)
+##  put files in place
+opts_knit$set(base.dir="..", base.url="/")
+```
+
 
 # Knitr and markdown tests
 
@@ -16,21 +48,6 @@ and **knitr** will automatically determine the output filename to be
 
 I used the code below to make sure **knitr** writes correct URL's for my images.
 
-``` {r setup}
-opts_knit$set(base.dir="..", base.url="/")
-render_jekyll()
-hook_plot_md_side <- function(x, options){
-  if (!is.null(options$fig.sidebar)) {
-    paste(sub("\\s+$", "", hook_plot_md(x, options)),
-          "{: .sidefig}\n",
-          sep = ""
-          )
-  }else{
-    hook_plot_md(x, options)
-  } 
-}
-knit_hooks$set(plot = hook_plot_md_side)
-````
 
 Now we write some code chunks in this markdown file:
 
@@ -44,9 +61,16 @@ rnorm(5)
 
 We can also produce plots:
 
-``` {r md-cars-scatter, message=FALSE, fig.sidebar=T}
+``` {r md-cars-scatter, message=FALSE, fig.align='sidebar'}
 library(ggplot2)
 qplot(hp, mpg, data=mtcars)+geom_smooth()
+````
+
+Testing multiple plot rendering
+
+``` {r cars2, message=FALSE,  fig.align='center'}
+qplot(hp, mpg, data=mtcars)+geom_smooth()
+qplot(hp, mpg, data=mtcars, color = cyl)+geom_smooth()
 ````
 
 So no more hesitation on using GitHub and **knitr**! You just write a minimal
