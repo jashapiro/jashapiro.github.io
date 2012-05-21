@@ -3,34 +3,7 @@ layout: Rmd
 title: knitr markdown test
 ---
 ```{r setup, include=FALSE, cache=FALSE}
-render_jekyll()
-opts_chunk$set(tidy=FALSE, fig.path="images/Rplot-", fig.width=5, fig.height=5)
-hook_plot_md_side <- function(x, options){
-  if (options$fig.align== 'sidebar') {
-    ## sidebar figures
-    ## remove terminal space from hook_plot_md 
-    paste(sub("\\s+$", "", hook_plot_md(x, options)),
-          "{: .sidefig}\n",
-          sep = ""
-          )
-  }else if (options$fig.show == 'asis' ||
-            options$fig.num == 1L || 
-            options$fig.cur == options$fig.num){
-    ## alignment class at end of list of figures: will apply to their paragraph
-    if(options$fig.align %in% c('center', 'left', 'right')){
-      div_class <- paste("{: .align-", options$fig.align, "}", sep="")
-      paste(sub("\\s+$", "", hook_plot_md(x, options)),
-          "\n", div_class, "\n", 
-          sep = ""
-          )
-    } else {
-      hook_plot_md(x, options)
-    }
-  } else {
-    hook_plot_md(x, options)
-  }
-}
-knit_hooks$set(plot = hook_plot_md_side)
+source("knit_jekyll_setup.")
 ##  put files in place
 opts_knit$set(base.dir="..", base.url="/")
 ```
