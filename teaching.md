@@ -1,6 +1,7 @@
 ---
 layout: default
 title: teaching
+permalink: pretty
 ---
 
 # Teaching
