@@ -13,4 +13,7 @@ Much of my work has involved studying natural populations of organisms that have
 
 ## Global selective sweeps in *C. elegans*
 
+*Caenorhabditis elegans* is a globally distributed species of nematode  that lives in decaying plant material and soil. It 
+
+
 ## Functional variation in *S. cerevisiae*
