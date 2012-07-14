@@ -36,8 +36,15 @@
 
       </script>
 
-      	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-      	<script src="http://d3js.org/d3.v2.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script src="/js/sidefig.js"></script>
+      <script type="text/javascript">
+        // adjust highlight classes to allow for more control of background color
+        $(function() {
+          $("code.r").parent().parent().addClass("r_highlight");
+          $("code.text").parent().parent().addClass("text_highlight");
+        });
+      </script>
 
 
   </head>
@@ -93,16 +100,6 @@
 	</div>
   </body>
 
-  <script src="/js/sidefig.js"></script>
-  <script type="text/javascript">
-		//adjust highlight classes to allow for more control of background color
-		var highlights = d3.selectAll(".highlight")
-		highlights.classed("r_highlight", function(d) {
-    		return ! d3.select(this).select("pre").select("code.r").empty();});
-		highlights.classed("text_highlight", function() {
-    		return ! d3.select(this).select("pre").select("code.text").empty();});
-
-		</script>
 </html>
 
 
