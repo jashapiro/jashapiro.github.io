@@ -1,7 +1,7 @@
 ---
 layout: default
 title: teaching
-permalink: pretty
+permalink: /teaching/index.html
 ---
 
 # Teaching
