@@ -13,7 +13,7 @@
 			.noprint {display:none;}
 			#container {width: 990px;}
 			#main {padding-left: 10px;}
-			body {font-size: 14px;} 
+			body {font-size: 14px;}
 			h1 {font-size: 24px;}
 			h2 {font-size: 16px;}
 		}
@@ -36,15 +36,9 @@
       </script>
 
       	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script src="/js/sidefig.js"></script>
-		<script type="text/javascript">
-		//adjust highlight classes to allow for more control of background color
-		$(function() {
-			$("code.r").parent().parent().addClass("r_highlight");
-			$("code.text").parent().parent().addClass("text_highlight");
-		});
-		</script>
-				
+      	<script src="http://d3js.org/d3.v2.js"></script>
+
+
   </head>
   <body class="{{ page.layout }}">
 	<div id="container">
@@ -82,7 +76,7 @@
 				<li>twitter: <a href=http://twitter.com/#!/jashapiro>@jashapiro</a>
 		  </ul>
 		  </div>
-		  
+
      </div>
      <div id="main">
 		 <section id="content">
@@ -90,13 +84,24 @@
 		  </section>
 	  </div>
 	  <div id="sidebar">
-	  
+
 	  </div>
 
 	  </div>
 
 	</div>
   </body>
+
+  <script src="/js/sidefig.js"></script>
+  <script type="text/javascript">
+		//adjust highlight classes to allow for more control of background color
+		var highlights = d3.selectAll(".highlight")
+		highlights.classed("r_highlight", function(d) {
+    		return ! d3.select(this).select("pre").select("code.r").empty();});
+		highlights.classed("text_highlight", function() {
+    		return ! d3.select(this).select("pre").select("code.text").empty();});
+
+		</script>
 </html>
 
 
