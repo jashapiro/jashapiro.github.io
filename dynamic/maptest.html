@@ -1,20 +1,97 @@
 ---
 layout: empty_sidebar
-title: research
+title: elegans map
 ---
 <script src="http://d3js.org/d3.v2.js"></script>
-<par id="worldmap">
+<h1> World distribution of <span class="species">C. Elegans</span></h1> 
+<p>Below this paragraph should appear a world map. Generated in javascript, zoomable with the scroll wheel and pannable by clicking and dragging... cool!</p>
+<p id="worldmap">
 
 <script>
-var rectDemo = d3.select("#worldmap").
-  append("svg:svg").
-  attr("width", 800).
-  attr("height", 300);
 
-rectDemo.append("svg:rect").
-  attr("x", 0).
-  attr("y", 0).
-  attr("height", 100).
-  attr("width", 300);
-  
+var width = 640,
+    height = 300,
+    ratio = height / width
+
+var projection = d3.geo.equirectangular()
+    .scale(width)
+    .translate([width / 2, height / 2]);
+
+var path = d3.geo.path()
+    .projection(projection);
+    
+var zoom = d3.behavior.zoom()
+    .translate(projection.translate())
+    .scale(projection.scale())
+    .scaleExtent([width, 8 * width])
+    .on("zoom", move);
+
+var svg = d3.select("#worldmap").append("svg:svg")
+    .attr("width", width)
+    .attr("height", height)
+    .call(zoom);
+    
+
+var feature = svg.append("svg:g")
+              .selectAll(".feature"),
+    site = svg.append("svg:g")
+              .selectAll(".site");
+
+svg.append("rect")
+    .attr("class", "frame")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("stroke", 'rgba(116,124,149,1)')
+    .attr("fill", 'none');
+
+d3.json("world-countries.json", function(collection) {
+  feature = feature
+      .data(collection.features)
+    .enter().append("path")
+      .attr("class", "feature")
+      .attr("d", path)
+      .attr('fill', 'rgba(116,124,149,0.5)')
+      .attr('stroke', 'rgba(116,124,149,1)')
+      .attr('stroke-width', 0.1);
+});
+
+d3.csv("worm-strains.csv", function(data){
+  var points = data.map(worm_csv2json);
+  site=site.data(points)
+    .enter().append("path")
+    .attr("class", "site")
+    .attr("d", path)  
+    .attr("r", 3)
+    .attr("fill", function(s){
+        if(s.properties.plug == "N2") 
+          return "rgba(199,138,34,0.8)";
+        else if (s.properties.plug == "CB4856")
+          return "rgba(37,74,168,0.8)"  ;
+        else return "rgba(0,0,0,0.8)";});
+});
+
+function worm_csv2json(d) {
+    return {"type" : "Feature",
+            "properties":{"name":d.strain,
+                          "peel":d.peel,
+                          "plug":d.plg
+                          },
+            "geometry":{"type":"Point",
+                        "coordinates":[parseFloat(d.longitude),
+                                       parseFloat(d.latitude)]
+                        }
+            };
+    }
+    
+
+function move() {
+  var t = d3.event.translate,
+      s = d3.event.scale;
+  t[0] = Math.max( width - s / 2 , Math.min( s / 2, t[0]));
+  t[1] = Math.max( height - s * ratio  / 2, Math.min(s * ratio / 2, t[1]));
+  zoom.translate(t);
+  projection.translate(t).scale(s);
+  feature.attr("d", path);
+  site.attr("d", path);
+}
 </script>
