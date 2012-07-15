@@ -33,7 +33,7 @@ body {
 
 #main {
 	margin: 0;
-	padding: 0 10px 0 220px;
+	padding: 0 10px 0 240px;
 	padding-top: 22px;
 }
 
@@ -186,14 +186,14 @@ nav a {
 	text-decoration: none;
 }
 
-#sidebar ul {
+#info ul {
 	padding: 0;
 	padding-right: 22px
 	padding-left: 10px
 
 }
 
-#sidebar li {
+#info li {
 	padding: 0 22px 0 10px;
 	font-size: 14px;
 }
