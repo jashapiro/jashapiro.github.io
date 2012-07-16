@@ -1,3 +1,8 @@
+/*********
+tardis blue (pantone 2955C): #003B6F;
+klein blue (via wikipedia): #002FA7
+*********/
+
 html {
 	margin: 0;
 	padding: 0;
@@ -38,7 +43,7 @@ body {
 }
 
 h1 {
-	color: #3049A6;
+	color: #003B6F;
 	font-family: 'Open Sans', 'Helvetica', sans-serif;
 	font-weight: bold;
 	font-style: italic;
@@ -58,7 +63,7 @@ h1 em{
 }
 
 h2 {
-	color: #3049A6;
+	color: #003B6F;
 	font-family: 'Open Sans', 'Helvetica', sans-serif;
 	font-weight: bold;
 	font-size: 18px;
@@ -75,7 +80,7 @@ a {
 }
 
 a:hover {
-	color: #3049A6;
+	color: #003B6F;
 }
 
 p {
@@ -103,7 +108,7 @@ ul {
 
 ul.bullets {
 	padding-left: 32px;
-	color: #3049A6;
+	color: #003B6F;
 	list-style-type: disc;
 	text-indent: -16px;
 }
@@ -186,7 +191,7 @@ nav li {
 }
 
 nav a {
-	color: #3049A6;
+	color: #003B6F;
 	text-decoration: none;
 }
 
