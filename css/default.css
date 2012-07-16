@@ -53,6 +53,10 @@ h1 .species{
   font-style: normal;
 }
 
+h1 em{
+  font-style: normal;
+}
+
 h2 {
 	color: #3049A6;
 	font-family: 'Open Sans', 'Helvetica', sans-serif;

@@ -8,12 +8,39 @@
 	  <link href="http://fonts.googleapis.com/css?family=Lora:400,400italic,700%7COpen+Sans:400italic,600,600italic" rel='stylesheet' type="text/css" />
 	  <link type="text/css" rel="stylesheet" href="/css/default.css" />
 	  
-	  <!-- Remove sidebar for printing -->
+	  <!-- add sidebar and adjust formatting -->
 	  <style type="text/css">
-    	@media print {
-      		.noprint { display: none; }
-      		#main {padding-left: 10px}
-    	}
+	   #container {
+		   width: 1000px;
+	   }
+	   #main {
+	   		padding: 22px 180px 0 240px;
+	   }
+	   #sidebar {
+		   position: absolute;
+		   right: 0px;
+		   top: 10px;
+		   width: 200px;
+	   }
+	   
+	   #sidebar h2 {
+		   margin-bottom: 0px;
+	   }
+	
+	   #sidebar ul {
+		   padding: 0;
+		   font-size: 14px;
+	   }
+ 
+	   #sidebar li {
+		   padding: 0 10px 0 22px;
+	   }
+	  	
+	   @media print {
+		   .noprint { display: none; }
+		   #main {padding: 0 240px 0 60px;}
+		   #sidebar {width: 240px}
+	   }
   	  </style>
 
 	  <!-- Google Analytics -->
