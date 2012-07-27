@@ -151,12 +151,6 @@ img {
 	display:block;
 	margin: 5px auto;
 }
-.align-sidebar {
-	float:right;
-	padding:0;
-	margin: 5px -230px 10px 10px;
-	max-width: 220px;
-}
 
 h1.title {
 	font-style: normal;
