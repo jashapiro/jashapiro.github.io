@@ -13,12 +13,15 @@ Much of my work has involved studying natural populations of organisms that have
 
 ## Global selective sweeps in *C. elegans*
 
-*Caenorhabditis elegans* is a globally distributed species of nematode that lives in decaying plant material and soil. It has been used as a model for developmental biology and genetics for over 50 years, with work on the species resulting in three Nobel prizes. Almost all of this work was done using a single strain, but there has long been interest in the natural variation and population genetics of the species. 
+*Caenorhabditis elegans* is a globally distributed species of nematode that lives in decaying plant material and soil. It has been used as a model for developmental biology and genetics for over 50 years, with work on the species resulting in three Nobel prizes. Almost all of this work was done using a single strain, but there has long been interest in the natural variation and population genetics of the species.
 
-*C. elegans* was known to have fairly low genetic diversity (a level similar to humans), and it was widely suspected that this low diversity was largely the result of the fact that *C. elegans* is a selfing hermaphrodite (with rare males), a life history that tends to result in greater power for purifying selection. Even mutations with very small negative effects will tend to be eliminated fairly quickly by natural selection, taking with them neutral variation, in a process called [background selection](http://www.ncbi.nlm.nih.gov/pubmed/8375663?dopt=Abstract "Charlesworth et al. The effect of deleterious mutations on neutral molecular variation.").  
+*C. elegans* was known to have fairly low genetic diversity (a level similar to humans), and it was widely suspected that this low diversity was largely the result of the fact that *C. elegans* is a selfing hermaphrodite (with rare males), a life history that tends to result in greater power for purifying selection. Even mutations with very small negative effects will tend to be eliminated fairly quickly by natural selection, taking with them neutral variation, in a process called [background selection](http://www.ncbi.nlm.nih.gov/pubmed/8375663?dopt=Abstract "Charlesworth et al. The effect of deleterious mutations on neutral molecular variation.").
 
 Together with [Erik Andersen](http://www.princeton.edu/~eca "Erik Andersen's Homepage") and Justin Gerke, I undertook a larg-scale study of the global and genomic diversity of *C. elegans*, examining over 200 strains using high-throughput sequencing. We discovered the surprising fact that in the vast majority of strains, a set of very recent and strong selective sweeps had eliminated almost all genetic variation from large regions of four of the six *C. elegans* chromosomes.
 
+![Haplotypes on chromosomes III and IV](/images/two_chroms.png =500x300){:.align-right width=500 height=300}
+
+{% img .align-right /images/two_chroms.png 500 300 "Haplotypes on chromosomes III and IV" %}
 
 ## Functional variation in *S. cerevisiae*
 
