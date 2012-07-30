@@ -5,8 +5,9 @@ title: elegans map
 <script src="http://d3js.org/d3.v2.js"></script>
 <h1> World distribution of <span class="species">C. elegans</span> strains</h1> 
 <p>Below this paragraph should appear a world map. Generated in javascript, zoomable with the scroll wheel and pannable by clicking and dragging... cool!</p>
-<p id="worldmap">
-
+<p><span id="worldmap"></span><br>
+<span id="strainid">STRAINID</span>
+</p>
 <script>
 
 var width = 640,
@@ -32,10 +33,17 @@ var svg = d3.select("#worldmap").append("svg:svg")
     .call(zoom);
     
 
-var feature = svg.append("svg:g")
-              .selectAll(".feature"),
-    site = svg.append("svg:g")
-              .selectAll(".site");
+var countries = svg.append("g")
+        .attr("id", "countries")
+        .selectAll(".country"),
+    sites = svg.append("g")
+        .attr("id", "sites")
+        .selectAll(".site"),
+    cells = svg.append("g")
+      .attr("id", "cells")
+      .selectAll(".cell"),
+    arcs = svg.selectAll("g.cell path.arc");
+              
 
 svg.append("rect")
     .attr("class", "frame")
@@ -45,19 +53,91 @@ svg.append("rect")
     .attr("fill", 'none');
 
 d3.json("world-countries.json", function(collection) {
-  feature = feature
+  countries = countries
       .data(collection.features)
-    .enter().append("path")
-      .attr("class", "feature")
+      .enter().append("path")
+      .attr("class", "country")
       .attr("d", path)
       .attr('fill', 'rgba(116,124,149,0.5)')
       .attr('stroke', 'rgba(116,124,149,1)')
       .attr('stroke-width', 0.1);
 });
 
+
+d3.csv("shared_segments.csv", function(segments){
+  var linksByStrain = {},
+      countByStrain = {},
+      lengthBySegment = {},
+      locationByStrain = {},
+      points = [];
+ 
+  var segment = d3.geo.greatArc()
+      .source(function(d) { return locationByStrain[d.source]; })
+      .target(function(d) { return locationByStrain[d.target]; });
+  
+  segments.forEach(function(s) {
+    var strain1 = s.strain1,
+        strain2 = s.strain2,
+        segment_length = s.end - s.start + 1,
+        segment_id1 = strain1 + "-" + strain2,
+        segment_id2 = strain2 + "-" + strain1,
+        links1 = linksByStrain[strain1] || (linksByStrain[strain1] = []),
+        links2 = linksByStrain[strain2] || (linksByStrain[strain2] = []);
+    links1.push({source: strain1, target: strain2});
+    links2.push({source: strain2, target: strain1});
+    countByStrain[strain1] = (countByStrain[strain1] || 0) + 1;
+    countByStrain[strain2] = (countByStrain[strain2] || 0) + 1;
+    lengthBySegment[segment_id1] =  (lengthBySegment[segment_id1] || 0) + segment_length;
+    lengthBySegment[segment_id2] =  (lengthBySegment[segment_id2] || 0) + segment_length;
+  });
+  
+  d3.csv("worm-strains.csv", function(strains){
+    points = strains.map(function(d) { 
+        point = worm_csv2json(d);
+        locationByStrain[d.strain] = [d.longitude, d.latitude];
+        return point; 
+    }); 
+    sites=sites.data(points)
+        .enter().append("path")
+        .attr("class", "site")
+        .attr("d", path)  
+        .attr("r", 3)
+        .attr("fill", function(s){
+            if(s.properties.plug == "N2") 
+              return "rgba(199,138,34,0.8)";
+            else if (s.properties.plug == "CB4856")
+              return "rgba(0,47,167,0.8)"  ;
+            else return "rgba(0,0,0,0.7)";});
+            
+     cells = cells.data(strains)
+        .enter().append("g")
+        .attr("class", "cell");
+;
+      
+    arcs = cells.selectAll("path.arc")
+        .data(function(d) {return segment(linksByStrain[d.strain]) || [] ;}) 
+        .enter().append("path")
+        .attr("class", "arc")
+        .attr("fill", "none")
+        .attr("stroke", "#000")
+        .attr("d", function(d) { return path(segment(d)); })
+        .attr("stroke-width", function(d) {
+          var segment_id = d.source + "_" + d.target;
+          return lengthBySegment[segment_id]/12000000;
+        });
+  
+  });
+
+      
+});
+
+
+
+
+/*
 d3.csv("worm-strains.csv", function(data){
   var points = data.map(worm_csv2json);
-  site=site.data(points)
+  sites=sites.data(points)
     .enter().append("path")
     .attr("class", "site")
     .attr("d", path)  
@@ -69,6 +149,10 @@ d3.csv("worm-strains.csv", function(data){
           return "rgba(0,47,167,0.8)"  ;
         else return "rgba(0,0,0,0.7)";});
 });
+*/
+
+
+
 
 function worm_csv2json(d) {
     return {"type" : "Feature",
@@ -82,7 +166,20 @@ function worm_csv2json(d) {
                         }
             };
     }
-    
+
+
+function link2json(d) {
+    return {"type" : "Feature",
+            "properties":{"name":d.strain,
+                          "peel":d.peel,
+                          "plug":d.plg
+                          },
+            "geometry":{"type":"Point",
+                        "coordinates":[parseFloat(d.longitude),
+                                       parseFloat(d.latitude)]
+                        }
+            };
+    }
 
 function move() {
   var t = d3.event.translate,
@@ -91,7 +188,9 @@ function move() {
   t[1] = Math.max( height - s * ratio  / 2, Math.min(s * ratio / 2, t[1]));
   zoom.translate(t);
   projection.translate(t).scale(s);
-  feature.attr("d", path);
-  site.attr("d", path);
+  countries.attr("d", path);
+  sites.attr("d", path);
+  cells.attr("d", path);
+  arcs.attr("d", path);
 }
 </script>
