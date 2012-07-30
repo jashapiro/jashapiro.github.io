@@ -17,11 +17,11 @@ Much of my work has involved studying natural populations of organisms that have
 
 *C. elegans* was known to have fairly low genetic diversity (a level similar to humans), and it was widely suspected that this low diversity was largely the result of the fact that *C. elegans* is a selfing hermaphrodite (with rare males), a life history that tends to result in greater power for purifying selection. Even mutations with very small negative effects will tend to be eliminated fairly quickly by natural selection, taking with them neutral variation, in a process called [background selection](http://www.ncbi.nlm.nih.gov/pubmed/8375663?dopt=Abstract "Charlesworth et al. The effect of deleterious mutations on neutral molecular variation.").
 
-Together with [Erik Andersen](http://www.princeton.edu/~eca "Erik Andersen's Homepage") and Justin Gerke, I undertook a larg-scale study of the global and genomic diversity of *C. elegans*, examining over 200 strains using high-throughput sequencing. We discovered the surprising fact that in the vast majority of strains, a set of very recent and strong selective sweeps had eliminated almost all genetic variation from large regions of four of the six *C. elegans* chromosomes.
+<img class="align-right" src="/images/two_chroms.png" alt="elegans haplotypes" title="Haplotype blocks on C. elegans Chromosomes III and V" width="400px" height="240px" />
 
-![Haplotypes on chromosomes III and IV](/images/two_chroms.png =500x300){:.align-right width=500 height=300}
+Together with [Erik Andersen](http://www.princeton.edu/~eca "Erik Andersen's Homepage") and Justin Gerke, I undertook a larg-scale study of the global and genomic diversity of *C. elegans*, examining over 200 strains using high-throughput sequencing. We began by confirming the general patterns of diversity that had previously been observed using smaller data sets, but our data allowed us to see patterns that had never been appreciated before. Not only was overall diversity low, but on three of the six *C. elegans* chromosomes, large regions were completely identical across strains collected from all over the globe. These long blocks of identity are compelling evidence for the presence of , or haplotypes, o  the surprising fact that in the vast majority of strains, a set of very recent and strong selective sweeps had eliminated almost all genetic variation from large regions of four of the six *C. elegans* chromosomes.
 
-{% img .align-right /images/two_chroms.png 500 300 "Haplotypes on chromosomes III and IV" %}
+
 
 ## Functional variation in *S. cerevisiae*
 
