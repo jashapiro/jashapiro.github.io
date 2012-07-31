@@ -152,6 +152,11 @@ img {
 	margin: 5px auto;
 }
 
+.align-pullright {
+	float: right;
+	margin: 5px -100px 12px 12px;
+}
+
 h1.title {
 	font-style: normal;
 	position: absolute;
@@ -203,6 +208,28 @@ nav li {
 nav a {
 	color: #002FA7;
 	text-decoration: none;
+}
+
+figure {
+  display: table;
+  border: 2px solid #bdc2cf;
+  border-radius: 12px;
+  padding:8px;
+  width: 1px; //makes this shrink to figure size
+}
+
+figure img{
+  display: table-row;
+  margin:0px;
+  margin-bottom: 8px;
+}
+
+figcaption {
+  display: table-row;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 12px;
+  text-align: justify;
+  ;
 }
 
 #info ul {
