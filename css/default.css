@@ -220,7 +220,7 @@ figure {
   border: 2px solid #bdc2cf;
   border-radius: 12px;
   padding:8px;
-  width: 1px; //makes this shrink to figure size
+  width: 200px; //makes this shrink to figure size
 }
 
 figure img{

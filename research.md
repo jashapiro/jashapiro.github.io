@@ -31,6 +31,7 @@ If you are interested in exploring this in more detail, you could do worse than 
 ## Functional variation in *S. cerevisiae*
 
 Another focus of my post-doctoral research has been to identify and characterize the natural patterns of functional variation in the brewers yeast *Saccharomyces cerevisiae*.  Working with Joseph Schacherer, I used an unbiased SNP discovery platform developed in our lab to examined variation in strains of yeast collected from around the world in different environments, both natural and industrial. We generated one of the most comprehensive sets of data on genomic diversity of *S. cerevisiae* strains polymorphism available.  
+
 <figure class="align-pullleft">
 <img src="/images/yeast_tree.png" alt="cerevisiae tree" title="Tree of S. cerevisiae strains" width="400px" height="291px" />
 <figcaption>
