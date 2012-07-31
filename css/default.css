@@ -157,6 +157,11 @@ img {
 	margin: 5px -100px 12px 12px;
 }
 
+.align-pullleft {
+	float: left;
+	margin: 5px 12px 12px -100px;
+}
+
 h1.title {
 	font-style: normal;
 	position: absolute;
