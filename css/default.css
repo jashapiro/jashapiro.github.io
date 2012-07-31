@@ -152,12 +152,12 @@ img {
 	margin: 5px auto;
 }
 
-.align-pullright {
+.pull-right {
 	float: right;
 	margin: 5px -100px 12px 12px;
 }
 
-.align-pullleft {
+.pull-left {
 	float: left;
 	margin: 5px 12px 12px -100px;
 }
