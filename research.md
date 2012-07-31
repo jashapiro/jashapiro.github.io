@@ -30,3 +30,13 @@ If you are interested in exploring this in more detail, you could do worse than 
 
 ## Functional variation in *S. cerevisiae*
 
+Another focus of my post-doctoral research has been to identify and characterize the natural patterns of functional variation in the brewers yeast *Saccharomyces cerevisiae*.  Working with Joseph Schacherer, I used an unbiased SNP discovery platform developed in our lab to examined variation in strains of yeast collected from around the world in different environments, both natural and industrial. We generated one of the most comprehensive sets of data on genomic diversity of *S. cerevisiae* strains polymorphism available.  
+<figure class="align-pullleft">
+<img src="/images/yeast_tree.png" alt="cerevisiae tree" title="Tree of S. cerevisiae strains" width="400px" height="291px" />
+<figcaption>
+A neighbor-joining tree illustrating the relationships among a global sample of <em>S. cerevisiae</em> strains, determined by genome-wide array-based genotyping. There is little geographic structure among the strains, but they are strongly clustered by environment, particularly strains derived from wineries, sake production and laboratory research. </figcaption>
+</figure>
+
+These data clearly demonstrated strong population structure in *S. cerevisiae*, most likely largely driven by strong selection of domestication for winemaking, sake production, and laboratory work. These
+
+Through a genome-wide association study (GWAS), I identified sets of polymorphisms that are responsible for changes in global gene expression among these strains. Population genetic analysis of these polymorphisms shows that changes in trans-acting factors tend to be deleterious, especially when they affect the expression of many other genes. By contrast, cis-regulatory variants are more likely to be neutral or adaptive. 
