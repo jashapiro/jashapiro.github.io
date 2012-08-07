@@ -1,7 +1,8 @@
 /*********
 a couple of color references
 tardis blue (pantone 2955C): #003B6F;
-international klein blue (via wikipedia): #002FA7
+international klein blue (via wikipedia): #002FA7 rgba(0,48,166)
+slate grey: #747C95
 *********/
 
 
@@ -77,8 +78,11 @@ h2 {
 }
 
 a {
-	color: #747C95;
+	color: #000;
 	text-decoration: none;
+	padding-bottom: 2px;
+	border-bottom: 1px solid #bfc3d0;
+	line-height: 
 }
 
 a:hover {
@@ -88,17 +92,20 @@ a:hover {
 p {
 	padding: 0 10px 10px 16px;
 	margin: 0;
+	line-height: 1.5em;
 }
 
 p.tight {
 	padding-bottom: 0;
 	padding-left: 16px;
 	text-indent: -10px;
+	line-height: 1em;
 }
 
 p.subh1 {
 	padding-left: 36px;
 	margin: -12px 0;
+	line-height: 1em;
 }
 
 ul {
@@ -172,11 +179,13 @@ h1.title {
 	font-family: 'Lora', 'Georgia', serif;
 	font-weight: bold;
 	font-size: 36px;
+	
 }
 
 h1.title a {
 	color: #747C95;
 	text-decoration: none;
+	border-bottom: none;
 }
 
 h1.title a:hover {
@@ -213,7 +222,10 @@ nav li {
 nav a {
 	color: #002FA7;
 	text-decoration: none;
+	border: none;
 }
+
+
 
 figure {
   display: table;
@@ -248,7 +260,11 @@ figcaption {
 	padding: 0 22px 0 10px;
 	font-size: 14px;
 }
-
+#info a {
+  color: #747C95;
+	text-decoration: none;
+	border: none;
+}
 .sideblock{
 	padding:10px;
 }
