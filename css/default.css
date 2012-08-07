@@ -82,7 +82,6 @@ a {
 	text-decoration: none;
 	padding-bottom: 2px;
 	border-bottom: 1px solid #bfc3d0;
-	line-height: 
 }
 
 a:hover {
@@ -96,10 +95,14 @@ p {
 }
 
 p.tight {
-	padding-bottom: 0;
+	padding-bottom: 2px;
 	padding-left: 16px;
 	text-indent: -10px;
 	line-height: 1em;
+}
+
+p.tight a {
+ padding-bottom: 0;
 }
 
 p.subh1 {
