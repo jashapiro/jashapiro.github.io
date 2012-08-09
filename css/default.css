@@ -77,8 +77,9 @@ h2 {
 	padding-right: 10px;
 }
 
+
 a {
-	color: #000;
+	color: inherit;
 	text-decoration: none;
 	padding-bottom: 2px;
 	border-bottom: 1px solid #bfc3d0;
@@ -185,17 +186,17 @@ h1.title {
 	
 }
 
-h1.title a {
+.title a {
 	color: #747C95;
 	text-decoration: none;
 	border-bottom: none;
 }
 
-h1.title a:hover {
+.title a:hover {
 	color: #747C95;
 }
 
-h2.description {
+.description {
 	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
 	color: #747C95;
 	font-size: 12px;
@@ -274,7 +275,6 @@ cite{
 }
 
 cite a{
-  color: #747C95;
   border: none;
 }
 
@@ -282,35 +282,12 @@ cite:before {
 content: "– ";
 }
 
-#info ul {
-	padding: 0;
-	padding-right: 22px
-	padding-left: 10px
-
-}
-
-#info li {
-	padding: 0 22px 0 10px;
-	font-size: 14px;
-}
-#info a {
+.file-link{
+  font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  padding-left: 10px; 
   color: #747C95;
-	text-decoration: none;
-	border: none;
-}
-.sideblock{
-	padding:10px;
-}
-
-.sideblock img{
-	max-width: 220px;
-}
-
-.sidefig{
-	float:right;
-	padding:0;
-	margin: 5px -10px 10px 10px;
-	max-width: 220px;
 }
 
 
@@ -355,6 +332,20 @@ pre{
   letter-spacing: 1px;
 }
 
+#info li {
+	padding: 0 22px 0 10px;
+	font-size: 14px;
+}
+#info a {
+  color: #747C95;
+	text-decoration: none;
+	border: none;
+}
 
+#info ul {
+	padding: 0;
+	padding-right: 22px
+	padding-left: 10px
 
+}
 
