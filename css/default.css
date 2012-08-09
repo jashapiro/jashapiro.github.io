@@ -41,8 +41,7 @@ body {
 
 #main {
 	margin: 0;
-	padding: 0 10px 0 240px;
-	padding-top: 22px;
+	padding: 23px 10px 0 240px;
 }
 
 h1 {
@@ -50,7 +49,7 @@ h1 {
 	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
 	font-weight: bold;
 	font-style: italic;
-	font-size: 36px;
+	font-size: 40px;
 	margin-top: 10px;
 	margin-bottom: 6px;
 	padding-left: 10px;
@@ -69,8 +68,8 @@ h2 {
 	color: #002FA7;
 	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
 	font-weight: bold;
-	font-size: 18px;
-	margin-top: 18px;
+	font-size: 20px;
+	margin-top: 20px;
 	margin-bottom: 6px;
 	margin-left: 0px;
 	padding-left: 10px;
@@ -173,7 +172,7 @@ img {
 	margin: 5px 12px 12px -100px;
 }
 
-h1.title {
+.title {
 	font-style: normal;
 	position: absolute;
 	bottom: 0px;
@@ -199,8 +198,8 @@ h1.title {
 .description {
 	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
 	color: #747C95;
-	font-size: 12px;
-	line-height: 12px;
+	font-size: 13px;
+	line-height: 13px;
 	font-style: italic;
 	font-weight: normal;
 	padding-left: 10px;
