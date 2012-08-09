@@ -47,7 +47,7 @@ body {
 
 h1 {
 	color: #002FA7;
-	font-family: 'Open Sans', 'Helvetica', sans-serif;
+	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
 	font-weight: bold;
 	font-style: italic;
 	font-size: 36px;
@@ -67,7 +67,7 @@ h1 em{
 
 h2 {
 	color: #002FA7;
-	font-family: 'Open Sans', 'Helvetica', sans-serif;
+	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
 	font-weight: bold;
 	font-size: 18px;
 	margin-top: 18px;
@@ -196,7 +196,7 @@ h1.title a:hover {
 }
 
 h2.description {
-	font-family: 'Open Sans', 'Helvetica', sans-serif;
+	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
 	color: #747C95;
 	font-size: 12px;
 	line-height: 12px;
@@ -246,10 +246,40 @@ figure img{
 
 figcaption {
   display: table-row;
-  font-family: 'Helvetica', 'Arial', sans-serif;
-  font-size: 12px;
+  font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+  font-size: 14px;
   text-align: justify;
-  ;
+}
+
+blockquote {
+  float: right;
+  width: 320px;
+  font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  padding: 10px 20px;
+  margin: 0px;
+  margin-right:-100px;
+  color: #515663;
+}
+
+cite{
+  display: block;
+  font-family: 'Lora', 'Georgia', serif;
+  font-style: italic;
+  text-align: right;
+  padding: 0px;
+  margin: 0px;
+  color: #747C95;
+}
+
+cite a{
+  color: #747C95;
+  border: none;
+}
+
+cite:before {
+content: "– ";
 }
 
 #info ul {
