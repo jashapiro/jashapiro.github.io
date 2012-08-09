@@ -263,6 +263,18 @@ blockquote {
   margin-right:-100px;
   color: #515663;
 }
+/* 
+blockquote:before {
+    content: "“";
+    font-size: 80px;
+    font-family: 'Lora', 'Georgia', serif;
+    display: block;
+    height: 30px;
+    margin-left: -20px;  
+    color: #E9E9E9;
+}
+ */
+
 
 cite{
   display: block;
@@ -289,7 +301,12 @@ content: "– ";
   padding-left: 10px; 
   color: #747C95;
 }
-
+.file-link:before {
+content: "[";
+}
+.file-link:after {
+content: "]";
+}
 
 .highlight{
 	background-color: #E0E0E0;

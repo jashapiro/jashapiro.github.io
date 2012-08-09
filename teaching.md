@@ -8,7 +8,8 @@ permalink: /teaching/index.html
 
 Below are brief descriptions of some the courses that I have designed and taught recently, including links to syllabus documents.
 
-## Introduction to Genomics and Bioinformatics <span class="file-link">[[syllabus](/docs/BiolB216_syllabus_fall2011.pdf)]</span>
+## Introduction to Genomics and Bioinformatics <span class="file-link">[syllabus](/docs/BiolB216_syllabus_fall2011.pdf)</span>
+
 <blockquote> We shift over our fingers the first grains of this great outpouring of information and say to ourselves that the world be helped by it.<br>…one small link in the chain from biochemistry and mathematics to sociology and medicine.
 <cite><a href="http://en.wikipedia.org/wiki/Margaret_Oakley_Dayhoff">Margaret Dayhoff</a><br>(<a href="http://dx.doi.org/10.1007/s10739-009-9221-0">Strasser 2010</a>)</cite>
 </blockquote>
@@ -20,17 +21,16 @@ An introduction to the study of genomes and genomic data. This course will exami
 
 
 
-## Evolutionary Genetics and Genomics <span class="file-link">[[syllabus](/docs/BiolB327_syllabus_spring2012.pdf)]</span>
+## Evolutionary Genetics and Genomics <span class="file-link">[syllabus](/docs/BiolB327_syllabus_spring2012.pdf)</span>
 <blockquote>…nothing makes sense in biology except in the light of evolution, <em>sub specie evolutionis</em>.
 <cite><a href='http://en.wikipedia.org/wiki/Theodosius_Dobzhansky'> Theodosius Dobzhansky</a><br>(<a href="http://dx.doi.org/10.1093/icb/4.4.443">Dobzhansky 1964</a>)</cite>
 </blockquote>
 
-This seminar course will discuss evolution primarily at the level of genes and genomes. Topics will include the roles of selection and drift in molecular evolution, evolution of gene expression, genomic approaches to the study of quantitative variation, evolutionary history of humans, and evolutionary perspectives on the study of human disease. Students  read papers from the primary literature, lead and participate in class discussions and debates, and write reviews of research articles.
-<br><span class='file-link'></span>
 
-## Experimental Design and Statistics <span class="file-link">[[syllabus](/docs/BiolB215_syllabus_spring2012.pdf)]</span>
 
-<blockquote>Statistics is applied philosophy of science. 
+## Experimental Design and Statistics <span class="file-link">[syllabus](/docs/BiolB215_syllabus_spring2012.pdf)</span>
+
+<blockquote>Statistics is applied philosophy of science.
 <cite><a href='http://www.statslab.cam.ac.uk/~apd/'>A. P. Dawid</a><br>(<a href="http://www.worldcat.org/title/statistics-a-very-short-introduction/oclc/216938494">Hand 2008</a>)</cite>
 </blockquote>
 
