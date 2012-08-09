@@ -33,7 +33,7 @@ body {
 	margin-top: 0px;
 }
 
-#head_title {
+#head-title {
 	height: 50px;
 	margin: 0px;
 	position: relative;
@@ -106,7 +106,7 @@ p.tight a {
 }
 
 p.subh1 {
-	padding-left: 36px;
+	padding-left: 50px;
 	margin: -12px 0;
 	line-height: 1em;
 }
@@ -172,7 +172,7 @@ img {
 	margin: 5px 12px 12px -100px;
 }
 
-.title {
+#site-title {
 	font-style: normal;
 	position: absolute;
 	bottom: 0px;
@@ -185,13 +185,13 @@ img {
 	
 }
 
-.title a {
+#site-title a {
 	color: #747C95;
 	text-decoration: none;
 	border-bottom: none;
 }
 
-.title a:hover {
+#site-title a:hover {
 	color: #747C95;
 }
 
@@ -330,7 +330,7 @@ pre{
 	font-weight: bold;
 }
 
-.title {
+.paper-title {
 }
 
 .journal {
