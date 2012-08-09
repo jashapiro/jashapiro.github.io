@@ -26,6 +26,7 @@ An introduction to the study of genomes and genomic data. This course will exami
 <cite><a href='http://en.wikipedia.org/wiki/Theodosius_Dobzhansky'> Theodosius Dobzhansky</a><br>(<a href="http://dx.doi.org/10.1093/icb/4.4.443">Dobzhansky 1964</a>)</cite>
 </blockquote>
 
+This seminar focuses on topics in population genetics and molecular evolution, beginning our discussions by examining classic papers from the primary literature. Many of these classic papers are based on data from only one or a few genes, but advances in technology are now making it possible to revisit those questions with data from entire genomes. By comparing the classic papers with more recent work at done at genomic scales, we can see how the orignal models have been adapted and updated with the addition of more complete data. This new genomic data answers many long-standing questions, but also raises new questions and avenues of inquiry that we are only beginning to explore. Topics include the roles of selection and drift in molecular evolution, evolution of gene expression, genomic approaches to the study of quantitative variation, evolutionary history of humans, and evolutionary perspectives on the study of human disease. Students write weekly responses to the assigned readings, lead and participate in class discussions and debates, and write a final review paper on a topic of their choice.
 
 
 ## Experimental Design and Statistics <span class="file-link">[syllabus](/docs/BiolB215_syllabus_spring2012.pdf)</span>
