@@ -6,19 +6,15 @@
   </head>
   <body class="{{ page.layout }}">
 	<div id="container">
-	 <div id="head_nav">
+	 <section id="head_nav">
 	    {% include site_title.html %}
 	  	{% include site_nav.html %}
 	  	{% include info.html %}
-	  </div>
-	  <div id="main">
-		 <section id="content">
+	  </section>
+		<section id="content">
 			  {{ content }}
-		  </section>
-	  </div>
-
-
-	</div>
+		</section>
+</div>
   </body>
 </html>
 
