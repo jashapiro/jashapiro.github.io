@@ -171,7 +171,6 @@ pre{
 	position: relative;
 }
 
-
 #site-title {
 	bottom: 0px;
 	font-family: 'Lora', 'Georgia', serif;
@@ -188,10 +187,23 @@ pre{
 	color: #747C95;
 	text-decoration: none;
 }
-
 #site-title a:hover {
 	color: #747C95;
 }
+#tagline {
+	color: #747C95;
+	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+	font-size: 13px;
+	font-style: italic;
+	font-weight: normal;
+	line-height: 13px;
+	margin-bottom: 20px;
+	margin-right: 0px;
+	margin-top: -3px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 #info ul {
 	padding-left: 10px;
 	padding-right: 22px;
@@ -230,15 +242,9 @@ pre{
 	padding-left: 32px;
 	text-indent: -16px;
 }
-
 li.tight {
 	padding-top: 0px;
 	padding-bottom: 0px;
-}
-
-.pub {
-	padding-left: 22px;
-	text-indent: -16px;
 }
 
 
@@ -255,31 +261,14 @@ li.tight {
 	display:block;
 	margin: 5px auto;
 }
-
 .pull-right {
 	float: right;
 	margin: 5px -100px 12px 12px;
 }
-
 .pull-left {
 	float: left;
 	margin: 5px 12px 12px -100px;
 }
-
-#tagline {
-	color: #747C95;
-	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
-	font-size: 13px;
-	font-style: italic;
-	font-weight: normal;
-	line-height: 13px;
-	margin-bottom: 20px;
-	margin-right: 0px;
-	margin-top: -3px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
 .file-link{
   color: #747C95;
   font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
@@ -305,33 +294,30 @@ li.tight {
 .species {
 	font-style: italic;
 }
-
 h1 .species{
   font-style: normal;
 }
 
 /*Reference text span styles*/
+.pub {
+	padding-left: 22px;
+	text-indent: -16px;
+}
 .author {
 }
-
 .author .self {
 	font-weight: bold;
 }
-
-.paper-title {
+.pub .title {
 }
-
 .journal {
 	font-style: italic;
 }
-
 .issue {
 	font-weight: bold;
 }
-
 .pages {
 }
-
 .phone {
   letter-spacing: 1px;
 }
