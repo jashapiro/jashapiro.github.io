@@ -9,11 +9,13 @@ slate grey: #747C95
 html {
 	margin: 0;
 	padding: 0;
+	height: 100%;
 }
 
 body {
 	font-family: 'Lora', 'Georgia', serif;
 	font-size: 16px;
+	height:100%;
 	margin: 0;
 	padding: 0;
 }
@@ -98,7 +100,7 @@ nav a {
 
 figure {
   border-radius: 12px;
-  border: 2px solid #bdc2cf;
+  border: 2px solid #bfc3d0;
   display: table;
   padding:8px;
   width: 200px; /*makes this shrink to figure size*/
@@ -143,19 +145,23 @@ cite a{
 cite:before {
 content: "– ";
 }
-
 pre{
 	margin:0;
 }
+
+
+
+
 /*section formatting classes*/
 #container {
 	position: relative;
 	width: 960px;
 	margin: 10px auto 10px 10px;
+	min-height:100%;
 }
 #content {
 	margin: 0;
-	padding: 23px 10px 0 240px;
+	padding: 23px 10px 80px 240px;
 }
 #head_nav {
 	left: 0px;
@@ -165,6 +171,18 @@ pre{
 	top: 0px;
 	width: 220px;
 }
+footer {
+  border-top: 1px solid #bfc3d0;
+  bottom: 0;
+  color: #747C95;
+  font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+  font-size: 12px;
+  height: 20px;
+  margin: 20px auto 10px 230px;
+  padding: 10px;
+  position:absolute;
+}
+
 #head-title {
 	height: 50px;
 	margin: 0px;

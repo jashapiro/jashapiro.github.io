@@ -10,7 +10,7 @@
        width: 1000px;
       }
       #content {
-        padding: 22px 180px 0 240px;
+        padding: 22px 180px 100px 240px;
       }
       #sidebar {
        position: absolute;
@@ -46,14 +46,14 @@
   </head>
   <body class="{{ page.layout }}">
     <div id="container">
-      <section id="head_nav" class="noprint">
+      <header id="head_nav" class="noprint">
         {% include site_title.html %}
         {% include site_nav.html %}
-      </section>
-       <section id="content">
+      </header>
+      <div id="content">
           {{ content }}
-      </section>
-      <section id="sidebar">
+      </div>
+      <aside id="sidebar">
         <h2>Contact</h2>
         <ul>
           <li>
@@ -84,7 +84,10 @@
             </li>
             <li>twitter: <a href="http://twitter.com/#!/jashapiro">@jashapiro</a>
           </ul>
-      </section>
+      </aside>
+      <footer>
+        {% include footer.html %}
+      </footer>
     </div>
   </body>
 </html>
