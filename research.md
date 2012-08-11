@@ -1,10 +1,8 @@
 ---
-layout: default
-title: research
+layout: page
+title: Research
 permalink: /research/index.html
 ---
-
-# Research
 
 My research focuses on the relationship between genetic variation and the path of evolution. Natural selection requires  genetic variation to act upon, but the action of selection removes that variation from the population. My work explores the interplay between these forces, taking advantage of genomic data from many individuals and multiple populations in order to create an unbiased picture of genetic variation across a species.
 
