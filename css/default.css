@@ -19,6 +19,12 @@ body {
 	margin: 0;
 	padding: 0;
 }
+#container {
+	position: relative;
+	width: 960px;
+	margin: 20px auto 20px 0;
+	min-height:100%;
+}
 h1 {
 	color: #002FA7;
 	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
@@ -58,7 +64,8 @@ a:hover {
 p {
 	line-height: 1.5em;
 	margin: 0;
-	padding: 0 10px 10px 16px;
+	padding: 0 20px 16px 20px;
+	text-align: justify;
 }
 ul {
 	list-style-position: inside;
@@ -69,12 +76,12 @@ ul {
 
 li {
 	margin: 0;
-	padding: 2px;
+	padding: 2px 0;
 }
 
 img {
 	display:block;
-	margin: 10px auto;
+	margin: 16px auto;
 }
 
 a img {
@@ -90,7 +97,7 @@ nav li {
 	line-height: 18px;
 	list-style: none;
 	margin-bottom: 12px;
-	padding-right: 12px;
+	padding-right: 8px;
 }
 nav a {
 	border: none;
@@ -149,19 +156,10 @@ pre{
 	margin:0;
 }
 
-
-
-
 /*section formatting classes*/
-#container {
-	position: relative;
-	width: 960px;
-	margin: 10px auto 10px 10px;
-	min-height:100%;
-}
 #content {
 	margin: 0;
-	padding: 23px 10px 80px 240px;
+	padding: 22px 10px 80px 250px;
 }
 #head_nav {
 	left: 0px;
@@ -169,23 +167,26 @@ pre{
 	position: absolute;
 	text-align: right;
 	top: 0px;
-	width: 220px;
+	width: 240px;
 }
 footer {
   border-top: 1px solid #bfc3d0;
   bottom: 0;
   color: #747C95;
   font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   height: 20px;
-  margin: 20px auto 10px 230px;
-  padding: 10px;
+  margin: 20px 20px 10px 260px;
+  padding: 10px 10px;
   position:absolute;
+  text-align: justify;
+  width:660px;
 }
 
 #head-title {
 	height: 50px;
 	margin: 0px;
+	padding-right: 10px;
 	position: relative;
 }
 
@@ -222,14 +223,9 @@ footer {
 	padding-right: 10px;
 }
 
-#info ul {
-	padding-left: 10px;
-	padding-right: 22px;
-	padding: 0;
-}
 #info li {
 	font-size: 14px;
-	padding: 0 22px 0 10px;
+	padding: 0 8px 0 10px;
 }
 #info a {
   border: none;
@@ -257,8 +253,7 @@ footer {
 .bullets {
 	color: #002FA7;
 	list-style-type: disc;
-	padding-left: 32px;
-	text-indent: -16px;
+	padding-left: 10px;
 }
 li.tight {
 	padding-top: 0px;
@@ -269,11 +264,11 @@ li.tight {
 /*alignment blocks for asides*/
 .align-right {
 	float: right;
-	margin: 5px 5px 12px 12px;
+	margin: 10px 10px 10px 20px;
 }
 .align-left {
 	float: left;
-	margin: 5px 12px 12px 5px;
+	margin: 10px 20px 10px 10px;
 }
 .align-center {
 	display:block;
@@ -281,11 +276,11 @@ li.tight {
 }
 .pull-right {
 	float: right;
-	margin: 5px -100px 12px 12px;
+	margin: 10px  -100px 20px 20px;
 }
 .pull-left {
 	float: left;
-	margin: 5px 12px 12px -100px;
+	margin: 10px 20px 20px -100px;
 }
 .file-link{
   color: #747C95;
