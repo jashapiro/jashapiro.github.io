@@ -1,137 +1,81 @@
 /*********
 a couple of color references
 tardis blue (pantone 2955C): #003B6F;
-international klein blue (via wikipedia): #002FA7
+international klein blue (via wikipedia): #002FA7 rgba(0,48,166)
+slate grey: #747C95
 *********/
 
-
+/* base styles */
 html {
 	margin: 0;
 	padding: 0;
+	height: 100%;
 }
 
 body {
 	font-family: 'Lora', 'Georgia', serif;
 	font-size: 16px;
+	height:100%;
 	margin: 0;
 	padding: 0;
 }
-
 #container {
 	position: relative;
 	width: 960px;
-	margin: 10px auto 10px 10px;
+	margin: 20px auto 20px 0;
+	min-height:100%;
 }
-
-#head_nav {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 220px;
-	text-align: right;
-	margin-top: 0px;
-}
-
-#head_title {
-	height: 50px;
-	margin: 0px;
-	position: relative;
-}
-
-#main {
-	margin: 0;
-	padding: 0 10px 0 240px;
-	padding-top: 22px;
-}
-
 h1 {
 	color: #002FA7;
-	font-family: 'Open Sans', 'Helvetica', sans-serif;
+	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
 	font-weight: bold;
 	font-style: italic;
-	font-size: 36px;
+	font-size: 40px;
 	margin-top: 10px;
 	margin-bottom: 6px;
 	padding-left: 10px;
 	padding-right: 10px;
 }
-
-h1 .species{
-  font-style: normal;
-}
-
 h1 em{
-  font-style: normal;
+  font-style: normal;/* undo italics when the text is in italics to start */
 }
 
 h2 {
 	color: #002FA7;
-	font-family: 'Open Sans', 'Helvetica', sans-serif;
+	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+	font-size: 20px;
 	font-weight: bold;
-	font-size: 18px;
-	margin-top: 18px;
 	margin-bottom: 6px;
 	margin-left: 0px;
+	margin-top: 20px;
 	padding-left: 10px;
 	padding-right: 10px;
 }
-
 a {
-	color: #747C95;
+	border-bottom: 1px solid #bfc3d0;
+	color: inherit;
+	padding-bottom: 2px;
 	text-decoration: none;
 }
-
 a:hover {
 	color: #002FA7;
 }
 
 p {
-	padding: 0 10px 10px 16px;
+	line-height: 1.5em;
 	margin: 0;
+	padding: 0 20px 16px 20px;
 }
-
-p.tight {
-	padding-bottom: 0;
-	padding-left: 16px;
-	text-indent: -10px;
-}
-
-p.subh1 {
-	padding-left: 36px;
-	margin: -12px 0;
-}
-
 ul {
+	list-style-position: inside;
+	list-style-type: none;
 	margin: 0;
 	padding: 0 10px;
-	list-style-type: none;
-	list-style-position: inside;
-}
-
-ul.bullets {
-	padding-left: 32px;
-	color: #002FA7;
-	list-style-type: disc;
-	text-indent: -16px;
 }
 
 li {
 	margin: 0;
-	padding: 2px;
-}
-
-li.tight {
-	padding-top: 0px;
-	padding-bottom: 0px;
-}
-
-li.pub {
-	padding-left: 22px;
-	text-indent: -16px;
-}
-
-a img {
-	border: none;
+	padding: 2px 0;
 }
 
 img {
@@ -139,9 +83,65 @@ img {
 	margin: 10px auto;
 }
 
-.align-right {
-	float: right;
-	margin: 5px 5px 12px 12px;
+a img {
+	border: none;
+}
+
+nav {
+	margin-bottom: 40px;
+}
+nav li {
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 18px;
+	list-style: none;
+	margin-bottom: 12px;
+	padding-right: 8px;
+}
+nav a {
+	border: none;
+	color: #002FA7;
+	text-decoration: none;
+}
+
+figure {
+  border-radius: 12px;
+  border: 2px solid #bfc3d0;
+  display: table;
+  padding:8px;
+  width: 200px; /*makes this shrink to figure size*/
+}
+figure img{
+  display: table-row;
+  margin:0px;
+  margin-bottom: 8px;
+}
+figcaption {
+  display: table-row;
+  font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+  font-size: 14px;
+  text-align: justify;
+}
+
+blockquote {
+  color: #515663;
+  float: right;
+  font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  margin-right:-100px;
+  margin: 0px;
+  padding: 10px 20px;
+  width: 320px;
+}
+cite{
+  color: #747C95;
+  display: block;
+  font-family: 'Lora', 'Georgia', serif;
+  font-style: italic;
+  margin: 0px;
+  padding: 0px;
+  text-align: right;
 }
 .align-left {
 	float: left;
@@ -158,128 +158,190 @@ img {
 	max-width: 220px;
 }
 
-h1.title {
-	font-style: normal;
+cite a{
+  border: none;
+}
+
+cite:before {
+content: "– ";
+}
+pre{
+	margin:0;
+}
+
+/*section formatting classes*/
+#content {
+	margin: 0;
+	padding: 22px 10px 80px 250px;
+}
+#head_nav {
+	left: 0px;
+	margin-top: 0px;
 	position: absolute;
+	text-align: right;
+	top: 0px;
+	width: 240px;
+}
+footer {
+  border-top: 1px solid #bfc3d0;
+  bottom: 0;
+  color: #747C95;
+  font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+  font-size: 11px;
+  height: 20px;
+  margin: 20px 20px 10px 260px;
+  padding: 10px 10px;
+  position:absolute;
+  width:660px;
+}
+
+#head-title {
+	height: 50px;
+	margin: 0px;
+	padding-right: 10px;
+	position: relative;
+}
+
+#site-title {
 	bottom: 0px;
-	right: 0px;
+	font-family: 'Lora', 'Georgia', serif;
+	font-size: 36px;
+	font-style: normal;
+	font-weight: bold;
 	margin-bottom: 0px;
 	margin-right: 0px;
-	font-family: 'Lora', 'Georgia', serif;
-	font-weight: bold;
-	font-size: 36px;
+	position: absolute;
+	right: 0px;
 }
-
-h1.title a {
+#site-title a {
+	border-bottom: none;
 	color: #747C95;
 	text-decoration: none;
 }
-
-h1.title a:hover {
+#site-title a:hover {
 	color: #747C95;
 }
-
-h2.description {
-	font-family: 'Open Sans', 'Helvetica', sans-serif;
+#tagline {
 	color: #747C95;
-	font-size: 12px;
-	line-height: 12px;
+	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+	font-size: 13px;
 	font-style: italic;
 	font-weight: normal;
+	line-height: 13px;
+	margin-bottom: 20px;
+	margin-right: 0px;
+	margin-top: -3px;
 	padding-left: 10px;
 	padding-right: 10px;
-	margin-top: -3px;
-	margin-right: 0px;
-	margin-bottom: 20px;
-}
-
-nav {
-	margin-bottom: 40px;
-}
-
-nav li {
-	list-style: none;
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 18px;
-	padding-right: 12px;
-	margin-bottom: 12px;
-}
-
-nav a {
-	color: #002FA7;
-	text-decoration: none;
-}
-
-#info ul {
-	padding: 0;
-	padding-right: 22px
-	padding-left: 10px
-
 }
 
 #info li {
-	padding: 0 22px 0 10px;
 	font-size: 14px;
+	padding: 0 8px 0 10px;
+}
+#info a {
+  border: none;
+  color: #747C95;
+	text-decoration: none;
 }
 
-.sideblock{
-	padding:10px;
+/*special formatting */
+.tight {
+	line-height: 1em;
+	padding-bottom: 2px;
+	padding-left: 16px;
+	text-indent: -10px;
 }
 
-.sideblock img{
-	max-width: 220px;
+.tight a {
+ padding-bottom: 0;
 }
 
-.sidefig{
-	float:right;
-	padding:0;
-	margin: 5px -10px 10px 10px;
-	max-width: 220px;
+.subh1 {
+	margin-top: -10px;
+}
+.bullets {
+	color: #002FA7;
+	list-style-type: disc;
+	padding-left: 10px;
+}
+li.tight {
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 
+/*alignment blocks for asides*/
+.align-right {
+	float: right;
+	margin: 10px 10px 10px 20px;
+}
+.align-left {
+	float: left;
+	margin: 10px 20px 10px 10px;
+}
+.align-center {
+	display:block;
+	margin: 5px auto;
+}
+.pull-right {
+	float: right;
+	margin: 10px  -100px 10px 20px;
+}
+.pull-left {
+	float: left;
+	margin: 10px 20px 10px -100px;
+}
+.file-link{
+  color: #747C95;
+  font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: bold;
+  padding-left: 10px;
+}
+.file-link:before {
+  content: "[";
+}
+.file-link:after {
+  content: "]";
+}
+/* code formatting */
 .highlight{
 	background-color: #E0E0E0;
 	overflow:auto;
 	padding: 8px 16px;
 }
 
-pre{
-	margin:0;
-}
-
-
+/*semantics for species names... just like <em>*/
 .species {
 	font-style: italic;
 }
-
-/*Reference text span styles*/
-.author {
+h1 .species{
+  font-style: normal;
 }
 
+/*Reference text span styles*/
+.pub {
+	padding-left: 22px;
+	text-indent: -16px;
+}
+.author {
+}
 .author .self {
 	font-weight: bold;
 }
-
-.title {
+.pub .title {
 }
-
 .journal {
 	font-style: italic;
 }
-
 .issue {
 	font-weight: bold;
 }
-
 .pages {
 }
-
 .phone {
   letter-spacing: 1px;
 }
-
-
-
 
