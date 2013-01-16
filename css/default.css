@@ -281,8 +281,9 @@ footer {
  padding-bottom: 0;
 }
 
-.subh1 {
+.preh1 {
 	margin-top: -10px;
+	margin-bottom: -15px;
 }
 .bullets {
 	color: #002FA7;
