@@ -1,10 +1,8 @@
 ---
-layout: default
-title: teaching
+layout: page
+title: Teaching
 permalink: /teaching/index.html
 ---
-
-# Teaching
 
 Below are brief descriptions of some the courses that I have designed and taught recently, including links to syllabi.
 
