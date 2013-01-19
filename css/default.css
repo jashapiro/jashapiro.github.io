@@ -353,7 +353,8 @@ li.tight {
 }
 /* code formatting */
 .highlight{
-	background-color: #E0E0E0;
+	background-color: #e0e0e0;
+	margin-left: 20px;
 	overflow:auto;
 	padding: 8px 16px;
 }
@@ -366,9 +367,8 @@ pre{
 }
 
 .text_highlight{
-	background-color: #CDD3E6;
-	margin-left: 24px;
-	padding: 4px 8px 4px 4px;
+	background-color: #fff0be;
+	padding: 8px 16px;
 }
 
 /*semantics for species names... just like <em>*/
