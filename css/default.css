@@ -1,5 +1,13 @@
 /*********
 a couple of color references
+Bryn Mawr Grey: #646e7d
+Bryn Mawr Yellow: #fff0be
+Bryn Mawr Cool Grey: #bebebe
+BMC Cyan: #00aaf0
+BMC class yellow: #ffe60f
+BMC class green: #00a58c
+BMC class Red: #f04137
+BMC class Blue: #005596
 tardis blue (pantone 2955C): #003B6F;
 international klein blue (via wikipedia): #002FA7 rgba(0,48,166)
 slate grey: #747C95
@@ -26,7 +34,7 @@ body {
 	min-height:100%;
 }
 h1 {
-	color: #002FA7;
+	color: #005596;
 	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
 	font-weight: bold;
 	font-style: italic;
@@ -41,16 +49,28 @@ h1 em{
 }
 
 h2 {
-	color: #002FA7;
+	color: #005596;
 	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
 	font-size: 20px;
 	font-weight: bold;
 	margin-bottom: 6px;
-	margin-left: 0px;
 	margin-top: 20px;
 	padding-left: 10px;
 	padding-right: 10px;
 }
+
+h3 {
+	color: #005596;
+	font-family: 'Lora', 'Georgia', serif;
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: 16px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
 a {
 	border-bottom: 1px solid #bfc3d0;
 	color: inherit;
@@ -58,13 +78,13 @@ a {
 	text-decoration: none;
 }
 a:hover {
-	color: #002FA7;
+	color: #005596;
 }
 
 p {
 	line-height: 1.5em;
 	margin: 0;
-	padding: 0 20px 16px 20px;
+	padding: 0px 20px 16px 20px;
 }
 ul {
 	list-style-position: inside;
@@ -119,7 +139,7 @@ blockquote {
   width: 320px;
 }
 cite{
-  color: #747C95;
+  color: #646e7d;
   display: block;
   font-family: 'Lora', 'Georgia', serif;
   font-style: italic;
@@ -168,7 +188,7 @@ pre{
 }
 
 #site_nav {
-  color: #002FA7;
+  color: #005596;
 	font-size: 20px;
 	font-weight: bold;
 	line-height: 18px;
@@ -186,7 +206,7 @@ pre{
 footer {
   border-top: 1px solid #bfc3d0;
   bottom: 0;
-  color: #747C95;
+  color: #646e7d;
   font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
   font-size: 11px;
   height: 20px;
@@ -216,14 +236,14 @@ footer {
 }
 #site-title a {
 	border-bottom: none;
-	color: #747C95;
+	color: #646e7d;
 	text-decoration: none;
 }
 #site-title a:hover {
-	color: #747C95;
+	color: #646e7d;
 }
 #tagline {
-	color: #747C95;
+	color: #646e7d;
 	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
 	font-size: 13px;
 	font-style: italic;
@@ -242,12 +262,12 @@ footer {
 }
 #info a {
   border: none;
-  color: #747C95;
+  color: #646e7d;
 	text-decoration: none;
 }
 
 .date {
-  color: #747C95;
+  color: #646e7d;
   float: right;
   font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
   font-size: 18px;
@@ -261,7 +281,7 @@ footer {
 }
 
 .paging li{
-  color: #747C95;
+  color: #646e7d;
   display: inline;
   font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
   font-size: 18px;
@@ -286,7 +306,7 @@ footer {
 	margin-bottom: -15px;
 }
 .bullets {
-	color: #002FA7;
+	color: #005596;
 	list-style-type: disc;
 	padding-left: 10px;
 }
@@ -318,7 +338,7 @@ li.tight {
 	margin: 10px 20px 10px -100px;
 }
 .file-link{
-  color: #747C95;
+  color: #646e7d;
   font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -336,6 +356,19 @@ li.tight {
 	background-color: #E0E0E0;
 	overflow:auto;
 	padding: 8px 16px;
+}
+
+pre{
+	margin:0;
+}
+
+.r_highlight{
+}
+
+.text_highlight{
+	background-color: #CDD3E6;
+	margin-left: 24px;
+	padding: 4px 8px 4px 4px;
 }
 
 /*semantics for species names... just like <em>*/
