@@ -2,13 +2,9 @@
 
 <html>
   <head>
-	  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-	  <title>ShapBio{% if page.title %}: {{ page.title }} {% endif %}</title>
-	  <meta name="author" content="Joshua A Shapiro" />
-	  <link href="http://fonts.googleapis.com/css?family=Lora:400,400italic,700%7COpen+Sans:400italic,600,600italic" rel="stylesheet" type="text/css" />
-	  <link type="text/css" rel="stylesheet" href="/css/Rhandout.css" />
-	  <link type="text/css" rel="stylesheet" href="/css/code.css" />
-	  <style>
+    {% include head.html %}
+    <link type="text/css" rel="stylesheet" href="/css/code.css" />
+    <style>
 		@media print {
 			.noprint {display:none;}
 			#container {width: 990px;}
@@ -18,87 +14,29 @@
 			h2 {font-size: 16px;}
 		}
 	  </style>
-
-	  <!-- Google Analytics -->
-	  <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-31317675-1']);
-        _gaq.push(['_setDomainName', 'shapbio.me']);
-        _gaq.push(['_setAllowLinker', true]);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-
-      </script>
-
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-      <script src="/js/sidefig.js"></script>
-      <script type="text/javascript">
-        // adjust highlight classes to allow for more control of background color
-        $(function() {
-          $("code.r").parent().parent().addClass("r_highlight");
-          $("code.text").parent().parent().addClass("text_highlight");
-        });
-      </script>
-
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/sidefig.js"></script>
+    <script type="text/javascript">
+      // adjust highlight classes to allow for more control of background color
+      $(function() {
+        $("code.r").parent().parent().addClass("r_highlight");
+        $("code.text").parent().parent().addClass("text_highlight");
+      });
+    </script>
   </head>
   <body class="{{ page.layout }}">
 	<div id="container">
-	 <div id="head_nav" class="noprint">
-	    <div id="head_title">
-	  	    <h1 class="title"><a href="/" >shapbio.me</a></h1>
-	  	</div>
-	  	<h2 class="description">evolutionary genomics and such from<br>Joshua A Shapiro PhD</h2>
-	  	<nav id="site_nav">
-		  <ul>
-			  <li><a href="/research">research</a></li>
-	          <li><a href="/teaching">teaching</a></li>
-			  <li><a href="/cv">curriculum<br> vitae</a></li>
-		  </ul>
-	  	</nav>
-	  	<div id="info" class="noprint">
-		   <ul>
-				  <li>
-				  email:
-				  <script language="Javascript" type="text/javascript">
-					<!--
-					document.write('<a href="mai');
-					document.write('lto');
-					document.write(':&#106;&#111;&#115;&#104;');
-					document.write('@');
-					document.write('&#115;&#104;&#97;&#112;&#98;&#105;&#111;&#46;&#110;&#101;&#116;">');
-					document.write('&#106;&#111;&#115;&#104;');
-					document.write('@');
-					document.write('&#115;&#104;&#97;&#112;&#98;&#105;&#111;&#46;&#110;&#101;&#116;<\/a>');
-					// -->
-					</script><noscript>&#106;&#111;&#115;&#104; at
-					&#115;&#104;&#97;&#112;&#98;&#105;&#111; dot &#110;&#101;&#116;</noscript>
-				</li>
-				<li>twitter: <a href=http://twitter.com/#!/jashapiro>@jashapiro</a>
-		  </ul>
-		  </div>
-
-     </div>
-     <div id="main">
-		 <section id="content">
+	 <header id="head_nav">
+	    {% include site_title.html %}
+	  	{% include site_nav.html %}
+	  	{% include info.html %}
+	  </header>
+		<div id="content">
 			  {{ content }}
-		  </section>
-	  </div>
-	  <div id="sidebar">
-
-	  </div>
-
-	  </div>
-
-	</div>
+		</div>
+		<footer>
+		  {% include footer.html %}
+		</footer>
+  </div>
   </body>
-
 </html>
-
-
