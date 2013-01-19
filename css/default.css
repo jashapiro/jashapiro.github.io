@@ -98,9 +98,11 @@ li {
 	padding: 2px 0;
 }
 
-img {
+img {	
 	display:block;
 	margin: 10px auto;
+	max-width: 660px;
+	page-break-inside: avoid;
 }
 
 a img {
@@ -355,20 +357,33 @@ li.tight {
 .highlight{
 	background-color: #e0e0e0;
 	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 4px;
 	overflow:auto;
-	padding: 8px 16px;
+	padding: 8px 8px;
 }
 
 pre{
 	margin:0;
+  font-family: 'Source Code Pro',  monospace;
+  font-size: 14px;
 }
-
+code{
+  font-family: 'Source Code Pro',  monospace;
+}
 .r_highlight{
+  padding-left: 28px;
+}
+code.r:before{
+  content: "> ";
+  margin-left: -16px;
+  font-weight: bold;
+  color: #005596;
 }
 
 .text_highlight{
 	background-color: #fff0be;
-	padding: 8px 16px;
+	padding: 4px 8px 4px 4px;
 }
 
 /*semantics for species names... just like <em>*/
