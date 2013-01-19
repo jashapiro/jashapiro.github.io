@@ -35,25 +35,25 @@ On the left is the console. This is the main way that you interact with R, issui
 
 
 {% highlight r %}
-> 2 + 2
+2 + 2
 {% endhighlight %}
 
 
 
 {% highlight text %}
-[1] 4
+## [1] 4
 {% endhighlight %}
 
 
 
 {% highlight r %}
-> 10 * 5 - 4 / 0.5
+10 * 5 - 4 / 0.5
 {% endhighlight %}
 
 
 
 {% highlight text %}
-[1] 42
+## [1] 42
 {% endhighlight %}
 
 

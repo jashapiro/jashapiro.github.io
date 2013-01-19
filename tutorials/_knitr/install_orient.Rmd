@@ -35,7 +35,7 @@ Open `RStudio` and look around.  When you open it for the first time, you will s
 
 On the left is the console. This is the main way that you interact with R, issuing commands and reading the results that they produce. You will see some text with information about the version of `R` that you are running as well as some extremely brief help. Below that is a blue carat, the command prompt. Give it a try by typing in some simple math:
 
-```{r first, prompt=TRUE, comment=NA}
+```{r first}
 2 + 2
 10 * 5 - 4 / 0.5
 ```
