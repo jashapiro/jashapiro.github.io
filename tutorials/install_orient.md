@@ -15,11 +15,11 @@ In order to apply statistics effectively, we need to be able to perform calculat
 
 ### Base `R`
 
-To use `R`, we first have to install it. Luckily, this is fairly straightforward. `R` is an open source project, and the latest version (along with the latest versions of many of the packages that we will get to later in the course) is available for download at "The Comprehensive R Archive Network" (CRAN): <http://cran.r-project.org>. Simply go to the CRAN website, and choose the link for the system that you are using. For Windows you will want to select the `base` package. 
+To use `R`, we first have to install it. Luckily, this is fairly straightforward. `R` is an open source project, and the latest version (along with the latest versions of many of the packages that we will get to later in the course) is available for download at "The Comprehensive R Archive Network" (CRAN): <http://cran.r-project.org>. Simply go to the CRAN website, and choose the link for the system that you are using. For Windows you will want to select the `base` package. As of this writing, the current version was `2.15.2`.
 
 ### RStudio
 
-Once you have downloaded and installed `R` you could be done and start right away using `R` and the basic interface that it comes with, but I find that interface to be a bit limited. A somewhat nicer interface comes from a separate open source project: `RStudio`. This project is still in active development, so while it is mostly stable, you should be aware that it can occasionally have problems and crash, and there will very likely be software updates through the semester that you will want to install to fix bugs or add features. The most current stable version of `RStudio` can be downloaded at <http://rstudio.org/download/desktop>. As of this writing, the current version was `0.96.122`.
+Once you have downloaded and installed `R` you could be done and start right away using `R` and the basic interface that it comes with, but I find that interface to be a bit limited. A somewhat nicer interface comes from a separate open source project: `RStudio`. This project is still in active development, so while it is mostly stable, you should be aware that it can occasionally have problems and crash, and there will very likely be software updates through the semester that you will want to install to fix bugs or add features. The most current stable version of `RStudio` can be downloaded at <http://rstudio.org/download/desktop>. As of this writing, the current version was `0.97.310`.
 
 With those two things installed, you should be ready to start using `R` on your computer.
 
@@ -32,7 +32,6 @@ Open `RStudio` and look around.  When you open it for the first time, you will s
 ### The Console
 
 On the left is the console. This is the main way that you interact with R, issuing commands and reading the results that they produce. You will see some text with information about the version of `R` that you are running as well as some extremely brief help. Below that is a blue carat, the command prompt. Give it a try by typing in some simple math:
-
 
 
 {% highlight r %}
@@ -60,8 +59,6 @@ On the left is the console. This is the main way that you interact with R, issui
 
 
 
-
-
 ### The other panes
 
 On the right are two panes, each of which with several tabs at the top. (You can change which tabs are in each pane to your liking by choosing the "Pane Layout" section of the `RStudio` preferences.) I'll go through them briefly here, and in more detail as they come up in use.
@@ -74,12 +71,9 @@ In the bottom pane, you have a **Files** tab which shows a view of the files and
 
 Finally, we have the **Help** tab. Most `R` functions have an associated help file, and when you open it, it will appear in this tab. How do you open a help file? The easiest way is to simply type a question mark in front of the function name in the console.
 
-
 {% highlight r %}
 ?library
 {% endhighlight %}
-
-
 
 
 These help files, as you might be noting if you are looking at one now, are not always all that helpful. They may contain a lot of information, but it is not always easy to figure out what exactly each part means. As you become more familiar with `R`, they should become more comprehensible. For now, one of the most useful parts tends to be way at the bottom of the help file, where there is usually a set of examples using the function with different options. Trying these out and seeing what the results are can be quite informative.
