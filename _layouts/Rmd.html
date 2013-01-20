@@ -3,40 +3,25 @@
 <html>
   <head>
     {% include head.html %}
-    <link type="text/css" rel="stylesheet" href="/css/code.css" />
-    <style>
-		@media print {
-			.noprint {display:none;}
-			#container {width: 990px;}
-			#main {padding-left: 10px;}
-			body {font-size: 14px;}
-			h1 {font-size: 24px;}
-			h2 {font-size: 16px;}
-		}
-	  </style>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="/js/sidefig.js"></script>
-    <script type="text/javascript">
-      // adjust highlight classes to allow for more control of background color
-      $(function() {
-        $("code.r").parent().parent().addClass("r_highlight");
-        $("code.text").parent().parent().addClass("text_highlight");
-      });
-    </script>
+    {% include codestyle.html %}
+    {% include headnav_noprint.html %}
   </head>
   <body class="{{ page.layout }}">
-	<div id="container">
-	 <header id="head_nav">
-	    {% include site_title.html %}
-	  	{% include site_nav.html %}
-	  	{% include info.html %}
-	  </header>
-		<div id="content">
-			  {{ content }}
+    <div id="container">
+      <header id="head_nav" class="noprint">
+          {% include site_title.html %}
+          {% include site_nav.html %}
+          {% include info.html %}
+      </header>
+      <div id="content">
+        <header>
+          <h1>{{ page.title }}</h1>
+        </header>
+        {{ content }}
+      </div>
+      <footer class="noprint">
+		    {% include footer.html %}
+		  </footer>
 		</div>
-		<footer>
-		  {% include footer.html %}
-		</footer>
-  </div>
   </body>
 </html>

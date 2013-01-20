@@ -84,7 +84,7 @@ a:hover {
 p {
 	line-height: 1.5em;
 	margin: 0;
-	padding: 0px 20px 16px 20px;
+	padding: 0px 20px 10px 20px;
 }
 ul {
 	list-style-position: inside;
@@ -359,9 +359,9 @@ li.tight {
 	background-color: #e0e0e0;
 	margin-left: 20px;
 	margin-right: 20px;
-	margin-bottom: 4px;
+	margin-bottom: 10px;
 	overflow:auto;
-	padding: 8px 8px;
+	padding: 5px 10px;
 }
 
 pre{
@@ -373,18 +373,11 @@ code{
   font-family: 'Source Code Pro',  monospace;
 }
 .r_highlight{
-  padding-left: 28px;
-}
-code.r:before{
-  content: "> ";
-  margin-left: -16px;
-  font-weight: bold;
-  color: #005596;
 }
 
 .text_highlight{
 	background-color: #fff0be;
-	padding: 4px 8px 4px 4px;
+	margin-top: -10px;
 }
 
 /*semantics for species names... just like <em>*/
