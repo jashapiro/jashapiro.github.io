@@ -178,7 +178,8 @@ pre{
 /*section formatting classes*/
 #content {
 	margin: 0;
-	padding: 22px 10px 80px 250px;
+	margin-left:240px;
+	padding: 22px 10px 80px 10px;
 }
 #head_nav {
 	left: 0px;
