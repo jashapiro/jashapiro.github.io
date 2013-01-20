@@ -1,13 +1,11 @@
 ---
 layout: Rmd
-title: R installation and orientation
+title: First steps with R
 tags: [R, tutorial, RStudio]
 ---
 
 
 
-
-# First steps with R
 
 Once you have successfully installed `R`, it is time to start using it. As you read through this page, I strongly encourage you to type along in your own R window, and check that you are getting the same results as shown here. But don't stop there. Try new things, play around. You won't break it, and you might learn something.
 
@@ -741,7 +739,26 @@ If you want to store text (usually referred to as *strings* in programming conte
 
 {% highlight r %}
 pet <- "dog"
+pet
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] "dog"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 pets <- c("dog", "cat", "fish", "hedgehog")
+pets
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] "dog"      "cat"      "fish"     "hedgehog"
 {% endhighlight %}
 
 

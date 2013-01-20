@@ -1,6 +1,6 @@
 ---
 layout: Rmd
-title: R installation and orientation
+title: First steps with R
 tags: [R, tutorial, RStudio]
 ---
 
@@ -8,8 +8,6 @@ tags: [R, tutorial, RStudio]
 source("../../_knitr/knit_jekyll_setup.R")
 opts_knit$set(base.dir="plots/")
 ```
-
-# First steps with R
 
 Once you have successfully installed `R`, it is time to start using it. As you read through this page, I strongly encourage you to type along in your own R window, and check that you are getting the same results as shown here. But don't stop there. Try new things, play around. You won't break it, and you might learn something.
 
@@ -179,7 +177,9 @@ even | threes #elements that are even OR divisible by 3
 If you want to store text (usually referred to as *strings* in programming contexts), `R` does so in a `character()` data type. Note that these too are stored as vectors. 
 ```{r characters}
 pet <- "dog"
+pet
 pets <- c("dog", "cat", "fish", "hedgehog")
+pets
 ```
 
 ### Factors

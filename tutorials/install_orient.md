@@ -1,13 +1,11 @@
 ---
 layout: Rmd
-title: R installation and orientation
+title: R Installation & Orientation
 tags: [R, tutorial, RStudio]
 ---
 
 
 
-
-# R Installation & Orientation
 
 In order to apply statistics effectively, we need to be able to perform calculations quickly and easily. A few calculations can be done by hand, but most require a calculator at least, and more likely a computer. While you can do a lot with something like Excel, what we really want is a system that was designed from the ground up for statistics. For this class, we are going to use `R`. `R` is available for Mac, Windows, and Linux. It is also free, which is great, but famously hard to learn at first. The task today (and for much of the rest of the semester), is to get up that "steep learning curve" so that you can use `R` for basic calculations and statistics and start to appreciate the power and flexibility of the system.
 
@@ -75,5 +73,12 @@ Finally, we have the **Help** tab. Most `R` functions have an associated help fi
 ?library
 {% endhighlight %}
 
+You can also use the `help()` command to perform the same task:
 
-These help files, as you might be noting if you are looking at one now, are not always all that helpful. They may contain a lot of information, but it is not always easy to figure out what exactly each part means. As you become more familiar with `R`, they should become more comprehensible. For now, one of the most useful parts tends to be way at the bottom of the help file, where there is usually a set of examples using the function with different options. Trying these out and seeing what the results are can be quite informative.
+{% highlight r %}
+help(library)
+{% endhighlight %}
+
+If you are not sure what the exact command you are looking for is, but you think you know some part of the command, you can use the `apropos()`  or `help.search()` commands to try to find the  function you are looking for.
+
+These help files, as you might be noting if you are looking at one now, are not always all that helpful. They may contain a lot of information, but it is not always easy to figure out what exactly each part means. As you become more familiar with `R`, they should become more comprehensible. For now, one of the most useful parts tends to be way at the bottom of the help file, where there is usually a set of examples using the function with different options. Trying these out and seeing what the results are can be quite informative. 
