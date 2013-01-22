@@ -1,6 +1,6 @@
 render_jekyll()
 
-hook_plot_md_side <- function(x, options){
+hook_plot_md_align <- function(x, options){
   if (options$fig.show == 'asis' ||
       options$fig.num == 1L || 
       options$fig.cur == options$fig.num){
@@ -18,4 +18,4 @@ hook_plot_md_side <- function(x, options){
     hook_plot_md(x, options)
   }
 }
-knit_hooks$set(plot = hook_plot_md_side)
+knit_hooks$set(plot = hook_plot_md_align)
