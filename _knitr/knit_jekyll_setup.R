@@ -1,5 +1,5 @@
 render_jekyll()
-opts_chunk$set(tidy=FALSE, fig.path="images/Rplot-", fig.width=5, fig.height=5)
+opts_chunk$set(tidy=FALSE, fig.width=5, fig.height=5)
 hook_plot_md_side <- function(x, options){
   if (options$fig.show == 'asis' ||
       options$fig.num == 1L || 

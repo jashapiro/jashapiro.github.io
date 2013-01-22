@@ -739,7 +739,7 @@ If you want to store text (usually referred to as *strings* in programming conte
 
 
 {% highlight r %}
-name <- "Jane Doe"
+name <- 'Jane Doe'
 name
 {% endhighlight %}
 

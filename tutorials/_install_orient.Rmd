@@ -5,8 +5,8 @@ tags: [R, tutorial, RStudio]
 ---
 
 ```{r setup, include=FALSE, cache=FALSE}
-source("../../_knitr/knit_jekyll_setup.R")
-opts_knit$set(base.dir="plots/")
+source("../_knitr/knit_jekyll_setup.R")
+opts_chunk$set(fig.path="plots/install_orient-")
 ```
 
 In order to apply statistics effectively, we need to be able to perform calculations quickly and easily. A few calculations can be done by hand, but most require a calculator at least, and more likely a computer. While you can do a lot with something like Excel, what we really want is a system that was designed from the ground up for statistics. For this class, we are going to use `R`. `R` is available for Mac, Windows, and Linux. It is also free, which is great, but famously hard to learn at first. The task today (and for much of the rest of the semester), is to get up that "steep learning curve" so that you can use `R` for basic calculations and statistics and start to appreciate the power and flexibility of the system.
