@@ -6,7 +6,7 @@ tags: [R, tutorial, RStudio]
 
 ```{r setup, include=FALSE, cache=FALSE}
 source("../_knitr/knit_jekyll_setup.R")
-opts_chunk$set(fig.path="plots/test_math-")
+opts_chunk$set(fig.path="plots/test_math-", tidy=FALSE, fig.width=5, fig.height=5)
 ```
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring web pages (click the **MD** toolbar button for help on Markdown).

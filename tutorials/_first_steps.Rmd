@@ -6,7 +6,7 @@ tags: [R, tutorial, RStudio]
 
 ```{r setup, include=FALSE, cache=FALSE}
 source("../_knitr/knit_jekyll_setup.R")
-opts_chunk$set(fig.path="plots/first_steps-")
+opts_chunk$set(fig.path="plots/first_steps-", tidy=FALSE, fig.width=5, fig.height=5)
 ```
 
 Once you have successfully installed `R`, it is time to start using it. As you read through this page, I strongly encourage you to type along in your own R window, and check that you are getting the same results as shown here. But don't stop there. Try new things, play around. You won't break it, and you might learn something.
