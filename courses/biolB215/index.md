@@ -1,8 +1,7 @@
 ---
-layout: course
+layout: page
 title: Experimental Design and Statistics
-course_num: Biol B215
-semester: Spring 2013
+pretitle: Biol B215
 ---
 
 **How do you use statistics to answer questions about biology and beyond?**
