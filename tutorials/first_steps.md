@@ -735,17 +735,18 @@ even | threes #elements that are even OR divisible by 3
 
 
 ### Characters and strings
-If you want to store text (usually referred to as *strings* in programming contexts), `R` does so in a `character()` data type. Note that these too are stored as vectors. 
+If you want to store text (usually referred to as *strings* in programming contexts), `R` does so in a `character()` data type. Enclose the string of text in quotes to distinguish it from variables (single or double quotes will work). Note that these too are stored as vectors. 
+
 
 {% highlight r %}
-pet <- "dog"
-pet
+name <- "Jane Doe"
+name
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## [1] "dog"
+## [1] "Jane Doe"
 {% endhighlight %}
 
 
