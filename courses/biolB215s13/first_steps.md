@@ -838,8 +838,8 @@ as.integer(colors)
 {% endhighlight %}
 
 
-## Missing Data
-When tried to convert a character vector to an integer, `R` returned the value "`NA`". This stands for "Not Available", and is the chief way that missing data is stored in `R`. `NA` will always return `NA` in any comparison, as it is usually preferrable to keep missing values missing. You can test specifically for `NA` values using `is.na()`, and some functions that don't work with `NA`s have options to remove them before performing their calculations
+### Missing Data
+When I tried to convert a character vector to an integer, `R` returned the value "`NA`". This stands for "Not Available", and is the chief way that missing data is stored in `R`. `NA` will always return `NA` in any comparison, as it is usually preferrable to keep missing values missing. You can test specifically for `NA` values using `is.na()`, and some functions that don't work with `NA`s have options to remove them before performing their calculations
 
 {% highlight r %}
 x <- c(1, 2, 3, 4, 5, NA)
@@ -963,3 +963,6 @@ mean(sqrt(a))
 {% endhighlight %}
 
 
+
+## Next
+Now that you know something about the basic data types, we will start to move on to learning about how to read in data, organize it, and create beautiful plots.

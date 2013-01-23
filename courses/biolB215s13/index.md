@@ -4,10 +4,40 @@ title: Experimental Design and Statistics
 pretitle: Biol B215
 ---
 
-**How do you use statistics to answer questions about biology and beyond?**
-This course is designed to introduce the concepts and tools of statistics in a biological context. In addition to description of classical statistical methods, a substantial portion of the course is devoted to discussion of the how the concepts of statistics inform the design of experiments. We also explore the interpretation of data from experiments and observations that are not designed to an ideal standard (also known as *data*). A critical component of the class is the computational lab which introduces the [`R` statistics environment](http://www.r-project.org), a powerful and flexible system that is rapidly becoming the standard for statistical analysis in biology and elsewhere. We work with actual biological data as much as possible, learning how to handle issues like violations of assumptions, non-standard distributions, and multiple testing. Using `R` also allows the exploration of computationally intensive techniques such as simulation, permutation testing, and bootstrapping.
+<blockquote>Statistics is applied philosophy of science.
+<cite><a href='http://www.statslab.cam.ac.uk/~apd/'>A. P. Dawid</a><br>(<a href="http://www.worldcat.org/title/statistics-a-very-short-introduction/oclc/216938494">Hand 2008</a>)</cite>
+</blockquote>
+
+## Overview & Goals {#overview}
+
+We have learned huge amounts in biology by doing experiments which generate clear and simple results. But many parts of biology are governed by smaller effects, which are sometimes hard to measure exactly. For example: Does an amino acid substitution change the efficiency of an enzyme? Do female frogs prefer mates with lower-pitched croaks? Does the chance of developing diabetes depend on your genotype at a specific locus? To answer these kinds of questions, we have to use statistics, not only to decide on our answer, but also to make some determination of how much we believe it. To actually use those statistics, you need two things: understanding of the theory, and the ability to apply them. To that end, the primary goals of the course are:
+
+* to introduce to the field of statistics and its uses for describing data and testing hypothesis, with a special emphasis on biological examples.
+* to develop an understanding of the considerations of designing experiments to answer biological questions clearly and efficiently.
+* to learn how to implement statistical tests and calculations using classical formulae, as well as through computational tools, specifically the R language.
 
 
+### Meeting time & Location
+
+**Lecture** MWF 10-11AM  
+**Lab** Wednesday 1-4PM  
+**Location** 10 Park Science Center
+
+### Office Hours & Contact info
+
+Monday & Friday 2–3:30PM, and by appointment.
+
+### Textbook
+
+*The Analysis of Biological Data* by Whitlock and Schluter.
+
+## Tutorials and Labs {#tutorials}
+
+**[Installing R](install_orient.html)**  
+**[First Steps with R](first_steps.html)**
 
 
+## External Resources {#external}
+
+**[Try R](http://tryr.codeschool.com)**
 
