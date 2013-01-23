@@ -86,17 +86,14 @@ p {
 	margin: 0;
 	padding: 0px 20px 10px 20px;
 }
+
 ul {
-	list-style-position: inside;
-	list-style-type: none;
-	margin: 0;
-	padding: 0 10px;
 }
 
 li {
-	margin: 0;
-	padding: 2px 0;
+  padding: 2px 0;
 }
+
 
 img {	
 	display:block;
@@ -197,6 +194,13 @@ pre{
 	line-height: 18px;
 	margin-bottom: 40px;
 }
+#site_nav ul {
+	list-style-position: inside;
+	list-style-type: none;
+	margin: 0;
+	padding: 0 10px;
+}
+
 #site_nav li {
 	list-style: none;
 	margin-bottom: 12px;
@@ -257,6 +261,13 @@ footer {
 	margin-top: -3px;
 	padding-left: 10px;
 	padding-right: 10px;
+}
+
+#info ul {
+	list-style-position: inside;
+	list-style-type: none;
+	margin: 0;
+	padding: 0 10px;
 }
 
 #info li {
@@ -387,6 +398,7 @@ code{
 h1 .species{
   font-style: normal;
 }
+
 
 /*Reference text span styles*/
 .pub {
