@@ -42,4 +42,5 @@ plot(cars)
 Embedding math should work now, either on its own:
 $$\sum_i^{10}{i}$$
 
-Or inline with text like this: $\frac{10}{x}$. One thing I am curious about is if I can do superscripts like this 10^3 or not.
+Or inline with text like this: $\frac{10}{x}$.
+
