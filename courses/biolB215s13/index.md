@@ -10,20 +10,20 @@ pretitle: Biol B215
 
 ## Overview & Goals {#overview}
 
-We have learned huge amounts in biology by doing experiments which generate clear and simple results. But many parts of biology are governed by smaller effects, which are sometimes hard to measure exactly. For example: Does an amino acid substitution change the efficiency of an enzyme? Do female frogs prefer mates with lower-pitched croaks? Does the chance of developing diabetes depend on your genotype at a specific locus? To answer these kinds of questions, we have to use statistics, not only to decide on our answer, but also to make some determination of how much we believe it. To actually use those statistics, you need two things: understanding of the theory, and the ability to apply them. To that end, the primary goals of the course are:
+We have learned huge amounts in biology by doing experiments which generate clear and simple results. But many parts of biology are governed by smaller effects, which are sometimes hard to measure exactly. For example: Does an amino acid substitution change the efficiency of an enzyme? Do female frogs prefer mates with lower-pitched croaks? Does the chance of developing diabetes depend on your genotype at a specific locus? To answer these kinds of questions, we have to use statistics, not only to decide on our answer, but also to make some determination of how much we believe it. To actually use those statistics, you need two things: understanding of the theory behind the statistics and the ability to apply them. To that end, the primary goals of the course are:
 
 * to introduce to the field of statistics and its uses for describing data and testing hypothesis, with a special emphasis on biological examples.
 * to develop an understanding of the considerations of designing experiments to answer biological questions clearly and efficiently.
 * to learn how to implement statistical tests and calculations using classical formulae, as well as through computational tools, specifically the R language.
 
 
-### Meeting time & Location
+### Meeting Time & Location {#logistics}
 
 **Lecture** MWF 10-11AM  
-**Lab** Wednesday 1-4PM  
+**Lab** Wed 1-4PM  
 **Location** 10 Park Science Center
 
-### Office Hours & Contact info
+### Office Hours
 
 Monday & Friday 2–3:30PM, and by appointment.
 
@@ -31,7 +31,7 @@ Monday & Friday 2–3:30PM, and by appointment.
 
 *The Analysis of Biological Data* by Whitlock and Schluter.
 
-## Tutorials and Labs {#tutorials}
+## Tutorials & Labs {#tutorials}
 
 **[Installing R](install_orient.html)**  
 **[First Steps with R](first_steps.html)**
