@@ -1,7 +1,7 @@
 ---
 layout: Rmd
 title: First steps with R
-pretitle: BioB215
+pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
 ---
