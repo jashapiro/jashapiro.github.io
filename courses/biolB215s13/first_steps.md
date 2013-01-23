@@ -96,11 +96,11 @@ sin(1) # trig functions use radians, not degrees
 ## [1] 0.8415
 {% endhighlight %}
 
-Notice that `R` does not try to evaluate anything on the line after the "`#`" character. The "`#`" denotes the start of a "comment", which is very handy for putting notes right in with your code. We will discuss another way of documenting your code later, which will allow you to produce html documents like this one quickly and easily. 
+Notice that `R` does not try to evaluate anything on the line after the &#8220;`#`" character. The &#8220;`#`" denotes the start of a "comment", which is very handy for putting notes right in with your code. We will discuss another way of documenting your code later, which will allow you to produce html documents like this one quickly and easily. 
 
 ## Variables
 
-You can also store the results of any calculation (or really anything at all) in a variable of your choosing. Then any time you want that value back you can just type the variable name, either by itself or as part of a later calculation. There are two ways to do this: with an equals sign (`=`), which will *assign* the value on the right to the variable name on the left. The other way is with an arrow (`<-`), which will store a value into the variable that it is pointing to. The arrow tends to be more common, mostly for historical reasons (you couldn't use the "`=`" symbol in early versions of `R`), but you should feel free to use either. 
+You can also store the results of any calculation (or really anything at all) in a variable of your choosing. Then any time you want that value back you can just type the variable name, either by itself or as part of a later calculation. There are two ways to do this: with an equals sign (`=`), which will *assign* the value on the right to the variable name on the left. The other way is with an arrow (`<-`), which will store a value into the variable that it is pointing to. The arrow tends to be more common, mostly for historical reasons (you couldn't use the &#8220;`=`" symbol in early versions of `R`), but you should feel free to use either. 
 
 
 {% highlight r %}
@@ -167,7 +167,7 @@ z - x
 
 
 ## Vectors
-You may have noticed that when `R` returns a value, it prepends it with "`[1]`". This is because, in it's way of working, `R` is never actually working just one number, but rather it is always working with a string of numbers: a **vector**. It is just that all the vectors we have dealt with so far have length 1. To construct a vector that is longer than length 1, you use the `c()` function:
+You may have noticed that when `R` returns a value, it prepends it with &#8220;`[1]`". This is because, in it's way of working, `R` is never actually working just one number, but rather it is always working with a string of numbers: a **vector**. It is just that all the vectors we have dealt with so far have length 1. To construct a vector that is longer than length 1, you use the `c()` function:
 
 {% highlight r %}
 X <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -839,7 +839,7 @@ as.integer(colors)
 
 
 ### Missing Data
-When I tried to convert a character vector to an integer, `R` returned the value "`NA`". This stands for "Not Available", and is the chief way that missing data is stored in `R`. `NA` will always return `NA` in any comparison, as it is usually preferrable to keep missing values missing. You can test specifically for `NA` values using `is.na()`, and some functions that don't work with `NA`s have options to remove them before performing their calculations
+When I tried to convert a character vector to an integer, `R` returned the value &#8220;`NA`". This stands for "Not Available", and is the chief way that missing data is stored in `R`. `NA` will always return `NA` in any comparison, as it is usually preferrable to keep missing values missing. You can test specifically for `NA` values using `is.na()`, and some functions that don't work with `NA`s have options to remove them before performing their calculations
 
 {% highlight r %}
 x <- c(1, 2, 3, 4, 5, NA)
@@ -877,7 +877,7 @@ mean(x, na.rm=TRUE)
 {% endhighlight %}
 
 
-There are a couple of other "missing" data types, for when you divide by `0` and silly things like that: these are "`Inf`", "`-Inf`" and "`NaN`" (not a number). They are *not* the same as `NA`, though they will often behave similarly, or cause other functions to return `NA` or `NaN`. But since they are not `NA`, `is.na()` will return `FALSE`. 
+There are a couple of other "missing" data types, for when you divide by `0` and silly things like that: these are &#8220;`Inf`", &#8220;`-Inf`" and &#8220;`NaN`" (not a number). They are *not* the same as `NA`, though they will often behave similarly, or cause other functions to return `NA` or `NaN`. But since they are not `NA`, `is.na()` will return `FALSE`. 
 
 {% highlight r %}
 a <- -3:3
