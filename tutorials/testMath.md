@@ -36,7 +36,10 @@ You can also embed plots, for example:
 plot(cars)
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-2](plots/test_math-unnamed-chunk-2.png) 
+![plot of chunk unnamed-chunk-2](plots/test_math-unnamed-chunk-2.png)
+{: .align-right}
 
-
+Embedding math should work now, either on its own:
 $$\sum_i^{10}{i}$$
+
+Or inline with text like this: $\frac{10}{x}$. One thing I am curious about is if I can do superscripts like this 10^3 or not.
