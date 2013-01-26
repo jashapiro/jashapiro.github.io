@@ -35,9 +35,13 @@ Monday & Friday 2–3:30PM, and by appointment.
 
 **[Installing R](install_orient.html)**  
 **[First Steps with R](first_steps.html)**
+**[Basic Graphics in R](basic_graphics.html)**
 
 
 ## External Resources {#external}
 
+### Tutorials
 **[Try R](http://tryr.codeschool.com)**
 
+### Reference
+**[ggplot2 Documentation](http://docs.ggplot2.org/)**
