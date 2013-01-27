@@ -26,6 +26,7 @@ body {
 	height:100%;
 	margin: 0;
 	padding: 0;
+	counter-reset: Q; /* create question counter */
 }
 #container {
 	position: relative;
@@ -391,6 +392,23 @@ code{
 	margin-top: -10px;
 }
 
+/* Numbered Questions */
+.question {
+	font-family: 'Source Sans Pro', 'Helveltica', sans-serif;
+	margin: 19px;
+	padding: 5px 9px;
+	background-color: #00aaf0;
+	border: 2px solid #646e7d;
+}
+
+.question:before {
+  font-weight: bold;
+  font-variant: small-caps;
+  content: "Problem " counter(Q) ": "; 	/* Print the H1 number */
+  counter-increment: Q; 	/* Add 1 to next H1 */
+}
+
+
 /*semantics for species names... just like <em>*/
 .species {
 	font-style: italic;
@@ -398,6 +416,10 @@ code{
 h1 .species{
   font-style: normal;
 }
+question .species{
+  font-style: normal
+}
+
 
 
 /*Reference text span styles*/
