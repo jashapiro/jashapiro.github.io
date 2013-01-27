@@ -134,6 +134,13 @@ You can assign new values to existing variables, but when you do, whatever old v
 {% highlight r %}
 y <- exp(3) 
 # exp() calculates powers of the mathematical constant e
+y
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] 20.09
 {% endhighlight %}
 
 
@@ -242,7 +249,8 @@ X * (X + 1)
 {% endhighlight %}
 
 
-Notice how when I told `R` to add or multiply two vectors, it performed the operation element by element. (This might not be what you expected for the multiplication if you were thinking of vectors like you would in linear algebra.) In fact, when I told it to add a single value to the vector, what `R` actually did was to repeat that value to a vector equal in length to the longer one, and then perform the pairwise addition. This means that you can do some fun and often useful things like adding different numbers to each element of the list depending on position. Say you want to make every other element negative. You can just make a vector of length 2: `c(1, -1)` and multiply it by your starting vector. `R` will automatically repeat the shorter vector as many times as necessary to make it the same length as the longer one. If it can't do that an integer number of times, it will give you a warning (but it will still perform the operation, usually).
+Notice how when I told `R` to add or multiply two vectors, it performed the operation element by element. (This might not be what you expected for the multiplication if you were thinking of vectors like you would in linear algebra.) In fact, when I told it to add a single value to the vector, what `R` actually did was to repeat that value to a vector equal in length to the longer one, and then perform the pairwise addition. This means that you can do some fun and often useful things like adding different numbers to each element of the list depending on position. Say you want to make every other element negative. You can just make a vector of length 2: `c(1, -1)` and multiply it by your starting vector. `R` will automatically repeat the shorter vector as many times as necessary to make it the same length as the longer one. This is known as vector "recycling". If it can't do that an integer number of times, it will give you a warning (but it will still perform the operation, usually).
+
 
 {% highlight r %}
 X * c(1, -1)
@@ -374,6 +382,9 @@ x <- 3
 ## [1] 1
 {% endhighlight %}
 
+Create a vector of the numbers from 1 to 9 and store it in a variable called `digits`. Use `R`'s vector recycling to divide every even number by 2, then multiply every multiple of 3 by 3. (6, being both even and a multiple of 3 should become 9). Store the result in a new variable.
+{: .question }
+
 
 ### Selecting from vectors
 Sometimes you want only a single element from a vector, or a few elements of the vector. To get that, you can use the square brackets operator, `[]`, with the index positions of the element or elements you want. So if I want the fifth element of a vector I can get it with something like: `X[5]`. You are not limited to choosing only one element, or even to choosing each element only once: simply provide another vector with the element positions you wish to select. 
@@ -438,7 +449,7 @@ X[c(-4,-8)]
 
 What you can *not* do is mix positive and negative index numbers. I'm not even sure what that would mean, and `R` will complain.
 
-Here you will also have noticed that `R` counts its index positions starting with `1`. This is different from many programming languages, which start with `0`. If you haven't done much programming before that won't be a big deal, but for people coming from another language it can be pretty confusing. (You might notice tha the previous syntax wouldn't work if you started from `0`, as you would not be able to exclude the first element...)
+You may have noticed that `R` counts its index positions starting with `1`. This is different from many programming languages, which start with `0`. If you haven't done much programming before that won't be a big deal, but for people coming from another language it can be pretty confusing. (Note that the previous syntax for excluding elements wouldn't work if you numbered from `0`, as you would not be able to exclude the first element...)
 
 You can also use the vector indexing to replace an element or elements of a vector, even replacing multiple elements at once:
 
@@ -555,6 +566,9 @@ diff(Y)
 ##  [1]  1  0  3  1 -4  1  1  0  1  1  1 -5  1  2
 {% endhighlight %}
 
+
+Calculate the sum of the integers from 1 to 1000 with every number divisible by 3 excluded. There are many ways to do this; show at least two methods.
+{: .question}
 
 ## Basic Data Types
 
