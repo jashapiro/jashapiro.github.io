@@ -286,6 +286,7 @@ Working always with vectors this way may seem odd at first, but it makes a lot o
 ### The colon operator
 There is another way of generating vectors that can be quite handy, so it is worth mentioning. That is the colon operator, `:`. This simply generates a vector of numbers where each is 1 more than the previous starting with the number on the left, ending with the number on the right (or as close as possible without going over, *Price Is Right* rules). Or if the number on the left is larger than the one on the right, it will produce a vector of descending numbers. While you can use this with non-integer starting points, I generally don't recommend it, as you are likely to be get confused about what the exact sequence returned will be.
 
+
 {% highlight r %}
 1:10
 {% endhighlight %}
@@ -320,6 +321,7 @@ There is another way of generating vectors that can be quite handy, so it is wor
 ##  [1]  2.3  3.3  4.3  5.3  6.3  7.3  8.3  9.3 10.3 11.3 12.3 13.3 14.3 15.3
 ## [15] 16.3 17.3 18.3 19.3 20.3 21.3 22.3
 {% endhighlight %}
+
 
 One very important note with the colon operator is that it comes first in the order of operations, before addition, multiplication, etc. Forget this at your peril.
 
@@ -382,9 +384,9 @@ x <- 3
 ## [1] 1
 {% endhighlight %}
 
+
 Create a vector of the numbers from 1 to 9 and store it in a variable called `digits`. Use `R`'s vector recycling to divide every even number by 2, then multiply every multiple of 3 by 3. (6, being both even and a multiple of 3 should become 9). Store the result in a new variable.
 {: .question }
-
 
 ### Selecting from vectors
 Sometimes you want only a single element from a vector, or a few elements of the vector. To get that, you can use the square brackets operator, `[]`, with the index positions of the element or elements you want. So if I want the fifth element of a vector I can get it with something like: `X[5]`. You are not limited to choosing only one element, or even to choosing each element only once: simply provide another vector with the element positions you wish to select. 
@@ -492,19 +494,20 @@ X
 
 
 {% highlight r %}
-x[c(2,4,6)] <- c(-10, -20, -30)
+X[c(1,3,6)] <- c(-10, -20, -30)
 X
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## [1]  1  0 23  0  5  0  7  8
+## [1] -10   0 -20   0   5 -30   7   8
 {% endhighlight %}
 
 
 ### Functions on vectors
 There are a number of functions that require vectors as input, rather than simply being applied to each element in turn. These are things like: `length()`, which tells you how many elements are in the vector; `sum()` and `mean()`, which perform some variant of aggregation; as well as functions like `diff()`,  which returns a vector of the differences between each pair of numbers in the input vector. It is important to keep track of what input a function requires and what its output will be, but most of the time things will work generally as you expect them to.
+
 
 {% highlight r %}
 Y <- c(1, 2, 2, 5, 6, 2, 3, 4, 
@@ -551,7 +554,7 @@ median(X)
 
 
 {% highlight text %}
-## [1] 3
+## [1] 0
 {% endhighlight %}
 
 
@@ -567,8 +570,6 @@ diff(Y)
 {% endhighlight %}
 
 
-Calculate the sum of the integers from 1 to 1000 with every number divisible by 3 excluded. There are many ways to do this; show at least two methods.
-{: .question}
 
 ## Basic Data Types
 
@@ -687,7 +688,9 @@ even
 ##  [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE
 {% endhighlight %}
 
+
 If you have a vector of booleans like this, you can also use that as a way of selecting part of a vector. If you want to know how many elements of a boolean vector are true, the easiest thing is usually just to sum up the vector, which will convert all of the `TRUE` values to 1 and all of the `FALSE` values to 0, then sum them just like any other number).
+
 
 {% highlight r %}
 Z[even]
@@ -748,6 +751,10 @@ even | threes #elements that are even OR divisible by 3
 {% highlight text %}
 ##  [1] FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE
 {% endhighlight %}
+
+
+Calculate the sum of the integers from 1 to 1000 with every number divisible by 7 excluded. There are many ways to do this; show at least two methods.
+{: .question}
 
 
 ### Characters and strings
@@ -977,6 +984,52 @@ mean(sqrt(a))
 {% endhighlight %}
 
 
+## A Bit on Functions
+I am not going to go into great depth on how functions in R work, but I want to introduce a bit of terminology that will keep coming up. A function in `R` has two basic parts: the function name and its arguments. The name of the function is the first part, followed immediately by parenthesis. Inside the parenthesis are the arguments, separated by commas. For example, in the `rnorm()` function, which generates normally distributed random numbers, the arguments are: `n`, the number of random numbers you want to generate; `mean`, the mean of the normal distribution they are chosen from; and `sd`, the standard deviation of that distribution. So if you wanted 12 random numbers drawn from a normal distribution with mean 3 and standard deviation 5, you would call the function like this:
+
+{% highlight r %}
+rnorm(n = 12, mean = 3, sd = 5)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##  [1]   5.5396   6.8117   2.9617  13.1828   1.5804 -12.1504   6.7161
+##  [8]   3.6189   9.3018   9.2497  -0.4952  -1.1872
+{% endhighlight %}
+
+You can actually take a shortcut and not give the argument names explicitly, as long as you give them in the order expected:
+
+{% highlight r %}
+rnorm(12, 3, 5)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##  [1] -6.954 13.464 -5.927 14.429 14.321  5.336  6.235  4.381  2.744 -7.609
+## [11]  7.185  6.986
+{% endhighlight %}
+
+Some arguments have default values, which you can see if you look at the help page for the function you are interested in. For `rnorm()` the default `mean` is `0` and the default `sd` is `1`. If we want to use those, we can shorten our call further and leave those off completely:
+
+{% highlight r %}
+rnorm(12) # equivalent to rnorm(12, 0, 1)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##  [1] -0.21185  0.06186  0.31532 -0.06949 -1.20805 -1.20355 -0.69940
+##  [8]  2.19021 -0.08003  0.09302 -0.93088 -2.98639
+{% endhighlight %}
+
+If you want to leave some arguments as their default but change others, you can skip the ones you don't want to change, but then you **must** name any arguments that are out of order. If I want 5 random numbers with mean 0 but standard deviation of 0.2 (rather than default of 1), I could do the following:
+```{R rnorm_ex3}
+rnorm(5, sd = 0.2)
+```
+
+If any of this is confusing for now, don't worry. There was a lot to take in. Everything will become more clear the more you practice. And there will be plenty of chances to practice.
 
 ## Next
 Now that you know something about the basic data types, we will start to move on to learning about how to read in data, organize it, and create beautiful plots.
