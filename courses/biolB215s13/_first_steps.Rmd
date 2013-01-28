@@ -247,7 +247,7 @@ Some arguments have default values, which you can see if you look at the help pa
 rnorm(12) # equivalent to rnorm(12, 0, 1)
 ```
 If you want to leave some arguments as their default but change others, you can skip the ones you don't want to change, but then you **must** name any arguments that are out of order. If I want 5 random numbers with mean 0 but standard deviation of 0.2 (rather than default of 1), I could do the following:
-```{R rnorm_ex3}
+```{r rnorm_ex4}
 rnorm(5, sd = 0.2)
 ```
 

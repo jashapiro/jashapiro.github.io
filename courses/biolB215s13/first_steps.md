@@ -994,8 +994,8 @@ rnorm(n = 12, mean = 3, sd = 5)
 
 
 {% highlight text %}
-##  [1]   5.5396   6.8117   2.9617  13.1828   1.5804 -12.1504   6.7161
-##  [8]   3.6189   9.3018   9.2497  -0.4952  -1.1872
+##  [1]  3.869  1.981  7.688  3.921 -3.564  6.397 -4.175  7.145  1.481 -5.545
+## [11]  3.267  2.056
 {% endhighlight %}
 
 You can actually take a shortcut and not give the argument names explicitly, as long as you give them in the order expected:
@@ -1007,8 +1007,8 @@ rnorm(12, 3, 5)
 
 
 {% highlight text %}
-##  [1] -6.954 13.464 -5.927 14.429 14.321  5.336  6.235  4.381  2.744 -7.609
-## [11]  7.185  6.986
+##  [1]  8.4036  3.0903  6.1925 -1.5030  4.8541  4.0534  8.7923 -0.6792
+##  [9]  4.5874  1.2151  3.5151  1.8892
 {% endhighlight %}
 
 Some arguments have default values, which you can see if you look at the help page for the function you are interested in. For `rnorm()` the default `mean` is `0` and the default `sd` is `1`. If we want to use those, we can shorten our call further and leave those off completely:
@@ -1020,14 +1020,22 @@ rnorm(12) # equivalent to rnorm(12, 0, 1)
 
 
 {% highlight text %}
-##  [1] -0.21185  0.06186  0.31532 -0.06949 -1.20805 -1.20355 -0.69940
-##  [8]  2.19021 -0.08003  0.09302 -0.93088 -2.98639
+##  [1] -2.3425 -0.8902  0.5632 -0.7580  0.5680 -0.1129  1.1362  0.5958
+##  [9]  1.3860 -0.8861  1.0796  1.9063
 {% endhighlight %}
 
 If you want to leave some arguments as their default but change others, you can skip the ones you don't want to change, but then you **must** name any arguments that are out of order. If I want 5 random numbers with mean 0 but standard deviation of 0.2 (rather than default of 1), I could do the following:
-```{R rnorm_ex3}
+
+{% highlight r %}
 rnorm(5, sd = 0.2)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] -0.015988  0.070612  0.001292 -0.045066  0.218979
+{% endhighlight %}
+
 
 If any of this is confusing for now, don't worry. There was a lot to take in. Everything will become more clear the more you practice. And there will be plenty of chances to practice.
 
