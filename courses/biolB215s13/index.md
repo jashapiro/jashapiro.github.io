@@ -33,7 +33,7 @@ Monday & Friday 2–3:30PM, and by appointment.
 
 ## Tutorials & Labs {#tutorials}
 
-**[Installing R](install_orient.html)**  
+**[Installing R and RStudio](install_orient.html)**  
 **[First Steps with R](first_steps.html)**  
 **[Basic Graphics in R](basic_graphics.html)**  
 
