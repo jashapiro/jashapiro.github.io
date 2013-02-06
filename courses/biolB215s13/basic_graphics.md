@@ -1,6 +1,6 @@
 ---
 layout: Rmd
-title: Basic Graphics with R
+title: Basic Plots with R
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
@@ -34,46 +34,6 @@ The other data set we will use is a set of measurements of irises (the flower). 
 {% highlight r %}
 data(iris)
 attach(iris)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## The following object(s) are masked from 'iris (position 3)':
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species
-## The following object(s) are masked from 'iris (position 4)':
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species
-## The following object(s) are masked from 'iris (position 5)':
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species
-## The following object(s) are masked from 'iris (position 6)':
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species
-## The following object(s) are masked from 'iris (position 7)':
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species
-## The following object(s) are masked from 'iris (position 8)':
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species
-## The following object(s) are masked from 'iris (position 9)':
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species
-## The following object(s) are masked from 'iris (position 10)':
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species
-## The following object(s) are masked from 'iris (position 11)':
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species
-## The following object(s) are masked from 'iris (position 13)':
-## 
-##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species
-{% endhighlight %}
-
-
-
-{% highlight r %}
 names(iris) #this shows the names of the variables in the iris data.
 {% endhighlight %}
 
@@ -441,4 +401,6 @@ qplot(x = Sepal.Width, y = Sepal.Length,
 
 Make one more plot to turn in. Use the iris data, and create a plot that illustrates something you find interesting about that data, then write a caption explaining what the plot shows. Make sure your plot is fully labelled. Extra points for using a feature of plotting in `R` that was not discussed on this page, either from base graphics or `ggplot2`. (Some suggestions: density plots, transparency, facets, varible point sizes, continuous color scales, fit lines, or smoothing curves). You may find the examples available at [ggplot2.org](http://ggplot2.org) to be helpful, especially the example chapter from the [ggplot2 book](http://ggplot2.org/book/): "[Getting started with qplot](http://ggplot2.org/book/qplot.pdf)"
 {: .question}
+
+
 
