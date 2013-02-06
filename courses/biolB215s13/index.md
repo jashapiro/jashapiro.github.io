@@ -41,11 +41,11 @@ Monday & Friday 2–3:30PM, and by appointment.
 ## External Resources {#external}
 
 ### Tutorials
-**[Try R](http://tryr.codeschool.com)**
-**[Getting Help with R](http://www.rstudio.com/ide/docs/help_with_r)**
+**[Try R](http://tryr.codeschool.com)**  
+**[Getting Help with R](http://www.rstudio.com/ide/docs/help_with_r)**  
 
 ### Reference
 
-**[ggplot2 Documentation](http://docs.ggplot2.org/)**
-**[RStudio Documentation](http://www.rstudio.com/ide/docs/)**
+**[ggplot2 Documentation](http://docs.ggplot2.org/)**  
+**[RStudio Documentation](http://www.rstudio.com/ide/docs/)**  
 
