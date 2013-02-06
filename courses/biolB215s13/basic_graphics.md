@@ -399,7 +399,7 @@ qplot(x = Sepal.Width, y = Sepal.Length,
 ![plot of chunk ggcolorscatter2](plots/basic_graphics-ggcolorscatter2.png) 
 
 
-Make one more plot to turn in. Use the iris data, and create a plot that illustrates something you find interesting about that data, then write a caption explaining what the plot shows. Make sure your plot is fully labelled. Extra points for using a feature of plotting in `R` that was not discussed on this page, either from base graphics or `ggplot2`. (Some suggestions: density plots, transparency, facets, varible point sizes, continuous color scales, fit lines, or smoothing curves). You may find the examples available at [ggplot2.org](http://ggplot2.org) to be helpful, especially the example chapter from the [ggplot2 book](http://ggplot2.org/book/): "Getting started with qplot" [PDF](http://ggplot2.org/book/qplot.pdf).
+Make one more plot to turn in. Use the iris data, and create a plot that illustrates something you find interesting about that data, then write a caption explaining what the plot shows. Make sure your plot is fully labelled. Extra points for using a feature of plotting in `R` that was not discussed on this page, either from base graphics or `ggplot2`. (Some suggestions: density plots, transparency, facets, varible point sizes, continuous color scales, fit lines, or smoothing curves). You may find the examples available at [ggplot2.org](http://ggplot2.org) to be helpful, especially the example chapter from the [ggplot2 book](http://ggplot2.org/book/): "Getting started with qplot" \[[PDF](http://ggplot2.org/book/qplot.pdf)\].
 {: .question}
 
 
