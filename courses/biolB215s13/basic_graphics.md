@@ -158,6 +158,29 @@ The basic plotting function in in `ggplot2` is `qplot()`, which can actually mak
 
 {% highlight r %}
 require(ggplot2)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Loading required package: ggplot2
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Warning: package 'ggplot2' was built under R version 2.15.1
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Use suppressPackageStartupMessages to eliminate package startup messages.
+{% endhighlight %}
+
+
+
+{% highlight r %}
 qplot(med_norm)
 {% endhighlight %}
 
@@ -350,7 +373,7 @@ qplot(x = Species,
 
 
 
-Make a boxplot that shows the distribution of the product of petal width and petal length for each individual iris in the data set, split by species. Add a solid horizontal line to your plot that shows the mean of this product of  across all three the species. Also add a dotted horizontal line that shows the product of mean width and mean height, calculated separately. Are these the same? Why or why not?
+Make a boxplot that shows the distribution of the product of petal width and petal length for each individual iris in the data set, split by species. Add a solid horizontal line to your plot that shows the mean of this product across all three the species. Also add a dotted horizontal line that shows the product of mean width and mean length, calculated separately. Are these the same? Why or why not?
 {: .question}
 
 ## Scatterplots
