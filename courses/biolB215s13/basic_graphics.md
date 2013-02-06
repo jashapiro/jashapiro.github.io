@@ -158,29 +158,6 @@ The basic plotting function in in `ggplot2` is `qplot()`, which can actually mak
 
 {% highlight r %}
 require(ggplot2)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Loading required package: ggplot2
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning: package 'ggplot2' was built under R version 2.15.1
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Use suppressPackageStartupMessages to eliminate package startup messages.
-{% endhighlight %}
-
-
-
-{% highlight r %}
 qplot(med_norm)
 {% endhighlight %}
 
