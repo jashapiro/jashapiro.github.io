@@ -173,7 +173,7 @@ ddply(crabs, c("sp", "sex"),
 
 Once we have our data arranged nicely in a data frame, it is easy to use it in plots, and to take advantage of some of the fancier features `ggplot2`. We don't need to separate out the individual vectors, as we had done before; if we include a `data` argument in `qplot()`, it will use only the data in our data frame. In particular, we can take advantage of "faceting", the ability to make multiple small plots with the same axes, which makes comparison across groups easier. I'll just present some examples here to give you a bit of inspiration.
 
-```{r qplots, message=FALSE, width = 6, height = 6}
+```{r qplots, message=FALSE, fig.width = 6, fig.height = 6}
 # rename the factor levels and column names
 # so they are more understandable in the plot legend
 crabs$Sex <- crabs$sex # make a new column to be safe
@@ -201,8 +201,8 @@ qplot(data = crabs,
       ) +
   theme(legend.position = "none") + 
   scale_fill_manual(values = c("blue", "orange"))
-
-
+```
+```{r qplot_scatter, message=FALSE, fig.width = 7, fig.height = 6}
 qplot(data = crabs, 
       x = RW, y = BD,
       geom = c("point", "smooth"),

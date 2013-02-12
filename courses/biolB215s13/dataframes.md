@@ -455,9 +455,8 @@ qplot(data = crabs,
 
 ![plot of chunk qplots](plots/dataframes-qplots2.png) 
 
+
 {% highlight r %}
-
-
 qplot(data = crabs, 
       x = RW, y = BD,
       geom = c("point", "smooth"),
@@ -470,6 +469,6 @@ qplot(data = crabs,
   scale_color_manual(values = c("blue", "orange")) 
 {% endhighlight %}
 
-![plot of chunk qplots](plots/dataframes-qplots3.png) 
+![plot of chunk qplot_scatter](plots/dataframes-qplot_scatter.png) 
 
 
