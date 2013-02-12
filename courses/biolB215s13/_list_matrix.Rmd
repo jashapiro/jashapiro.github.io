@@ -58,10 +58,10 @@ rbind(a, b, c)
 
 Notice how `R` automatically named one of the dimensions, using the names of the vectors that you gave to the bind command. You should also have notice how the vector `b` was recycled automatically to be the same length as the other vectors (or the longest vector, if there were many lengths of vectors).
 
-## Arrays
-If you want to store things in more than two dimensions, you can do that as well, using arrays, which are constructed with `array()`. Rather than specifying the the number of rows or columns with `ncol` or `nrow`, you give it a vector of the array dimensions using the `dim` argument.  Otherwise these are mostly analagous to matrices, extended to an arbitrary  number of dimensions. I'm not going to go into detail here, as they don't come up all that often for basic analyses, and you should be able to figure them out if they do...
+### Arrays
+If you want to store things in more than two dimensions, you can do that as well, using arrays, which are constructed with `array()`. Rather than specifying the the number of rows or columns with `ncol` or `nrow`, you give it a vector of the array dimensions using the `dim` argument.  Otherwise these are mostly analagous to matrices, extended to an arbitrary  number of dimensions. I'm not going to go into detail here, as they don't come up all that often for basic analyses, but feel free to explore on your own...
 
-\subsection*{Lists}
+## Lists
 You have already seen lists, as with the list of dimension names in the last section, so just a couple of quick notes here. You can use lists to put together vectors that might be different lengths, or of different types. Unlike with the bind commands, vectors of different length won't be expanded when putting together a list. Lists don't actually have to contain just vectors, but they can contain any `R` object, whether it be a matrix, data frame (coming next) or another list. Yes, you can have lists of lists. Some examples:
 
 ```{r basiclist}
