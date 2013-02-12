@@ -37,7 +37,7 @@ Monday & Friday 2–3:30PM, and by appointment.
 **[First Steps with R](first_steps.html)**  
 **[Basic Plots in R](basic_graphics.html)**  
 **[Matrices and Lists](list_matrix.html)**  
-**[Data Frames](dataframes.html)**  
+**[Working with Data Frames](dataframes.html)**  
 
 ## External Resources {#external}
 

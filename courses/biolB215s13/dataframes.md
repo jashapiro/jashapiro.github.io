@@ -1,6 +1,6 @@
 ---
 layout: Rmd
-title: Dataframes
+title: Working with Data Frames
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
