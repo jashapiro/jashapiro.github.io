@@ -994,8 +994,8 @@ rnorm(n = 12, mean = 3, sd = 5)
 
 
 {% highlight text %}
-##  [1]  3.869  1.981  7.688  3.921 -3.564  6.397 -4.175  7.145  1.481 -5.545
-## [11]  3.267  2.056
+##  [1]  8.339  5.084  4.473  2.607 11.031  5.895 12.285  6.716  2.989  1.835
+## [11]  4.838  2.182
 {% endhighlight %}
 
 You can actually take a shortcut and not give the argument names explicitly, as long as you give them in the order expected:
@@ -1007,8 +1007,8 @@ rnorm(12, 3, 5)
 
 
 {% highlight text %}
-##  [1]  8.4036  3.0903  6.1925 -1.5030  4.8541  4.0534  8.7923 -0.6792
-##  [9]  4.5874  1.2151  3.5151  1.8892
+##  [1]  8.5321  2.5257  7.4402  2.2448 -2.9494 -2.6978 -0.6749 -0.7934
+##  [9] 12.3240  4.7489  7.0968  3.3546
 {% endhighlight %}
 
 Some arguments have default values, which you can see if you look at the help page for the function you are interested in. For `rnorm()` the default `mean` is `0` and the default `sd` is `1`. If we want to use those, we can shorten our call further and leave those off completely:
@@ -1020,8 +1020,8 @@ rnorm(12) # equivalent to rnorm(12, 0, 1)
 
 
 {% highlight text %}
-##  [1] -2.3425 -0.8902  0.5632 -0.7580  0.5680 -0.1129  1.1362  0.5958
-##  [9]  1.3860 -0.8861  1.0796  1.9063
+##  [1] -0.72192 -0.41138  0.32912 -1.98467  0.03093  1.67171 -0.81785
+##  [8] -0.74734 -0.48133 -0.10988 -0.79118 -1.12635
 {% endhighlight %}
 
 If you want to leave some arguments as their default but change others, you can skip the ones you don't want to change, but then you **must** name any arguments that are out of order. If I want 5 random numbers with mean 0 but standard deviation of 0.2 (rather than default of 1), I could do the following:
@@ -1033,7 +1033,7 @@ rnorm(5, sd = 0.2)
 
 
 {% highlight text %}
-## [1] -0.015988  0.070612  0.001292 -0.045066  0.218979
+## [1]  0.14999  0.21532 -0.01341  0.12641  0.08772
 {% endhighlight %}
 
 

@@ -8,7 +8,7 @@ tags: [R, tutorial, RStudio, BiolB215]
 
 ```{r setup, include=FALSE, cache=FALSE}
 source("../../_knitr/knit_jekyll_setup.R")
-opts_chunk$set(fig.path="plots/basic_graphics-", tidy=FALSE, fig.width=5, fig.height=5)
+opts_chunk$set(fig.path="plots/basic_graphics-", tidy=FALSE, fig.width=5, fig.height=5, cache = TRUE)
 ```
 
 

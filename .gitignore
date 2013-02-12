@@ -6,3 +6,4 @@ _site
 .Rapp.Rhistory
 knitr/*.html
 
+courses/biolB215s13/cache
