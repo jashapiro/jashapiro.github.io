@@ -327,7 +327,11 @@ sd(blue_females$FL)
 
 
 
-Calculate the median and IQR of carapace length (`CL`) for the orange males with body depth greater than 15mm. 
+
+If you were trying to put all the crabs in a storage cage that had a hole size of 25 mm, you might expect that any crabs with a carapace length (CL) smaller than the holes would be able to escape (since they move sideways).  
+**a.**  Create a histogram showing the size distribution of the crabs that you would expect to stay in the cage (measured by carapace length). Be sure to label your plot completely, including the total number of crabs that remain.  
+**b.**  What proportion of crabs remaining in your cage would be female? What proportion would be orange?  
+**c.**  What is the median body depth of the female, blue crabs that you would expect to escape? 
 {: .question}
 
 ## Working with multiple subsets simultaneously
@@ -407,7 +411,10 @@ ddply(crabs, c("sp", "sex"),
 
 The functions that you pass in to summarize don't have to be as simple as the ones I just showed; you could calculate the 80% quantile of the difference between the square root of the carapace width and frontal lobe cubed, though I doubt you would want to. The only limitation is that each of the functions should return a single value, or you will get an error.
 
-Calculate the mean, and variance, and standard error for each of carapace length, carapace width, and the difference between width and length for each of the species/sex combinations. Which species tends to be larger (by these measures)? Which sex? What can you tell about the relationship between carapace length and carapace width by comparing the variances of each of those quantities to the variance of their difference? 
+
+**a.** Calculate the mean, and variance, and standard error for each of carapace length, carapace width, and the difference between width and length for each of the species/sex combinations.  
+**b.**  Which species tends to be larger (by these measures)? Which sex?  
+**c.**  What can you tell about the relationship between carapace length and carapace width by comparing the variances of each of those quantities to the variance of their difference? 
 {: .question}
 
 
