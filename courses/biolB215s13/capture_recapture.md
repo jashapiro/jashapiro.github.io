@@ -7,10 +7,8 @@ tags: [R, tutorial, RStudio, BiolB215]
 ---
 
 
-```{r setup, include=FALSE, cache=FALSE}
-source("../../_knitr/knit_jekyll_setup.R")
-opts_chunk$set(fig.path="plots/capture_recapture-", tidy=FALSE, fig.width=6.5, fig.height=5, cache=TRUE)
-```
+
+
 
 ## Introduction
 Estimating the number of organisms in a region is easiest if the organisms don't move and are easy to find. In that case, you can either count them all, or randomly choose subregions to sample and  count the number of individuals in each of those, multplying by the number of possible subregions. In that case, you would also be able to estimate a confidence interval based on the sampling error in your counts. If you are dealing with moving organisms, but ones that are easy to see, you can often do something similar: counting the number you see in a given area, possibly over time.
@@ -24,14 +22,24 @@ $$N=\frac{MC}{R}$$
 ### Functions in R
 Since this is something we will be doing over and over, it is a good time to write our first function in `R`. Functions are one of the real strengths of `R`, since they allow you to run the same set of analysis repeatedly with different sets of input data, without having to copy and paste large chunks of code, and without cluttering up your workspace with all of the intermediate results. To define a function, you use the `function()` command, which takes as its arguments the names of the arguments that you your function will take. The commands that make up the function are then put in curly braces, `{}`, and can use the arguments you just defined as variables. To be more clear, here is an example of a function, one returns the 5% and 95% quantiles of a vector:
 
-```{r function_intro}
+
+{% highlight r %}
 quant5to95 <- function(data){quantile(x = data, probs=c(0.05, 0.95))}
 quant5to95(data = rnorm(10000))
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##     5%    95% 
+## -1.629  1.631
+{% endhighlight %}
+
 
 A slightly more complicated function might give the quantiles bounding a range. So If I asked for the 90% range it would five the 5% and 95% confidence intervals, or if I asked for the 50% range it would give the 25% to 75% range. This version also shows how you can specify a default value for an argument (the value if that argument is left blank), and a quick error check to stop the function if an invalid input is given. The error check uses an `if(){}` statement, which executes the code between the curly braces only when the statement in parenthesis is true; in this case it checks whether the range is nonsensical, in which case it stops the function and prints an error message using the `stop()` function. it also uses a proper return statement to specify the way the results are presented when the function is run. In this case, it will return a list with the  requested range as the first element (named `range`) and the calculated quantiles as the second named `bounds`.
 
-```{r rangefunction}
+
+{% highlight r %}
 quantRange <- function(data, range = 0.95){
   if (range > 1 | range <= 0){
     stop("range must be greater than 0 and less than 1.")
@@ -42,28 +50,77 @@ quantRange <- function(data, range = 0.95){
 }
 a <- rnorm(10000)
 quantRange(a, range = 0.5)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## $range
+## [1] 0.5
+## 
+## $bounds
+##     25%     75% 
+## -0.6692  0.6630
+{% endhighlight %}
+
+
+
+{% highlight r %}
 quantRange(a)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## $range
+## [1] 0.95
+## 
+## $bounds
+##   2.5%  97.5% 
+## -1.954  1.962
+{% endhighlight %}
+
 
 ## Calculating Population Size
 Now we should have everything we need to write some functions to calculate the number of individuals in a population based on the the number of individuals we caught in the two trappings and the number that were marked in the second trapping.
 
-```{r recapture function}
+
+{% highlight r %}
 recapturePopSize <- function(first, second, marked){
   N_est <- first * second / marked
   return(N_est)
 }
-```
+{% endhighlight %}
+
 
 Now let's see how it well it works. Lets assume that the true population size is 5000 individuals. On the first trip we capture 100. When we rerelease them, then we have a total population of 100 marked individuals and 4900 unmarked individuals. On our second trip we will capture 200 individuals (we have gotten better at our trapping with practice!). We will simulate the number of individuals we capture who are marked by first creating a vector of individuals with 100 marked and 4900 unmarked, then using the `sample()` function to select 200 individuals from that population at random.
 
-```{r recaptureSample}
+
+{% highlight r %}
 marked_pop <- factor(rep(c("marked", "unmarked"), c(100, 4900)))
 trapped <- sample(marked_pop, 200)
 n_marked  <-  sum(trapped == "marked")
 n_marked
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] 4
+{% endhighlight %}
+
+
+
+{% highlight r %}
 recapturePopSize(100, 200, n_marked)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] 5000
+{% endhighlight %}
+
 
 Doing this one time doesn't tell us much about the distribution of our estimate, so we will write a function to do the simulation, with arguments that specify the total population size and the number of individuals captured in the first and second trappings. If we made a `marked_pop` vector every time, this would be pretty slow to calculate, so we can take advantage of a function built into `R` that can do the same thing much more quickly. The second capture is very much like binomial sampling in that we are sampling individuals of two kinds from a population, but unlike binomial sampling, we are capturing individuals *without* replacement. This makes it into something called a hypergeometric distribution, which has the following probability function:
 $$\Pr(R) = \frac{\binom{M}{R}\binom{N-M}{C-R}}{\binom{N}{C}}$$
@@ -74,25 +131,53 @@ To draw randomly from this distribution in `R`, we use the `rhyper()` function (
 `k` - the number of individuals to choose for each sample ($C$ above)  
 
 To create a single sample with this function, equivalent to the functions above, we would do the following:
-```{r hyper}
+
+{% highlight r %}
 n_marked <- rhyper(nn = 1, m = 100, n = 4900, k = 200)
 n_marked
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] 4
+{% endhighlight %}
+
+
+
+{% highlight r %}
 recapturePopSize(100, 200, n_marked)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] 5000
+{% endhighlight %}
+
 
 We can wrap this whole thing up in a function to calculate a single simulation, just returning the estimate we would have gotten given a population size, and our first and second capture numbers, then use the `replicate()` function in `R` to run it many times (10 in this case).
 
-```{r simRecapture}
+
+{% highlight r %}
 simRecapture <- function(N, first, second){
   marked <- rhyper(nn = reps, m = first, n = N - first, k = second)
   N_est <- recapturePopSize(first, second, marked)
   return(N_est)
 }
 sims <- replicate(10, simRecapture(5000, 100, 200))
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error: object 'reps' not found
+{% endhighlight %}
+
 
 In fact, this is still a slightly inefficient way to do things. That `nn = 1` argument to `rhyper()`, which told it we only wanted to do one trial, but the function would have been perfectly happy to do all of the trials we wanted all at once. You might think that you would still have to write a function to go through all of those results and apply our `recapturePopSize()` function, but in fact the function we wrote it will work just fine with vectors for each argument. So in this case, where we are not varying the number of individuals captured each trapping, we can do things a bit more efficiently without the separate `simRecapture()` function.
-```{r simRecapture2}
+
+{% highlight r %}
 simRecapture2<- function(N, first, second, reps = 1){
   marked = rhyper(nn = 1, m = first, n = N - first, k = second)
   N_est <- recapturePopSize(first, second, marked)
@@ -100,7 +185,15 @@ simRecapture2<- function(N, first, second, reps = 1){
                     marked, N_est))
 }
 simRecapture2(5000, 100, 200, reps = 5)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##   first second marked N_est
+## 1   100    200      7  2857
+{% endhighlight %}
+
 
 ## A Better Estimate
 It turns out that this simple estimate of the population size is somewhat biased. This is perhaps easiest to see if you think about the case when you don't capture any marked individuals. Then $R = 0$, and the population is estimated to be of infinite size, which is never a good thing. A somewhat better estimator is the **Schnabel** method: 
@@ -151,13 +244,22 @@ So that leaves us again with $\Pr(N=x)$, which is the prior probability that $N$
 
 ## Calculating likelihoods
 So with the math sorted out, we can start to code it into `R`. First, the likelihood of the data, $\Pr(R|N=x)$, we can calculate using the `dbinom()` function. This takes the same `size` and `prob` arguments as rbinom, but returns the value of the binomial probability distribution at some value or values. So if we want to know the probability of catching 5 marked individuals among 50 trapped individuals if the population size was 1000 and we had trapped 100 individuals on the first trip, that would look like this:
-```{r dbinom}
+
+{% highlight r %}
 dbinom(5, size = 50, prob = 100/1000)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] 0.1849
+{% endhighlight %}
+
 
 In fact, we could calculate it for a range of numbers of marked individuals, using the fact that `R` loves to work with vectors. We could go ahead and calculate the entire probability  distribution; the chance of catching 0, 1, 2, ... , 50 marked individuals in a sample of 50, which I have plotted for your edification. What you may not be able to see exactly, but should be aware of, is that the sum of these probabilities is equal to 1. Check this for yourself using `sum()`.
 
-```{r probdist}
+
+{% highlight r %}
 #full probability distribution
 recaptured <- 0:50
 probs <- dbinom(recaptured, size = 50, prob = 100/1000)
@@ -169,11 +271,15 @@ qplot(x = recaptured, y = probs,
       main = "Recapture count probabilities in a 10% marked population.",
       xlab = "Number of marked individuals recaptured", 
       ylab = "Probability")
-```
+{% endhighlight %}
+
+![plot of chunk probdist](plots/capture_recapture-probdist.png) 
+
 
 Of course, for a given experiment, we only see one outcome; we capture one group of animals and see one number of marked individuals among them. What we want to know is what the chance is that we would have seen that number of marked individuals given some range of population sizes. Again, this is the *likelihood* of the data given a particular parameter value. `R` is happy enough to calculate `dbinom()` for a variety of population sizes as well, and we can generate a plot of the likelihood of observing 5 marked individuals given a variety of total population sizes. 
 
-```{r likelihood}
+
+{% highlight r %}
 popsize <- 500:5000
 likes <- dbinom(5, size = 50, prob = 100/popsize )
 qplot(x = popsize, y =  likes,
@@ -182,7 +288,10 @@ qplot(x = popsize, y =  likes,
       main = "Population size likelihoods given recapture of 5 marked individuals in a sample of 50.",
       xlab = "Population Size", 
       ylab = "Likelihood")
-```
+{% endhighlight %}
+
+![plot of chunk likelihood](plots/capture_recapture-likelihood.png) 
+
 
 
 The likelihood of the data across a range of parameters is often used directly to estimate the true value of a paprameter. To do this, you find the *maximum likelihood*, the value of the parameter that results in the largest likelihood value under your model. Calculate the likelihood values for population sizes between 200 and 100,000 individuals, for a project where you trapped 200 birds on your first trip to an island, banded and released them, then  returned to caputure 200 birds on your second visit, of which 24 were marked. For your own reference, generate a plot of the population sizes and the corresponding likelihoods.  
@@ -195,18 +304,21 @@ The likelihood of the data across a range of parameters is often used directly t
 ### Calculating posterior probability
 With the likelihood calculations done, we should be able to construct a function to calculate the posterior probability distribution of population size given the number of marked individuals that we caught on our second trapping trip. First a function to make the vector of population sizes we will look at (with a minimum as described above), and their prior probabilities.
 
-```{r prior}
+
+{% highlight r %}
 makePrior <- function(max_N, first=1, second=1){
   #impossible to have a population size smaller than the number captured in either run
   N <- max(c(first, second)):max_N
   prob <- 1/length(N)
   return(data.frame(N, prob))
 }
-```
+{% endhighlight %}
+
 
 Since we can caluculate the all of the likelihoods we need as described above, we can go right on to calculating the posterior probabilities of each population size given the number of marked individuals, the number of individuals trapped each time, and the prior probabilities (with the prior given as a a data frame with columns named `N` and `prob`, as constructed above). 
 
-```{r posterior}
+
+{% highlight r %}
 calcPosterior <- function(marked, first, second, prior){
   likelihoods <- dbinom(marked, size = second, 
                         prob = first/prior$N)
@@ -215,12 +327,14 @@ calcPosterior <- function(marked, first, second, prior){
   posterior <- numerators/denominator
   return(data.frame(N = prior$N, prob = posterior))
 }
-```
+{% endhighlight %}
+
 
 
 Nowe we can construct a prior and calculate the posteriors, using the count data from our hypothetical experiment.
 
-```{r priorplot, fig.width=7.5}
+
+{% highlight r %}
 prior <- makePrior(10000,100, 100)
 posterior <- calcPosterior(marked = 5, 100, 100, prN_prior)
 
@@ -237,19 +351,32 @@ qplot(data = plotdata,
       xlab = "Population Size", 
       ylab = "Probability") +
   guides(color = guide_legend(title = "Distribution"))
-```
+{% endhighlight %}
+
+![plot of chunk priorplot](plots/capture_recapture-priorplot.png) 
+
 
 
 One thing we might want to know from this is what the most probable value is for the population size. One way to do this is to use the function `which.max()` to get the index of the largest of the probability values from the posterior distribution, selecting the whole row from data frame.
 
-```{r max}
+
+{% highlight r %}
 posterior[which.max(posterior$post_prob), ]
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] N    prob
+## <0 rows> (or 0-length row.names)
+{% endhighlight %}
+
 
 ### Calculating credible intervals
 This should give similar answers to the previous (frequentist) way of estimating the population size, but it is not necessarily unbiased in the same way, since it depends not just on the data but also the prior probability that we arbitrarily (but with some justification) assigned to the population size. More importantly, we can now calculate a Bayesian credible interval, the interval of the probability distribution that contains a given fraction (95%, for example) of the total probability. The easiest way to do this is to calculate the cumulative sums of the posterior probabilities, using the function @cumsum()@, then find the population size values that corespond to the ends of the interval we want. For example, if we wanted the 95% credible interval, we would be looking for where the cumulative probability crossed 0.025 and 0.975. Below is a function to do this, and also return the site with the maximum probability, and the midpoint of the probability distribution, where there is an approximately equal probability that the true population size is above or below that value.
 
-```{r credibleinterval}
+
+{% highlight r %}
 credIntN <- function(prN, range = 0.95){
   #get the max first
   max_prob <- prN$N[which.max(prN$prob)]
@@ -267,10 +394,12 @@ credIntN <- function(prN, range = 0.95){
   return (data.frame(max_p = max_prob, mid_p = mid_prob,
                     bayes_lower = low_bound, bayes_upper = high_bound))
 }
-```
+{% endhighlight %}
+
 
 Finally, with all of that we can make a nice tidy function that takes a set of values for the number of individuals caught in the first trapping (and then marked and released), the number caught in the second trapping, the number of the second set that were marked, and the maximum population size we are willing to consider (with a default of 100,000). The function will then construct the prior, calculate the posterior, and return the results of our Bayesian analysis, optionally including the full posterior distribution).
-```{r integrated}
+
+{% highlight r %}
 bayesPopSize <- function(marked, first, second, 
                          max_N = 10^5,  return_post= F){
   input_frame <- data.frame(marked, first, second)
@@ -286,7 +415,15 @@ bayesPopSize <- function(marked, first, second,
 }
 
 bayesPopSize(marked = 5, first = 100, second = 100)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##   marked first second max_p mid_p bayes_lower bayes_upper
+## 1      5   100    100  2000  2705        1162        8995
+{% endhighlight %}
+
 
 
 Using the same conditions as the last problem, calculate the posterior probability, using a maximum possible population size of 100,000 individuals.  
