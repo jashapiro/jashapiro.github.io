@@ -161,7 +161,7 @@ We can wrap this whole thing up in a function to calculate a single simulation, 
 
 {% highlight r %}
 simRecapture <- function(N, first, second){
-  marked <- rhyper(nn = reps, m = first, n = N - first, k = second)
+  marked <- rhyper(nn = 1, m = first, n = N - first, k = second)
   N_est <- recapturePopSize(first, second, marked)
   return(N_est)
 }
@@ -169,17 +169,11 @@ sims <- replicate(10, simRecapture(5000, 100, 200))
 {% endhighlight %}
 
 
-
-{% highlight text %}
-## Error: object 'reps' not found
-{% endhighlight %}
-
-
 In fact, this is still a slightly inefficient way to do things. That `nn = 1` argument to `rhyper()`, which told it we only wanted to do one trial, but the function would have been perfectly happy to do all of the trials we wanted all at once. You might think that you would still have to write a function to go through all of those results and apply our `recapturePopSize()` function, but in fact the function we wrote it will work just fine with vectors for each argument. So in this case, where we are not varying the number of individuals captured each trapping, we can do things a bit more efficiently without the separate `simRecapture()` function.
 
 {% highlight r %}
 simRecapture2<- function(N, first, second, reps = 1){
-  marked = rhyper(nn = 1, m = first, n = N - first, k = second)
+  marked = rhyper(nn = reps, m = first, n = N - first, k = second)
   N_est <- recapturePopSize(first, second, marked)
   return(data.frame(first, second, 
                     marked, N_est))
@@ -191,7 +185,11 @@ simRecapture2(5000, 100, 200, reps = 5)
 
 {% highlight text %}
 ##   first second marked N_est
-## 1   100    200      7  2857
+## 1   100    200      3  6667
+## 2   100    200      9  2222
+## 3   100    200      4  5000
+## 4   100    200      8  2500
+## 5   100    200      4  5000
 {% endhighlight %}
 
 
