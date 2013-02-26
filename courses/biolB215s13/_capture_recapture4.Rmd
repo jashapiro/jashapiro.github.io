@@ -27,7 +27,7 @@ $$\Pr(R) = \sum_x{\Pr(R \mid N=x)\Pr(N=x)}$$
 which is to say that the total probability of the observed $R$ is equal to the sums of the probabilities of observing $R$ for each possible value of $N$ times the probability of that value of $N$.
 
 
-So that leaves us again with $\Pr(N=x)$, which is the prior probability that $N$ equals some value $x$. Here there are a number of options, as you might have any number of ideas about what the population size is most likely to be. For now, we'll just assume that the population size is less than some large number, say 100,000 individuals. We can also be pretty safe in assuming that it is larger than the sum of $M$ and $(C-R)$, since we captured that many individuals. Other than that, we won't assume anything, and we will set the prior probability of $x$ as $1/[100,000 - (M + C - R1)]$
+So that leaves us again with $\Pr(N=x)$, which is the prior probability that $N$ equals some value $x$. Here there are a number of options, as you might have any number of ideas about what the population size is most likely to be. For now, we'll just assume that the population size is less than some large number, say 10,000 individuals. We can also be pretty safe in assuming that it is larger than the sum of $M$ and $(C-R)$, since we captured that many individuals. Other than that, we won't assume anything, and we will set the prior probability of $x$ as $1/(10,000 - (M + C - R))$
 
 
 ### Calculating posterior probability
