@@ -38,6 +38,8 @@ Monday & Friday 2–3:30PM, and by appointment.
 **[Basic Plots in R](basic_graphics.html)**  
 **[Matrices and Lists](list_matrix.html)**  
 **[Working with Data Frames](dataframes.html)**  
+  
+**[Capture-Recapture Lab](capture_recapture.html)**  
 
 ## External Resources {#external}
 
