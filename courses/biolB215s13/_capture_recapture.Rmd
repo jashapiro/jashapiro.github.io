@@ -1,6 +1,6 @@
 ---
 layout: Rmd
-title: "Capture Recapture Lab: Introduction"
+title: "Capture Recapture Lab"
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]

@@ -1,12 +1,12 @@
 ---
 layout: Rmd
-title: "Capture Recapture: Error and likelihood"
+title: "Recapture: Error & Likelihood"
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
 ---
 
-[back to Calculations and simulations](capture_recapture2.html)
+[back to Calculations & Simulations](capture_recapture2.html)
 
 ```{r setup, include=FALSE, cache=FALSE}
 source("../../_knitr/knit_jekyll_setup.R")
