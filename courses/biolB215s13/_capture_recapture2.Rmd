@@ -1,6 +1,6 @@
 ---
 layout: Rmd
-title: "Capture Recapture: Calculations and simulations"
+title: "Recapture: Calculations & Simulations"
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
