@@ -114,7 +114,7 @@ sim_recaptures
 
 
 {% highlight text %}
-##  [1] 1 1 4 1 3 3 5 3 2 3
+##  [1] 3 3 4 4 3 0 1 1 4 1
 {% endhighlight %}
 
 
@@ -126,7 +126,7 @@ recapturePopSize(50, 150, sim_recaptures)
 
 
 {% highlight text %}
-##  [1] 7500 7500 1875 7500 2500 2500 1500 2500 3750 2500
+##  [1] 2500 2500 1875 1875 2500  Inf 7500 7500 1875 7500
 {% endhighlight %}
 
 
@@ -149,7 +149,7 @@ sim_recaptured
 
 
 {% highlight text %}
-##  [1] 7 3 1 0 1 2 0 1 2 4
+##  [1] 4 5 3 4 1 1 5 2 0 1
 {% endhighlight %}
 
 
@@ -174,11 +174,11 @@ simRecapture2(3000, 50, 150, reps = 5)
 
 {% highlight text %}
 ##   popsize first second recaught pop_est
-## 1    3000    50    150        1    7500
-## 2    3000    50    150        1    7500
-## 3    3000    50    150        3    2500
-## 4    3000    50    150        3    2500
-## 5    3000    50    150        6    1250
+## 1    3000    50    150        3    2500
+## 2    3000    50    150        4    1875
+## 3    3000    50    150        0     Inf
+## 4    3000    50    150        0     Inf
+## 5    3000    50    150        3    2500
 {% endhighlight %}
 
 
@@ -187,7 +187,7 @@ It turns out that this simple estimate of the population size is somewhat biased
 $$\hat{N} = \frac{(M+1)(C+1)}{R+1} - 1 $$
 
 Write a function to estimate the number of individuals in the population using the Schnabel method.  
-**a.**  Using the as the population size the number of lizards you estimated were in the box , simulate 1000 experiments where you capture 100 individuals in the first trapping and 100 in the second. Be sure to store the data from these (and the following) simulations, as you will need to use them for later problems as well. Generate a histogram of the estimated population sizes that you calculated with the Schnabel method.  
+**a.**  Using as the true population size the number of lizards you estimated were in the box, simulate 1000 experiments where you capture 100 individuals in the first trapping and 100 in the second. Be sure to store the data from these (and the following) simulations, as you will need to use them for later problems as well. Generate a histogram of the estimated population sizes that you calculated with the Schnabel method.  
 **b.**  How do your results change if you captured 150 individuals in the first trapping? What about if you caught 150 in the second (and 50 in the first)? It may be helpful to combine all of your results into a single data frame, and use `ggplot2`/`qlot()` to make all of the histograms together.  
 **c.**  For each of the three experimental designs above, calculate the mean squared error of the Schnabel estimate ($\mathrm{MSE} = \frac{\sum(\hat{N}_i - N)^2}{n}$, where $\hat{N}_i$ is your estimate from the each simulation, $N$ is the population size you simulated, and $n$ is the number of simulations. Which gave the best estimate of the actual population size? Do you think it is better to put more effort into your first or second sample?  
 {: .question}
