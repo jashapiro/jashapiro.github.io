@@ -81,4 +81,4 @@ Calculate the likelihood values for lizard population sizes between 200 and 100,
 {: .question}
 
 ## Next
-Reverend Bayes and the Lizard Posterior.
+[Reverend Bayes and the Lizard Posterior](capture_recapture4.html)

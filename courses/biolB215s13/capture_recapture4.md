@@ -1,6 +1,6 @@
 ---
 layout: Rmd
-title: "Capture Recapture: Bayesian"
+title: "Recapture: Bayesian Confidence"
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
@@ -18,14 +18,14 @@ or in words:
 The probability that the total population size ($N$) is $x$ given that we observed $R$ marked (recaptured) individuals in our second trapping is equal to the probability that we would capture $R$ marked individuals given that the population size is $x$ times the prior probability that the population size is $x$, divided by the probability that we would capture $R$ marked individuals, across all possible population sizes. (All given that we captured $M$ individuals in the first trapping and $C$ in the second)
 
 
-So what parts of this do know from our data? Well, we know $R$, and we can calculate $\Pr(R \mid N=x)$ (the likelihood of $R$ given $N=x$) using the hypergeometric distribution as shown previously
+So what parts of this do know from our data? Well, we know $R$, and we can calculate $\Pr(R \mid N=x)$ (the likelihood of $R$ given $N=x$) using the hypergeometric distribution as shown previously.
 
 Leaving aside the prior, $\Pr(N=x)$, for a moment, we will go on to $\Pr(R)$. By the law of total probability, we can calculate that:
 $$\Pr(R) = \sum_x{\Pr(R \mid N=x)\Pr(N=x)}$$
 which is to say that the total probability of the observed $R$ is equal to the sums of the probabilities of observing $R$ for each possible value of $N$ times the probability of that value of $N$.
 
 
-So that leaves us again with $\Pr(N=x)$, which is the prior probability that $N$ equals some value $x$. Here there are a number of options, as you might have any number of ideas about what the population size is most likely to be. For now, we'll just assume that the population size is less than some large number, say 100,000 individuals. We can also be pretty safe in assuming that it is larger than the sum of $M$ and $(C-R)$, since we captured that many individuals. Other than that, we won't assume anything, and we will set the prior probability of $x$ as $1/[100,000 - (M + C - R1)]$
+So that leaves us again with $\Pr(N=x)$, which is the prior probability that $N$ equals some value $x$. Here there are a number of options, as you might have any number of ideas about what the population size is most likely to be. For now, we'll just assume that the population size is less than some large number, say 10,000 individuals. We can also be pretty safe in assuming that it is larger than the sum of $M$ and $(C-R)$, since we captured that many individuals. Other than that, we won't assume anything, and we will set the prior probability of $x$ as $1/(10,000 - (M + C - R))$
 
 
 ### Calculating posterior probability
@@ -34,7 +34,7 @@ With the prior probability set and the likelihood calculations done, we should b
 
 {% highlight r %}
 makePrior <- function(max_N, first=1, second=1, recaught=0){
-  #impossible to have a population size smaller than the number captured in either run
+  #impossible to have a population size smaller than the total number captured in either run
   N <- (first + second - recaught):max_N
   prob <- 1/length(N)
   return(data.frame(N, prob))
@@ -60,7 +60,7 @@ calcPosterior <- function(marked, first, second, prior){
 
 
 
-Nowe we can construct a prior and calculate the posteriors, using the count data from our hypothetical experiment.
+Nowe we can construct a simple prior and calculate the posteriors, using the count data from our hypothetical experiment.
 
 
 {% highlight r %}
@@ -102,7 +102,7 @@ posterior[which.max(posterior$post_prob), ]
 
 
 ### Calculating credible intervals
-This should give similar answers to the previous (frequentist) way of estimating the population size, but it is not necessarily unbiased in the same way, since it depends not just on the data but also the prior probability that we arbitrarily (but with some justification) assigned to the population size. More importantly, we can now calculate a Bayesian credible interval, the interval of the probability distribution that contains a given fraction (95%, for example) of the total probability. The easiest way to do this is to calculate the cumulative sums of the posterior probabilities, using the function @cumsum()@, then find the population size values that correspond to the ends of the interval we want. For example, if we wanted the 95% credible interval, we would be looking for where the cumulative probability crossed 0.025 and 0.975. Below is a function to do this, and also return the site with the maximum probability, and the midpoint of the probability distribution, where there is an approximately equal probability that the true population size is above or below that value.
+This should give similar answers to the previous (frequentist) way of estimating the population size, but it is not necessarily unbiased in the same way, since it depends not just on the data but also the prior probability that we arbitrarily (but with some justification) assigned to the population size. More importantly, we can now calculate a Bayesian credible interval, the interval of the probability distribution that contains a given fraction (95%, for example) of the total probability. The easiest way to do this is to calculate the cumulative sums of the posterior probabilities, using the function `cumsum()`, then find the population size values that correspond to the ends of the interval we want. For example, if we wanted the 95% credible interval, we would be looking for where the cumulative probability crossed 0.025 and 0.975. Below is a function to do this, and also return the site with the maximum probability, and the midpoint of the probability distribution, where there is an approximately equal probability that the true population size is above or below that value.
 
 
 {% highlight r %}
@@ -151,23 +151,22 @@ bayesPopSize(marked = 5, first = 100, second = 100)
 
 {% highlight text %}
 ##   marked first second max_p mid_p bayes_lower bayes_upper
-## 1      5   100    100  2000  2705        1162        8995
+## 1      5   100    100  2000  2687        1183        8819
 {% endhighlight %}
 
 
 
-Using the same conditions as the last problem, calculate the posterior probability, using a maximum possible population size of 100,000 individuals.  
+Using your lizard count data from class, calculate the posterior probability of the population size, using a flat prior distribution with a maximum possible population size of 10,000 lizards.  
 **a.**  What is the most probable value, and what is the credible interval? How does it compare to the estimate based on the likelihood values?  
-**b.**  Give an intuitive explanation of the differences between the maximum likelihood confidence interval and the Bayesian credible interval. (Don't just state the definitions of confidence interval and credible interval, but think about how they were calculated here.)  
-**c.**  How do these values change if you had presupposed a maximum possible population size of 10,000? Explain this result. Is the maximum of 10,000 individuals a good choice for a prior?  
+**b.**  Think about an intuitive explanation of the differences between the maximum likelihood confidence interval and the Bayesian credible interval. (Don't just state the definitions of confidence interval and credible interval, but think about how they were calculated here.)  
+**c.**  How do these values change if you had presupposed a maximum possible population size of 1,000 lizards? Explain this result. Is the maximum of 1,000 individuals a good choice for a prior?  
 {: .question}
 
-
-On your first trip to the island with the lizards, you had caught and marked 205 individuals. When you came back for the second trip, you caught 302, of which 25 were marked. Hoping to get another chance to visit the island, you mark all of the lizards that didn't already have marks and release them. Based on your results, the government lets the small violation of your permit slide, and grants you the opportunity to make a third trip. On this trip, you capture only 107 individuals, of which 8 are marked.  
-**a.**  How many total individuals were marked when you went out to trap the third time? Assume no loss of markings.  
-**b.**  Calculate population size estimates and Bayesian credible intervals using the data from the second and third trips, using a simple prior as your starting point.  
-**c.**  Is this an appropriate prior distribution to use for the data from the third trip? What might be a better choice?  
-**d.**  Use the alternative prior that you identified in the previous part to calculate a new posterior distribution for population size using the data from the third trip. Calculate an estimate of the population size and credible intervals based on this posterior distribution. How does this estimate compare to your previous calculations?  
-**e.**  Plot the three posterior distributions (the two from part b and the one from part d) in a single chart. Which one provides the best information about the size of lizard population?
-**f.**  Capture-recapture experiments assume that an individual's chance of being caught does not depend on whether it was marked or not. How do you think your results be affected if marking animals made them more likely to be caught by predators? What if marking individuals has no effect, but some individuals are more attracted to the bait you use to trap them than others? 
+Use the class guesses of the population size to construct a prior distribution that is not so flat as the one we have used to this point.  
+**a.**  What should this prior look at? How could we smooth the class guesses into a distribution? How much range should we add?  
+**b.**  Plot this new prior distribution, and the posterior that it results in. Compare this to the prior and posterior distributions from one of the flat priors that you used before.
+**c.**  Are you happier with this new distribution? What are the benefits of this "more subjective: prior over the flat prior? What are its disadvantages? Is it really more subjective?  
 {: .question}
+
+## Next
+Iterating on Bayes.
