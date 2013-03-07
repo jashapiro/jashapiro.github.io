@@ -70,7 +70,7 @@ n_marked
 
 
 {% highlight text %}
-## [1] 1
+## [1] 2
 {% endhighlight %}
 
 
@@ -82,7 +82,7 @@ recapturePopSize(50, 150, n_marked)
 
 
 {% highlight text %}
-## [1] 7500
+## [1] 3750
 {% endhighlight %}
 
 
@@ -101,7 +101,7 @@ simRecapture(3000, 50, 150)
 
 
 {% highlight text %}
-## [1] 7
+## [1] 2
 {% endhighlight %}
 
 Then we can use a function called `replicate()` to call this function many times with the same arguments. Each time it runs it will choose a different random sample from the population, so we will get different results. Let's run it  10 times for now, then calculate the estimated population sizes for each sample using our `recapturePopSize()` function. Notice that this function works just as we might have hoped when we give it a vector rather than a single value, even though we didn't do anything special when we wrote it. 
@@ -114,7 +114,7 @@ sim_recaptures
 
 
 {% highlight text %}
-##  [1] 1 1 1 3 5 2 3 2 3 4
+##  [1] 3 3 4 4 3 0 1 1 4 1
 {% endhighlight %}
 
 
@@ -126,7 +126,7 @@ recapturePopSize(50, 150, sim_recaptures)
 
 
 {% highlight text %}
-##  [1] 7500 7500 7500 2500 1500 3750 2500 3750 2500 1875
+##  [1] 2500 2500 1875 1875 2500  Inf 7500 7500 1875 7500
 {% endhighlight %}
 
 
@@ -149,7 +149,7 @@ sim_recaptured
 
 
 {% highlight text %}
-##  [1] 3 2 4 4 2 3 4 4 5 0
+##  [1] 4 5 3 4 1 1 5 2 0 1
 {% endhighlight %}
 
 
@@ -175,10 +175,10 @@ simRecapture2(3000, 50, 150, reps = 5)
 {% highlight text %}
 ##   popsize first second recaught pop_est
 ## 1    3000    50    150        3    2500
-## 2    3000    50    150        3    2500
-## 3    3000    50    150        1    7500
-## 4    3000    50    150        2    3750
-## 5    3000    50    150        2    3750
+## 2    3000    50    150        4    1875
+## 3    3000    50    150        0     Inf
+## 4    3000    50    150        0     Inf
+## 5    3000    50    150        3    2500
 {% endhighlight %}
 
 

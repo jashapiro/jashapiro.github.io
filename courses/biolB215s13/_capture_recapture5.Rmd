@@ -1,0 +1,28 @@
+---
+layout: Rmd
+title: "Recapture: Bayesian"
+pretitle: Biol B215
+parent: index.html
+tags: [R, tutorial, RStudio, BiolB215]
+---
+
+[back to Bayesian Confidence](capture_recapture4.html)
+
+```{r setup, include=FALSE, cache=FALSE}
+source("../../_knitr/knit_jekyll_setup.R")
+opts_chunk$set(fig.path="plots/capture_recapture5-", tidy=FALSE, fig.width=6.5, fig.height=5, cache=TRUE, cache.extra=rand_seed)
+set.seed(20130306)
+```
+
+
+
+## Using Bayes to improve the estimate.
+
+On your first trip to the island with the lizards, you had caught and marked 205 individuals. When you came back for the second trip, you caught 302, of which 25 were marked. Hoping to get another chance to visit the island, you mark all of the lizards that didn't already have marks and release them. Based on your results, the government lets the small violation of your permit slide, and grants you the opportunity to make a third trip. On this trip, you capture only 107 individuals, of which 8 are marked.  
+**a.**  How many total individuals were marked when you went out to trap the third time? Assume no loss of markings.  
+**b.**  Calculate population size estimates and Bayesian credible intervals using the data from the second and third trips, using a simple prior as your starting point.  
+**c.**  Is this an appropriate prior distribution to use for the data from the third trip? What might be a better choice?  
+**d.**  Use the alternative prior that you identified in the previous part to calculate a new posterior distribution for population size using the data from the third trip. Calculate an estimate of the population size and credible intervals based on this posterior distribution. How does this estimate compare to your previous calculations?  
+**e.**  Plot the three posterior distributions (the two from part b and the one from part d) in a single chart. Which one provides the best information about the size of lizard population?
+**f.**  Capture-recapture experiments assume that an individual's chance of being caught does not depend on whether it was marked or not. How do you think your results be affected if marking animals made them more likely to be caught by predators? What if marking individuals has no effect, but some individuals are more attracted to the bait you use to trap them than others? 
+{: .question}
