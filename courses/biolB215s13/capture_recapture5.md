@@ -8,11 +8,8 @@ tags: [R, tutorial, RStudio, BiolB215]
 
 [back to Bayesian Confidence](capture_recapture4.html)
 
-```{r setup, include=FALSE, cache=FALSE}
-source("../../_knitr/knit_jekyll_setup.R")
-opts_chunk$set(fig.path="plots/capture_recapture5-", tidy=FALSE, fig.width=6.5, fig.height=5, cache=TRUE, cache.extra=rand_seed)
-set.seed(20130306)
-```
+
+
 
 ##  Alternative Bayesian priors
 The uniform prior is simple, but does not reflect the information that you and the class put into your initial estimates of the number of lizards in the box. Ideally, we would like to incorporate that information, which we can do by adjusting the prior probability distribution that we use. How we do this is a bit subjective, however, and you will have to think about how much weight you want to put on the class guesses. There is no "correct" answer, aside from the fact that the sum of the prior probabilities for each population size you include in the distribution must equal 1.
