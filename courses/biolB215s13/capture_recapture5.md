@@ -16,7 +16,7 @@ The uniform prior is simple, but does not reflect the information that you and t
 
 Use the class guesses of the population size to construct a prior distribution that is not so flat as the one we have used to this point.  
 **a.**  What should this prior look at? How could we smooth the class guesses into a distribution? How much uncertainty should we add?  
-**b.**  Plot this new prior distribution, and the posterior that it results in. Compare this to the prior and posterior distributions from one of the uniform priors that you used before.
+**b.**  Plot this new prior distribution, and the posterior that it results in. Compare this to the prior and posterior distributions from one of the uniform priors that you used before.  
 **c.**  Are you happier with this new distribution? What are the benefits of this "more subjective: prior over the flat prior? What are its disadvantages? Is it really more subjective?  
 {: .question}
 
@@ -27,7 +27,7 @@ What is the the best way to integrate this new information into your estimate of
 **a.**  How many total individuals were marked when you went out to trap the third time? Assume no loss of markings.  
 **b.**  Calculate population size estimates and Bayesian credible intervals using the data from the third capture, using a uniform (flat) distribution for your prior probabilities.  
 **c.**  Is the uniform distribution an appropriate prior distribution to use for the data from the third trip? What might be a better choice (besides the class estimate)?  
-**d.**  Use the alternative prior that you identified in the previous part to calculate a new posterior distribution for population size using the data from the third trip. Calculate an estimate of the population size and credible intervals based on this posterior distribution. How does this estimate compare to your previous calculations?  
+**d.**  Use the alternative prior that you identified in the previous part to calculate a new posterior distribution for population size using the data from the third trip. Calculate an estimate of the population size and credible intervals based on this posterior distribution. How does this estimate compare to your previous calculations?   
 **e.**  Plot the three posterior distributions (the two from part **b** and the one from part **d**) in a single chart. Which one provides the best information about the size of lizard population?    
 {: .question}
 
