@@ -11,7 +11,7 @@ options(width = 60)
 library(ggplot2)
 library(plyr)
 
-# set random number seed for reproducability
+# set random number seed for reproducibility
 set.seed(20130703)
 ```
 

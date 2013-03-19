@@ -13,7 +13,7 @@ options(width=60)
 library(ggplot2)
 library(plyr)
 
-#set random number seed for reproducability
+# set random number seed for reproducibility
 set.seed(20130703)
 ```
 
@@ -29,7 +29,7 @@ schnabel <- function(first, second, recaught){
   N_est <- (first + 1) * (second + 1) / (recaught + 1) - 1
   return(N_est)
 }
-#test it
+# test it
 schnabel(150, 50, 3)
 ```
 
@@ -46,7 +46,7 @@ simRecapture<- function(popsize, first, second, reps = 1){
                     pop_est)
          )
 }
-#test it
+# test it
 simRecapture(100, 50, 50, reps = 3)
 ```
 
@@ -57,7 +57,7 @@ mseSim <- function(sim_df){
   return(mean(sq_err))
 }
 
-#test it
+# test it
 my_sims <- simRecapture(100, 50, 50, reps = 5)
 mseSim(my_sims)
 ```
