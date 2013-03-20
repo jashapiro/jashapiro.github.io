@@ -85,7 +85,7 @@ qplot(data = plotdata,
 One thing we might want to know from this is what the most probable value is for the population size. One way to do this is to use the function `which.max()` to get the index of the largest of the probability values from the posterior distribution, selecting the whole row from data frame.
 
 ```{r max}
-posterior[which.max(posterior$post_prob), ]
+posterior[which.max(posterior$prob), ]
 ```
 
 ### Calculating credible intervals
