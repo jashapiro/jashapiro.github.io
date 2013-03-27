@@ -21,7 +21,7 @@ Use the class guesses of the population size to construct a prior distribution t
 {: .question}
 
 ## One more capture
-After your second "capture", you marked the group of lizards you "caught" and returned them to the box. I will now give you one more chance to catch lizards: 100 more. Working in groups of 3, you will choose 60 more lizards (per group). Record the numbers of lizards of each color, marked and unmarked. 
+After your second "capture", you marked the group of lizards you "caught" and returned them to the box. I will now give you one more chance to catch lizards. Working in groups of 3, you will choose 60 more lizards (per group). Record the numbers of lizards of each color, marked and unmarked. 
 
 What is the the best way to integrate this new information into your estimate of the population size?  
 **a.**  How many total individuals were marked when you went out to trap the third time? Assume no loss of markings.  
