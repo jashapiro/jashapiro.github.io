@@ -26,7 +26,7 @@ You can find the data in CSV format at the following link: [abalone.csv](abalone
 
 To read the file, we will use the `read.csv()` command[^readtable], and store it in a variable called `abalone`. While we are at it, we'll also load up `plyr`, as it will come in handy later.
 
-[^readtable]: The `read.csv()` function is one of many 
+[^readtable]: The `read.csv()` function is one of many functions in R that are part of the `read.table()` group. All of them read in simple text file tables with individual fields separated in various ways (tabs, spaces, commas, you name it). The base function `read.table()` is quite customizable; you can explore the various options available by looking at the help page in `R`. One particular note is that `R` will read text strings in as factors unless you tell it not to with the argument `stringsAsFactors = FALSE`. For these data, we wanted to leave male and female as factors, but if you have a column of things like sample names or DNA sequences, you might not want to do that. You can always convert a column from text to a factor later, as needed.
 
 
 {% highlight r %}
@@ -39,17 +39,16 @@ abalone <- read.csv("abalone.csv")
 Look at the data. The column names are fairly informative in general, but some are not, so I have defined them below:
 
 Variable | Unit | Description
--------- | ---- | -----------
-Sex | | M (male), F (female), or I (immature)
-Length | mm | longest shell measurement 
-Diam | mm	 | perpendicular to length 
-Height | mm | height of abalone (including body) 
-Whole | grams| weight of whole abalone 
-Shucked | grams | weight of meat 
-Viscera | grams| gut weight
-Shell | grams | shell weight after drying 
-Rings | | Number of rings in the shell 
-
+-------- | :----: | -----------
+`Sex` | | `M` (male), `F` (female), or `I` (immature)
+`Length` | mm | longest shell measurement 
+`Diam` | mm	 | shell measurement perpendicular to length 
+`Height` | mm | height of abalone (including body) 
+`Whole` | g| weight of whole abalone 
+`Shucked` | g | weight of meat 
+`Viscera` | g| gut weight
+`Shell` | g | shell weight after drying 
+`Rings` | | number of rings in the shell 
 
 The abalone add one ring to their shell every year, except in their first year, and we can estimate the age of the abalone quite accurately by adding 1.5 to the number of rings. 
 
@@ -67,7 +66,9 @@ Start by loading the `ggplot2` library and making a histogram of the abalone wei
 
 {% highlight r %}
 library(ggplot2)
-qplot(Whole, data = abalone, geom = "histogram")
+qplot(Whole, 
+      data = abalone, 
+      geom = "histogram")
 {% endhighlight %}
 
 
@@ -85,8 +86,11 @@ Isn't that pretty? Sure, but it might not really be what we are interested in lo
 
 {% highlight r %}
 library(ggplot2)
-qplot(Whole, data = abalone, geom = "histogram", 
-      facets = Sex~., binwidth = 20)
+qplot(Whole, 
+      data = abalone, 
+      geom = "histogram", 
+      facets = Sex~., 
+      binwidth = 20)
 {% endhighlight %}
 
 ![plot of chunk weighthistfacet](plots/abalone_cleaning-weighthistfacet.png) 
@@ -96,8 +100,11 @@ You will note that the labels for each panel are shown on the right side, and th
 
 
 {% highlight r %}
-abalone$Sex <- ordered(abalone$Sex, levels = c("I", "M", "F"), 
+#make Sex and ordered factor
+abalone$Sex <- ordered(abalone$Sex, 
+                       levels = c("I", "M", "F"), 
                        labels = c("Immature", "Male", "Female"))
+#redo the histogram
 {% endhighlight %}
 
 
@@ -105,7 +112,10 @@ We can also use `qplot()` to make boxplots, which may be a bit nicer for this ap
 
 
 {% highlight r %}
-qplot(Sex, Whole, data = abalone, geom = "boxplot", fill = Sex)
+qplot(Sex, Whole, 
+      data = abalone, 
+      geom = "boxplot", 
+      fill = Sex)
 {% endhighlight %}
 
 ![plot of chunk boxplots](plots/abalone_cleaning-boxplots.png) 
@@ -115,7 +125,10 @@ While we are playing around, one more plot... An alternative to the box plot tha
 
 
 {% highlight r %}
-qplot(Sex, Whole, data = abalone, geom = "violin", fill = Sex)
+qplot(Sex, Whole, 
+      data = abalone, 
+      geom = "violin", 
+      fill = Sex)
 {% endhighlight %}
 
 ![plot of chunk violins](plots/abalone_cleaning-violins.png) 
@@ -125,9 +138,10 @@ qplot(Sex, Whole, data = abalone, geom = "violin", fill = Sex)
 Look at all of the continuous variables using your preferred visualization method. You do not need to turn in all of these plots, but use them to answer the questions below.  
 **a.** Describe the shape of the distributions for each variable. Do they appear normal overall (with the sexes combined)? Does separating by Sex make them appear normal?  
 **b.** Are there any values that look particularly strange? What do you think caused those?  
-**Before proceeding, remove any rows from the data frame with obviously bad data.** This should include any rows where a measurement is equal to 0.  
 **c.** Show me your favorite of the plots you generated. Make sure it is well labeled.
-{: .question}}
+{: .question}
+
+**Before proceeding, remove any rows from the data frame with obviously bad data.** This should include any rows where a measurement is equal to 0.  
 
 
 
@@ -147,7 +161,9 @@ Scatter plots in `ggplot` are just as easy as with standard plotting, and possib
 
 
 {% highlight r %}
-qplot(Whole, Shucked, data = abalone, color = Sex)
+qplot(Whole, Shucked, 
+      data = abalone, 
+      color = Sex)
 {% endhighlight %}
 
 ![plot of chunk simplescatter](plots/abalone_cleaning-simplescatter.png) 
@@ -158,8 +174,10 @@ That looks pretty nice, but do you notice anything strange about the data in the
 
 
 {% highlight r %}
-qplot(Whole, Shucked, data = abalone, color = Sex) +
-      geom_abline(slope = 1)
+qplot(Whole, Shucked, 
+      data = abalone, 
+      color = Sex) +
+  geom_abline(slope = 1)
 {% endhighlight %}
 
 ![plot of chunk scatter_ref](plots/abalone_cleaning-scatter_ref.png) 
@@ -177,19 +195,22 @@ abalone <- subset(abalone, Whole > Shucked)
 The shell weight of the abalone is measured after drying, wheras the whole weight and shucked weight are measured wet. We can calculate the wet weight of the shell then, by subtracting the shucked weight from the total. This should be greater than or equal to the dry shell weight in the data.  
 **a.** Calculate the predicted wet shell weight, and make a scatter plot showing the relationship between that and the dry shell weight.  
 **b.** Does the plot follow the standard mentioned above (shell wet weight greater than shell dry weight), in general? How many samples seem to have been measured incorrectly by the standard mentioned above? Include only those samples that are clearly wrong, not the ones that just seem a bit off.  
+{: .question}
+
 **Before proceeding, remove the samples that are clearly erroneous.**  
 
-``{r morecleaning, echo=FALSE, include=FALSE}
-abalone <- subset(abalone, Whole - Shucked >= Shell)
-```
 
-If you did everything as I did, you should now have an abalone data frame with 4169 rows. Also, if you make a new version of the Whole vs. Shucked plot, you will should see that most of the dodgy points are now gone. 
+
+
+If you did everything as I did, you should now have an abalone data frame with 4158 rows. Also, if you make a new version of the Whole vs. Shucked plot, you will should see that most of the dodgy points are now gone. 
 
 There is one more obviously bad point I want to get rid of, which you can see in the plot below. The Female with a Height of 3 mm and a Length of 127 mm. So we will get rid of that row too.
 
 
 {% highlight r %}
-qplot(Length , Height, data = abalone, color = Sex)
+qplot(Length, Height, 
+      data = abalone, 
+      color = Sex)
 {% endhighlight %}
 
 ![plot of chunk shortfemale](plots/abalone_cleaning-shortfemale.png) 
@@ -205,7 +226,7 @@ A few quick questions about that plot of length and height that you just made. F
 **c.** What is the coefficient of determination ($$r^2$$)?  
 **d.** Do the data meet the strict assumptions of correlation tests or linear regression? In particular, do the data appear homoscedastic?  
 
-So now, finally, you should have an abalone data frame with 4168 rows. Remember how I said that dealing with bad data was a big part of the job? Exactly.
+So now, finally, you should have an abalone data frame with 4157 rows. Remember how I said that dealing with bad data was a big part of the job? Exactly.
 
 If you made it to here, congratulations. Take a break. We will come back to this data next week. Just one more thing. Save your work. You don't want to have to do all this again, do you? You should have an R or Rmarkdown document with all of the (working) commands that you have run so far (you were keeping a record of your work, right?). Add to that one more command:
 
