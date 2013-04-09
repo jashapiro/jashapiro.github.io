@@ -1,6 +1,6 @@
 ---
 layout: Rmd
-title: "Cleaning Abalone"
+title: "Cleaning Abalone (data)"
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
@@ -25,7 +25,7 @@ Sea Fisheries Division, Technical Report No. 48 (ISSN 1034-3288)
 
 You can find the data in CSV format at the following link: [abalone.csv](abalone.csv). Download the file and put it in your working directory. (You did make a new project with its own folder for all of your work on this exercise, right?)  CSV stands for "comma separated values" and is one of the more convenient formats for getting data into `R`. It has the advantages of being a plain text format, so it is easy to read and write from a variety of software, and the format is(fairly) standard, meaning that most programs will write and read data from it in the same way[^excel]. Each row of text is a row of the table, with the columns separated by commas (hence: "comma separated"). The first row contains column headings, and the remaining rows contain data. That's it. Unlike an Excel file, it doesn't include any fancy formatting or equations to calculate values, but this is actually a good thing. We want to separate the data from the calculations that we do on it as much as possible.
 
-[^excel]: To save a CSV file from Excel or most other spreadsheet programs, use the "Save As..." command and select "Comma Separated Values"  (.csv)" from the format options. Excel will complain that there are features of Excel that won't work with that format. Tell it to continue.
+[^excel]: To save a CSV file from Excel or most other spreadsheet programs, use the "Save As..." command and select "Comma Separated Values (.csv)" from the format options. Excel will complain that there are features of Excel that won't work with that format. Tell it to continue.
 
 To read the file, we will use the `read.csv()` command[^readtable], and store it in a variable called `abalone`. While we are at it, we'll also load up `plyr`, as it will come in handy later.
 

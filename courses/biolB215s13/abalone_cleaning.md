@@ -1,6 +1,6 @@
 ---
 layout: Rmd
-title: "Cleaning Abalone"
+title: "Cleaning Abalone (data)"
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
@@ -22,7 +22,7 @@ Sea Fisheries Division, Technical Report No. 48 (ISSN 1034-3288)
 
 You can find the data in CSV format at the following link: [abalone.csv](abalone.csv). Download the file and put it in your working directory. (You did make a new project with its own folder for all of your work on this exercise, right?)  CSV stands for "comma separated values" and is one of the more convenient formats for getting data into `R`. It has the advantages of being a plain text format, so it is easy to read and write from a variety of software, and the format is(fairly) standard, meaning that most programs will write and read data from it in the same way[^excel]. Each row of text is a row of the table, with the columns separated by commas (hence: "comma separated"). The first row contains column headings, and the remaining rows contain data. That's it. Unlike an Excel file, it doesn't include any fancy formatting or equations to calculate values, but this is actually a good thing. We want to separate the data from the calculations that we do on it as much as possible.
 
-[^excel]: To save a CSV file from Excel or most other spreadsheet programs, use the "Save As..." command and select "Comma Separated Values"  (.csv)" from the format options. Excel will complain that there are features of Excel that won't work with that format. Tell it to continue.
+[^excel]: To save a CSV file from Excel or most other spreadsheet programs, use the "Save As..." command and select "Comma Separated Values (.csv)" from the format options. Excel will complain that there are features of Excel that won't work with that format. Tell it to continue.
 
 To read the file, we will use the `read.csv()` command[^readtable], and store it in a variable called `abalone`. While we are at it, we'll also load up `plyr`, as it will come in handy later.
 
@@ -204,16 +204,13 @@ The shell weight of the abalone is measured after drying, wheras the whole weigh
 
 If you did everything as I did, you should now have an abalone data frame with 4158 rows. Also, if you make a new version of the Whole vs. Shucked plot, you will should see that most of the dodgy points are now gone. 
 
-There is one more obviously bad point I want to get rid of, which you can see in the plot below. The Female with a Height of 3 mm and a Length of 127 mm. So we will get rid of that row too.
+There is one more obviously bad point I want to get rid of, which you can see in the plot of length and height that appears below. 
+
+![plot of chunk shortfemaleplot](plots/abalone_cleaning-shortfemaleplot.png) 
 
 
-{% highlight r %}
-qplot(Length, Height, 
-      data = abalone, 
-      color = Sex)
-{% endhighlight %}
+The female with a length of 127 mm but a height of only 3 mm (in the lower right of the plot) seems like she must have been mismeasured somehow, so I will remove that single point as well.
 
-![plot of chunk shortfemale](plots/abalone_cleaning-shortfemale.png) 
 
 {% highlight r %}
 abalone <- subset(abalone, !(Sex == "Female" & Height == 3))
@@ -230,6 +227,7 @@ A few quick questions about that plot of length and height that you just made. F
 So now, finally, you should have an abalone data frame with 4157 rows. Remember how I said that dealing with bad data was a big part of the job? Exactly.
 
 If you made it to here, congratulations. Take a break. We will come back to this data next week. Just one more thing. Save your work. You don't want to have to do all this again, do you? You should have an R or Rmarkdown document with all of the (working) commands that you have run so far (you were keeping a record of your work, right?). Add to that one more command:
+
 
 {% highlight r %}
 save(abalone, file = "abalone_trimmed.Rdata")
