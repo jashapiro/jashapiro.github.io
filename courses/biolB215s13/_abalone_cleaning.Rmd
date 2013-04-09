@@ -173,24 +173,31 @@ abalone <- subset(abalone, Whole - Shucked >= Shell)
 
 If you did everything as I did, you should now have an abalone data frame with `r nrow(abalone)` rows. Also, if you make a new version of the Whole vs. Shucked plot, you will should see that most of the dodgy points are now gone. 
 
-There is one more obviously bad point I want to get rid of, which you can see in the plot below. The Female with a Height of 3 mm and a Length of 127 mm. So we will get rid of that row too.
+There is one more obviously bad point I want to get rid of, which you can see in the plot of length and height that appears below. 
 
-```{r shortfemale}
+```{r shortfemaleplot, echo=FALSE}
 qplot(Length, Height, 
       data = abalone, 
       color = Sex)
+```
+
+The female with a length of 127 mm but a height of only 3 mm (in the lower right of the plot) seems like she must have been mismeasured somehow, so I will remove that single point as well.
+
+```{r shortfemale}
 abalone <- subset(abalone, !(Sex == "Female" & Height == 3))
 ```
 
 A few quick questions about that plot of length and height that you just made. For now, ignore differences among the sexes.  
 **a.** Are length and height significantly correlated in abalone?  
 **b.** What is the correlation coefficient?  
-**c.** What is the coefficient of determination ($$r^2$$)?  
+**c.** What is the coefficient of determination ($r^2$)?  
 **d.** Do the data meet the strict assumptions of correlation tests or linear regression? In particular, do the data appear homoscedastic?  
+{: .question}
 
 So now, finally, you should have an abalone data frame with `r nrow(abalone)` rows. Remember how I said that dealing with bad data was a big part of the job? Exactly.
 
 If you made it to here, congratulations. Take a break. We will come back to this data next week. Just one more thing. Save your work. You don't want to have to do all this again, do you? You should have an R or Rmarkdown document with all of the (working) commands that you have run so far (you were keeping a record of your work, right?). Add to that one more command:
+
 ```{r save_trimmed}
 save(abalone, file = "abalone_trimmed.Rdata")
 ```

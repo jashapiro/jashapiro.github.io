@@ -223,8 +223,9 @@ abalone <- subset(abalone, !(Sex == "Female" & Height == 3))
 A few quick questions about that plot of length and height that you just made. For now, ignore differences among the sexes.  
 **a.** Are length and height significantly correlated in abalone?  
 **b.** What is the correlation coefficient?  
-**c.** What is the coefficient of determination ($$r^2$$)?  
+**c.** What is the coefficient of determination ($r^2$)?  
 **d.** Do the data meet the strict assumptions of correlation tests or linear regression? In particular, do the data appear homoscedastic?  
+{: .question}
 
 So now, finally, you should have an abalone data frame with 4157 rows. Remember how I said that dealing with bad data was a big part of the job? Exactly.
 
