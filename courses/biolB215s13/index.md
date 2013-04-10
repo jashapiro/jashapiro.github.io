@@ -39,7 +39,8 @@ Monday & Friday 2–3:30PM, and by appointment.
 **[Matrices and Lists](list_matrix.html)**  
 **[Working with Data Frames](dataframes.html)**  
   
-**[Capture-Recapture Lab](capture_recapture.html)**  
+**[Lizard Lab](capture_recapture.html)**    
+**[Abalone Lab](abalone_cleaning.html)**  
 
 ## External Resources {#external}
 

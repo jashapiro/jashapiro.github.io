@@ -194,6 +194,7 @@ A few quick questions about that plot of length and height that you just made. F
 **d.** Do the data meet the strict assumptions of correlation tests or linear regression? In particular, do the data appear homoscedastic?  
 {: .question}
 
+## Saving your work
 So now, finally, you should have an abalone data frame with `r nrow(abalone)` rows. Remember how I said that dealing with bad data was a big part of the job? Exactly.
 
 If you made it to here, congratulations. Take a break. We will come back to this data next week. Just one more thing. Save your work. You don't want to have to do all this again, do you? You should have an R or Rmarkdown document with all of the (working) commands that you have run so far (you were keeping a record of your work, right?). Add to that one more command:
@@ -203,3 +204,6 @@ save(abalone, file = "abalone_trimmed.Rdata")
 ```
 
 This will save just the abalone data frame in a native `R` format file, so that you can very quickly read it back in without worrying about whether `R` will  remember the ordered factors and such. If you accidentally modify the data frame later, you can reload it directly from the `.Rdata` file without having to repeat all of the data trimming and organization that you just went through.
+
+## Next
+Now that we have a nice set of cleaned data, we can start to push forward to calculating new and different correlations and working out the best way to predict the age of an abalone from its measurements.
