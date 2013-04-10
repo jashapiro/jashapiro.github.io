@@ -95,6 +95,48 @@ li {
   padding: 2px 0;
 }
 
+table {
+  margin: 20px auto;
+  font-family:  'Source Sans Pro', 'Helvetica', sans-serif;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+}
+
+th,
+td {
+  padding: 4px 20px;
+  line-height: 20px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid #bebebe;
+}
+
+thead th {
+  vertical-align: bottom;
+  text-align: center;
+}
+
+thead:first-child tr:first-child th,
+thead:first-child tr:first-child td {
+  border-top: 0;
+  background-color: #e1e1e1;
+}
+
+tbody > tr:nth-child(odd) > td,
+tbody > tr:nth-child(odd) > th {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover > td,
+tbody tr:hover > th {
+  background-color: #fff0be;
+}
+
+hr{
+	border-style: solid;
+	border-color: #646e7d;
+}
 
 img {	
 	display:block;

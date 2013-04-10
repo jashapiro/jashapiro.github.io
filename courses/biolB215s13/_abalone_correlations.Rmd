@@ -1,0 +1,103 @@
+---
+layout: Rmd
+title: "Abalone Analysis"
+pretitle: Biol B215
+parent: index.html
+tags: [R, tutorial, RStudio, BiolB215]
+---
+
+```{r setup, include=FALSE, cache=FALSE}
+source("../../_knitr/knit_jekyll_setup.R")
+opts_chunk$set(fig.path="plots/abalone_analysis-", tidy=FALSE, fig.width=6.5, fig.height=5, cache=TRUE, cache.extra=rand_seed)
+set.seed(20130409)
+```
+
+## Correlations 
+First, if you have created a new environment, you will need to reload the abalone data and make sure that you have the `plyr`,  `ggplot2` and `reshape` libraries loaded. I had saved my abalone data frame as `abalone_trimmed.Rdata`, so I will use `load()` to pull that back into my fresh workspace, where it will again be named `abalone`. Just to check, it should still have 4157 rows.
+
+```{r read}
+library(plyr)
+library(ggplot2)
+library(reshape)
+load("abalone_trimmed.Rdata")
+dim(abalone)
+```
+
+What we would like to do, ultimately, is to be able to estimate the age of the abalone based on measurements that we can do more easily than drilling into the shell to count the rings. If we are looking at fishery samples, we won't care if the abalone is dead, but we would also like to be able to estimate the age of  abalone that are still alive. 
+
+We can get a a quick estimate of which measurements will be the best predictors of age by looking at the correlation matrix, but while we are doing that we may as well look at the relationships among all of the groups. For now, we will leave the males, females and immature abalone all together. We can calculate the whole correlation matrix (Pearson correlation) with ```cor()`, but this will have a lot of redundant data, so it will be helpful to melt the matrix into a data frame. We can then select only the nonredundant comparisons by requiring the two variables tested to be different. The code to perform this is shown below.
+
+```{r cor}
+# leave off the first column, since that is the factor for sex.
+ab_cors <- cor(abalone[ , -1]) 
+ab_melt <- melt(ab_cors)
+# The varible name columns are given the names X1 and X2
+# We will select only the rows where the variable names 
+# differ, and only one of each pair. To do this, we have
+# to convert the factors to numbers... It is a bit of a 
+# hack, but it works.
+ab_melt <- subset(ab_melt, 
+      as.integer(X1) < as.integer(X2) )
+# One more thing: Order rows by the correlation coefficients
+ab_melt <- ab_melt[order(ab_melt$value, decreasing = T),]
+```
+
+
+\newpart{What are the top five pairs of measurements with the highest correlation coefficients? (Don't include the correlation between Age and Rings, as only one of those is a measurement...)}
+\newpart{Calculate the correlation coefficients using the Spearman rank correlation. What are the top five pairs for this measure?}
+\newpart{What explains the increase in the correlation for Length and Whole weight? You may find it helful to create a scatter plot of the two variables.}
+Create a new version of the `abalone` data frame called `logabalone` where you take the log() of every variable but the sex.
+\newpart{What does the relationship between Length and Whole weight look like for the {\tt logabalone} data frame? Does this improve the Pearson correlation coefficients? }
+\newpart{Why do you think taking the log makes a difference in this case? (Think about the relationship between length and weight (or volume). How does taking a log change that relationship? )}
+\end{problem}
+
+
+```{r logabalone, echo=FALSE, include=FALSE}
+logabalone <- cbind(Sex = abalone[,1], log(abalone[,-1]))
+```
+
+
+## Building linear models
+When you looked at the correlation coefficients, you should have noted that the measurement most highly correlated with age is the dry shell weight. Since we are using the number of rings in the shell as a measure of the age, it should not be too surprising that a shell measurement is our best correlate with age. Unfortunatley, getting a dry shell measurement requires killing the abalone, so that is not ideal. The best live measurement seems to be the height of the abalone, so that is what we will work with.
+
+Recall that we can build linear models (regression models) using the `lm()` function, and then examine the results with the `summary()` function. We can also plot the data using `qplot()`, adding on the results from a linear model by using the `stat_smooth()` function, much like we did with `stat_abline()`. By default, `stat_smooth()` draws a smoothed curve through the data, but we can tell it to plot the results of a simple linear model by setting `method = lm`. (We could actually use `stat_abline()` as before, but we would have to extract the fit of the model, or enter it by hand... ugh.)
+
+```{r basic_lm}
+lm_height <- lm(Age~Height, data = abalone)
+summary(lm_height)
+qplot(Height, Age, data = abalone) + 
+    stat_smooth(method = lm)
+```
+
+\begin{problem}
+\newpart{What equation does the linear model predict as the relationship between abalone height and age?}
+Calculate a linear model using the log of `Height` and log of `Age` (use the {\tt logabalone} data frame). Save this model in a variable named `lm_logheight`.
+\newpart{Plot the the logged values of height and age, along with the linear fit. Make sure you label the axes properly.}
+\newpart{What equation does this log-based model describe? Write your answer with resepect to the original height and age measurements, {\it not} the log of the measurements.}
+\end{problem}
+
+```{r loglm, echo=FALSE, include=FALSE}
+lm_logheight = lm(Age~Height, data = logabalone)
+```
+
+\subsection*{Reconsidering the log}
+Taking the log of the measurements seems like a pretty good idea for these data. There are some logical reasons to do so, and the correlation coefficients go up, so it must be worth doing, right? Well, not necessarily. Let's investigate a bit further.
+
+What we want to know is how close each of our estimates of abalone age based on height are to the actual ages of the abalone. For the linear model (unlogged), this is easy to calculate, and `R` has actually already calculated it. To get the data, we can getresiduals from our `lm_height` object using the `residuals()` function. We'll store those, then calculate the mean of the squared values. This is the mean square error.
+
+```{r mse}
+mse = mean( residuals(lm_height)^2 )
+mse
+```
+
+For the fit of the log measurements, things are just a bit more complicated. The residuals that `R` calculated are in log space, so we can't directly translate them into the actual estimation error. Luckliy `R` also provides us with the predicted ages for each height (I bet you thought you were going to have to write a function). We can get those from  `lm_logheight` using the `fitted()` function. Translating those back out of log space is done by raising $e$ to the appropriate power using the `exp()` function.
+
+```{r logfits}
+age_predicted <- exp(fitted(lm_logheight))
+```
+
+\begin{problem}
+\newpart{Calculate the mean square error for the log-scale predictions.}
+\newpart{What are the mean {\it absolute} errors for the normal and log-scale predictions?}
+\newpart{Which method of estimating age do you think gives better results? Why?}
+\end{problem}
