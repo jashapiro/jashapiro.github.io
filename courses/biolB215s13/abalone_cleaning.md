@@ -238,4 +238,5 @@ save(abalone, file = "abalone_trimmed.Rdata")
 This will save just the abalone data frame in a native `R` format file, so that you can very quickly read it back in without worrying about whether `R` will  remember the ordered factors and such. If you accidentally modify the data frame later, you can reload it directly from the `.Rdata` file without having to repeat all of the data trimming and organization that you just went through.
 
 ## Next
-Now that we have a nice set of cleaned data, we can start to push forward to calculating new and different correlations and working out the best way to predict the age of an abalone from its measurements.
+Now that we have a nice set of cleaned data, we can start to push forward to calculating new and different correlations and working out ways to predict the age of an abalone from its measurements.  
+[Abalone modeling](abalone_correlations.html)
