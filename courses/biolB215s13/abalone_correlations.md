@@ -147,7 +147,7 @@ age_predicted <- 10^(fitted(lm_logheight))
 **b.** Plot the predicted vs. actual values for both the normal and log-scale predictions.  
 **c.** What are the mean *absolute* errors for the normal and log-scale predictions?  
 **d.** Which method of estimating age from height (normal or log) do you think gives better results? Why?  
-**e.** What happens if you try to use the log of height to predict age (unlogged)? Is that better than predicting log(age) from log(height)? 
+**e.** What happens if you try to use the log of height to predict age (unlogged)? Is that better than predicting log(age) from log(height)?  
 **f.** Which abalone measurement gives the best overall prediction of age (aside from rings)? Regular or log?
 {: .question}
 
