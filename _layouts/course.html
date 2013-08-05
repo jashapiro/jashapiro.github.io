@@ -1,16 +1,16 @@
 ---
 layout: default
 ---
-<header>
+<header class='page-header'>
+  <h1>
   {% if page.course_num %} 
-    <h2 class="preh1">{{ page.course_num }} 
+    <small>{{ page.course_num }} 
     {% if page.semester %} 
       | {{ page.semester }} 
     {% endif %}
-    </h2>
-  {% endif %}
-  
-  <h1>{{ page.title }}</h1>
+    </small><br>
+  {% endif %} 
+  {{ page.title }}</h1>
 </header>
 {{ content }}
   
