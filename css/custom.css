@@ -14,6 +14,19 @@ slate grey: #747C95
 *********/
 
 
+/* Basic customization
+------------------------------------------------- */
+
+body {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', sans-serif;
+  font-size: 18px;
+  line-height: 1.3;
+  color: #000000;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+	font-family: 'Source Sans Pro', 'Helvetica Neue', sans-serif;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -62,8 +75,49 @@ body {
 }
 .container .credit {
   margin: 20px 0;
+  font-size: 80%;
 }
 
-code {
+
+/* Figure Formatting
+---------------------------------------------------- */
+
+figure {
+  border-radius: 1em;
+  border: 2px solid #bfc3d0;
+  display: table;
+  padding:0.5em;
+  margin: 0.5em 1em;
+  width: 200px; /*makes this shrink to figure size*/
+}
+figure img{
+  display: table-row;
+  margin:0px;
+  margin-bottom: 8px;
+}
+figcaption {
+  display: table-row;
+  font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
   font-size: 80%;
+  line-height: 1.1;
+  text-align: justify;
+}
+
+figure.pull-right {
+	margin-right: 0;
+}
+
+figure.pull-left {
+	margin-left: 0;
+}
+
+@media (max-width: 767px) {
+figure.pull-right {
+	float: none;
+	margin:	0.5em auto;
+}
+
+figure.pull-left {
+	float: none;
+	margin:	0.5 em auto;
 }

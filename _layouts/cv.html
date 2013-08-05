@@ -37,7 +37,6 @@
       }
 
       @media print {
-       .noprint {display: none;}
        #content {padding: 0 240px 0 60px;}
        #sidebar {width: 240px}
       }
@@ -45,7 +44,7 @@
   </head>
   <body class="{{ page.layout }}">
     <div id="wrap">
-      <header id="head_nav" class="noprint">
+      <header id="head_nav" class="hidden-print">
         {% include site_nav.html %}
       </header>
       <div class="container">
@@ -85,10 +84,8 @@
       </aside>
       </div>
     </div>
-    <footer id="footer">
-      <div class = "container">
+    <footer id="footer" class="hidden-print">
   		{% include footer.html %}
-  	  </div>
     </footer>
   </body>
 </html>

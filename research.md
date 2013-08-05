@@ -17,7 +17,7 @@ Much of my work has involved studying natural populations of organisms that have
 Despite having having large population sizes, which tends to increase diversity, *C. elegans* was known to have fairly low genetic diversity (a level similar to humans), and it was widely suspected that this low diversity was largely the result of the fact that *C. elegans* is a selfing hermaphrodite with rare males, a life history that tends to result in greater power for purifying selection. Even mutations with very small negative effects will tend to be eliminated fairly quickly by natural selection, taking with them neutral variation, in a process called [background selection](http://www.ncbi.nlm.nih.gov/pubmed/8375663?dopt=Abstract "Charlesworth et al. The effect of deleterious mutations on neutral molecular variation.").
 
 <figure class="pull-right">
-<img src="/images/two_chroms.png" alt="elegans haplotypes" title="Haplotype blocks on C. elegans Chromosomes III and V" width="400px" height="240px" />
+<img src="/images/two_chroms.png" alt="elegans haplotypes" title="Haplotype blocks on C. elegans Chromosomes III and V" width="400px" height="240px">
 <figcaption>Haplotypes in a global sample of <em>C. elegans</em>. Each row represents an individual and the colored bars indicated regions of the chromosome that are nearly identical across multiple individuals. On the left, chromosome III shows the expected pattern without positive selection, with many different haplotypes tend to be shared among a few individuals each. By contrast, chromosome V, on the right, shows evidence for a very recent strong selective sweep, which has spread the large red haplotype across almost all sampled strains. </figcaption>
 </figure>
 
@@ -32,7 +32,7 @@ If you are interested in exploring this in more detail, you could do worse than 
 Another focus of my post-doctoral research has been to identify and characterize the natural patterns of functional variation in the brewers yeast *Saccharomyces cerevisiae*.  Working with [Joseph Schacherer](http://gmgm.u-strasbg.fr/~js/Joseph_Schacherer.html), I used an unbiased SNP discovery platform developed in our lab to examined variation in strains of yeast collected from around the world in different environments, both natural and industrial. We generated one of the most comprehensive sets of data on genomic diversity of *S. cerevisiae* strains polymorphism available.
 
 <figure class="pull-left">
-<img src="/images/yeast_tree.png" alt="cerevisiae tree" title="Tree of S. cerevisiae strains" width="400px" height="291px" />
+<img src="/images/yeast_tree.png" alt="cerevisiae tree" title="Tree of S. cerevisiae strains" width="400px" height="291px">
 <figcaption>
 A neighbor-joining tree illustrating the relationships among a global sample of <em>S. cerevisiae</em> strains, determined by genome-wide array-based genotyping. There is little geographic structure among the strains, but they are strongly clustered by environment, particularly strains derived from wineries, sake production and laboratory research. </figcaption>
 </figure>

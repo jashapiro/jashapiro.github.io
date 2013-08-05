@@ -9,7 +9,7 @@
   </head>
   <body class="{{ page.layout }}">
 	<div id="wrap">
-      <header id="head_nav" class="noprint">
+      <header id="head_nav" class="hidden-print">
           {% include site_nav.html %}
       </header>
       <div class="container">
@@ -17,11 +17,11 @@
         {{ content }}
       </div>
     </div>
-      <footer id="footer" class="noprint" >
-      	<div class = "container">
-		    {% include footer.html %}
-      	</div>
-	  </footer>
+  <footer id="footer hidden-print">
+  	<div class="container">
+  		{% include footer.html %}
+  	</div>
+  </footer>
 	
   </body>
 </html>
