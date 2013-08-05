@@ -6,16 +6,10 @@
 
 	  <!-- add sidebar and adjust formatting -->
 	  <style type="text/css">
-      #container {
-       width: 960px;
-      }
-      #content {
-        padding: 23px 180px 100px 10px;
-      }
       #sidebar {
        position: absolute;
        right: 0px;
-       top: 10px;
+       top: 100px;
        width: 200px;
       }
       
@@ -36,21 +30,12 @@
        text-decoration: none;
        border: none;
       }
-      p {
-        text-align: left;
-      }
-      
+
       ul {
         list-style-position: inside;
         list-style-type: none;
-        margin: 0;
-        padding: 0 10px;
       }
 
-      li {
-        margin: 0;
-        padding: 2px 0;
-      }
       @media print {
        .noprint {display: none;}
        #content {padding: 0 240px 0 60px;}
@@ -59,14 +44,13 @@
   	</style>
   </head>
   <body class="{{ page.layout }}">
-    <div id="container">
+    <div id="wrap">
       <header id="head_nav" class="noprint">
-        {% include site_title.html %}
         {% include site_nav.html %}
       </header>
-      <div id="content">
+      <div class="container">
           {{ content }}
-      </div>
+      
       <aside id="sidebar">
         <h2>Contact</h2>
         <ul>
@@ -99,10 +83,13 @@
             <li>twitter: <a href="http://twitter.com/#!/jashapiro">@jashapiro</a>
           </ul>
       </aside>
-      <footer>
-        {% include footer.html %}
-      </footer>
+      </div>
     </div>
+    <footer id="footer">
+      <div class = "container">
+  		{% include footer.html %}
+  	  </div>
+    </footer>
   </body>
 </html>
 

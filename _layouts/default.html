@@ -5,19 +5,21 @@
     {% include head.html %}
   </head>
   <body class="{{ page.layout }}">
-	<div id="container">
+  <div id="wrap">
 	 <header id="head_nav">
-	    {% include site_title.html %}
 	  	{% include site_nav.html %}
-	  	{% include info.html %}
 	  </header>
-		<div id="content">
+      <div class="container">
 			  {{ content }}
-		</div>
-		<footer>
-		  {% include footer.html %}
-		</footer>
+	  </div>
   </div>
+  <footer id="footer">
+  	<div class = "container">
+  		{% include footer.html %}
+  	</div>
+  </footer>
+  
+  {% include js_body.html %}
   </body>
 </html>
 

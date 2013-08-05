@@ -4,23 +4,23 @@
   <head>
     {% include head.html %}
     {% include codestyle.html %}
-    {% include headnav_noprint.html %}
+    {% include nav_noprint.html %}
     {% include mathjax.html %}
   </head>
   <body class="{{ page.layout }}">
-    <div id="container">
+	<div id="wrap">
       <header id="head_nav" class="noprint">
-          {% include site_title.html %}
           {% include site_nav.html %}
-          {% include info.html %}
       </header>
-      <div id="content">
+      <div class="container">
         {% include pagetitle.html %}
         {{ content }}
       </div>
       <footer class="noprint">
+      	<div class = "container">
 		    {% include footer.html %}
-		  </footer>
-		</div>
+      	</div>
+	  </footer>
+	</div>
   </body>
 </html>
