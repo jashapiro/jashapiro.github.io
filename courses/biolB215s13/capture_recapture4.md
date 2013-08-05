@@ -4,6 +4,7 @@ title: "Recapture: Bayesian Confidence"
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
+nav: teaching
 ---
 
 [back to Error and likelihood](capture_recapture3.html)

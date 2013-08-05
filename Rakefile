@@ -35,6 +35,7 @@ task :post do
     post.puts "layout: post"
     post.puts "date: #{Time.now.strftime('%Y-%m-%d %k:%M:%S')}"
     post.puts "title: \"#{title.gsub(/-/,' ')}\""
+    post.puts "nav: labnote"
     post.puts 'description: ""'
     post.puts "category: "
     post.puts "tags: []"

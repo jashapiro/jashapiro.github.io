@@ -4,6 +4,7 @@ title: Working with Data Frames
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
+nav: teaching
 ---
 
 ```{r setup, include=FALSE, cache=FALSE}

@@ -4,6 +4,7 @@ title: "Cleaning Abalone (data)"
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
+nav: teaching
 ---
 
 

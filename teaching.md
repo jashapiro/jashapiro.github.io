@@ -2,6 +2,7 @@
 layout: page
 title: Teaching
 permalink: /teaching/index.html
+nav: teaching
 ---
 
 Below are brief descriptions of some the courses that I have designed and taught recently, including links to syllabi.

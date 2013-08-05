@@ -4,6 +4,7 @@ title: "Recapture: More Bayes"
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
+nav: teaching
 ---
 
 [back to Bayesian Confidence](capture_recapture4.html)
