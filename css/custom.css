@@ -1,0 +1,69 @@
+/*********
+a couple of color references
+Bryn Mawr Grey: #646e7d
+Bryn Mawr Yellow: #fff0be
+Bryn Mawr Cool Grey: #bebebe
+BMC Cyan: #00aaf0
+BMC class yellow: #ffe60f
+BMC class green: #00a58c
+BMC class Red: #f04137
+BMC class Blue: #005596
+tardis blue (pantone 2955C): #003B6F;
+international klein blue (via wikipedia): #002FA7 rgba(0,48,166)
+slate grey: #747C95
+*********/
+
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#wrap > .container {
+  padding: 60px 15px 0;
+}
+.container .credit {
+  margin: 20px 0;
+}
+
+code {
+  font-size: 80%;
+}
