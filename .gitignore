@@ -7,3 +7,4 @@ _site
 knitr/*.html
 
 courses/biolB215s13/cache
+Gemfile.lock
