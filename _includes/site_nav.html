@@ -1,4 +1,4 @@
-<nav id="site_nav" class="navbar navbar-static-top", role="navigation">
+<div id="site_nav" class="navbar navbar-default navbar-static-top", role="navigation">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
       <span class="icon-bar"></span>
@@ -16,12 +16,15 @@
     		<a href="/teaching">teaching</a>
     	</li>
     	<!-- 
-    	<li {% if page.nav == 'labnote' %}class = 'active'{% endif %}>
+    	<li {% if page.nav == 'labnotes' %}class = 'active'{% endif %}>
     		<a href="/labnotes/">lab notes</a>
     	</li> -->
+    	<li {% if page.nav == 'people' %}class = 'active'{% endif %}>
+    		<a href="/people">people</a>
+    	</li>
     	<li {% if page.nav == 'cv' %}class = 'active'{% endif %}>
     		<a href="/cv">curriculum&nbsp;vitae</a>
     	</li>
     </ul>
   </div><!--/.nav-collapse -->
-</nav>
+</div>
