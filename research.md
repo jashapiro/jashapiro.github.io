@@ -9,6 +9,21 @@ My research focuses on the relationship between genetic variation and the path o
 
 Much of my work has involved studying natural populations of organisms that have been long been used as laboratory models: the 'fruit' fly *Drosophila melanogaster*, the nematode *Caenorhabditis elegans*, and the budding yeast *Saccharomyces cerevisiae*. Most laboratory studies in these organisms are performed using the progeny of a small number of strains, and often only a single genetic background. While this approach has led to many great advances in biology, understanding the variation present in the species allows us to put laboratory findings in context. At the same time, the variation  present in natural populations can be very different from the mutations that are commonly induced in the lab or may cause those laboratory mutations to behave quite differently. This makes natural varaints a rich source of new genetic information that we can use to make discoveries that may not be possible using only the standard laboratory strains.
 
+## Patterns of variation in *S. cerevisiae*
+
+The brewers yeast, *Saccharomyces cerevisiae*, was the first eukaryote to have its genome completely sequenced. It has long been a favorite model organism for the studies in genentics and cell biology, and over time the yeast research community has built fantastic genomic and functional resources that make it an ideal system for 
+
+Working with [Joseph Schacherer](http://gmgm.u-strasbg.fr/~js/Joseph_Schacherer.html), I examined genomic variation in strains of yeast collected from around the world in different environments, both natural and industrial. These data clearly demonstrated strong population structure in *S. cerevisiae*, most likely largely driven by strong selection of domestication for winemaking, sake production, and laboratory work. In addition to these major groups, there were also many strains that appeared to be the results of more recent hybridization between groups, including many of the strains which were isolated from human infections (*S. cerevisiae* is not normally pathogenic, but it can infect immunocompromised individuals). Again, the best way to find out more is to read the original publication in *Nature*: [Comprehensive polymorphism survey elucidates population structure of *Saccharomyces cerevisiae*](http://dx.doi.org/10.1038/nature07670) ([free version at PMC](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2782482/)).
+
+<figure class="pull-left">
+<img src="/images/yeast_tree.png" alt="cerevisiae tree" title="Tree of S. cerevisiae strains" width="400px" height="291px">
+<figcaption>
+A neighbor-joining tree illustrating the relationships among a global sample of <em>S. cerevisiae</em> strains, determined by genome-wide array-based genotyping. There is little geographic structure among the strains, but they are strongly clustered by environment, particularly strains derived from wineries, sake production and laboratory research. </figcaption>
+</figure>
+
+
+While the overall diversity of yeast is low compared to many other species, there is still quite a bit of  diversity to explore among these strains, and in new strains collected from the wild. One goal of my current research is to conduct focused sampling of yeast diversity at particular sites to deepen our understanding of the patterns of local adaptation in yeast. Can we detect signatures of natural selection over short time scales or in specific locales? How do these small-scale patterns of evolution relate to the global patterns of diversity that we have observed? How the patterns of evolution in wild yeasts relate the patterns  that have been observed in experimental evolution of the same species?
+
 
 ## Global selective sweeps in *C. elegans*
 
@@ -27,16 +42,3 @@ This strong selection and rapid spread indicates that some allele or combination
 
 If you are interested in exploring this in more detail, you could do worse than to read the paper we published in *Nature Genetics*: [Chromosome-scale selective sweeps shape *Caenorhabditis elegans* genomic diversity](http://dx.doi.org/10.1038/ng.1050) ([free version at PMC](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3365839)). There was also a nice [News and Views article](http://www.nature.com/ng/journal/v44/n3/full/ng.2201.html) by [Patrick Philips](http://pages.uoregon.edu/pphil/index.html) published alongside the original article (not free).
 
-## Functional variation in *S. cerevisiae*
-
-Another focus of my post-doctoral research has been to identify and characterize the natural patterns of functional variation in the brewers yeast *Saccharomyces cerevisiae*.  Working with [Joseph Schacherer](http://gmgm.u-strasbg.fr/~js/Joseph_Schacherer.html), I used an unbiased SNP discovery platform developed in our lab to examined variation in strains of yeast collected from around the world in different environments, both natural and industrial. We generated one of the most comprehensive sets of data on genomic diversity of *S. cerevisiae* strains polymorphism available.
-
-<figure class="pull-left">
-<img src="/images/yeast_tree.png" alt="cerevisiae tree" title="Tree of S. cerevisiae strains" width="400px" height="291px">
-<figcaption>
-A neighbor-joining tree illustrating the relationships among a global sample of <em>S. cerevisiae</em> strains, determined by genome-wide array-based genotyping. There is little geographic structure among the strains, but they are strongly clustered by environment, particularly strains derived from wineries, sake production and laboratory research. </figcaption>
-</figure>
-
-These data clearly demonstrated strong population structure in *S. cerevisiae*, most likely largely driven by strong selection of domestication for winemaking, sake production, and laboratory work. In addition to these major groups, there were also many strains that appeared to be the results of more recent hybridization between groups, including many of the strains which were isolated from human infections (*S. cerevisiae* is not normally pathogenic, but it can infect immunocompromised individuals). Again, the best way to find out more is to read the original publication in *Nature*: [Comprehensive polymorphism survey elucidates population structure of *Saccharomyces cerevisiae*](http://dx.doi.org/10.1038/nature07670) ([free version at PMC](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2782482/)).
-
-While the overall diversity of yeast is low compared to many other species, there is still quite a bit of phenotypic diversity to explore among these strains, including in the patterns  gene expression, which is where my subsequent work has been focused. I measured gene expression across most of the strains in our diversity panel, and I am currently working to analyze those data as part of a genome-wide association study (GWAS), and examining the results in a population genetic framework. By identifying and characterizing the mutations that are responsible for differences in gene expression levels among strains I hope to expand our understanding of the types of mutations that are likely to occur in the course of evolution.
