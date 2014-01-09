@@ -24,13 +24,15 @@ We have learned huge amounts in biology by doing experiments which generate clea
 **Lab** Wed 1-4PM  
 **Location** 10 Park Science Center
 
-### Office Hours
-
-Monday & Friday 2–3:30PM, and by appointment.
 
 ### Textbook
 
-*The Analysis of Biological Data* by Whitlock and Schluter.
+*[The Analysis of Biological Data][ws]* by M Whitlock and D Schluter
+
+also recommended: *[R Cookbook][rcook]* by P Teetor
+
+[ws]: http://www.roberts-publishers.com/authors/schluter-dolph/the-analysis-of-biological-data.html
+[rcook]: http://shop.oreilly.com/product/9780596809164.do
 
 ## Tutorials & Labs {#tutorials}
 
@@ -52,7 +54,9 @@ Monday & Friday 2–3:30PM, and by appointment.
 
 ### Reference
 
-**[ggplot2 Documentation](http://docs.ggplot2.org/)**  
-**[RStudio Documentation](http://www.rstudio.com/ide/docs/)**   
 **[Quick R](http://www.statmethods.net/)**  
+**[RStudio Documentation](http://www.rstudio.com/ide/docs/)**   
+**[ggplot2 Documentation](http://docs.ggplot2.org/)**  
+**[plyr tutorial](http://plyr.had.co.nz/09-user/)**  
+
 
