@@ -53,8 +53,9 @@ Variable | Unit | Description
 
 The abalone add one ring to their shell every year, except in their first year, and we can estimate the age of the abalone quite accurately by adding 1.5 to the number of rings. 
 
+{: .problem}
 Make a new column called `Age` in the `abalone` data frame using this fact.
-{: .question}
+
 
 
 
@@ -75,8 +76,7 @@ qplot(Whole,
 
 
 {% highlight text %}
-## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust
-## this.
+## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
 {% endhighlight %}
 
 ![plot of chunk weighthist](plots/abalone_cleaning-weighthist.png) 
@@ -136,11 +136,12 @@ qplot(Sex, Whole,
 
 
 
+{: .problem}
 Look at all of the continuous variables using your preferred visualization method. You do not need to turn in all of these plots, but use them to answer the questions below.  
 **a.** Describe the shape of the distributions for each variable. Do they appear normal overall (with the sexes combined)? Does separating by Sex make them appear normal?  
 **b.** Are there any values that look particularly strange? What do you think caused those?  
 **c.** Show me your favorite of the plots you generated. Make sure it is well labeled.
-{: .question}
+
 
 **Before proceeding, remove any rows from the data frame with obviously bad data.** This should include any rows where a measurement is equal to 0.  
 

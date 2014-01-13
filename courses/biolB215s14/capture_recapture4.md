@@ -157,13 +157,13 @@ bayesPopSize(marked = 5, first = 100, second = 100)
 {% endhighlight %}
 
 
-
+{: .problem}
 Using your lizard count data from class, calculate the posterior probability of the population size, using a uniform (flat) prior distribution with a maximum possible population size of 10,000 lizards.  
 **a.**  What is the most probable value, and what is the credible interval? How does it compare to the estimate based on the likelihood values?  
 **b.**  Think about an intuitive explanation of the differences between the maximum likelihood confidence interval and the Bayesian credible interval. (Don't just state the definitions of confidence interval and credible interval, but think about how they were calculated here.)  
 **c.**  How do these values change if you had presupposed a maximum possible population size of 1,000 lizards? Explain this result. Is the maximum of 1,000 individuals a good choice for a prior?  
 **d.**  Capture-recapture experiments assume that an individual's chance of being caught does not depend on whether it was marked or not. How do you think your results be affected if marking animals made them more likely to be caught by predators? What if marking individuals has no effect, but some individuals are more attracted to the bait you use to trap them than others?  
-{: .question}
+
 
 ## Next
 [Improving with Bayes](capture_recapture5.html)

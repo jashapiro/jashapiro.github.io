@@ -386,8 +386,9 @@ x <- 3
 {% endhighlight %}
 
 
+{: .problem}
 Create a vector of the numbers from 1 to 9 and store it in a variable called `digits`. Use `R`'s vector recycling to divide every even number by 2, then multiply every multiple of 3 by 3. (6, being both even and a multiple of 3 should become 9). Store the result in a new variable.
-{: .question }
+
 
 ### Selecting from vectors
 Sometimes you want only a single element from a vector, or a few elements of the vector. To get that, you can use the square brackets operator, `[]`, with the index positions of the element or elements you want. So if I want the fifth element of a vector I can get it with something like: `X[5]`. You are not limited to choosing only one element, or even to choosing each element only once: simply provide another vector with the element positions you wish to select. 
@@ -754,8 +755,9 @@ even | threes #elements that are even OR divisible by 3
 {% endhighlight %}
 
 
+{: .problem}
 Calculate the sum of the integers from 1 to 1000 with every number divisible by 7 excluded. There are many ways to do this; show at least two methods.
-{: .question}
+
 
 
 ### Characters and strings
@@ -995,8 +997,8 @@ rnorm(n = 12, mean = 3, sd = 5)
 
 
 {% highlight text %}
-##  [1]  8.339  5.084  4.473  2.607 11.031  5.895 12.285  6.716  2.989  1.835
-## [11]  4.838  2.182
+##  [1]  4.045  3.824  9.532  6.138  7.856  8.204  3.175 -1.001  2.184  2.778
+## [11]  2.555  6.031
 {% endhighlight %}
 
 You can actually take a shortcut and not give the argument names explicitly, as long as you give them in the order expected:
@@ -1008,8 +1010,8 @@ rnorm(12, 3, 5)
 
 
 {% highlight text %}
-##  [1]  8.5321  2.5257  7.4402  2.2448 -2.9494 -2.6978 -0.6749 -0.7934
-##  [9] 12.3240  4.7489  7.0968  3.3546
+##  [1]  0.9236 -1.0097 -3.3813 -3.7074 13.1839 -3.6309  1.6424  7.2482
+##  [9] -4.8231  2.9387 10.6432 -2.9668
 {% endhighlight %}
 
 Some arguments have default values, which you can see if you look at the help page for the function you are interested in. For `rnorm()` the default `mean` is `0` and the default `sd` is `1`. If we want to use those, we can shorten our call further and leave those off completely:
@@ -1021,8 +1023,8 @@ rnorm(12) # equivalent to rnorm(12, 0, 1)
 
 
 {% highlight text %}
-##  [1] -0.72192 -0.41138  0.32912 -1.98467  0.03093  1.67171 -0.81785
-##  [8] -0.74734 -0.48133 -0.10988 -0.79118 -1.12635
+##  [1]  0.14633  0.62600  0.98646  0.44159  2.77082 -0.32709  1.22547
+##  [8] -0.36008 -1.55886  0.05443 -0.96159  0.90856
 {% endhighlight %}
 
 If you want to leave some arguments as their default but change others, you can skip the ones you don't want to change, but then you **must** name any arguments that are out of order. If I want 5 random numbers with mean 0 but standard deviation of 0.2 (rather than default of 1), I could do the following:
@@ -1034,7 +1036,7 @@ rnorm(5, sd = 0.2)
 
 
 {% highlight text %}
-## [1]  0.14999  0.21532 -0.01341  0.12641  0.08772
+## [1] -0.18941 -0.26387 -0.59856 -0.12437 -0.05666
 {% endhighlight %}
 
 

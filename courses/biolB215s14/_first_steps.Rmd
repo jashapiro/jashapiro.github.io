@@ -103,8 +103,9 @@ x <- 3
 1:(x/3)
 ```
 
+{: .problem}
 Create a vector of the numbers from 1 to 9 and store it in a variable called `digits`. Use `R`'s vector recycling to divide every even number by 2, then multiply every multiple of 3 by 3. (6, being both even and a multiple of 3 should become 9). Store the result in a new variable.
-{: .question }
+
 
 ### Selecting from vectors
 Sometimes you want only a single element from a vector, or a few elements of the vector. To get that, you can use the square brackets operator, `[]`, with the index positions of the element or elements you want. So if I want the fifth element of a vector I can get it with something like: `X[5]`. You are not limited to choosing only one element, or even to choosing each element only once: simply provide another vector with the element positions you wish to select. 
@@ -187,8 +188,9 @@ odd & threes #elements that are odd AND divisible by 3
 even | threes #elements that are even OR divisible by 3
 ```
 
+{: .problem}
 Calculate the sum of the integers from 1 to 1000 with every number divisible by 7 excluded. There are many ways to do this; show at least two methods.
-{: .question}
+
 
 
 ### Characters and strings

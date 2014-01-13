@@ -42,18 +42,19 @@ ab_cors <- cor(abalone[ , -1])
 {% endhighlight %}
 
 
-
+{: .problem}
 **a.** What are the top five pairs of measurements with the highest correlation coefficients? (Don't include the correlation between Age and Rings, as only one of those is a measurement...)  
 **b.** Recalculate the correlation coefficients using the Spearman rank correlation. What are the top five pairs for this measure?  
 **c.** What explains the increase in the correlation for `Length` and `Whole` weight? You may find it helful to create a scatter plot of the two variables.  
-{: .question}
+
 
 Some of these data clearly do not follow the assumptions of correlations and regression, so it may be helpful to transform some of them and compare results between transformed and untransformed data.
 
+{: .problem}
 Create a new version of the `abalone` data frame called `logabalone` where you take the base 10 log of every variable but the sex (use the function `log10()`).  
 **a.** What does the relationship between `Length` and `Whole` weight look like for the `logabalone` data frame? Does this improve the Pearson correlation coefficients?    
 **b.** Why do you think taking the log makes a difference in this case? (Think about the relationship between length and weight (or volume). How does taking a log change that relationship? )
-{: .question}
+
 
 
 
@@ -108,12 +109,13 @@ qplot(x = Height,
 ![plot of chunk basic_lm](plots/abalone_analysis-basic_lm.png) 
 
 
+{: .problem}
 To find what the actual equation of the fit is, you will have to run the `lm()` function on its own.
 **a.** What equation does the linear model predict as the relationship between abalone height and age?  
 **b.** Plot the the log10 values of height and age, along with the linear fit (for the log values). Make sure you label the axes properly.  
 Save the linear model associated with the fit you just plotted in a variable named `lm_logheight`.  
 **c.** What equation does this log-based model describe? Write your answer with resepect to the original height and age measurements, *not* the log of the measurements. 
-{: .question}
+
 
 
 
@@ -144,13 +146,14 @@ age_predicted <- 10^(fitted(lm_logheight))
 {% endhighlight %}
 
 
+{: .problem}
 **a.** Calculate the mean square error for the log-scale predictions.  
 **b.** Plot the predicted vs. actual values for both the normal and log-scale predictions.  
 **c.** What are the mean *absolute* errors for the normal and log-scale predictions?  
 **d.** Which method of estimating age from height (normal or log) do you think gives better results? Why?  
 **e.** What happens if you try to use the log of height to predict age (unlogged)? Is that better than predicting log(age) from log(height)?  
 **f.** Which abalone measurement gives the best overall prediction of age (aside from rings)? Regular or log?
-{: .question}
+
 
 
 

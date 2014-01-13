@@ -44,8 +44,9 @@ my_table['a', ]
 my_table[1, 2]
 ```
 
+{: .problem}
 See what happens if you try to select from a matrix using only a single number in the brackets, i.e. `my_table[3]`. What is going on? What does the `3` refer to in this case?
-{: .question}
+
 
 One other way of building matrixes is to combine vectors using `rbind()` and `cbind()`, which join vectors into a matrix by rows or by columns, respectively:
  

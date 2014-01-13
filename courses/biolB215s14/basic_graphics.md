@@ -117,8 +117,9 @@ plot(1:20,
 
 Notice how I can give the `pch` and `col` arguments vectors, so each point gets a different shape and the colors alternate (because `R` is recycling the vector). You can do the same thing for any other option that affects the appearance of data points, which can be useful for visually separating different subsets of data, or highlighting individual points. 
 
+{: .problem}
 Create a plot of the `med_norm` vector where all the points greater than or equal to 5 are blue and all the points less than 5 are green. You will need to create a of color names to do this; the easiest way is to start with a vector of all one color that the same length as the `med_norm` vector, using the `rep()` function, then replace the values that need to change in the next step.  
-{: .question}
+
 
 ## Histograms
 Since the previous plots were not particularly useful, lets try to do a bit better. We'll start with a basic histogram, which you already saw in your homework assignment.
@@ -165,8 +166,7 @@ qplot(med_norm)
 
 
 {% highlight text %}
-## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust
-## this.
+## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
 {% endhighlight %}
 
 ![plot of chunk gghist](plots/basic_graphics-gghist.png) 
@@ -226,8 +226,9 @@ qplot(large_norm,
 ![plot of chunk ggannotated_hist](plots/basic_graphics-ggannotated_hist.png) 
 
 
+{: .problem}
 Create a histogram of the `large_norm` data with about 100 breakpoints. Is this a good number? Play around with different numbers of breakpoints until you find one that you think is a good representation of the data. Then add vertical lines indicating the median and interquartile range of the data. You will want to use the `quantile()` function to find those quantities.
-{: .question}
+
 
 
 ## Bar charts
@@ -351,8 +352,8 @@ qplot(x = Species,
 
 
 
+{: .problem}
 Make a boxplot that shows the distribution of the product of petal width and petal length for each individual iris in the data set, split by species. Add a solid horizontal line to your plot that shows the mean of this product across all three the species. Also add a dotted horizontal line that shows the product of mean width and mean length, calculated separately. Are these the same? Why or why not?
-{: .question}
 
 ## Scatterplots
 Finally, lets make some scatterplots. In many ways, these are the easiest to do. Use `plot()`, giving both `x` and `y` values.
@@ -400,8 +401,9 @@ qplot(x = Sepal.Width, y = Sepal.Length,
 ![plot of chunk ggcolorscatter2](plots/basic_graphics-ggcolorscatter2.png) 
 
 
+{: .problem}
 Make one more plot to turn in. Use the iris data, and create a plot that illustrates something you find interesting about that data, then write a caption explaining what the plot shows. Make sure your plot is fully labelled. Extra points for using a feature of plotting in `R` that was not discussed on this page, either from base graphics or `ggplot2`. (Some suggestions: density plots, transparency, facets, varible point sizes, continuous color scales, fit lines, or smoothing curves). You may find the examples available at [ggplot2.org](http://ggplot2.org) to be helpful, especially the example chapter from the [ggplot2 book](http://ggplot2.org/book/): "Getting started with qplot" \[[PDF](http://ggplot2.org/book/qplot.pdf)\].
-{: .question}
+
 
 
 
