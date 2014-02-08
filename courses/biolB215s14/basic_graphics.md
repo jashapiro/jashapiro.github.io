@@ -118,7 +118,7 @@ plot(1:20,
 Notice how I can give the `pch` and `col` arguments vectors, so each point gets a different shape and the colors alternate (because `R` is recycling the vector). You can do the same thing for any other option that affects the appearance of data points, which can be useful for visually separating different subsets of data, or highlighting individual points. 
 
 {: .problem}
-Create a plot of the `med_norm` vector where all the points greater than or equal to 5 are blue and all the points less than 5 are green. You will need to create a of color names to do this; the easiest way is to start with a vector of all one color that the same length as the `med_norm` vector, using the `rep()` function, then replace the values that need to change in the next step.  
+Create a plot of the `med_norm` vector where all the points greater than or equal to 5 are blue and all the points less than 5 are green. You will need to create a vector of color names to do this; the easiest way is to start with a vector of all one color that the same length as the `med_norm` vector, using the `rep()` function, then replace the values that need to change in the next step.  
 
 
 ## Histograms
@@ -160,6 +160,18 @@ The basic plotting function in in `ggplot2` is `qplot()`, which can actually mak
 
 {% highlight r %}
 require(ggplot2)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Loading required package: ggplot2
+## Use suppressPackageStartupMessages to eliminate package startup messages.
+{% endhighlight %}
+
+
+
+{% highlight r %}
 qplot(med_norm)
 {% endhighlight %}
 

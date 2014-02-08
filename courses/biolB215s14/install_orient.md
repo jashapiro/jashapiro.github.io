@@ -82,7 +82,7 @@ install.packages("plyr")
 
 An alternative method in `RStudio` is to go to the "Packages" tab and click on the "Install Packages" button at the top of the tabe of currently installed packages. This will pop up a window in which you can type the names of the package(s) you want to install. 
 
-For now, try installing the `plyr`, `ggplot2`, and `knitr` packages. We will be using those (and some others) later in the semester. Make sure that the "Install dependencies" checkbox is checked, as this will allow for `R ` to automatically install some other packages that those packages depend on.
+For now, try installing the `plyr`, `ggplot2`, and `knitr` packages. We will be using those (and some others) later in the semester. Make sure that the "Install dependencies" checkbox is checked, as this will allow for `R` to automatically install some other packages that those packages depend on.
 
 ## Help
 
