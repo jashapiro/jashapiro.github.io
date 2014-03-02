@@ -5929,9 +5929,34 @@ body {
   font-weight: bold;
   font-variant: small-caps;
   content: "Problem " counter(P) ": ";
-  /* Print the H1 number */
+  /* Print the problem number */
   counter-increment: P;
-  /* Add 1 to next H1 */
+  /* Add 1 to next problem */
+}
+.problem-nonum {
+  margin: 19px;
+  padding: 5px 9px;
+  background-color: #00aaf0;
+  border-color: #005596;
+  border-left: 2px solid ;
+}
+.problem-nonum:before {
+  font-weight: bold;
+  font-variant: small-caps;
+  content: "Problem: ";
+  /* Print the problem number */
+}
+.question {
+  margin: 19px;
+  padding: 5px 9px;
+  background-color: #00aaf0;
+  border-color: #005596;
+  border-left: 2px solid ;
+}
+.question:before {
+  font-weight: bold;
+  font-variant: small-caps;
+  content: "Question: ";
 }
 .clearfix:before,
 .clearfix:after {
