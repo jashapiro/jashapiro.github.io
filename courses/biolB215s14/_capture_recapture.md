@@ -8,10 +8,8 @@ nav: teaching
 ---
 
 
-```{r setup, include=FALSE, cache=FALSE}
-source("../../_knitr/knit_jekyll_setup.R")
-opts_chunk$set(fig.path="plots/capture_recapture-", tidy=FALSE, fig.width=6.5, fig.height=5, cache=TRUE)
-```
+
+
 
 ## Introduction
 Estimating the number of organisms in a region is easiest if the organisms don't move and are easy to find. In that case, you can either count them all, or randomly choose subregions to sample and  count the number of individuals in each of those, multiplying by the number of possible subregions. In that case, you would also be able to estimate a confidence interval based on the sampling error in your counts. If you are dealing with moving organisms, but ones that are easy to see, you can often do something similar: counting the number you see in a given area, possibly over time.
@@ -29,7 +27,7 @@ But first, have a look in the box. Without touching the lizards or talking to cl
 
 
 ## Designing a sampling strategy
-Clearly, the more individuals captured in each phase of a capture-recapture experiment, the better your estimates of the population size will be, but we can't just expect unlimited resources for sampling.  There are always limits on the number of individuals you can capture, whether because of license limitations, time constraints, or simply the effort required to process each animal captured. With our docile toy lizards, we could just "catch" all of them and go to work counting, but I'm not going to let you do that. I am imposing a total class budget of **200** lizard captures, split however you like between the first and second "trappings". 
+Clearly, the more individuals captured in each phase of a capture-recapture experiment, the better your estimates of the population size will be, but we can't just expect unlimited resources for sampling.  There are always limits on the number of individuals you can capture, whether because of license limitations, time constraints, or simply the effort required to process each animal captured. With our docile toy lizards, we could just "catch" all of them and go to work counting, but I'm not going to let you do that. I am imposing a total class budget of **340** lizard captures, split however you like between the first and second "trappings". 
 
 Since we only have one set of lizards, we will have to decide as a class what the best way to divide our effort to sample the lizards is. Take some time to discuss your thoughts with those around you, then we will talk about it as a group. We don't have to make a final decision quite yet, but we should have some ideas about *how* we would make this decision.
 
