@@ -157,7 +157,7 @@ bayesPopSize(marked = 5, first = 100, second = 100)
 {% endhighlight %}
 
 
-{: .problem}
+{: .problem-nonum}
 Using your lizard count data from class, calculate the posterior probability of the population size, using a uniform (flat) prior distribution with a maximum possible population size of 10,000 lizards.  
 **a.**  What is the most probable value, and what is the credible interval? How does it compare to the estimate based on the likelihood values?  
 **b.**  Think about an intuitive explanation of the differences between the maximum likelihood confidence interval and the Bayesian credible interval. (Don't just state the definitions of confidence interval and credible interval, but think about how they were calculated here.)  

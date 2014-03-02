@@ -183,31 +183,25 @@ simRecapture2(3000, 100, 240, reps = 5)
 {% endhighlight %}
 
 
-## A Better Estimate
+### A Better Estimate
 It turns out that this simple estimate of the population size is somewhat biased. This is perhaps easiest to see if you think about the case when you don't capture any marked individuals (you may have some of those in the data you simulated). Then $R = 0$, and the population is estimated to be of infinite size, which is never a good thing. A somewhat better estimator is the **Schnabel** method: 
 $$\hat{N} = \frac{(M+1)(C+1)}{R+1} - 1 $$
 
+{: .problem-nonum}
 Write a function to estimate the number of individuals in the population using the Schnabel method.  
 **a.**  Using as the true population size the number of lizards you estimated were in the box, simulate 1000 experiments where you capture 170 individuals in the first trapping and 170 in the second. Be sure to store the data from these (and the following) simulations, as you will need to use them for later problems as well. Generate a histogram of the estimated population sizes that you calculated with the Schnabel method.  
 **b.**  How do your results change if you captured 200 individuals in the first trapping? What about if you caught 200 in the second (and 140 in the first)? It may be helpful to combine all of your results into a single data frame, and use `ggplot2`/`qlot()` to make all of the histograms together.  
-**c.**  For each of the three experimental designs above, calculate the mean squared error of the Schnabel estimate ($\mathrm{MSE} = \frac{\sum(\hat{N}_i - N)^2}{n}$, where $\hat{N}_i$ is your estimate from the each simulation, $N$ is the population size you simulated, and $n$ is the number of simulations. Which gave the best estimate of the actual population size? Do you think it is better to put more effort into your first or second sample?  
-{: .question}
+**c.**  For each of the three experimental designs above, calculate the mean squared error of the Schnabel estimate ($\mathrm{MSE} = \frac{\sum(\hat{N}_i - N)^2}{n}$, where $\hat{N}_i$ is your estimate from the each simulation, $N$ is the population size you simulated, and $n$ is the number of simulations). Which gave the best estimate of the actual population size? Do you think it is better to put more effort into your first or second sample?  
 
-### Back to Experimental Design
-Using your results from the above simulations, and any more simulations you might want to do (recording all of your results!), decide as a class what sampling scheme we should use. What should we do to get the most accurate results?
 
-## Capturing Lizards
-Now that the class has agreed on the sampling scheme, lets do it! Each of you will come up and "catch" some lizards, marking each with a stripe on its tail. If we were doing a real experiment, we would be remiss not to take some measurements of the lizards. Measurements on toy lizards are a bit silly, but do record how many of each color you capture. After all of the lizards are marked, we will throw them back in the box and mix thoroughly. Then you can catch the second sample, again recording how many of each color were caught, and how many were marked with tail stripes (by color and total). *Do not return these lizards to the box.* We will keep them for later experiments.
+## Completing the Experimental Design
+Using your results from the above simulations, and any more simulations you might want to do (recording all of your results!), come up with a plan for the sampling scheme that you think the class should use. What should we do to get the most accurate and precise results?
 
-Estimate the following quantities from the pooled class data:  
-**a.** The total number of lizards in the box.  
-**b.** The number of lizards of each color in the box.  
-**c.** The proportion of lizards that are each color.  
-**d.** There are at least two ways to do the second two calculations. Which do you think is more accurate? If you are motivated, design and perform some simulations to test your intuition.
-{: .question}
+{: .problem-nonum}
+Write up your calculations and simulations in an Rmarkdown document that describes what you did to determine the best sampling scheme for the lizard capture. You will present this to a classmate at the next lab period, then the class will decide as a whole what the lizard sampling scheme will be.   
+*Note:* You should use your solution to the previous problem(s) in your writeup, but you do not need to explicitly label those solutions. Your writeup should be a narrative that explains what you did and why, and the conclusions that you drew from your simulations.
 
 ## Next
-Now that we have an initial estimate of the lizard population, we need to think about how confident we are in that estimate, and ways we might improve our estimate. 
+Now that we have a sampling scheme, we will try to get the best estimate of the number of lizards in the population *and our uncertainty about that number*.
 
-Make sure you have saved all of your work from this week. You will need some of your results next time.
 **[Error and likelihood](capture_recapture3.html)**

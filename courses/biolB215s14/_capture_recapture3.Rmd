@@ -15,16 +15,30 @@ opts_chunk$set(fig.path="plots/capture_recapture3-", tidy=FALSE, fig.width=6.5, 
 set.seed(20130306)
 ```
 
+## Capturing Lizards
+Now that the class has agreed on the sampling scheme, it is time to do it! Each of you will come up and "catch" some lizards, marking each with a stripe on its tail. If we were doing a real experiment, we would be remiss not to take some measurements of the lizards. Measurements on toy lizards are a bit silly, but do record how many of each color you capture. After all of the lizards are marked, we will throw them back in the box and mix thoroughly. Then you can catch the second sample, again recording how many of each color were caught, and how many were marked with tail stripes (by color and total). *Do not return these lizards to the box.* We will keep them for later experiments.
+
+{: .problem-nonum}
+Estimate the following quantities from the pooled class data:  
+**a.** The total number of lizards in the box.  
+**b.** The number of lizards of each color in the box.  
+**c.** The proportion of lizards that are each color.   
+**d.** There are at least two ways to do the second two calculations. Which do you think is more accurate? If you are motivated, design and perform some simulations to test your intuition.
+
+ 
+
 ## Estimating Error
+Now that we have an initial estimate of the lizard population, we need to think about how confident we are in that estimate, and ways we might improve our estimate.
+
 You calculated the true error for your simulation runs last time when you looked at the mean squared error. Of course, you don't know the true population size most of the time, and we don't know it for the box of lizards, so this is not something that is possible to calculate for most real data. Instead you have to calculate some form of confidence interval or credible interval. There are two a few ways to do this: using the standard error, a likelihood model, and with Bayesian statistics.
 
-## Standard Error
+### Standard Error
 It is possible to calculate the standard deviation of the estimate of population size using frequentist statistics. We won't derive this equation, but it is a reasonable place to start:
 $$\mathrm{SE}(N) = \sqrt{\frac{(M+1)(C+1)(M-R)(C-R)}{(R+1)(R+1)(R+2)}}$$
 
 Using the standard approximation of the 95% confidence interval as $\hat{N} \pm 1.96 \cdot \mathrm{SE}(N)$ it is possible calculate the confidence intervals for the previous simulations.
 
-{: .problem}
+{: .problem-nonum}
 Write a function to calculate the standard error and 95% confidence intervals from a capture-recapture experiment using the numbers of individuals captured in the first and second trappings and number of marked (recaptured) individuals in the second trapping.
 **a.**  Calculate the standard error and a 95% confidence interval for your estimate of the number of lizards in the box.  
 **b.**  Calculate the standard errors and confidence intervals for your previous simulations. Generate histograms of the minimum and maximum for each confidence intervals from  set of simulations where you captured 100 individuals each time.  
@@ -32,7 +46,7 @@ Write a function to calculate the standard error and 95% confidence intervals fr
 **d.**  What fraction of the time does your confidence interval include the true size of the population? Does this agree with what you know about confidence intervals?  
 
 
-## Likelihood Analysis
+### Likelihood Analysis
 
 The likelihood is the probability of the data we observed given some set of particular parameter values. In this situation, it is the probability that we would capture $R$ marked lizards in our second trapping, given a certain population size $N$: $\Pr(R\mid N)$. As I mentioned earlier, in this case that probability is given by the hypergeometric distribution:
 $$\Pr(R \mid N=x) = \frac{\binom{M}{R}\binom{N-M}{C-R}}{\binom{N}{C}}$$
@@ -75,7 +89,7 @@ qplot(x = popsize, y =  likes,
 
 The likelihood of the data across a range of parameters is often used directly to estimate the true value of a paprameter. To do this, you find the *maximum likelihood*, the value of the parameter that results in the largest likelihood value under your model.  
 
-{: .problem}
+{: .problem-nonum}
 Calculate the likelihood values for lizard population sizes between 200 and 100,000 individuals, using the capture-recapture data from class. Generate a plot of the population sizes and the corresponding likelihoods.  
 **a.**  What is the maximum likelihood, and what population size does it correspond to? You will find the functions `max()` and  `which.max()`, which is also discussed below, to be quite helpful.  
 **b.**  How does the maximum likelihood value you calculate compare to a naive estimate of the population size ($N = \frac{MC}{R}$). What about the Schnabel estimate?  
