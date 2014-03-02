@@ -13,11 +13,11 @@ nav: teaching
 
 
 ## Calculating Population Size
-Recall that we can estimate the population size $N$ from the number of individuals caught in the first round $M$, the number caught in the second round $C$, and the number of the second round that had already been captured $R$ using the equation $N=\frac{MC}{R}$. If we did a version of our experiment capturing and marking 50 individuals in our first trapping, then 150 in the second trapping, of which 3 were marked, we would calculate the number of individuals as follows:
+Recall that we can estimate the population size $N$ from the number of individuals caught in the first round $M$, the number caught in the second round $C$, and the number of the second round that had already been captured $R$ using the equation $N=\frac{MC}{R}$. If we did a version of our experiment capturing and marking 100 individuals in our first trapping, then 240 in the second trapping, of which 3 were marked, we would calculate the number of individuals as follows:
 
 {% highlight r %}
-M <- 50
-C <- 150
+M <- 100
+C <- 240
 R <- 3
 est_N <- M * C / R
 est_N
@@ -26,7 +26,7 @@ est_N
 
 
 {% highlight text %}
-## [1] 2500
+## [1] 8000
 {% endhighlight %}
 
 That works, but if we were doing this many times, we could easily make a mistake with the formula at some point, and we would like to avoid that if possible. The best way to do that is to write a new function in `R` to perform the calculation. 
@@ -43,27 +43,27 @@ recapturePopSize <- function(first, second, recaught){
   return(N_est)
 }
 
-recapturePopSize(first = 50, second = 150, recaught = 3)
+recapturePopSize(first = 100, second = 240, recaught = 3)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## [1] 2500
+## [1] 8000
 {% endhighlight %}
 
 
-Note that just as with the built-in functions, if we give the arguments in the correct order, we don't actually have to name them when we use the function: `recapturePopSize(50, 150, 3)` would have worked as well as the more explicit version above.
+Note that just as with the built-in functions, if we give the arguments in the correct order, we don't actually have to name them when we use the function: `recapturePopSize(100, 240, 3)` would have worked as well as the more explicit version above.
 
 ## Simulating the experiment
-Now let's see how well our estimate of the population size from a capture-recapture experiment actually works. Let's assume that the true population size is exactly 3000 lizards. On the first trip we capture and mark 50. When we rerelease them, then the total population will consist of 50 marked individuals and 2950 unmarked lizards, which we will represent as a vector of strings: 50 with the value of `"marked"` and the remaining 2950 `"unmarked"`. On our second trip we will capture 150 individuals, just as in the example above. We will simulate this capture using the `sample()` function, which picks elements from a list randomly without replacement (unless you tell it differently). We will sample 150 individuals from the population vector, then count the number of those that are `"marked"`.
+Now let's see how well our estimate of the population size from a capture-recapture experiment actually works. Let's assume that the true population size is exactly 3000 lizards. On the first trip we capture and mark 100. When we rerelease them, then the total population will consist of 50 marked individuals and 2900 unmarked lizards, which we will represent as a vector of strings: 100 with the value of `"marked"` and the remaining 2900 `"unmarked"`. On our second trip we will capture 240 individuals, just as in the example above. We will simulate this capture using the `sample()` function, which picks elements from a list randomly without replacement (unless you tell it differently). We will sample 240 individuals from the population vector, then count the number of those that are `"marked"`.
 
 
 {% highlight r %}
 # create the population vector with marked & unmarked 
-marked_pop <- rep(c("marked", "unmarked"), c(50, 2950))
+marked_pop <- rep(c("marked", "unmarked"), c(100, 2900))
 # sample from that population
-trapped <- sample(marked_pop, 150)
+trapped <- sample(marked_pop, 240)
 n_marked <- sum(trapped == "marked")
 n_marked
 {% endhighlight %}
@@ -71,19 +71,19 @@ n_marked
 
 
 {% highlight text %}
-## [1] 2
+## [1] 7
 {% endhighlight %}
 
 
 
 {% highlight r %}
-recapturePopSize(50, 150, n_marked)
+recapturePopSize(100, 240, n_marked)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## [1] 3750
+## [1] 3429
 {% endhighlight %}
 
 
@@ -96,38 +96,38 @@ simRecapture <- function(popsize, first, second){
   return ( sum(trapped == "marked") )
 }
 
-simRecapture(3000, 50, 150)
+simRecapture(3000, 100, 240)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## [1] 2
+## [1] 8
 {% endhighlight %}
 
 Then we can use a function called `replicate()` to call this function many times with the same arguments. Each time it runs it will choose a different random sample from the population, so we will get different results. Let's run it  10 times for now, then calculate the estimated population sizes for each sample using our `recapturePopSize()` function. Notice that this function works just as we might have hoped when we give it a vector rather than a single value, even though we didn't do anything special when we wrote it. 
 
 {% highlight r %}
-sim_recaptures <- replicate(10, simRecapture(3000, 50, 150))
+sim_recaptures <- replicate(10, simRecapture(3000, 100, 240))
 sim_recaptures
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##  [1] 3 3 4 4 3 0 1 1 4 1
+##  [1]  7 10  6  3 11  6  7  4  6  4
 {% endhighlight %}
 
 
 
 {% highlight r %}
-recapturePopSize(50, 150, sim_recaptures)
+recapturePopSize(100, 240, sim_recaptures)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##  [1] 2500 2500 1875 1875 2500  Inf 7500 7500 1875 7500
+##  [1] 3429 2400 4000 8000 2182 4000 3429 6000 4000 6000
 {% endhighlight %}
 
 
@@ -143,14 +143,14 @@ To draw randomly from this distribution in `R`, we use the `rhyper()` function (
 To create a set of 10 samples with this function which is equivalent to the functions above, we would do the following:
 
 {% highlight r %}
-sim_recaptured <- rhyper(nn = 10, m = 50, n = 2950, k = 150)
+sim_recaptured <- rhyper(nn = 10, m = 100, n = 2900, k = 240)
 sim_recaptured
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##  [1] 4 5 3 4 1 1 5 2 0 1
+##  [1] 11  5  7  6 12 12 11  7  5 13
 {% endhighlight %}
 
 
@@ -168,18 +168,18 @@ simRecapture2<- function(popsize, first, second, reps = 1){
                     pop_est)
          )
 }
-simRecapture2(3000, 50, 150, reps = 5)
+simRecapture2(3000, 100, 240, reps = 5)
 {% endhighlight %}
 
 
 
 {% highlight text %}
 ##   popsize first second recaught pop_est
-## 1    3000    50    150        3    2500
-## 2    3000    50    150        4    1875
-## 3    3000    50    150        0     Inf
-## 4    3000    50    150        0     Inf
-## 5    3000    50    150        3    2500
+## 1    3000   100    240        7    3429
+## 2    3000   100    240        7    3429
+## 3    3000   100    240        8    3000
+## 4    3000   100    240        8    3000
+## 5    3000   100    240       14    1714
 {% endhighlight %}
 
 
@@ -187,26 +187,24 @@ simRecapture2(3000, 50, 150, reps = 5)
 It turns out that this simple estimate of the population size is somewhat biased. This is perhaps easiest to see if you think about the case when you don't capture any marked individuals (you may have some of those in the data you simulated). Then $R = 0$, and the population is estimated to be of infinite size, which is never a good thing. A somewhat better estimator is the **Schnabel** method: 
 $$\hat{N} = \frac{(M+1)(C+1)}{R+1} - 1 $$
 
-{: .problem}
 Write a function to estimate the number of individuals in the population using the Schnabel method.  
-**a.**  Using as the true population size the number of lizards you estimated were in the box, simulate 1000 experiments where you capture 100 individuals in the first trapping and 100 in the second. Be sure to store the data from these (and the following) simulations, as you will need to use them for later problems as well. Generate a histogram of the estimated population sizes that you calculated with the Schnabel method.  
-**b.**  How do your results change if you captured 150 individuals in the first trapping? What about if you caught 150 in the second (and 50 in the first)? It may be helpful to combine all of your results into a single data frame, and use `ggplot2`/`qlot()` to make all of the histograms together.  
+**a.**  Using as the true population size the number of lizards you estimated were in the box, simulate 1000 experiments where you capture 170 individuals in the first trapping and 170 in the second. Be sure to store the data from these (and the following) simulations, as you will need to use them for later problems as well. Generate a histogram of the estimated population sizes that you calculated with the Schnabel method.  
+**b.**  How do your results change if you captured 200 individuals in the first trapping? What about if you caught 200 in the second (and 140 in the first)? It may be helpful to combine all of your results into a single data frame, and use `ggplot2`/`qlot()` to make all of the histograms together.  
 **c.**  For each of the three experimental designs above, calculate the mean squared error of the Schnabel estimate ($\mathrm{MSE} = \frac{\sum(\hat{N}_i - N)^2}{n}$, where $\hat{N}_i$ is your estimate from the each simulation, $N$ is the population size you simulated, and $n$ is the number of simulations. Which gave the best estimate of the actual population size? Do you think it is better to put more effort into your first or second sample?  
-
+{: .question}
 
 ### Back to Experimental Design
 Using your results from the above simulations, and any more simulations you might want to do (recording all of your results!), decide as a class what sampling scheme we should use. What should we do to get the most accurate results?
 
 ## Capturing Lizards
-Now that the class has agreed on the sampling scheme, lets do it! Each of you will come up and "catch" some lizards, marking each with a single dot on its belly. If we were doing a real experiment, we would be remiss not to take some measurements of the lizards. Measurements on toy lizards are a bit silly, but do record how many of each color you capture. After all of the lizards are marked, we will throw them back in the box and mix thoroughly. Then you can catch the second sample, again recording how many of each color were caught, and how many were marked (by color and total). *Do not return these lizards to the box.* We will keep them for later experiments.
+Now that the class has agreed on the sampling scheme, lets do it! Each of you will come up and "catch" some lizards, marking each with a stripe on its tail. If we were doing a real experiment, we would be remiss not to take some measurements of the lizards. Measurements on toy lizards are a bit silly, but do record how many of each color you capture. After all of the lizards are marked, we will throw them back in the box and mix thoroughly. Then you can catch the second sample, again recording how many of each color were caught, and how many were marked with tail stripes (by color and total). *Do not return these lizards to the box.* We will keep them for later experiments.
 
-{: .problem}
 Estimate the following quantities from the pooled class data:  
 **a.** The total number of lizards in the box.  
 **b.** The number of lizards of each color in the box.  
 **c.** The proportion of lizards that are each color.  
 **d.** There are at least two ways to do the second two calculations. Which do you think is more accurate? If you are motivated, design and perform some simulations to test your intuition.
-
+{: .question}
 
 ## Next
 Now that we have an initial estimate of the lizard population, we need to think about how confident we are in that estimate, and ways we might improve our estimate. 
