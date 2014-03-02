@@ -1,0 +1,225 @@
+---
+layout: Rmd
+title: Working with Data Frames
+pretitle: Biol B215
+parent: index.html
+tags: [R, tutorial, RStudio, BiolB215]
+nav: teaching
+---
+
+```{r setup, include=FALSE, cache=FALSE}
+source("../../_knitr/knit_jekyll_setup.R")
+opts_chunk$set(fig.path="plots/dataframes-", tidy=FALSE, fig.width=5, fig.height=5, cache=TRUE)
+```
+
+## Introduction
+Data frames are one of the most useful ways of organizing and storing data in `R`, and they are the format we will probably use most often. A data frame can be thought of like a spreadsheet. The data is arranged in rows and columns, where each row is a set of related data points (measurements from an individual, for example), and the columns are the different types of data that we collected (height, weight, eye color, etc.). This format makes it easy keep all related data together, while making it convenient to select subsets of the data for later analysis.
+
+## Constructing data frames
+If you already have some data stored as vectors, you can put them together into a data frame using the `data.frame()` command. This will create a table with the names of the vectors as the column names. 
+
+```{r dataframe}
+x = c("apple", "banana", "cherry")
+y = c("red", "yellow", "red")
+z = c(180, 120, 8) 
+my_df <- data.frame(x, y, z)
+my_df
+```
+If you want to specify the column names as something different from the vector name, you can do that within the call to data.frame, using single equal signs: the column name you want on the left, the data you want it to contain on the right.
+```{r namedframe}
+my_df <- data.frame(fruit = x, 
+                    color = y, 
+                    grams = z)
+my_df
+```
+
+You can also look at the data frame in **RStudio** by clicking on it in the "Workspace" tab (it will be listed under "Data"). A tab will open in the upper left pane with the contents displayed in a neat table. Note that you can not edit the data there, only view it.
+
+## Selecting from a data frame
+
+There are a number of ways to select subsets of data from a data frame. The first is to use the selection brackets, just as we did for vectors. The only difference is that we are now dealing with two dimensional data, so we have to specify both which row(s) and which column(s) we want, separated by a comma (rows first, then columns). If you want all rows or columns, you can leave the space before or after the comma, respectively, blank. For the columns, you can also give a vector of the column names that you want to select.
+
+```{r df_selection}
+my_df[2, 3]
+my_df[2, ]
+my_df[ , c(TRUE, FALSE, FALSE)]
+my_df[1 , c("fruit", "grams")]
+```
+
+Often we want just a single column from the data frame, so there is a nice shorthand for that: the data frame followed by `$` and the column name you want:
+
+```{r df_dollar}
+my_df$color
+```
+
+Another thing that we commonly want to do is to select rows based on some of the data in the data frame. We could do this with brackets and the dollar sign operator, but it can start to get unweildy, especially if you want to select on more than one aspect of the data at the same time (and I can't tell you how many times I have gotten into trouble  for forgetting the comma). Just for illustration, I am going to 
+```{r subset_ugly}
+my_df[my_df$grams > 10, ]
+my_df[my_df$grams > 10 & my_df$color == "red", ]
+```
+
+Luckliy, there is a much more convenient way of selecting rows in a situation like this: the `subset()` command. The first argument to `subset()` is the data frame we want to select from, and the second argument is the condition that we want the selected rows to to satisfy. What is especially convenient here is that we don't have to retype the name of the data frame every time we want to use a different column, just the names of the columns is sufficient.
+```{r subset}
+subset(my_df, grams > 10 & color =="red")
+```
+
+### A note on strings and factors
+You may have noticed that while we put a vector of strings into our data frame for fruit names and colors, what came out was not a vector of strings, but a factor. This is sometimes what you want, but not always. If you want to keep strings as strings, you can add one more argument to `data.frame()` *after* you specify all of the columns: `stringsAsFactors = FALSE`. If you want to, you can then convert individual rows to factors as I have done below, or you could create the data frame with explicitly described factors using `factor()`.
+
+```{r}
+my_df <- data.frame(fruit = x, color = y , grams = z,
+                    stringsAsFactors = FALSE)
+my_df$color
+my_df$color <- as.factor(my_df$color)
+my_df$color
+```
+
+
+## Adding to a data frame
+You can join two data frames with the same kinds of columns together using `rbind()` (row bind), and you can add columns (or data frames with the same number of rows) with `cbind()` (column bind), or by naming a new column that doesn't yet exist.
+
+```{r}
+my_df2 <- data.frame(fruit = c("blueberry", "grape", "orange"),
+                     color = c("blue", "purple", "orange"),
+                     grams = c(0.5, 2, 140),
+                     stringsAsFactors = FALSE)
+fruits <- rbind(my_df, my_df2)
+n_per_kg <- 1000 / fruits$grams 
+fruits <- cbind(fruits, n_per_kg) 
+fruits
+fruits$peel <- c(FALSE, TRUE, FALSE, FALSE, FALSE, TRUE)
+fruits
+```
+
+
+
+## Manipulating Data
+Once you have your data in a data frame, it is time to start characterizing and describing it. There are a number of special functions you can use to make all of this easier, and I will go over some of those now. But first, we need some data to work with. The data we will use this time is measurements from rock crabs of the species *Leptograpsus variegatus* which were collected in Western Australia. This data set is not built into `R`, but it is part of one of the libraries that comes with `R`. Libraries (also called packages) are sets of functions and/or datasets that have been made available by their authors to extend the functionality of `R`, often to perform new kinds of statistical analysis. Most of the time you will have to install a library before you use it, but in this case we will be using the `MASS` library, which comes with the base distribution of `R`. (MASS stands for *Modern and Applied Statistics with S* by Venables and Ripley, which was one of the first decent books available about `R`, or really about `S`, which was the non-open-source progenitor to `R` developed at Bell Labs. The `MASS` library includes a number of functions and datasets that were used in that book.)
+
+```{r}
+library(MASS)
+data(crabs)
+str(crabs)
+```
+
+The `str()` command tells us the structure of data in a variable, and in this case it is telling us that `crabs` is a data frame with 200 rows (obs.) and 8 variables (columns), but the names are a bit cryptic. To see what each stands for, you should look using `help(crabs)`. Leaving aside for the moment what each variable stands for, you can get a very nice quick summary of the data overall using the function `summary()`:
+
+```{r}
+summary(crabs)
+```
+
+All that is nice, but it doesn't really tell us too much, since what we really might want to know about this data is how the different kinds of crabs compare to each other. We have males and females, blue and orange crabs, so we should see if we can look at just one kind at a time. Lets look at the blue females first; we can select rows from the data frame by testing which rows have `sp == "B"` and `sex == "F"`. Notice the double equals sign. This is the test for equality, as distinct from the single equal sign that you can use for assigning a value to a variable or function argument. We will also use the ampersand, `&`, to combine the two tests. Make sure you include the comma at the end; that indicates we are selecting the data by row. Then we will calculate the mean and standard deviation of frontal lobe size (`FL`) for the female, blue crabs.
+
+```{r}
+blue_females <- subset(crabs, sp == "B" & sex == "F")
+mean(blue_females$FL)
+sd(blue_females$FL)
+```
+
+
+{: .problem}
+If you were trying to put all the crabs in a storage cage that had a hole size of 25 mm, you might expect that any crabs with a carapace length (CL) smaller than the holes would be able to escape (since they move sideways).  
+**a.**  Create a histogram showing the size distribution of the crabs that you would expect to stay in the cage (measured by carapace length). Be sure to label your plot completely, including the total number of crabs that remain.  
+**b.**  What proportion of crabs remaining in your cage would be female? What proportion would be orange?  
+**c.**  What is the median body depth of the female, blue crabs that you would expect to escape? 
+
+
+## Working with multiple subsets simultaneously
+Doing these calculations separately for each possible grouping of variables can be a bit tiresome, and if you wanted to a caculate statistic of the measurement variables (other than the ones that summary gave us), you would start to get a bit annoyed with typing the same thing over and over. Since this is an extremely common task, `R` has a variety of ways to help you do repetitive calculations like this more efficiently. The built-in functions are those in the "apply" family, so named because they allow you to apply any function to multiple subsets of your data at the same time. For example, you might want to calculate the median of every column of a data frame, or the mean of some measurement for each species of crab. Unfortunately, the built-in versions of these functions (eg. `apply()`, `sapply()`, `lapply()`, `tapply()`) are a bit quirky, so I tend not to use them. You should feel free to explore them on your own, but I almost never use them anymore. Instead, I use a set of replacement functions written by the same person who wrote `ggplot2`: Hadley Wickham. When you installed `ggplot2`, those functions should also have been installed as the `plyr` package. (If they are not actually installed for some reason, you will need to use `install.packages("plyr")` to get them.)
+
+### ddply and summarize
+The most common function we will use is `ddply()`, which applys functions to data frames and returns the results as a new data frame. A simple example of its use is to find out how many rows are in each subset of the data, taking advantage of the function `nrow()`. To do this with ddply, you need to give it three arguments: `.data`, `.variables`, and `.fun`, which are your data frame, the variables you want to split by, and the name of the function you want to apply, respectively. 
+
+
+```{r plyr1}
+library(plyr) #load the package
+ddply(.data = crabs, .variables = c("sp", "sex"), .fun = nrow)
+```
+
+As you can see, this makes a new data frame with the variables you split by in the first two columns, and the result of the calculation in the third. We can actually apply more than one function at a time, by giving `.fun` a vector of function names, and each result will be put in its own column of the resulting data frame. (By quoting them, we actually get the columns to be named for the function, instead of `V1` as before.)
+
+```{r plyr2}
+ddply(.data = crabs, .variables = c("sp", "sex"), .fun = c("nrow", "ncol"))
+```
+
+Counting rows and columns is not exactly the most useful thing we could do with this data. What we really wanted to do was to calculate statistics on subsets of the data, and one of the easiest ways to do that is to take advantage of a function called `summarize()` (or `summarise()` if you are not North American), which works in some ways very much like the `subset()` function we discussed earlier as way to save a lot of typing. It can also be thought of as a more flexible form of the `summary()` function we used earlier. `summarize()` takes as its arguments a data frame and any number of functions that you might want to calculate from the columns of the data frame. Like with the data frame itself we can name the results of those functions whatever we want. So if we wanted to calculate the mean of `FL` and the minimum of `RW`, we could do that as follows.
+```{r summarize}
+summarize(crabs, meanFL = mean(FL), minRW = min(RW))
+```
+To use this with `ddply()`, you specify `summarize` as the `.fun` argument. ddply will automatically fill in the first argument (the data) with each of the subsets of the original data frame. Then we give the statistics we want to calculate as additional arguments to `ddply()`, just as they were with the raw call to summarize. `ddply()` will use them for each of the calls to `summarize()` that it makes. (Notice that you can leave off the names of the first arguments, as long as you present them in order. I could actually have left off `.fun` as well, but kept it for clarity.)
+```{r ddsummarize}
+ddply(crabs, c("sp", "sex"), 
+      .fun = summarize,
+      meanFL = mean(FL), # passed along to summarize()
+      minRW = min(RW)
+      )
+```
+The functions that you pass in to summarize don't have to be as simple as the ones I just showed; you could calculate the 80% quantile of the difference between the square root of the carapace width and frontal lobe cubed, though I doubt you would want to. The only limitation is that each of the functions should return a single value, or you will get an error.
+
+{: .problem}
+**a.** Calculate the mean, and variance, and standard error for each of carapace length, carapace width, and the difference between width and length for each of the species/sex combinations.  
+**b.**  Which species tends to be larger (by these measures)? Which sex?  
+**c.**  What can you tell about the relationship between carapace length and carapace width by comparing the variances of each of those quantities to the variance of their difference? 
+
+
+```{r solution2, include = F}
+ddply(crabs, c("sp", "sex"), 
+      .fun = summarize,
+      meanCW = mean(CW),
+      meanCL = mean(CL),
+      meanDiff = mean(CW-CL),
+      varCW = var(CW),
+      varCL = var(CL),
+      varDiff = var(CW-CL),
+      seCW = sd(CW)/sqrt(length(CW)),
+      seCL = sd(CL)/sqrt(length(CL)),
+      seDiff = sd(CW-CL)/sqrt(length(CW-CL))
+      )
+```
+
+## Plotting from data frames
+
+Once we have our data arranged nicely in a data frame, it is easy to use it in plots, and to take advantage of some of the fancier features `ggplot2`. We don't need to separate out the individual vectors, as we had done before; if we include a `data` argument in `qplot()`, it will use only the data in our data frame. In particular, we can take advantage of "faceting", the ability to make multiple small plots with the same axes, which makes comparison across groups easier. I'll just present some examples here to give you a bit of inspiration.
+
+```{r qplots, message=FALSE, fig.width = 6, fig.height = 6}
+# rename the factor levels and column names
+# so they are more understandable in the plot legend
+crabs$Sex <- crabs$sex # make a new column to be safe
+levels(crabs$Sex) <- c("Female", "Male") # be careful to get these in the same order!
+crabs$Species <- crabs$sp 
+levels(crabs$Species) <- c("Blue", "Orange")
+
+library(ggplot2)
+qplot(data = crabs, x = CW,
+      binwidth = 5,
+      facets = Sex ~ Species,
+      fill = Species,
+      xlab = "carapace width (mm)"
+      ) +
+  theme(legend.position = "none") + # hide the redundant legend
+  scale_fill_manual(values = c("blue", "orange")) #choose logical colors, rather than using defaults
+
+qplot(data = crabs, 
+      x = Sex, y = FL,
+      geom = "boxplot",
+      facets = . ~ Species,
+      fill = Species, alpha = I(0.8),
+      xlab = "",
+      ylab = "frontal lobe width (mm)"
+      ) +
+  theme(legend.position = "none") + 
+  scale_fill_manual(values = c("blue", "orange"))
+```
+```{r qplot_scatter, message=FALSE, fig.width = 7, fig.height = 6}
+qplot(data = crabs, 
+      x = RW, y = BD,
+      geom = c("point", "smooth"),
+      color = Species,
+      shape = Sex,
+      linetype = Sex,
+      xlab = "rear width (mm)",
+      ylab = "body depth (mm)"
+      ) +
+  scale_color_manual(values = c("blue", "orange")) 
+```
+

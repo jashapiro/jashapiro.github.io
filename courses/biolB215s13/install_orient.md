@@ -4,6 +4,7 @@ title: "R & RStudio: Installation & Orientation"
 pretitle: Biol B215
 parent: index.html#tutorials
 tags: [R, tutorial, RStudio]
+nav: teaching
 ---
 
 

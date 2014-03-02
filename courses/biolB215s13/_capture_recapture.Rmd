@@ -4,6 +4,7 @@ title: "Capture Recapture Lab"
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
+nav: teaching
 ---
 
 
@@ -28,7 +29,7 @@ But first, have a look in the box. Without touching the lizards or talking to cl
 
 
 ## Designing a sampling strategy
-Clearly, the more individuals captured in each phase of a capture-recapture experiment, the better your estimates of the population size will be, but we can't just expect unlimited resources for sampling.  There are always limits on the number of individuals you can capture, whether because of license limitations, time constraints, or simply the effort required to process each animal captured. With our docile toy lizards, we could just "catch" all of them and go to work counting, but I'm not going to let you do that. I am imposing a total class budget of **200** lizard captures, split however you like between the first and second "trappings". 
+Clearly, the more individuals captured in each phase of a capture-recapture experiment, the better your estimates of the population size will be, but we can't just expect unlimited resources for sampling.  There are always limits on the number of individuals you can capture, whether because of license limitations, time constraints, or simply the effort required to process each animal captured. With our docile toy lizards, we could just "catch" all of them and go to work counting, but I'm not going to let you do that. I am imposing a total class budget of **340** lizard captures, split however you like between the first and second "trappings". 
 
 Since we only have one set of lizards, we will have to decide as a class what the best way to divide our effort to sample the lizards is. Take some time to discuss your thoughts with those around you, then we will talk about it as a group. We don't have to make a final decision quite yet, but we should have some ideas about *how* we would make this decision.
 

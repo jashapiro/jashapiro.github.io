@@ -1,0 +1,11 @@
+@import "../_bootstrap/less/bootstrap.less";
+@import "variables.less";
+@import "custom.less";
+@import "../_bootstrap/less/utilities.less";
+
+//eliminate links in printed versions
+@media print {
+  a[href]:after {
+    content: none;
+  }
+}

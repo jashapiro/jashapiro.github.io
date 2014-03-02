@@ -1,0 +1,171 @@
+/*********
+a couple of color references
+Bryn Mawr Grey: #646e7d
+Bryn Mawr Yellow: #fff0be
+Bryn Mawr Cool Grey: #bebebe
+BMC Cyan: #00aaf0
+BMC class yellow: #ffe60f
+BMC class green: #00a58c
+BMC class Red: #f04137
+BMC class Blue: #005596
+tardis blue (pantone 2955C): #003B6F;
+international klein blue (via wikipedia): #002FA7 rgba(0,48,166)
+slate grey: #747C95
+*********/
+
+
+/* Basic customization
+------------------------------------------------- */
+
+.page-header{
+  margin: 23px 0;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  background-color: #f5f5f5
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by min footer height */
+  padding: 0 0 60px;
+  background-color: #ffffff;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+
+
+#wrap > .container {
+  padding: 0 15px;
+}
+.container .credit {
+  margin: 20px 0;
+  font-size: 80%;
+}
+#footer > .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Figure Formatting
+---------------------------------------------------- */
+img.centered{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+figure {
+  border-radius: 1em;
+  border: 1px solid #bebebe;
+  display: table;
+  padding:0.5em;
+  margin: 0.5em 1em;
+  width: 200px; /*makes this shrink to figure size*/
+}
+figure img{
+  display: table-row;
+  margin:0px;
+  margin-bottom: 8px;
+}
+figcaption {
+  display: table-row;
+  font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+  font-size: 80%;
+  line-height: 1.1;
+  text-align: justify;
+}
+
+figure.pull-right {
+	margin-right: 0;
+}
+
+figure.pull-left {
+	margin-left: 0;
+}
+
+/* Drop figure pulling in narrow format */
+@media (max-width: 767px) {
+	figure.pull-right {
+		float: none;
+		margin:	0.5em auto;
+	}
+
+	figure.pull-left {
+		float: none;
+		margin:	0.5 em auto;
+	}
+}
+
+/* Code formatting 
+------------------------------------------------*/
+code, pre {
+  font-family: 'Source Code Pro', monospace;
+  color: #646e7d;
+  background-color: transparent;
+  border: none;
+  font-size: 90%;
+  font-weight: 400;
+  margin: 0;
+}
+
+.highlight{
+	background-color: #efefef;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	padding: 5px 10px;
+	word-wrap: normal;
+    white-space: pre;
+    overflow: auto;
+}
+
+.highlight pre, .highlight code {
+	word-wrap: normal;
+	white-space: pre;
+    overflow: auto;
+} 
+
+
+.r_highlight{
+}
+
+.text_highlight{
+	background-color: #fff0be;
+	margin-top: -10px;
+}
+
+
+/* Special classes
+---------------------------------------*/
+.file-link{
+  color: #646e7d;
+  font-size: 70%;
+  font-style: normal;
+  font-weight: 400;
+  padding-left: 10px;
+}
+.file-link:before {
+  content: "[";
+}
+.file-link:after {
+  content: "]";
+}
+
+

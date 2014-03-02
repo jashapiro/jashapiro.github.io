@@ -2,6 +2,7 @@
 layout: page
 title: Experimental Design and Statistics
 pretitle: Biol B215
+nav: teaching
 ---
 
 <blockquote>Statistics is applied philosophy of science.

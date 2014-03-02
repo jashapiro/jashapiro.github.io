@@ -1,8 +1,27 @@
-<nav id="site_nav">
-	<ul>
-		<li><a href="/research">research</a></li>
-		<li><a href="/teaching">teaching</a></li>
-		<!-- <li><a href="/labnotes/">lab notes</a></li> -->
-		<li><a href="/cv">curriculum<br> vitae</a></li>
-  </ul>
-</nav>
+<div id="site_nav" class="navbar navbar-default navbar-static-top", role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="/">shapbio.me</a>
+  </div> <!--/.nav-header -->
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+    	<li {% if page.nav == 'research' %}class = 'active'{% endif %}>
+    		<a href="/research">research</a>
+    	</li>
+    	<li> <li {% if page.nav == 'teaching' %}class = 'active'{% endif %}>
+    		<a href="/teaching">teaching</a>
+    	</li>
+    	<!-- 
+    	<li {% if page.nav == 'labnotes' %}class = 'active'{% endif %}>
+    		<a href="/labnotes/">lab notes</a>
+    	</li> -->
+    	<li {% if page.nav == 'people' %}class = 'active'{% endif %}>
+    		<a href="/people">people</a>
+    	</li>
+    </ul>
+  </div><!--/.nav-collapse -->
+</div>

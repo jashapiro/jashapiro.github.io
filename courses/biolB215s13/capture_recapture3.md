@@ -4,6 +4,7 @@ title: "Recapture: Error & Likelihood"
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
+nav: teaching
 ---
 
 [back to Calculations & Simulations](capture_recapture2.html)

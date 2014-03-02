@@ -1,0 +1,22 @@
+@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro:400,700");
+
+
+/* Numbered Questions */
+body{
+	counter-reset: P; /* create question counter */
+}
+
+.problem {
+	margin: 19px;
+	padding: 5px 9px;
+	background-color: @bmc-cyan;
+	border-color: @bmc-blue;
+	border-left: 2px solid ;
+}
+
+.problem:before {
+  font-weight: bold;
+  font-variant: small-caps;
+  content: "Problem " counter(P) ": "; 	/* Print the H1 number */
+  counter-increment: P; 	/* Add 1 to next H1 */
+}
