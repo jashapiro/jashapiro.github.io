@@ -62,7 +62,7 @@ Create a new version of the `abalone` data frame called `logabalone` where you t
 ## Building linear models
 When you looked at the correlation coefficients, you should have noted that the measurement most highly correlated with age is the dry shell weight. Since we are using the number of rings in the shell as a measure of the age, it should not be too surprising that a shell measurement is our best correlate with age. Unfortunatley, getting a dry shell measurement requires killing the abalone, so that is not ideal. The best live measurement seems to be the height of the abalone, so that is what we will work with.
 
-Recall that we can build linear models (regression models) using the `lm()` function, and then examine the results with the `summary()` function. We can also plot the data using `qplot()`, adding on the results from a linear model by using the `geom_smooth()` function, much like we did with `geom_abline()`. By default, `stat_smooth()` draws a smoothed curve through the data, but we can tell it to plot the results of a simple linear model by setting `method = lm`.  (We could actually use `geom_abline()` as before, but we would have to extract the fit of the model, or enter it by hand... ugh.) If you look closely, you can see that `ggplot2` automatically adds in the confidence ranbandge on the fit line as a faint grey band. It is pretty narrow in this case because of all of the data we have.
+Recall that we can build linear models (regression models) using the `lm()` function, and then examine the results with the `summary()` function. We can also plot the data using `qplot()`, adding on the results from a linear model by using the `geom_smooth()` function, much like we did with `geom_abline()`. By default, `stat_smooth()` draws a smoothed curve through the data, but we can tell it to plot the results of a simple linear model by setting `method = lm`.  (We could actually use `geom_abline()` as before, but we would have to extract the fit of the model, or enter it by hand... ugh.) If you look closely, you can see that `ggplot2` automatically adds in a confidence range on the fit line as a faint grey band. It is pretty narrow in this case because the large amount of data we have gives us a pretty small overall error rate.
 
 
 {% highlight r %}
@@ -147,7 +147,7 @@ age_predicted <- 10^(fitted(lm_logheight))
 **b.** Plot the predicted vs. actual values for both the normal and log-scale predictions.  
 **c.** What are the mean *absolute* errors for the normal and log-scale predictions?  
 **d.** Which method of estimating age from height (normal or log) do you think gives better results? Why?  
-**e.** What happens if you try to use the log of height to predict age (unlogged)? Is that better than predicting log(age) from log(height)? 
+**e.** What happens if you try to use the log of height to predict age (unlogged)? Is that better than predicting log(age) from log(height)?  
 **f.** Which abalone measurement gives the best overall prediction of age (aside from rings)? Regular or log?
 {: .question}
 

@@ -91,14 +91,14 @@ One thing we might want to know from this is what the most probable value is for
 
 
 {% highlight r %}
-posterior[which.max(posterior$post_prob), ]
+posterior[which.max(posterior$prob), ]
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## [1] N    prob
-## <0 rows> (or 0-length row.names)
+##         N      prob
+## 1801 2000 0.0003756
 {% endhighlight %}
 
 

@@ -21,7 +21,7 @@ You calculated the true error for your simulation runs last time when you looked
 It is possible to calculate the standard deviation of the estimate of population size using frequentist statistics. We won't derive this equation, but it is a reasonable place to start:
 $$\mathrm{SE}(N) = \sqrt{\frac{(M+1)(C+1)(M-R)(C-R)}{(R+1)(R+1)(R+2)}}$$
 
-Using the standard approximation of the 95% confidence interval as $\overline{N} \pm 1.96 \cdot \mathrm{SE}(N)$ it is possible calculate the confidence intervals for the previous simulations.
+Using the standard approximation of the 95% confidence interval as $\hat{N} \pm 1.96 \cdot \mathrm{SE}(N)$ it is possible calculate the confidence intervals for the previous simulations.
 
 Write a function to calculate the standard error and 95% confidence intervals from a capture-recapture experiment using the numbers of individuals captured in the first and second trappings and number of marked (recaptured) individuals in the second trapping.  
 **a.**  Calculate the standard error and a 95% confidence interval for your estimate of the number of lizards in the box.  
