@@ -74,7 +74,7 @@ posterior <- calcPosterior(marked = 5, 100, 100, prior)
 # with an extra column to identify the two distributions.
 plotdata <- rbind( cbind(prior, dist = "Prior"),
                    cbind(posterior, dist = "Posterior") )
-
+require(ggplot2)
 qplot(data = plotdata,
       x = N, y = prob, 
       color = dist,

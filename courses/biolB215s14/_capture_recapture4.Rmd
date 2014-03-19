@@ -13,6 +13,7 @@ nav: teaching
 source("../../_knitr/knit_jekyll_setup.R")
 opts_chunk$set(fig.path="plots/capture_recapture4-", tidy=FALSE, fig.width=6.5, fig.height=5, cache=TRUE, cache.extra=rand_seed)
 set.seed(20130306)
+
 ```
 ## Bayesian Analysis
 To calculate Bayesian Credible Intervals, we will use, as you might have guessed, Bayes' Theorem. Stated for this context, it is:
@@ -72,7 +73,7 @@ posterior <- calcPosterior(marked = 5, 100, 100, prior)
 # with an extra column to identify the two distributions.
 plotdata <- rbind( cbind(prior, dist = "Prior"),
                    cbind(posterior, dist = "Posterior") )
-
+require(ggplot2)
 qplot(data = plotdata,
       x = N, y = prob, 
       color = dist,
