@@ -38,7 +38,7 @@ Using the standard approximation of the 95% confidence interval as $\hat{N} \pm 
 {: .problem-nonum}
 Write a function to calculate the standard error and 95% confidence intervals from a capture-recapture experiment using the numbers of individuals captured in the first and second trappings and number of marked (recaptured) individuals in the second trapping.  
 **a.**  Calculate the standard error and a 95% confidence interval for your estimate of the number of lizards in the box.  
-**b.**  Calculate the standard errors and confidence intervals for your previous simulations. Generate histograms of the minimum and maximum for each confidence intervals from  set of simulations where you captured 100 individuals each time.  
+**b.**  Calculate the standard errors and confidence intervals for your previous simulations. Generate histograms of the minimum and maximum for each confidence intervals from the the of simulations where you captured 100 individuals the first time.  
 **c.**  Do these confidence intervals make sense? Why or why not?  
 **d.**  What fraction of the time does your confidence interval include the true size of the population? Does this agree with what you know about confidence intervals?  
 
