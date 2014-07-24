@@ -29,10 +29,10 @@ To read the file, we will use the `read.csv()` command[^readtable], and store it
 [^readtable]: The `read.csv()` function is one of many functions in R that are part of the `read.table()` group. All of them read in simple text file tables with individual fields separated in various ways (tabs, spaces, commas, you name it). The base function `read.table()` is quite customizable; you can explore the various options available by looking at the help page in `R`. One particular note is that `R` will read text strings in as factors unless you tell it not to with the argument `stringsAsFactors = FALSE`. For these data, we wanted to leave male and female as factors, but if you have a column of things like sample names or DNA sequences, you might not want to do that. You can always convert a column from text to a factor later, as needed.
 
 
-```r
+{% highlight r %}
 library(plyr)
 abalone <- read.csv("abalone.csv")
-```
+{% endhighlight %}
 
 
 Look at the data. The column names are fairly informative in general, but some are not, so I have defined them below:
@@ -63,74 +63,69 @@ This is a big data set, so it is hard to get a sense of how it looks just by sca
 Start by loading the `ggplot2` library and making a histogram of the abalone weights using `qplot()`. 
 
 
-```r
+{% highlight r %}
 library(ggplot2)
-```
-
-```
-## Loading required package: methods
-```
-
-```r
 qplot(Whole, 
       data = abalone, 
       geom = "histogram")
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
-```
+{% endhighlight %}
 
-![plot of chunk weighthist](figure/weighthist.png) 
+![plot of chunk weighthist](plots/abalone_cleaning-weighthist.png) 
 
 Isn't that pretty? Sure, but it might not really be what we are interested in looking at, as it is a combination of all sexes. We might want to see if the different sexes had different distributions. So we would like to make separate plots for each sex. This is quite easy to do in `ggplot2`, with the `facets` argument, which takes an R formula, like the one we used for ANOVAs (and will shortly use for regressions). The left side of the tilde (`~`) tells what variable you want to separate the data by for vertically arranged panels and the right side tells what variable to separate by for horizonal panels. You can do both, but if you only want to do one, you use a period for the other axis, as shown below. (I also added in a `binwidth` argument, so `ggplot` will stop complaining... )
 
 
-```r
+{% highlight r %}
 library(ggplot2)
 qplot(Whole, 
       data = abalone, 
       geom = "histogram", 
       facets = Sex~., 
       binwidth = 20)
-```
+{% endhighlight %}
 
-![plot of chunk weighthistfacet](figure/weighthistfacet.png) 
+![plot of chunk weighthistfacet](plots/abalone_cleaning-weighthistfacet.png) 
 
 You will note that the labels for each panel are shown on the right side, and the ordering is by alphabetical order. We probably don't care too much, but it might be nice to make the @Sex@ column into an ordered factor, and we might as well make the labels nicer while we are at it. I do this below in one step, but it is worth checking that everything is correct before you replace the data in the data frame, lest you unwittingly create random errors.
 
 
-```r
+{% highlight r %}
 #make Sex and ordered factor
 abalone$Sex <- ordered(abalone$Sex, 
                        levels = c("I", "M", "F"), 
                        labels = c("Immature", "Male", "Female"))
 #redo the histogram
-```
+{% endhighlight %}
 
 We can also use `qplot()` to make boxplots, which may be a bit nicer for this application, as it is easier to see some of the critical points in the data than it was with the histograms. We do this by putting the weight on the Y axis, and separating by sex on the x axis. Change the `geom` to boxplot and there you have it. I also added in a bit of color with the `fill` argument, which is a bit redundant here, but why not. Notice how `qplot()` automatically turned the factor column into a reasonable color scheme.
 
 
-```r
+{% highlight r %}
 qplot(Sex, Whole, 
       data = abalone, 
       geom = "boxplot", 
       fill = Sex)
-```
+{% endhighlight %}
 
-![plot of chunk boxplots](figure/boxplots.png) 
+![plot of chunk boxplots](plots/abalone_cleaning-boxplots.png) 
 
 While we are playing around, one more plot... An alternative to the box plot that you occasionally see is the violin plot, which is sot of like a histogram thrown on its side. It is not quite as useful for quantification, but it can look pretty nifty and display aspects of the data that are not immediately obvious from the boxplots.
 
 
-```r
+{% highlight r %}
 qplot(Sex, Whole, 
       data = abalone, 
       geom = "violin", 
       fill = Sex)
-```
+{% endhighlight %}
 
-![plot of chunk violins](figure/violins.png) 
+![plot of chunk violins](plots/abalone_cleaning-violins.png) 
 
 
 {: .problem}
@@ -158,33 +153,33 @@ With a general picture of the data, and having removed some of the problematic d
 Scatter plots in `ggplot` are just as easy as with standard plotting, and possibly easier. As an example, here is a plot of the whole weight vs shucked weight, colored by sex. Notice how `ggplot` adds a nice legend, something that is really annoying to do in base `R`. 
 
 
-```r
+{% highlight r %}
 qplot(Whole, Shucked, 
       data = abalone, 
       color = Sex)
-```
+{% endhighlight %}
 
-![plot of chunk simplescatter](figure/simplescatter.png) 
+![plot of chunk simplescatter](plots/abalone_cleaning-simplescatter.png) 
 
 ### More cleaning
 That looks pretty nice, but do you notice anything strange about the data in the plot? Shucked weight is supposed to be the weight without the shell, so it seems more than a bit odd that there are some abalone that are heavier after removing the shell. Just to look at it a bit more clearly, I'll add a line to the plot. Recall that to add to a plot with `ggplot`, we literally add, with a `+`, to the plot command. In this case we will use`geom_abline`, which works like the `abline` in base R, to add a line with a slope of 1 and an intercept of 0 (the default).
 
 
-```r
+{% highlight r %}
 qplot(Whole, Shucked, 
       data = abalone, 
       color = Sex) +
   geom_abline(slope = 1)
-```
+{% endhighlight %}
 
-![plot of chunk scatter_ref](figure/scatter_ref.png) 
+![plot of chunk scatter_ref](plots/abalone_cleaning-scatter_ref.png) 
 
 The points above the line are almost certainly errors, and they could cause problems later on when we are fitting regression equations. Since we don't know if the whole weight or the shucked weight is correct, we will just remove those individuals completely.There are a couple of other points that look a bit odd, but lets leave those for now, as we don't have as clear a logical reason to think they are definitely wrong.
 
 
-```r
+{% highlight r %}
 abalone <- subset(abalone, Whole > Shucked)
-```
+{% endhighlight %}
 
 
 The shell weight of the abalone is measured after drying, wheras the whole weight and shucked weight are measured wet. We can calculate the wet weight of the shell then, by subtracting the shucked weight from the total. This should be greater than or equal to the dry shell weight in the data.  
@@ -200,14 +195,14 @@ If you did everything as I did, you should now have an abalone data frame with 4
 
 There is one more obviously bad point I want to get rid of, which you can see in the plot of length and height that appears below. 
 
-![plot of chunk shortfemaleplot](figure/shortfemaleplot.png) 
+![plot of chunk shortfemaleplot](plots/abalone_cleaning-shortfemaleplot.png) 
 
 The female with a length of 127 mm but a height of only 3 mm (in the lower right of the plot) seems like she must have been mismeasured somehow, so I will remove that single point as well.
 
 
-```r
+{% highlight r %}
 abalone <- subset(abalone, !(Sex == "Female" & Height == 3))
-```
+{% endhighlight %}
 
 A few quick questions about that plot of length and height that you just made. For now, ignore differences among the sexes.  
 **a.** Are length and height significantly correlated in abalone?  
@@ -222,9 +217,9 @@ So now, finally, you should have an abalone data frame with 4157 rows. Remember 
 If you made it to here, congratulations. Take a break. We will come back to this data next week. Just one more thing. Save your work. You don't want to have to do all this again, do you? You should have an R or Rmarkdown document with all of the (working) commands that you have run so far (you were keeping a record of your work, right?). Add to that one more command:
 
 
-```r
+{% highlight r %}
 save(abalone, file = "abalone_trimmed.Rdata")
-```
+{% endhighlight %}
 
 This will save just the abalone data frame in a native `R` format file, so that you can very quickly read it back in without worrying about whether `R` will  remember the ordered factors and such. If you accidentally modify the data frame later, you can reload it directly from the `.Rdata` file without having to repeat all of the data trimming and organization that you just went through.
 

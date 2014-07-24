@@ -50,18 +50,20 @@ We can calculate this probability using the `dhyper()` function. This takes the 
 
 So if we want to know the probability of catching 5 marked lizards among 50 lizards  in our second round of trapping, assuming the population size was 3000 and we marked 150 individuals on the first trapping, that would look like this:
 
-```r
+{% highlight r %}
 dhyper(x = 5, m = 150, n = 3000 - 150, k = 50)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## [1] 0.06545
-```
+{% endhighlight %}
 
 In fact, we could calculate it for a range of numbers of marked individuals, using the fact that `R` loves to work with vectors. We could go ahead and calculate the entire probability  distribution; the chance of catching 0, 1, 2, ... , 50 marked individuals in a sample of 50, which I have plotted for your edification. What you may not be able to see exactly, but should be aware of, is that the sum of these probabilities is equal to 1. Check this for yourself using `sum()`.
 
 
-```r
+{% highlight r %}
 #full probability distribution
 recaptured <- 0:50
 probs <- dhyper(recaptured, m = 150, n = 3000 - 150, k = 50)
@@ -73,14 +75,14 @@ qplot(x = recaptured, y = probs,
       main = "Recapture count probabilities\nN = 3000, 150 marked, 50 captured",
       xlab = "Number of marked individuals recaptured", 
       ylab = "Probability")
-```
+{% endhighlight %}
 
 ![plot of chunk probdist](plots/capture_recapture3-probdist.png) 
 
 Of course, for a given experiment, we only see one outcome; we capture one group of animals and see one number of marked individuals among them. What we want to know is what the chance is that we would have seen that number of marked individuals given some range of population sizes. Again, this is the *likelihood* of the data given a particular parameter value. `R` is happy enough to calculate `dhyper()` for a variety of population sizes as well, and we can generate a plot of the likelihood of observing 5 marked individuals given a variety of total population sizes. 
 
 
-```r
+{% highlight r %}
 popsize <- 200:5000
 likes <- dhyper(5, m = 150, n = popsize - 150, k = 50)
 qplot(x = popsize, y =  likes,
@@ -89,7 +91,7 @@ qplot(x = popsize, y =  likes,
       main = "Population size likelihoods\n150 initially marked; 5 of 50 recaught",
       xlab = "Population Size", 
       ylab = "Likelihood")
-```
+{% endhighlight %}
 
 ![plot of chunk likelihood](plots/capture_recapture3-likelihood.png) 
 

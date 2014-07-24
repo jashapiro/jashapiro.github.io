@@ -9,9 +9,8 @@ nav: teaching
 
 ```{r setup, include=FALSE, cache=FALSE}
 source("../../_knitr/knit_jekyll_setup.R")
-opts_chunk$set(fig.path="plots/basic_graphics-", tidy=FALSE, fig.width=5, fig.height=5, cache = TRUE)
+opts_chunk$set(fig.path="plots/basic_graphics-", tidy=FALSE, fig.width=5, fig.height=5, fig.align="center")
 ```
-
 
 ## Introduction
 One of the most important parts of data analysis is to visualize your data with plots and charts. To paraphrase Yogi Berra: You can see a lot by looking. `R` has lots of powerful tools for creating plots, and you can customize and polish your plots to easily generate graphics worthy of the best scientific paper. There are a number of libraries for making specialized plots and sets of plots, some of which we will explore later in the semester. But for now we will just work on plotting with the built-in graphics. You will see how to make histograms, bar charts, box plots, and scatter plots, and how to customize those plots.
@@ -291,6 +290,3 @@ qplot(x = Sepal.Width, y = Sepal.Length,
 Make one more plot to turn in. Use the iris data, and create a plot that illustrates something you find interesting about that data, then write a caption explaining what the plot shows. Make sure your plot is fully labelled. Extra points for using a feature of plotting in `R` that was not discussed on this page, either from base graphics or `ggplot2`. (Some suggestions: density plots, transparency, facets, varible point sizes, continuous color scales, fit lines, or smoothing curves). You may find the examples available at [ggplot2.org](http://ggplot2.org) to be helpful, especially the example chapter from the [ggplot2 book](http://ggplot2.org/book/): "Getting started with qplot" \[[PDF](http://ggplot2.org/book/qplot.pdf)\].
 
 
-```{r detach, include=FALSE, cache=FALSE}
-detach(iris)
-```

@@ -32,7 +32,7 @@ So that leaves us again with $\Pr(N=x)$, which is the prior probability that $N$
 With a prior probability set and the likelihood calculations done, we should be able to construct a function to calculate the posterior probability distribution of population size given the number of marked individuals that we caught on our second trapping trip. First we'll write a function to make the data frame of the population sizes we will look at (with a minimum as described above), and their prior probabilities, which will be the the same for all possible population sizes: a uniform prior. 
 
 
-```r
+{% highlight r %}
 makeUniformPrior <- function(max_N, first=1, second=1, recaught=0){
   # impossible to have a population size smaller than the 
   # total number captured in either run
@@ -40,12 +40,12 @@ makeUniformPrior <- function(max_N, first=1, second=1, recaught=0){
   prob <- 1/length(N)
   return(data.frame(N, prob))
 }
-```
+{% endhighlight %}
 
 Since we can calculate the all of the likelihoods we need as described above, we can go right on to calculating the posterior probabilities of each population size given the number of marked individuals, the number of individuals trapped each time, and the prior probabilities (with the prior given as a a data frame with columns named `N` and `prob`, as constructed above). 
 
 
-```r
+{% highlight r %}
 calcPosterior <- function(marked, first, second, prior){
   likelihoods <- dhyper(x = marked, 
                         m = first, 
@@ -56,13 +56,13 @@ calcPosterior <- function(marked, first, second, prior){
   posterior <- numerators/denominator
   return(data.frame(N = prior$N, prob = posterior))
 }
-```
+{% endhighlight %}
 
 
 Nowe we can construct a simple prior and calculate the posteriors, using the count data from our hypothetical experiment.
 
 
-```r
+{% highlight r %}
 prior <- makeUniformPrior(10000,100, 100)
 posterior <- calcPosterior(marked = 5, 100, 100, prior)
 
@@ -79,7 +79,7 @@ qplot(data = plotdata,
       xlab = "Population Size", 
       ylab = "Probability") +
   guides(color = guide_legend(title = "Distribution"))
-```
+{% endhighlight %}
 
 ![plot of chunk priorplot](plots/capture_recapture4-priorplot.png) 
 
@@ -87,20 +87,22 @@ qplot(data = plotdata,
 One thing we might want to know from this is what the most probable value is for the population size. One way to do this is to use the function `which.max()` to get the index of the largest of the probability values from the posterior distribution, selecting the whole row from data frame.
 
 
-```r
+{% highlight r %}
 posterior[which.max(posterior$prob), ]
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ##         N      prob
 ## 1801 2000 0.0003756
-```
+{% endhighlight %}
 
 ### Calculating credible intervals
 This should give similar answers to the previous (frequentist) way of estimating the population size, but it is not necessarily unbiased in the same way, since it depends not just on the data but also the prior probability that we arbitrarily (but with some justification) assigned to the population size. More importantly, we can now calculate a Bayesian credible interval, the interval of the probability distribution that contains a given fraction (95%, for example) of the total probability. The easiest way to do this is to calculate the cumulative sums of the posterior probabilities, using the function `cumsum()`, then find the population size values that correspond to the ends of the interval we want. For example, if we wanted the 95% credible interval, we would be looking for where the cumulative probability crossed 0.025 and 0.975. Below is a function to do this, and also return the site with the maximum probability, and the midpoint of the probability distribution, where there is an approximately equal probability that the true population size is above or below that value.
 
 
-```r
+{% highlight r %}
 credIntN <- function(prN, range = 0.95){
   #get the max first
   max_prob <- prN$N[which.max(prN$prob)]
@@ -118,12 +120,12 @@ credIntN <- function(prN, range = 0.95){
   return (data.frame(max_p = max_prob, mid_p = mid_prob,
                     bayes_lower = low_bound, bayes_upper = high_bound))
 }
-```
+{% endhighlight %}
 
 Finally, with all of that we can make a nice tidy function that takes a set of values for the number of individuals caught in the first trapping (and then marked and released), the number caught in the second trapping, the number of the second set that were marked, and the maximum population size we are willing to consider (with a default of 100,000). The function will then construct the prior, calculate the posterior, and return the results of our Bayesian analysis, optionally including the full posterior distribution).
 
 
-```r
+{% highlight r %}
 bayesPopSize <- function(marked, first, second, 
                          max_N = 10^5,  return_post= F){
   input_frame <- data.frame(marked, first, second)
@@ -139,12 +141,14 @@ bayesPopSize <- function(marked, first, second,
 }
 
 bayesPopSize(marked = 5, first = 100, second = 100)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ##   marked first second max_p mid_p bayes_lower bayes_upper
 ## 1      5   100    100  2000  2687        1183        8819
-```
+{% endhighlight %}
 
 {: .problem-nonum}
 Using your lizard count data from class, calculate the posterior probability of the population size, using a uniform (flat) prior distribution with a maximum possible population size of 10,000 lizards.  

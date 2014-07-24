@@ -34,21 +34,27 @@ Open `RStudio` and look around.  When you open it for the first time, you will s
 On the left is the console. This is the main way that you interact with R, issuing commands and reading the results that they produce. You will see some text with information about the version of `R` that you are running as well as some extremely brief help. Below that is a blue carat, the command prompt. Give it a try by typing in some simple math:
 
 
-```r
+{% highlight r %}
 2 + 2
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## [1] 4
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 10 * 5 - 4 / 0.5
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## [1] 42
-```
+{% endhighlight %}
 
 
 
@@ -67,9 +73,9 @@ While the basic `R` program can do an immense amount of very powerful statstical
 
 The main method of installation is quite simple. Assuming you know the name of the package, you can  use the `install.packages()` command in the console. Installing the `plyr` package would be done as follows:
 
-```r
+{% highlight r %}
 install.packages("plyr")
-```
+{% endhighlight %}
 
 An alternative method in `RStudio` is to go to the "Packages" tab and click on the "Install Packages" button at the top of the tabe of currently installed packages. This will pop up a window in which you can type the names of the package(s) you want to install. 
 
@@ -79,14 +85,14 @@ For now, try installing the `plyr`, `ggplot2`, and `knitr` packages. We will be 
 
 Finally, we have the **Help** tab. Most `R` functions have an associated help file, and when you open it, it will appear in this tab. How do you open a help file? The easiest way is to simply type a question mark in front of the function name in the console.
 
-```r
+{% highlight r %}
 ?library
-```
+{% endhighlight %}
 You can also use the `help()` command to perform the same task:
 
-```r
+{% highlight r %}
 help(library)
-```
+{% endhighlight %}
 If you are not sure what the exact command you are looking for is, but you think you know some part of the command, you can use the `apropos()`  or `help.search()` commands to try to find the  function you are looking for.
 
 These help files, as you might be noting if you are looking at one now, are not always all that helpful. They may contain a lot of information, but it is not always easy to figure out what exactly each part means. As you become more familiar with `R`, they should become more comprehensible. For now, one of the most useful parts tends to be way at the bottom of the help file, where there is usually a set of examples using the function with different options. Trying these out and seeing what the results are can be quite informative. 
