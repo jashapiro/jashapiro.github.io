@@ -9,7 +9,7 @@ SOURCE = "."
 CONFIG = {
   'layouts' => File.join(SOURCE, "_layouts"),
   'posts' => File.join(SOURCE, "_posts"),
-  'post_ext' => "md"
+  'post_ext' => "markdown"
 }
 
 rmd_files = Rake::FileList.new("**/*.Rmd") do |fl|
@@ -51,17 +51,21 @@ end # task :post
 
 desc "Launch preview environment"
 task :preview do
-  system "jekyll --auto --server"
+  system "jekyll serve --watch"
 end # task :preview
 
 
 
 desc "compile markdown files"
-task :knit => :md
+task :knit => :markdown
 
 
-task :md => rmd_files.ext(".md").sub('/^_/', '')
-
-rule ".md" => ".Rmd" do |t|
-  sh "Rscript -e 'knitr::knit(\"_#{t.source}\", \"#{t.name}\")'"
+task :markdown => rmd_files.ext(".markdown")
+rule ".markdown" => ".Rmd" do |t|
+  basedir = Dir.getwd
+  Dir.chdir(File.dirname(t.source))
+  source = File.basename(t.source)
+  output = File.basename(t.name)
+  sh "Rscript -e 'knitr::knit(\"#{source}\", \"#{output}\")'"
+  Dir.chdir(basedir)
 end

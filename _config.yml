@@ -1,3 +1,6 @@
 pygments: true
 markdown: kramdown
 exclude: [Rakefile, shapbio.me.Rproj, Gemfile]
+markdown_ext: markdown
+kramdown:
+  input: GFM
