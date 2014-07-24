@@ -51,7 +51,7 @@ end # task :post
 
 desc "Launch preview environment"
 task :preview do
-  system "jekyll serve --watch"
+  system "bundle exec jekyll serve --watch"
 end # task :preview
 
 
