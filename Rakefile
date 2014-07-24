@@ -12,6 +12,11 @@ CONFIG = {
   'post_ext' => "md"
 }
 
+rmd_files = Rake::FileList.new("**/*.Rmd") do |fl|
+  fl.exclude(/^_.+\//) # exclude directories that start with "_"
+  fl.exclude(/^scratch\//)
+end
+
 # Usage: rake post title="A Title" [date="2012-02-09"]
 desc "Begin a new post in #{CONFIG['posts']}"
 task :post do
@@ -48,3 +53,15 @@ desc "Launch preview environment"
 task :preview do
   system "jekyll --auto --server"
 end # task :preview
+
+
+
+desc "compile markdown files"
+task :knit => :md
+
+
+task :md => rmd_files.ext(".md").sub('/^_/', '')
+
+rule ".md" => ".Rmd" do |t|
+  sh "Rscript -e 'knitr::knit(\"_#{t.source}\", \"#{t.name}\")'"
+end
