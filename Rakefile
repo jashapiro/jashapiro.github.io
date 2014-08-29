@@ -69,3 +69,10 @@ rule ".markdown" => ".Rmd" do |t|
   sh "Rscript -e 'knitr::knit(\"#{source}\", \"#{output}\")'"
   Dir.chdir(basedir)
 end
+
+desc "Rebuild Bootstrap-derived theme with lessc"
+task :bootstrap do
+  system "lessc _theme/shapbio.less _theme/bootstrap.css"
+  system "lessc --clean-css _theme/shapbio.less _theme/bootstrap.min.css"
+  system "cp _theme/bootstrap.* css/."
+end # task :lessc
