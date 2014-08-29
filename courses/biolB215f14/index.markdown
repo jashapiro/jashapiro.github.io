@@ -6,7 +6,7 @@ nav: teaching
 ---
 
 <blockquote>Statistics is applied philosophy of science.
-<cite><a href='http://www.statslab.cam.ac.uk/~apd/'>A. P. Dawid</a><br>(<a href="http://www.worldcat.org/title/statistics-a-very-short-introduction/oclc/216938494">Hand 2008</a>)</cite>
+<footer><cite><a href='http://www.statslab.cam.ac.uk/~apd/'>A. P. Dawid</a> (<a href="http://www.worldcat.org/title/statistics-a-very-short-introduction/oclc/216938494">Hand 2008</a>)</cite></footer>
 </blockquote>
 
 ## Overview & Goals {#overview}
@@ -29,33 +29,40 @@ We have learned huge amounts in biology by doing experiments which generate clea
 
 *[The Analysis of Biological Data][ws]* by M Whitlock and D Schluter
 
-also recommended: *[R Cookbook][rcook]* by P Teetor
+Also recommended:  
+*[R Cookbook][rcook]* by P Teetor  
+*[R Graphics Cookbook][rgraph]* by W Chang
 
-[ws]: http://www.roberts-publishers.com/authors/schluter-dolph/the-analysis-of-biological-data.html
+[ws]: http://www.roberts-publishers.com/new-publications/the-analysis-of-biological-data-1.html
 [rcook]: http://shop.oreilly.com/product/9780596809164.do
+[rgraph]: http://shop.oreilly.com/product/0636920023135.do
 
-## Tutorials & Labs {#tutorials}
+## Course Lab Instructions and Tutorials {#lab}
 
 **[Installing R and RStudio](install_orient.html)**  
 
 **[First Steps with R](first_steps.html)** 
 
-**[Basic Plots in R](basic_graphics.html)**    
+<!-- **[Basic Plots in R](basic_graphics.html)**
 
-**[Matrices and Lists](list_matrix.html)**    
+**[Matrices and Lists](list_matrix.html)**
 
-**[Working with Data Frames](dataframes.html)**    
-  
-**[Lizard Lab](capture_recapture.html)**      
+**[Working with Data Frames](dataframes.html)**
 
-**[Abalone Lab](abalone_cleaning.html)**    
+**[Lizard Lab](capture_recapture.html)**
+
+**[Abalone Lab](abalone_cleaning.html)**    --> 
 
 ## External Resources {#external}
 
 ### Tutorials
-**[Try R](http://tryr.codeschool.com)** 
+**[Try R](http://tryr.codeschool.com)**  
+An online introduction to R that runs in your browser. Nothing to install, and a goofy pirate theme.
 
-**[Getting Help with R](http://www.rstudio.com/ide/docs/help_with_r)**    
+**[Swirl](http://swirlstats.com)**  
+An R package for learning about R from within R. A number of modules are available, including both basic and more advanced tutorials.
+
+**[Online learning resources from RStudio](http://www.rstudio.com/resources/training/online-learning/)**
 
 
 ### Reference
@@ -63,6 +70,8 @@ also recommended: *[R Cookbook][rcook]* by P Teetor
 **[Quick R](http://www.statmethods.net/)**    
 
 **[RStudio Documentation](http://www.rstudio.com/ide/docs/)**     
+
+**[R Markdown Documentation](http://rmarkdown.rstudio.com)**    
 
 **[ggplot2 Documentation](http://docs.ggplot2.org/)**    
 
