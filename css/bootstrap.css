@@ -6164,6 +6164,10 @@ button.close {
     display: none !important;
   }
 }
+/* add padding to blockquote pulled-right */
+blockquote.pull-right {
+  padding-left: 10px;
+}
 /* Numbered Questions */
 body {
   counter-reset: P;
