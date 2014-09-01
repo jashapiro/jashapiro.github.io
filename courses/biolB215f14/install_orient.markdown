@@ -27,7 +27,7 @@ With those two things installed, you should be ready to start using `R` on your 
 
 Open `RStudio` and look around.  When you open it for the first time, you will see three main panes, as in the image below. What you see may be slightly different depending on the exact version or `RStudio` you have (and whether you have a Mac or a PC), but the general layout should be similar.
 
-![RStudio main window](images/RStudio_window.png "The RStudio window at startup.")
+<img src="images/RStudio_window.png" class="img-responsive" alt="Rstudio Main Window" title="The RStudio window at startup"> 
 
 ### The Console
 
