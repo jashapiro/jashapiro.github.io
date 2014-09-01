@@ -11,7 +11,7 @@ nav: teaching
 
 ## Overview & Goals {#overview}
 
-*[Fall 2014 Syllabus](BiolB215_syllabus_fall2014.pdf)*
+**[Fall 2014 Syllabus](BiolB215_syllabus_fall2014.pdf)**
 
 We have learned huge amounts in biology by doing experiments which generate clear and simple results. But many parts of biology are governed by smaller effects, which are sometimes hard to measure exactly. For example: Does an amino acid substitution change the efficiency of an enzyme? Do female frogs prefer mates with lower-pitched croaks? Does the chance of developing diabetes depend on your genotype at a specific locus? To answer these kinds of questions, we have to use statistics, not only to decide on our answer, but also to make some determination of how much we believe it. To actually use those statistics, you need two things: understanding of the theory behind the statistics and the ability to apply them. To that end, the primary goals of the course are:
 
