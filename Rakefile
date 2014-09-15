@@ -71,7 +71,7 @@ rule ".markdown" => ".Rmd" do |t|
 end
 
 desc "Rebuild Bootstrap-derived theme with lessc"
-task :bootstrap do
+task :lessc do
   system "lessc _theme/shapbio.less _theme/bootstrap.css"
   system "lessc --clean-css _theme/shapbio.less _theme/bootstrap.min.css"
   system "cp _theme/bootstrap.* css/."
