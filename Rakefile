@@ -66,7 +66,7 @@ rule ".markdown" => ".Rmd" do |t|
   Dir.chdir(File.dirname(t.source))
   source = File.basename(t.source)
   output = File.basename(t.name)
-  sh "Rscript -e 'knitr::knit(\"#{source}\", \"#{output}\")'"
+  sh "Rscript --vanilla -e 'knitr::knit(\"#{source}\", \"#{output}\")'"
   Dir.chdir(basedir)
 end
 
