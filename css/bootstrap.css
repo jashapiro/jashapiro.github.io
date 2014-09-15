@@ -6168,6 +6168,14 @@ button.close {
 blockquote.pull-right {
   padding-left: 10px;
 }
+/* Narrow table */
+table.table-narrow {
+  width: auto;
+}
+table.table-center {
+  margin-left: auto;
+  margin-right: auto;
+}
 /* Numbered Questions */
 body {
   counter-reset: P;
