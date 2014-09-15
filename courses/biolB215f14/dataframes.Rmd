@@ -142,7 +142,7 @@ If you were trying to put all the crabs in a storage cage that had a hole size o
 
 
 ## Working with multiple subsets simultaneously
-Doing these calculations separately for each possible grouping of variables can be a bit tiresome, and if you wanted to a caculate statistic of the measurement variables (other than the ones that summary gave us), you would start to get a bit annoyed with typing the same thing over and over. Since this is an extremely common task, `R` has a variety of ways to help you do repetitive calculations like this more efficiently. The built-in functions are those in the "apply" family, so named because they allow you to apply any function to multiple subsets of your data at the same time. For example, you might want to calculate the median of every column of a data frame, or the mean of some measurement for each species of crab. Unfortunately, the built-in versions of these functions (eg. `apply()`, `sapply()`, `lapply()`, `tapply()`) are a bit quirky, so I tend not to use them. You should feel free to explore them on your own, but I almost never use them anymore. Instead, I use a set of replacement functions written by a statistician named Hadley Wickham, who also wrote the graphics package that I use most: `ggplot2`. We will come back to `ggplot2`, but for now lets focus on the data manipulation functions that are part of his `dplyr` package. (There is also a previous version of called `plyr`, but `dplyr` is much faster and a bit simpler in some ways. You may see me use both at times, but I'm trying to convert over to `dplyr` full time.) 
+Doing these calculations separately for each possible grouping of variables can be a bit tiresome, and if you wanted to a caculate statistic of the measurement variables (other than the ones that summary gave us), you would start to get a bit annoyed with typing the same thing over and over. Since this is an extremely common task, `R` has a variety of ways to help you do repetitive calculations like this more efficiently. The built-in functions are those in the "apply" family, so named because they allow you to apply any function to multiple subsets of your data at the same time. For example, you might want to calculate the median of every column of a data frame, or the mean of some measurement for each species of crab. Unfortunately, the built-in versions of these functions (eg. `apply()`, `sapply()`, `lapply()`, `tapply()`) are a bit quirky, so I tend not to use them. You should feel free to explore them on your own, but I almost never use them anymore. Instead, I use a set of replacement functions written by a statistician named Hadley Wickham, who also wrote the graphics package that I use most: `ggplot2`. We will come back to `ggplot2`, but for now lets focus on the data manipulation functions that are part of his `dplyr` package. (There is also a previous version with similar goals called `plyr`, but `dplyr` is much faster and a bit simpler in some ways. You may see me use both at times, but I'm trying to convert over to `dplyr` full time.) 
 
 Below is a brief introduction to working with `dplyr`; I highly recommend you check out the more complete description available at the [dplyr website](http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html).
 
@@ -203,14 +203,16 @@ summarize(grouped_crabs,
 
 ## Plotting from data frames
 
-Once we have our data arranged nicely in a data frame, it is easy to use it in plots, and to take advantage of some of the fancier features in the `ggplot2` package that I mentioned earlier.  In particular, we can take advantage of "faceting", the ability to make multiple small plots with the same axes, which makes comparison across groups easier. I'll just present some examples here to give you a bit of inspiration, and as a preview for next week.
+Once we have our data arranged nicely in a data frame, it is easy to use it in plots, and to take advantage of some of the fancier features in the `ggplot2` package that I mentioned earlier.  In particular, we can take advantage of "faceting", the ability to make multiple small plots with the same axes, which makes comparison across groups easier. I'll just present some examples here to give you a bit of inspiration, and as a preview for next week. 
 
 ```{r qplots, message=FALSE, fig.width = 6, fig.height = 6}
-# rename the factor levels and column names
-# so they are more understandable in the plot legend
-crabs$Sex <- crabs$sex # make a new column to be safe
-levels(crabs$Sex) <- c("Female", "Male") # be careful to get these in the same order!
-crabs$Species <- crabs$sp 
+# Rename the column names and factor labels
+# so they are more understandable in the plot legend.
+
+# Make new columns with the new names first using mutate (from dplyr)
+crabs <- mutate(crabs, Sex = sex, Species = sp)
+# When changing factor levels, be careful to get them in the correct order!
+levels(crabs$Sex) <- c("Female", "Male") 
 levels(crabs$Species) <- c("Blue", "Orange")
 
 library(ggplot2)
