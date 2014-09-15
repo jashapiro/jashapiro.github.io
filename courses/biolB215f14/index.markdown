@@ -47,13 +47,15 @@ Also recommended:
 
 **[First Steps with R](first_steps.html)** 
 
-<!-- **[Basic Plots in R](basic_graphics.html)**
+**[Working with Data Frames](dataframes.html)**
 
 **[Matrices and Lists](list_matrix.html)**
 
-**[Working with Data Frames](dataframes.html)**
+<!-- **[Basic Plots in R](basic_graphics.html)**
 
-**[Lizard Lab](capture_recapture.html)**
+
+
+<!-- **[Lizard Lab](capture_recapture.html)**
 
 **[Abalone Lab](abalone_cleaning.html)**    --> 
 
