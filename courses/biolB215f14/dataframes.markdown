@@ -268,16 +268,19 @@ str(crabs)
 ##  $ BD   : num  7 7.4 7.7 8.2 8.2 9.8 9.8 10.4 9.7 10.3 ...
 {% endhighlight %}
 
-The `str()` command tells us the structure of data in a variable, and in this case it is telling us that `crabs` is a data frame with 200 rows (obs.) and 8 variables (columns), but the column names are a bit cryptic.  The meaning of each variable is shown below:
+The `str()` command tells us the structure of data in a variable, and in this case it is telling us that `crabs` is a data frame with 200 rows (obs.) and 8 variables (columns), but the column names are a bit cryptic.  The meaning of each column name is shown below:
 
-sp | species - "B" or "O" for blue or orange.
-sex | as it says.
-index | index 1:50 within each of the four groups.
-FL | frontal lobe size (mm).
-RW | rear width (mm).
-CL | carapace length (mm).
-CW | carapace width (mm).
-BD | body depth (mm).
+{: .table .table-hover .table-condensed .table-narrow .table-center}
+Variable | | Description
+--------  |-| -----------
+sp | | species - "B" or "O" for blue or orange.
+sex | | "M" or "F" for male or female
+index | | index 1:50 within each of the four groups
+FL | | frontal lobe size (mm)
+RW | | rear width (mm)
+CL | | carapace length (mm)
+CW | | carapace width (mm)
+BD | | body depth (mm)
 
 
 
