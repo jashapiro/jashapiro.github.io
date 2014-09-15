@@ -94,15 +94,34 @@ fruits
 
 
 ## Manipulating Data
-Once you have your data in a data frame, it is time to start characterizing and describing it. There are a number of special functions you can use to make all of this easier, and I will go over some of those now. But first, we need some data to work with. The data we will use this time is measurements from rock crabs of the species *Leptograpsus variegatus* which were collected in Western Australia. This data set is not built into `R`, but it is part of one of the libraries that comes with `R`. Libraries (also called packages) are sets of functions and/or datasets that have been made available by their authors to extend the functionality of `R`, often to perform new kinds of statistical analysis. Most of the time you will have to install a library before you use it, but in this case we will be using the `MASS` library, which comes with the base distribution of `R`. (MASS stands for *Modern and Applied Statistics with S* by Venables and Ripley, which was one of the first decent books available about `R`, or really about `S`, which was the non-open-source progenitor to `R` developed at Bell Labs. The `MASS` library includes a number of functions and datasets that were used in that book.)
+Once you have your data in a data frame, it is time to start characterizing and describing it. There are a number of special functions you can use to make all of this easier, and I will go over some of those now. But first, we need some data to work with. The data we will use this time is measurements from rock crabs of the species *Leptograpsus variegatus* which were collected in Western Australia. The original data is from:  
+Campbell, N.A. and Mahon, R.J. (1974) A multivariate study of variation in two species of rock crab of genus Leptograpsus. *Australian Journal of Zoology* 22, 417–425. 
+
+but I actually got the data from a book on `S`, the predecessor to `R`:   
+Venables, W. N. and Ripley, B. D. (2002) *Modern Applied Statistics with S.* Fourth edition. Springer.
+
+A file with the data can be downloaded at the following link: [crabs.csv](crabs.csv). Put it into the project folder on your computer, then you can load the data as follows with `read.csv()`, then have a look at it with the `str()` command.
 
 ```{r}
-library(MASS)
-data(crabs)
+crabs <- read.csv("crabs.csv")
 str(crabs)
 ```
 
-The `str()` command tells us the structure of data in a variable, and in this case it is telling us that `crabs` is a data frame with 200 rows (obs.) and 8 variables (columns), but the names are a bit cryptic. To see what each stands for, you should look using `help(crabs)`. Leaving aside for the moment what each variable stands for, you can get a very nice quick summary of the data overall using the function `summary()`:
+The `str()` command tells us the structure of data in a variable, and in this case it is telling us that `crabs` is a data frame with 200 rows (obs.) and 8 variables (columns), but the column names are a bit cryptic.  The meaning of each variable is shown below:
+
+sp | species - "B" or "O" for blue or orange.
+sex | as it says.
+index | index 1:50 within each of the four groups.
+FL | frontal lobe size (mm).
+RW | rear width (mm).
+CL | carapace length (mm).
+CW | carapace width (mm).
+BD | body depth (mm).
+
+
+
+
+You can get a very nice quick summary of the data overall using the function `summary()`:
 
 ```{r}
 summary(crabs)
