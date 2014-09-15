@@ -289,7 +289,7 @@ summary(crabs)
 ##  Max.   :47.6   Max.   :54.6   Max.   :21.6
 {% endhighlight %}
 
-All that is nice, but it doesn't really tell us too much, since what we really might want to know about this data is how the different kinds of crabs compare to each other. We have males and females, blue and orange crabs, so we should see if we can look at just one kind at a time. Lets look at the blue females first; we can select rows from the data frame by testing which rows have `sp == "B"` and `sex == "F"`. Notice the double equals sign. This is the test for equality, as distinct from the single equal sign that you can use for assigning a value to a variable or function argument. We will also use the ampersand, `&`, to combine the two tests. Make sure you include the comma at the end; that indicates we are selecting the data by row. Then we will calculate the mean and standard deviation of frontal lobe size (`FL`) for the female, blue crabs.
+All that is nice, but it doesn't really tell us too much, since what we really might want to know about this data is how the different kinds of crabs compare to each other. We have males and females, blue and orange crabs, so we should see if we can look at just one kind at a time. Lets look at the blue females first; we can select rows from the data frame by testing which rows have `sp == "B"` and `sex == "F"`. Notice the double equals sign. This is the test for equality, as distinct from the single equal sign that you can use for assigning a value to a variable or function argument. We will also use the ampersand, `&`, to combine the two tests. Make sure you include the comma at the end; that indicates we are selecting the data by row. Then we will calculate the mean and standard deviation of frontal lobe size (`FL`) for the female blue crabs.
 
 
 {% highlight r %}
@@ -315,85 +315,153 @@ sd(blue_females$FL)
 ## [1] 2.628
 {% endhighlight %}
 
+### Another subsetting command: `filter()`
+
+The subset command is great, but it has recently been supplemented with another version of the same idea which can be a bit easier to use. This new version is called `filter()` and is part of the `dplyr` package, which we will use more below. The only difference is that rather than using '`&`' to combine conditions, you can simply separate them with commas, which can be more convenient. So the equivalent to the command above would be:
+
+
+{% highlight r %}
+library(dplyr) #load the dplyr package (there may be warnings, but you can ignore these)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## 
+## Attaching package: 'dplyr'
+## 
+## The following object is masked from 'package:MASS':
+## 
+##     select
+## 
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+{% endhighlight %}
+
+
+
+{% highlight r %}
+blue_females2 <- filter(crabs, sp == "B", sex == "F")
+mean(blue_females2$FL)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] 13.27
+{% endhighlight %}
+
+
+
+{% highlight r %}
+sd(blue_females2$FL)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] 2.628
+{% endhighlight %}
+
+Note that you will only need to include the line `library(dplyr)` part once per session (or once per file). Including it more is not a problem, but not necessary either. If you do not have the dplyr package installed, you can install it with `install.packages("dplyr")`, but you should only need to do this once, ever.
+
+
 
 {: .problem}
 If you were trying to put all the crabs in a storage cage that had a hole size of 25 mm, you might expect that any crabs with a carapace length (CL) smaller than the holes would be able to escape (since they move sideways).  
 **a.**  Create a histogram showing the size distribution of the crabs that you would expect to stay in the cage (measured by carapace length). Be sure to label your plot completely, including the total number of crabs that remain.  
 **b.**  What proportion of crabs remaining in your cage would be female? What proportion would be orange?  
-**c.**  What is the median body depth of the female, blue crabs that you would expect to escape? 
+**c.**  What is the median body depth of the female, blue crabs that you would expect to *escape*? 
+
+
 
 
 ## Working with multiple subsets simultaneously
-Doing these calculations separately for each possible grouping of variables can be a bit tiresome, and if you wanted to a caculate statistic of the measurement variables (other than the ones that summary gave us), you would start to get a bit annoyed with typing the same thing over and over. Since this is an extremely common task, `R` has a variety of ways to help you do repetitive calculations like this more efficiently. The built-in functions are those in the "apply" family, so named because they allow you to apply any function to multiple subsets of your data at the same time. For example, you might want to calculate the median of every column of a data frame, or the mean of some measurement for each species of crab. Unfortunately, the built-in versions of these functions (eg. `apply()`, `sapply()`, `lapply()`, `tapply()`) are a bit quirky, so I tend not to use them. You should feel free to explore them on your own, but I almost never use them anymore. Instead, I use a set of replacement functions written by the same person who wrote `ggplot2`: Hadley Wickham. When you installed `ggplot2`, those functions should also have been installed as the `plyr` package. (If they are not actually installed for some reason, you will need to use `install.packages("plyr")` to get them.)
+Doing these calculations separately for each possible grouping of variables can be a bit tiresome, and if you wanted to a caculate statistic of the measurement variables (other than the ones that summary gave us), you would start to get a bit annoyed with typing the same thing over and over. Since this is an extremely common task, `R` has a variety of ways to help you do repetitive calculations like this more efficiently. The built-in functions are those in the "apply" family, so named because they allow you to apply any function to multiple subsets of your data at the same time. For example, you might want to calculate the median of every column of a data frame, or the mean of some measurement for each species of crab. Unfortunately, the built-in versions of these functions (eg. `apply()`, `sapply()`, `lapply()`, `tapply()`) are a bit quirky, so I tend not to use them. You should feel free to explore them on your own, but I almost never use them anymore. Instead, I use a set of replacement functions written by a statistician named Hadley Wickham, who also wrote the graphics package that I use most: `ggplot2`. We will come back to `ggplot2`, but for now lets focus on the data manipulation functions that are part of his `dplyr` package. (There is also a previous version of called `plyr`, but `dplyr` is much faster and a bit simpler in some ways. You may see me use both at times, but I'm trying to convert over to `dplyr` full time.) 
 
-### ddply and summarize
-The most common function we will use is `ddply()`, which applys functions to data frames and returns the results as a new data frame. A simple example of its use is to find out how many rows are in each subset of the data, taking advantage of the function `nrow()`. To do this with ddply, you need to give it three arguments: `.data`, `.variables`, and `.fun`, which are your data frame, the variables you want to split by, and the name of the function you want to apply, respectively. 
+Below is a brief introduction to working with `dplyr`; I highly recommend you check out the more complete description available at the [dplyr website](http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html).
+
+### `group_by()` and `summarize()`
+Some of the most common functions we will use are `group_by()` and `summarise()`, which do just what they say. `group_by()` divides a data frame in to subgroups based on some condition, and `summarize()` (or `summarise()` if you are more comfortable with that) calculates statistics based on the data in those subgroups, returning the results as a new data frame, with one row per group. A simple example of its use is to find out how many observations (rows) are in each subset of the data, taking advantage of the function `n()`, which is also part of `dplyr`. (`n()` is largely equivalent to the base function `nrow()` which will tell you how many rows there are in a data frame, but it works with grouped data.) 
+
+So the steps are these: first divide up the data with `group_by()`. To do this you give the data frame as the first argument (this will become a pattern), then the remaining variables are the names of the columns that you want to divide the data based on. You don't need to put them in quotes.
 
 
 
 {% highlight r %}
-library(plyr) #load the package
-ddply(.data = crabs, .variables = c("sp", "sex"), .fun = nrow)
+library(dplyr) #load the package if you have not done so already
+grouped_crabs <- group_by(crabs, sex, sp)
+{% endhighlight %}
+
+Next, you apply your function to the grouped data with `summarize()`. The first argument is the grouped data frame, and the rest are the summary statistics you wish to calculate. In this case, we will just use `n()` to give us a count of the number of rows. (Normally I would save the output, but I'm not going to in this case.)
+
+
+{% highlight r %}
+summarize(grouped_crabs, n())
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##   sp sex V1
-## 1  B   F 50
-## 2  B   M 50
-## 3  O   F 50
-## 4  O   M 50
+## Source: local data frame [4 x 3]
+## Groups: sex
+## 
+##   sex sp n()
+## 1   F  B  50
+## 2   F  O  50
+## 3   M  B  50
+## 4   M  O  50
 {% endhighlight %}
 
-As you can see, this makes a new data frame with the variables you split by in the first two columns, and the result of the calculation in the third. We can actually apply more than one function at a time, by giving `.fun` a vector of function names, and each result will be put in its own column of the resulting data frame. (By quoting them, we actually get the columns to be named for the function, instead of `V1` as before.)
+As you can see, this makes a new data frame with the variables you split by in the first two columns, and the result of the calculation in the third. The title of that third function is a bit nasty, but we can actually provide a better name quite easily, by 'naming' the argument, just as we did with the data frames before:
 
 
 {% highlight r %}
-ddply(.data = crabs, .variables = c("sp", "sex"), .fun = c("nrow", "ncol"))
+summarize(grouped_crabs, count = n())
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##   sp sex nrow ncol
-## 1  B   F   50    8
-## 2  B   M   50    8
-## 3  O   F   50    8
-## 4  O   M   50    8
+## Source: local data frame [4 x 3]
+## Groups: sex
+## 
+##   sex sp count
+## 1   F  B    50
+## 2   F  O    50
+## 3   M  B    50
+## 4   M  O    50
 {% endhighlight %}
 
-Counting rows and columns is not exactly the most useful thing we could do with this data. What we really wanted to do was to calculate statistics on subsets of the data, and one of the easiest ways to do that is to take advantage of a function called `summarize()` (or `summarise()` if you are not North American), which works in some ways very much like the `subset()` function we discussed earlier as way to save a lot of typing. It can also be thought of as a more flexible form of the `summary()` function we used earlier. `summarize()` takes as its arguments a data frame and any number of functions that you might want to calculate from the columns of the data frame. Like with the data frame itself we can name the results of those functions whatever we want. So if we wanted to calculate the mean of `FL` and the minimum of `RW`, we could do that as follows.
+Counting rows is not exactly the most useful thing we could do with this data. What we really wanted to do was to calculate statistics on subsets of the data. If we wanted to calculate the mean of `FL` and the minimum of `RW` for the grouped crab data set, we could do that as follows.
+
 
 {% highlight r %}
-summarize(crabs, meanFL = mean(FL), minRW = min(RW))
+summarize(grouped_crabs, 
+          count = n(),
+          meanFL = mean(FL), 
+          minRW = min(RW))
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##   meanFL minRW
-## 1  15.58   6.5
-{% endhighlight %}
-To use this with `ddply()`, you specify `summarize` as the `.fun` argument. ddply will automatically fill in the first argument (the data) with each of the subsets of the original data frame. Then we give the statistics we want to calculate as additional arguments to `ddply()`, just as they were with the raw call to summarize. `ddply()` will use them for each of the calls to `summarize()` that it makes. (Notice that you can leave off the names of the first arguments, as long as you present them in order. I could actually have left off `.fun` as well, but kept it for clarity.)
-
-{% highlight r %}
-ddply(crabs, c("sp", "sex"), 
-      .fun = summarize,
-      meanFL = mean(FL), # passed along to summarize()
-      minRW = min(RW)
-      )
+## Source: local data frame [4 x 5]
+## Groups: sex
+## 
+##   sex sp count meanFL minRW
+## 1   F  B    50  13.27   6.5
+## 2   F  O    50  17.59   9.2
+## 3   M  B    50  14.84   6.7
+## 4   M  O    50  16.63   6.9
 {% endhighlight %}
 
 
-
-{% highlight text %}
-##   sp sex meanFL minRW
-## 1  B   F  13.27   6.5
-## 2  B   M  14.84   6.7
-## 3  O   F  17.59   9.2
-## 4  O   M  16.63   6.9
-{% endhighlight %}
 The functions that you pass in to summarize don't have to be as simple as the ones I just showed; you could calculate the 80% quantile of the difference between the square root of the carapace width and frontal lobe cubed, though I doubt you would want to. The only limitation is that each of the functions should return a single value, or you will get an error.
 
 {: .problem}
@@ -406,7 +474,7 @@ The functions that you pass in to summarize don't have to be as simple as the on
 
 ## Plotting from data frames
 
-Once we have our data arranged nicely in a data frame, it is easy to use it in plots, and to take advantage of some of the fancier features `ggplot2`. We don't need to separate out the individual vectors, as we had done before; if we include a `data` argument in `qplot()`, it will use only the data in our data frame. In particular, we can take advantage of "faceting", the ability to make multiple small plots with the same axes, which makes comparison across groups easier. I'll just present some examples here to give you a bit of inspiration.
+Once we have our data arranged nicely in a data frame, it is easy to use it in plots, and to take advantage of some of the fancier features in the `ggplot2` package that I mentioned earlier.  In particular, we can take advantage of "faceting", the ability to make multiple small plots with the same axes, which makes comparison across groups easier. I'll just present some examples here to give you a bit of inspiration, and as a preview for next week.
 
 
 {% highlight r %}
@@ -428,7 +496,9 @@ qplot(data = crabs, x = CW,
   scale_fill_manual(values = c("blue", "orange")) #choose logical colors, rather than using defaults
 {% endhighlight %}
 
-![plot of chunk qplots](plots/dataframes-qplots1.png) 
+<img src="plots/dataframes-qplots1.png" title="plot of chunk qplots" alt="plot of chunk qplots" width="432" />
+{: .text-center}
+
 
 {% highlight r %}
 qplot(data = crabs, 
@@ -443,7 +513,8 @@ qplot(data = crabs,
   scale_fill_manual(values = c("blue", "orange"))
 {% endhighlight %}
 
-![plot of chunk qplots](plots/dataframes-qplots2.png) 
+<img src="plots/dataframes-qplots2.png" title="plot of chunk qplots" alt="plot of chunk qplots" width="432" />
+{: .text-center}
 
 {% highlight r %}
 qplot(data = crabs, 
@@ -458,5 +529,7 @@ qplot(data = crabs,
   scale_color_manual(values = c("blue", "orange")) 
 {% endhighlight %}
 
-![plot of chunk qplot_scatter](plots/dataframes-qplot_scatter.png) 
+<img src="plots/dataframes-qplot_scatter.png" title="plot of chunk qplot_scatter" alt="plot of chunk qplot_scatter" width="504" />
+{: .text-center}
+
 
