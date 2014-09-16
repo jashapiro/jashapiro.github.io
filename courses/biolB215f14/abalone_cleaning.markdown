@@ -37,6 +37,7 @@ abalone <- read.csv("abalone.csv")
 
 Look at the data. The column names are fairly informative in general, but some are not, so I have defined them below:
 
+{: .table .table-hover .table-condensed .table-narrow .table-center}
 Variable | Unit | Description
 -------- | :----: | -----------
 `Sex` | | `M` (male), `F` (female), or `I` (immature)
