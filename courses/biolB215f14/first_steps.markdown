@@ -974,8 +974,8 @@ rnorm(n = 12, mean = 3, sd = 5)
 
 
 {% highlight text %}
-##  [1]  6.674  4.673 -3.453  5.003  3.271  1.416  1.059 14.037  1.321  9.656
-## [11]  9.363  3.792
+##  [1]  0.3350  0.1255  3.3133  3.1686  1.2736  0.4476 15.3966  4.3233
+##  [9]  6.4212 -1.2381 -0.6283  6.1075
 {% endhighlight %}
 You can actually take a shortcut and not give the argument names explicitly, as long as you give them in the order expected:
 
@@ -986,8 +986,8 @@ rnorm(12, 3, 5)
 
 
 {% highlight text %}
-##  [1]  2.957  8.268  9.313  8.027  7.680  9.699  3.911 -6.712  4.458  9.461
-## [11] -8.703 -2.652
+##  [1] -6.6486  6.2734  2.0287 -0.7593 -1.0313 13.6651  7.8251 12.6589
+##  [9] -0.6130 -4.0471 -1.9640  8.0969
 {% endhighlight %}
 Some arguments have default values, which you can see if you look at the help page for the function you are interested in. For `rnorm()` the default `mean` is `0` and the default `sd` is `1`. If we want to use those, we can shorten our call further and leave those off completely:
 
@@ -998,8 +998,8 @@ rnorm(12) # equivalent to rnorm(12, 0, 1)
 
 
 {% highlight text %}
-##  [1] -1.9455 -1.0834 -0.3240 -1.7077 -0.8841  0.1466 -0.6354  0.5431
-##  [9] -0.1811 -0.5702  2.4839 -0.4630
+##  [1] -0.5978 -2.0133  0.6819 -1.1945  1.0082 -1.4975 -0.2475  1.6619
+##  [9] -0.2445  0.7492  0.8181 -0.3330
 {% endhighlight %}
 If you want to leave some arguments as their default but change others, you can skip the ones you don't want to change, but then you **must** name any arguments that are out of order. If I want 5 random numbers with mean 0 but standard deviation of 0.2 (rather than default of 1), I could do the following:
 
@@ -1010,7 +1010,7 @@ rnorm(5, sd = 0.2)
 
 
 {% highlight text %}
-## [1] -0.127590 -0.008354 -0.181203 -0.040246  0.156946
+## [1] -0.20821 -0.01579  0.15132 -0.07226 -0.15625
 {% endhighlight %}
 
 If any of this is confusing for now, don't worry. There was a lot to take in. Everything will become more clear the more you practice. And there will be plenty of chances to practice.

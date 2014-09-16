@@ -69,6 +69,17 @@ recaptured <- 0:50
 probs <- dhyper(recaptured, m = 150, n = 3000 - 150, k = 50)
 
 library(ggplot2) #load ggplot2
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Loading required package: methods
+{% endhighlight %}
+
+
+
+{% highlight r %}
 qplot(x = recaptured, y = probs,
       color = I("blue"), 
       geom = "line",
