@@ -26,12 +26,11 @@ med_norm <- rnorm(50, mean = 5)
 large_norm <- rnorm(1000, mean = 100, sd = 20) 
 {% endhighlight %}
 
-The other data set we will use is a set of measurements of irises (the flower). This data set dates back to the early 20th century, and a paper by R.A. Fisher, who originally developed much of the basic statistics that we use now. But he was fundamentally a biologist, and was also responsible for founding the fields of population genetics and quantitative genetics. Much of his work in statistics was developed to deal with biological data. In any case, the data in the iris data set were originally collected by Edgar Anderson, but made famous by one of Fisher's publications. They are measurements of flower sepals and petals, with 50 measurements of each of 3 species. (If you want a bit more information, try `?iris`.) The commands below load the data, and `attach()` it to the workspace, which makes it easier to get the individual columns of measurements (you won't see them listed as variables in your workspace, but they are there).
+The other data set we will use is a set of measurements of irises (the flower). This data set dates back to the early 20th century, and a paper by R.A. Fisher, who originally developed much of the basic statistics that we use now. But he was fundamentally a biologist, and was also responsible for founding the fields of population genetics and quantitative genetics. Much of his work in statistics was developed to deal with biological data. In any case, the data in the iris data set were originally collected by Edgar Anderson, but made famous by one of Fisher's publications. They are measurements of flower sepals and petals, with 50 measurements of each of 3 species. (If you want a bit more information, try `?iris`.) The commands below will load the data into your workspace as a data frame and then show the names of the data columns.
 
 
 {% highlight r %}
 data(iris)
-attach(iris)
 names(iris) #this shows the names of the variables in the iris data.
 {% endhighlight %}
 
@@ -44,8 +43,8 @@ names(iris) #this shows the names of the variables in the iris data.
 
 Take some time to look at the raw data (type the name of each variable and look at the output). You will see that `Sepal.Length`, `Sepal.Width`,  `Petal.Length`, and `Petal.Width` are all `numeric`,  data, while `Species` is a `factor`.
 
-## ggplot2
-For these exercises, we will mostly focus on the built-in graphics in `R`, but there are a number of packages which present alternative ways of creating plots, and one of the most common is [ggplot2](http://ggplot2.org), written by Hadley Wickham. If you have not already installed it, you can do so with `install.packages("ggplot2")`. For many of the plot types here I will show you how to construct them with either built-in graphics or ggplot2. Sometimes one is easier, and sometimes the other...
+## `ggplot2`
+For these exercises, we will mostly focus on the built-in graphics in `R`, but there are a number of packages which present alternative ways of creating plots, and one of the most common is [ggplot2](http://ggplot2.org), written by Hadley Wickham. If you have not already installed it, you can do so with `install.packages("ggplot2")`. For many of the plot types here I will show you how to construct them with either built-in graphics or ggplot2. Sometimes one is easier, and sometimes the other... but in my opinion, the ggplot2 version almost always looks better.
 
 
 ## Simple plots
@@ -56,7 +55,7 @@ The most basic plotting command in `R` is `plot()`. Lets see what happens when w
 plot(small_norm)
 {% endhighlight %}
 
-![plot of chunk small_plot](plots/basic_graphics-small_plot.png)
+<img src="plots/basic_graphics-small_plot.png" title="plot of chunk small_plot" alt="plot of chunk small_plot" width="504" />
 {: .text-center}
 
 So what did that do? Something you almost never want to bother doing: `R` plotted the data values in `small_norm` on the y-axis, with just the position of each value in the vector along the x-axis. Since the order doesn't mean anything, this is probably not the kind of plot we really wanted to produce. But for now, let's stick with it, just to illustrate some of the things you can do to customize plots.
@@ -71,7 +70,7 @@ plot(small_norm,
      main = "A Bad Plot")
 {% endhighlight %}
 
-![plot of chunk badplot](plots/basic_graphics-badplot.png)
+<img src="plots/basic_graphics-badplot.png" title="plot of chunk badplot" alt="plot of chunk badplot" width="504" />
 {: .text-center}
 
 We can also change what is being plotted (points, lines, etc.)using `type`, change the color of the points using `col`, and their shape with `pch` (which stands for "point character") and many other options. For a more extensive list, I recommend looking at the reference card available at: <http://cran.r-project.org/doc/contrib/Short-refcard.pdf>, and in particular the "Graphical parameters"" section. I'll use a few different options through this worksheet; see if you can figure out what is doing what by trying different settings yourself.
@@ -83,7 +82,7 @@ plot(small_norm,
      type = "l")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-1](plots/basic_graphics-unnamed-chunk-1.png)
+<img src="plots/basic_graphics-unnamed-chunk-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" width="504" />
 {: .text-center}
 
 `R` has a number of ways to define the color you want, but often the easiest is to just use one of the predefined colors, like `"blue"`, `"red"`, `"green"`, or `"lemonchiffon3"`. Yeah, the color names get strange. For a complete list of the colors, you can use the `colors()` command, or you could look at the following color chart: <http://research.stowers-institute.org/efg/R/Color/Chart/ColorChart.pdf> to see what they all look like. Note that color names have to be given  as strings with quotes around them (unless you store the color names in your own variable).
@@ -95,7 +94,7 @@ plot(med_norm,
      col = "firebrick", pch = 18)
 {% endhighlight %}
 
-![plot of chunk colored_plot](plots/basic_graphics-colored_plot.png)
+<img src="plots/basic_graphics-colored_plot.png" title="plot of chunk colored_plot" alt="plot of chunk colored_plot" width="504" />
 {: .text-center}
 
 To see the possible point types, you can make a quick plot using a command like the one below. 
@@ -108,12 +107,12 @@ plot(1:20,
      col = c("red", "blue") )
 {% endhighlight %}
 
-![plot of chunk point_types](plots/basic_graphics-point_types.png)
+<img src="plots/basic_graphics-point_types.png" title="plot of chunk point_types" alt="plot of chunk point_types" width="504" />
 {: .text-center}
 
 Notice how I can give the `pch` and `col` arguments vectors, so each point gets a different shape and the colors alternate (because `R` is recycling the vector). You can do the same thing for any other option that affects the appearance of data points, which can be useful for visually separating different subsets of data, or highlighting individual points. 
 
-{: .problem}
+{: .question}
 Create a plot of the `med_norm` vector where all the points greater than or equal to 5 are blue and all the points less than 5 are green. You will need to create a vector of color names to do this; the easiest way is to start with a vector of all one color that the same length as the `med_norm` vector, using the `rep()` function, then replace the values that need to change in the next step.  
 
 
@@ -125,7 +124,7 @@ Since the previous plots were not particularly useful, lets try to do a bit bett
 hist(med_norm)
 {% endhighlight %}
 
-![plot of chunk basic_hist](plots/basic_graphics-basic_hist.png)
+<img src="plots/basic_graphics-basic_hist.png" title="plot of chunk basic_hist" alt="plot of chunk basic_hist" width="504" />
 {: .text-center}
 
 We can adjust the number of divisions in the histogram with `breaks`. When making a histogram, this is probably your most important decision. If you have too many or too few breakpoints, your histogram will not be very informative. There are no hard and fast rules; it depends what you are trying to show with the plot, as well as how much data you have. (Note that `R` will not necessarily give the exact number of breakpoints that you ask for, it does some optimization internally. If you want, you can use `breaks` to specify the exact breakpoints with a vector instead of a single number. This can be useful for precise plots, and also for histograms with unequal bin widths.)
@@ -138,7 +137,7 @@ hist(small_norm,
      main = "Too many breakpoints")
 {% endhighlight %}
 
-![plot of chunk hist_breaks](plots/basic_graphics-hist_breaks1.png)
+<img src="plots/basic_graphics-hist_breaks1.png" title="plot of chunk hist_breaks" alt="plot of chunk hist_breaks" width="504" />
 {: .text-center}
 
 
@@ -149,10 +148,10 @@ hist(large_norm,
      main = "Better with more data")
 {% endhighlight %}
 
-![plot of chunk hist_breaks](plots/basic_graphics-hist_breaks2.png)
+<img src="plots/basic_graphics-hist_breaks2.png" title="plot of chunk hist_breaks" alt="plot of chunk hist_breaks" width="504" />
 {: .text-center}
 
-### ggplot2 Histograms
+### `ggplot2` Histograms
 The basic plotting function in in `ggplot2` is `qplot()`, which can actually make a large number of different kinds of plots, depending on what options you give it. To make a histogram, we will first load the `ggplot2` library (you only need to do this once per session) and then call `qplot()` with a single vector of numbers. Unlike `plot()`, `qplot()` will actually do something reasonable here, and make a histogram rather than just a series of points.
 
 
@@ -179,10 +178,10 @@ qplot(med_norm)
 ## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
 {% endhighlight %}
 
-![plot of chunk gghist](plots/basic_graphics-gghist.png)
+<img src="plots/basic_graphics-gghist.png" title="plot of chunk gghist" alt="plot of chunk gghist" width="504" />
 {: .text-center}
 
-We got a warning because we did not tell `qplot` about the histogram bins we wanted. Rather than specifying `breaks` as we did with `hist()`, we tell `qplot()` the actual size of the bins we want to use by givint it a `binwidth` argument. Other arguments for axis labels and title are the same is in `hist()`, though we have to use `fill` for the bar colors and enclose the name of color we want in `I()`. (That part is a bit strange, but there are good reasons for it. Ask if you are curious.)
+We got a warning because we did not tell `qplot` about the histogram bins we wanted. Rather than specifying `breaks` as we did with `hist()`, we tell `qplot()` the actual size of the bins we want to use by givint it a `binwidth` argument. Other arguments for axis labels and title are the same is in `hist()`, though we have to use `fill` for the bar colors and enclose the name of color we want in `I()`. (That part is a bit strange, but there are some good reasons for it. Ask if you are curious.)
 
 
 {% highlight r %}
@@ -193,8 +192,53 @@ qplot(med_norm,
       fill = I("blue"))
 {% endhighlight %}
 
-![plot of chunk gghist2](plots/basic_graphics-gghist2.png)
+<img src="plots/basic_graphics-gghist2.png" title="plot of chunk gghist2" alt="plot of chunk gghist2" width="504" />
 {: .text-center}
+
+### Facetting with ggplot2
+One of the very nice features of `ggplot2` is the ability to work with data frames that contain multiple related data sets, or to split data sets by a particular variable and plot each subset separately, in different colors, or otherwise distinguish the subsets. We can play around with this using the `iris` data set. To start, lets make a histogram of just the sepal widths of the flowers in the data set (notice how we use the `data` argument to specify that our x variable comes from a particular data frame):
+
+
+{% highlight r %}
+qplot(x = Sepal.Width,
+      data = iris,
+      binwidth = 0.2,
+      xlab = "Sepal Width (cm)")
+{% endhighlight %}
+
+<img src="plots/basic_graphics-sepalhist.png" title="plot of chunk sepalhist" alt="plot of chunk sepalhist" width="504" />
+{: .text-center}
+
+If we specify the fill color as a variable (`Species` in this case), ggplot will  make a kind of staked histograms, with each bar colored by the number of each species in each grouping.
+
+
+{% highlight r %}
+qplot(x = Sepal.Width,
+      data = iris,
+      binwidth = 0.2,
+      fill = Species,
+      xlab = "Sepal Width (cm)")
+{% endhighlight %}
+
+<img src="plots/basic_graphics-sepalcolor.png" title="plot of chunk sepalcolor" alt="plot of chunk sepalcolor" width="504" />
+{: .text-center}
+
+While pretty it can be a bit hard to see what each species histogram would look like on its own. In this case, the *setosa* histogram is easy to interpret, but the ones stacked on top of it are a bit rough. It might be better to separate those plots onto separate plots. When we do this, we do want all of our plots to still have the same binwidths and to be nicely aligned. This is called facetting, and can be done with the `facets` argument. To use this, you specify what you want to split the data up by, with vertical splits (rows) first, then a `~` (tilde) followed by horizontal splits (columns). In this case I want to the plots vertically so the data are stacked one on top of the other by Species, but I don't want to split by anything on the other axis, so I just use a period (`.`) to specify no splitting on the other axis. So facetting variable is `Species ~ .` as shown below.
+
+
+
+{% highlight r %}
+qplot(x = Sepal.Width,
+      data = iris,
+      binwidth = 0.2,
+      facets = Species ~ .,
+      xlab = "Sepal Width (cm)")
+{% endhighlight %}
+
+<img src="plots/basic_graphics-sepalfacet.png" title="plot of chunk sepalfacet" alt="plot of chunk sepalfacet" width="504" />
+{: .text-center}
+
+
 
 ## Adding to plots
 Often you might want to add extra points or lines to a plot, and `R` does allow you do to this in a few different ways. With the base graphics (we'll explore another system later), you can add points, lines, line segments, and rectangles to a plot you have made with commands `points()`, `abline()`, `segments()`, and `rect()`, respectively. For now, we will just use `abline()` to annotate our histogram a bit. Feel free to explore the other commands as well.
@@ -216,7 +260,7 @@ abline(v = c(large_mean + large_sd, large_mean - large_sd),
        lty = 2) #lty controls the line type, here dashed
 {% endhighlight %}
 
-![plot of chunk annotated_hist](plots/basic_graphics-annotated_hist.png)
+<img src="plots/basic_graphics-annotated_hist.png" title="plot of chunk annotated_hist" alt="plot of chunk annotated_hist" width="504" />
 {: .text-center}
 
 For `ggplot2`, you add elements to a plot by literally adding things to the `qplot()` function using a `+` sign. To add a vertical line, you add the `geom_vline()` function and specify the `xintercept` argument. As you will see, `ggplot2` tends to be a bit more verbose than the basic graphics. You have to type out things like `color` and `linetype`, but this can make it a bit easier to see what is really going on.
@@ -233,16 +277,131 @@ qplot(large_norm,
              linetype = 2 )
 {% endhighlight %}
 
-![plot of chunk ggannotated_hist](plots/basic_graphics-ggannotated_hist.png)
+<img src="plots/basic_graphics-ggannotated_hist.png" title="plot of chunk ggannotated_hist" alt="plot of chunk ggannotated_hist" width="504" />
 {: .text-center}
 
-{: .problem}
+{: .question}
 Create a histogram of the `large_norm` data with about 100 breakpoints. Is this a good number? Play around with different numbers of breakpoints until you find one that you think is a good representation of the data. Then add vertical lines indicating the median and interquartile range of the data. You will want to use the `quantile()` function to find those quantities.
 
+## Box Plots
+Another way we can represent a distribution is with a box plot, which we can make using the function `boxplot()`, of all things. For one variable, the call is simple:
 
 
-## Bar charts
-To make a bar chart in R, you can use the function `barplot()`. In the simplest case, you have a vector of numbers and a vector of labels. For example, if I were plotting the number of points scored by each team in the NFL Conference Championships this year, I would have the following vectors:
+{% highlight r %}
+boxplot(iris$Petal.Length, ylab = "Petal Length (cm)")
+{% endhighlight %}
+
+<img src="plots/basic_graphics-box.png" title="plot of chunk box" alt="plot of chunk box" width="504" />
+{: .text-center}
+
+The real utility of box plots though, is to compare distributions in a single plot. To include more than one variable, we need to enclose the variables in a `list`, which is a data structure we have not yet talked about. It is similar to a vector, but can contain elements of different types, including vectors. We could save the list to a variable name of its own, but for now we will just call `list()` within the `boxplot()` function. If To customise the labels for each box, you  use `names`, as in the `barplot()` example.
+
+
+{% highlight r %}
+boxplot(list(iris$Petal.Length, iris$Petal.Width, iris$Sepal.Length, iris$Sepal.Width), 
+        names = c("Petal Length", "Petal Width", 
+                  "Sepal Length", "Sepal Width"),
+        ylab = "centimeters")
+{% endhighlight %}
+
+<img src="plots/basic_graphics-boxplot.png" title="plot of chunk boxplot" alt="plot of chunk boxplot" width="504" />
+{: .text-center}
+
+Another thing we might want to do is to take the iris data and separate out the different species. To do that with base graphics, we have to introduce R formulas. A formula is a way of representing a relationship you want to explore. Take the classic linear relationship: $y = a + bx$. Since in statistical analysis we generally don't know $a$ and $b$ before we start, the R formula expression just leaves them out, and we would represent the relationship between a response variable `y` and an explanatory variable `x` with the formula `y ~ x`. What that is saying is that `y` may depend on `x`, and that is the relationship I want to explore. In the context of the box plot, I want to see if the distributions are different for different species, so I will use the formula `Petal.Length ~ Species`. This is put in as the first argument. In order to save me from having to type `iris$` a bunch of times to show that I am referring to the `iris` data frame (i.e. `iris$Petal.Length ~ iris$Species`), I can tell the boxplot command that all of my varibles are coming from `iris` with the argument `data = iris` as shown below. 
+
+
+{% highlight r %}
+boxplot(Petal.Length ~ Species, 
+        data = iris,
+        col = c("orange", "purple", "blue"),
+        ylab = "Sepal Length (cm)")
+{% endhighlight %}
+
+<img src="plots/basic_graphics-box_formula.png" title="plot of chunk box_formula" alt="plot of chunk box_formula" width="504" />
+{: .text-center}
+
+You should be able to see pretty clearly why plotting all of the species together as we did earlier was a bad idea...
+
+### ggplot2 boxplots
+`ggplot2` doesn't use the formula notation for boxplots. Instead you just specify the x and y axis as you might have otherwise expected, then use `geom="boxplot"`:
+
+
+{% highlight r %}
+qplot(x = Species,
+      y = Petal.Length,
+      data = iris,
+      geom = "boxplot",
+      fill = Species,
+      ylab = "Sepal Length (cm)"
+      )
+{% endhighlight %}
+
+<img src="plots/basic_graphics-ggboxplot.png" title="plot of chunk ggboxplot" alt="plot of chunk ggboxplot" width="432" />
+{: .text-center}
+
+{: .question}
+Make a boxplot that shows the distribution of the product of petal width and petal length for each individual iris in the data set, split by species. Add a solid horizontal line to your plot that shows the mean of this product across all three the species. Also add a dotted horizontal line that shows the product of mean width and mean length, calculated separately. Are these the same? Why or why not?
+
+## Scatterplots
+Finally, lets make some scatterplots. In many ways, these are the easiest to do. Use `plot()`, giving both `x` and `y` values. (Unfortunately, the `data = iris` trick won't work here.)
+
+{% highlight r %}
+plot(x = iris$Sepal.Width, y = iris$Sepal.Length)
+{% endhighlight %}
+
+<img src="plots/basic_graphics-scatter.png" title="plot of chunk scatter" alt="plot of chunk scatter" width="504" />
+{: .text-center}
+
+If you want to add color or shapes to indicate the different species, things get a bit annoying, as we have to assign a color to every single point. Since the data are ordered by species, we can do this quickly with `rep()`, but if they were not, things would get a bit more complicated. If we wanted to do different shapes by species, we would have to make a vector of the shapes as well, which starts to get tedious. We also have to make a legend manually, which I am not even going to try here. 
+
+{% highlight r %}
+species_colors <- rep(c("orange", "purple", "blue"), each = 50)
+plot(x = iris$Sepal.Width, y = iris$Sepal.Length,
+     col = species_colors)
+{% endhighlight %}
+
+<img src="plots/basic_graphics-colorscatter.png" title="plot of chunk colorscatter" alt="plot of chunk colorscatter" width="504" />
+{: .text-center}
+
+### ggplot2 scatterplots
+With `ggplot2`, making these kinds of plots is much simpler, as long as we are willing to let `ggplot2` choose the colors and shapes (it tends to do a good job, but we could override it with another set of commands that we won't worry about now).
+
+
+{% highlight r %}
+qplot(x = Sepal.Width, y = Sepal.Length,
+      data = iris,
+      color = Species,
+      shape = Species)
+{% endhighlight %}
+
+<img src="plots/basic_graphics-ggcolorscatter.png" title="plot of chunk ggcolorscatter" alt="plot of chunk ggcolorscatter" width="432" />
+{: .text-center}
+
+One little problem with this data that you can see is that there are multiple points that overlap, so you can't see all of the points. This is known as overplotting, and one way to get around it is to add a bit of random error ("jitter") to our data, moving all the points just a little bit from their true position. This is easy to do in `ggplot2` without affecting the original data. (This would be much more annoying to do using basic `R` plotting commands.)
+
+{% highlight r %}
+qplot(x = Sepal.Width, y = Sepal.Length,
+      data = iris,
+      color = Species,
+      shape = Species,
+      position = "jitter")
+{% endhighlight %}
+
+<img src="plots/basic_graphics-ggcolorscatter2.png" title="plot of chunk ggcolorscatter2" alt="plot of chunk ggcolorscatter2" width="432" />
+{: .text-center}
+
+
+## Writing Assignment
+
+Using the iris data, or any other multidimensional data set that you might find and want to use, create a plot that illustrates something you find interesting about that data. Your plot should take advantage of at least one feature of plotting in `R` that was not discussed on this page, either from base graphics or `ggplot2`. (Some suggestions: density plots, transparency, varible point sizes, continuous color scales, fit lines, or smoothing curves). You may find the examples available at [ggplot2.org](http://ggplot2.org) to be helpful, especially the example chapter from the [ggplot2 book](http://ggplot2.org/book/): "Getting started with qplot" \[[PDF](http://ggplot2.org/book/qplot.pdf)\].
+
+Your lab assignment for this week is to write a tutorial explaining how to make your plot and what it means. You should start by describing your data set and how to load it into R. Then describe the steps you took to make the plot. You may want start with a simple plot, then show your additions step by step as the plots (and plotting commands) become more complex. Finally, describe the conclusions about your data that you are able to discern from your plot. Assume that the reader has a basic knowledge of R, but has never seen `ggplot2` before. Basically, that they are where you were before today... 
+
+
+
+
+## Extra: Bar charts
+I don't use a lot of bar charts, for a few reasons, but it does come up at times, so I am throwing the instructions for making a bar plot down here at the bottom. To make a bar chart in R, you can use the function `barplot()`. In the simplest case, you have a vector of numbers and a vector of labels. For example, if I were plotting the number of points scored by each team in the NFL Conference Championships this year, I would have the following vectors:
 
 
 {% highlight r %}
@@ -261,7 +420,7 @@ barplot(points, names = teams,
         xlab = "Team")
 {% endhighlight %}
 
-![plot of chunk barplot](plots/basic_graphics-barplot.png)
+<img src="plots/basic_graphics-barplot.png" title="plot of chunk barplot" alt="plot of chunk barplot" width="504" />
 {: .text-center}
 One thing you might have noticed is that the y-axis in this plot does not extend to cover all of the data. `R` has a tendency to do this in its attempts to find "pretty" (their word, not mine) places to put the axis ticks, but you might disagree with its decision about how long a given axis should be. Luckily, you can control this using `xlim` and `ylim`, each of which takes a vector of length 2 with the minimum and maximum values for the axis.
 
@@ -274,7 +433,7 @@ barplot(points, names = teams,
         xlab = "Team")
 {% endhighlight %}
 
-![plot of chunk barplot_unpretty](plots/basic_graphics-barplot_unpretty.png)
+<img src="plots/basic_graphics-barplot_unpretty.png" title="plot of chunk barplot_unpretty" alt="plot of chunk barplot_unpretty" width="504" />
 {: .text-center}
 
 As the data get more complicated, you might want to start grouping bars (for example to put the teams that actually played each other close together, with larger spaces between matchup pairs), but we will leave that for another time. 
@@ -285,12 +444,12 @@ Bar charts can be done in `ggplot2` by adding the argument `geom = "bar"` to a `
 
 {% highlight r %}
 qplot(x = teams, y = points, 
-      geom="bar", 
+      geom = "bar", 
       stat = "identity", 
       fill = I(team_colors))
 {% endhighlight %}
 
-![plot of chunk ggbarplot](plots/basic_graphics-ggbarplot.png)
+<img src="plots/basic_graphics-ggbarplot.png" title="plot of chunk ggbarplot" alt="plot of chunk ggbarplot" width="504" />
 {: .text-center}
 If you don't use the `I()` function, `ggplot2` will try to intepret the vector you give to `fill` as a factor, and it will assign its own colors (and generate a legend), which can actually be handy:
 
@@ -303,114 +462,6 @@ qplot(x = teams, y = points,
       fill = league)
 {% endhighlight %}
 
-![plot of chunk ggbarplot2](plots/basic_graphics-ggbarplot2.png)
+<img src="plots/basic_graphics-ggbarplot2.png" title="plot of chunk ggbarplot2" alt="plot of chunk ggbarplot2" width="432" />
 {: .text-center}
-
-## Box Plots
-Another way we can represent a distribution is with a box plot, which we can make using the function `boxplot()`, of all things. For one variable, the call is simple:
-
-
-{% highlight r %}
-boxplot(Petal.Length, ylab = "Petal Length (cm)")
-{% endhighlight %}
-
-![plot of chunk box](plots/basic_graphics-box.png)
-{: .text-center}
-
-The real utility of box plots though, is to compare distributions in a single plot. To include more than one variable, we need to enclose the variables in a `list`, which is a data structure we have not yet talked about. It is similar to a vector, but can contain elements of different types, including vectors. We could save the list to a variable name of its own, but for now we will just call `list()` within the `boxplot()` function. If To customise the labels for each box, you  use `names`, as in the `barplot()` example.
-
-
-{% highlight r %}
-boxplot(list(Petal.Length, Petal.Width, Sepal.Length, Sepal.Width), 
-        names = c("Petal Length", "Petal Width", 
-                  "Sepal Length", "Sepal Width"),
-        ylab = "centimeters")
-{% endhighlight %}
-
-![plot of chunk boxplot](plots/basic_graphics-boxplot.png)
-{: .text-center}
-
-Another thing we might want to do is to take the iris data and separate out the different species. To do that with base graphics, we have to introduce R formulas. A formula is a way of representing a relationship you want to explore. Take the classic linear relationship: $y = a + bx$. Since in statistical analysis we generally don't know $a$ and $b$ before we start, the R formula expression just leaves them out, and we would represent the relationship between a response variable `y` and an explanatory variable `x` with the formula `y ~ x`. What that is saying is that `y` may depend on `x`, and that is the relationship I want to explore. In the context of the box plot, I want to see if the distributions are different for different species, so I will use the formula `Petal.Length ~ Species`. This is put in as the first argument. 
-
-
-{% highlight r %}
-boxplot(Petal.Length ~ Species, 
-        col = c("orange", "purple", "blue"),
-        ylab = "Sepal Length (cm)")
-{% endhighlight %}
-
-![plot of chunk box_formula](plots/basic_graphics-box_formula.png)
-{: .text-center}
-
-You should be able to see pretty clearly why plotting all of the species together as we did earlier was a bad idea...
-
-### ggplot2 boxplots
-`ggplot2` doesn't use the formula notation for boxplots. Instead you just specify the x and y axis as you might have otherwise expected, then use `geom="boxplot"`:
-
-
-{% highlight r %}
-qplot(x = Species,
-      y = Petal.Length,
-      geom = "boxplot",
-      fill = Species,
-      ylab = "Sepal Length (cm)"
-      )
-{% endhighlight %}
-
-![plot of chunk ggboxplot](plots/basic_graphics-ggboxplot.png)
-{: .text-center}
-
-
-{: .problem}
-Make a boxplot that shows the distribution of the product of petal width and petal length for each individual iris in the data set, split by species. Add a solid horizontal line to your plot that shows the mean of this product across all three the species. Also add a dotted horizontal line that shows the product of mean width and mean length, calculated separately. Are these the same? Why or why not?
-
-## Scatterplots
-Finally, lets make some scatterplots. In many ways, these are the easiest to do. Use `plot()`, giving both `x` and `y` values.
-
-{% highlight r %}
-plot(x = Sepal.Width, y = Sepal.Length)
-{% endhighlight %}
-
-![plot of chunk scatter](plots/basic_graphics-scatter.png)
-{: .text-center}
-
-If you want to add color or shapes to indicate the different species, things get a bit annoying, as we have to assign a color to every single point. Since the data are ordered by species, we can do this quickly with `rep()`, but if they were not, things would get a bit more complicated. If we wanted to do different shapes by species, we would have to make a vector of the shapes as well, which starts to get tedious. We also have to make a legend manually, which I am not even going to try here.
-
-{% highlight r %}
-species_colors <- rep(c("orange", "purple", "blue"), each = 50)
-plot(x = Sepal.Width, y = Sepal.Length,
-     col = species_colors)
-{% endhighlight %}
-
-![plot of chunk colorscatter](plots/basic_graphics-colorscatter.png)
-{: .text-center}
-
-### ggplot2 scatterplots
-With `ggplot2`, making these kinds of plots is much simpler, as long as we are willing to let `ggplot2` choose the colors and shapes (it tends to do a good job, but we could override it with another set of commands that we won't worry about now).
-
-
-{% highlight r %}
-qplot(x = Sepal.Width, y = Sepal.Length,
-      color = Species,
-      shape = Species)
-{% endhighlight %}
-
-![plot of chunk ggcolorscatter](plots/basic_graphics-ggcolorscatter.png)
-{: .text-center}
-
-One little problem with this data that you can see is that there are multiple points that overlap, so you can't see all of the points. This is known as overplotting, and one way to get around it is to add a bit of random error ("jitter") to our data, moving all the points just a little bit from their true position. This is easy to do in `ggplot2` without affecting the original data. (This would be much more annoying to do using basic `R` plotting commands.)
-
-{% highlight r %}
-qplot(x = Sepal.Width, y = Sepal.Length,
-      color = Species,
-      shape = Species,
-      position = "jitter")
-{% endhighlight %}
-
-![plot of chunk ggcolorscatter2](plots/basic_graphics-ggcolorscatter2.png)
-{: .text-center}
-
-{: .problem}
-Make one more plot to turn in. Use the iris data, and create a plot that illustrates something you find interesting about that data, then write a caption explaining what the plot shows. Make sure your plot is fully labelled. Extra points for using a feature of plotting in `R` that was not discussed on this page, either from base graphics or `ggplot2`. (Some suggestions: density plots, transparency, facets, varible point sizes, continuous color scales, fit lines, or smoothing curves). You may find the examples available at [ggplot2.org](http://ggplot2.org) to be helpful, especially the example chapter from the [ggplot2 book](http://ggplot2.org/book/): "Getting started with qplot" \[[PDF](http://ggplot2.org/book/qplot.pdf)\].
-
 
