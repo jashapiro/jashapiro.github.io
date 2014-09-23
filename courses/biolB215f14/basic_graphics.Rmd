@@ -9,7 +9,7 @@ nav: teaching
 
 ```{r setup, include=FALSE, cache=FALSE}
 source("../../_knitr/knit_jekyll_setup.R")
-opts_chunk$set(fig.path="plots/basic_graphics-", tidy=FALSE, fig.width=7, fig.height=5, fig.align="center", fig.retina = 2)
+opts_chunk$set(fig.path="plots/basic_graphics-", tidy=FALSE, fig.width=5, fig.height=5, fig.align="center", fig.retina = 2)
 set.seed(20140923)
 ```
 
@@ -142,7 +142,7 @@ qplot(x = Sepal.Width,
 
 If we specify the fill color as a variable (`Species` in this case), ggplot will  make a kind of staked histograms, with each bar colored by the number of each species in each grouping.
 
-```{r sepalcolor}
+```{r sepalcolor, fig.width=7}
 qplot(x = Sepal.Width,
       data = iris,
       binwidth = 0.2,
@@ -153,7 +153,7 @@ qplot(x = Sepal.Width,
 While pretty it can be a bit hard to see what each species histogram would look like on its own. In this case, the *setosa* histogram is easy to interpret, but the ones stacked on top of it are a bit rough. It might be better to separate those plots onto separate plots. When we do this, we do want all of our plots to still have the same binwidths and to be nicely aligned. This is called facetting, and can be done with the `facets` argument. To use this, you specify what you want to split the data up by, with vertical splits (rows) first, then a `~` (tilde) followed by horizontal splits (columns). In this case I want to the plots vertically so the data are stacked one on top of the other by Species, but I don't want to split by anything on the other axis, so I just use a period (`.`) to specify no splitting on the other axis. So facetting variable is `Species ~ .` as shown below.
 
 
-```{r sepalfacet, fig.height = 8}
+```{r sepalfacet, fig.height = 8, fig.width=7}
 qplot(x = Sepal.Width,
       data = iris,
       binwidth = 0.2,
