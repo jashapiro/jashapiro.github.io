@@ -51,7 +51,7 @@ Also recommended:
 
 **[Matrices and Lists](list_matrix.html)**
 
-<!-- **[Basic Plots in R](basic_graphics.html)**
+**[Plotting in R](basic_graphics.html)**
 
 
 
