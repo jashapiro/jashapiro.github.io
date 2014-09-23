@@ -26,19 +26,23 @@ med_norm <- rnorm(50, mean = 5)
 large_norm <- rnorm(1000, mean = 100, sd = 20) 
 {% endhighlight %}
 
-The other data set we will use is a set of measurements of irises (the flower). This data set dates back to the early 20th century, and a paper by R.A. Fisher, who originally developed much of the basic statistics that we use now. But he was fundamentally a biologist, and was also responsible for founding the fields of population genetics and quantitative genetics. Much of his work in statistics was developed to deal with biological data. In any case, the data in the iris data set were originally collected by Edgar Anderson, but made famous by one of Fisher's publications. They are measurements of flower sepals and petals, with 50 measurements of each of 3 species. (If you want a bit more information, try `?iris`.) The commands below will load the data into your workspace as a data frame and then show the names of the data columns.
+The other data set we will use is a set of measurements of irises (the flower). This data set dates back to the early 20th century, and a paper by R.A. Fisher, who originally developed much of the basic statistics that we use now. But he was fundamentally a biologist, and was also responsible for founding the fields of population genetics and quantitative genetics. Much of his work in statistics was developed to deal with biological data. In any case, the data in the iris data set were originally collected by Edgar Anderson, but made famous by one of Fisher's publications. They are measurements of flower sepals and petals, with 50 measurements of each of 3 species. (If you want a bit more information, try `?iris`.) The commands below will load the iris data set into your workspace as a data frame and then show a quick summary of structure of that data frame (names of the columns, type of data in each, and a few values).
 
 
 {% highlight r %}
 data(iris)
-names(iris) #this shows the names of the variables in the iris data.
+str(iris) 
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## [1] "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width" 
-## [5] "Species"
+## 'data.frame':	150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
 {% endhighlight %}
 
 Take some time to look at the raw data (type the name of each variable and look at the output). You will see that `Sepal.Length`, `Sepal.Width`,  `Petal.Length`, and `Petal.Width` are all `numeric`,  data, while `Species` is a `factor`.
@@ -97,14 +101,15 @@ plot(med_norm,
 <img src="plots/basic_graphics-colored_plot.png" title="plot of chunk colored_plot" alt="plot of chunk colored_plot" width="504" />
 {: .text-center}
 
-To see the possible point types, you can make a quick plot using a command like the one below. 
+To see the possible point types (there are 20 of them), you can make a quick plot using a command like the one below. 
 
 
 {% highlight r %}
 plot(1:20, 
      ylab = "pch value", 
      pch = 1:20,
-     col = c("red", "blue") )
+     col = c("red", "blue"),
+     cex = 2) 
 {% endhighlight %}
 
 <img src="plots/basic_graphics-point_types.png" title="plot of chunk point_types" alt="plot of chunk point_types" width="504" />
