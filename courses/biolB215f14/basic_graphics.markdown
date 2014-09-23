@@ -1,6 +1,6 @@
 ---
 layout: Rmd
-title: Basic Plots with R
+title: Plotting with R
 pretitle: Biol B215
 parent: index.html
 tags: [R, tutorial, RStudio, BiolB215]
@@ -309,7 +309,7 @@ boxplot(list(iris$Petal.Length, iris$Petal.Width, iris$Sepal.Length, iris$Sepal.
         ylab = "centimeters")
 {% endhighlight %}
 
-<img src="plots/basic_graphics-boxplot.png" title="plot of chunk boxplot" alt="plot of chunk boxplot" width="360" />
+<img src="plots/basic_graphics-boxplot.png" title="plot of chunk boxplot" alt="plot of chunk boxplot" width="504" />
 {: .text-center}
 
 Another thing we might want to do is to take the iris data and separate out the different species. To do that with base graphics, we have to introduce R formulas. A formula is a way of representing a relationship you want to explore. Take the classic linear relationship: $y = a + bx$. Since in statistical analysis we generally don't know $a$ and $b$ before we start, the R formula expression just leaves them out, and we would represent the relationship between a response variable `y` and an explanatory variable `x` with the formula `y ~ x`. What that is saying is that `y` may depend on `x`, and that is the relationship I want to explore. In the context of the box plot, I want to see if the distributions are different for different species, so I will use the formula `Petal.Length ~ Species`. This is put in as the first argument. In order to save me from having to type `iris$` a bunch of times to show that I am referring to the `iris` data frame (i.e. `iris$Petal.Length ~ iris$Species`), I can tell the boxplot command that all of my varibles are coming from `iris` with the argument `data = iris` as shown below. 
@@ -395,17 +395,19 @@ qplot(x = Sepal.Width, y = Sepal.Length,
 <img src="plots/basic_graphics-ggcolorscatter2.png" title="plot of chunk ggcolorscatter2" alt="plot of chunk ggcolorscatter2" width="432" />
 {: .text-center}
 
-
+<div class="panel panel-primary">
+<div class="panel-heading" markdown="1">
 ## Writing Assignment
-
+</div>
+<div class="panel-body" markdown="1">
 Using the iris data, or any other multidimensional data set that you might find and want to use, create a plot that illustrates something you find interesting about that data. Your plot should take advantage of at least one feature of plotting in `R` that was not discussed on this page, either from base graphics or `ggplot2`. (Some suggestions: density plots, transparency, varible point sizes, continuous color scales, fit lines, or smoothing curves). You may find the examples available at [ggplot2.org](http://ggplot2.org) to be helpful, especially the example chapter from the [ggplot2 book](http://ggplot2.org/book/): "Getting started with qplot" \[[PDF](http://ggplot2.org/book/qplot.pdf)\].
 
 Your lab assignment for this week is to write a tutorial explaining how to make your plot and what it means. You should start by describing your data set and how to load it into R. Then describe the steps you took to make the plot. You may want start with a simple plot, then show your additions step by step as the plots (and plotting commands) become more complex. Finally, describe the conclusions about your data that you are able to discern from your plot. Assume that the reader has a basic knowledge of R, but has never seen `ggplot2` before. Basically, that they are where you were before today... 
+</div>
+</div>
 
 
-
-
-## Extra: Bar charts
+### Extra: Bar charts
 I don't use a lot of bar charts, for a few reasons, but it does come up at times, so I am throwing the instructions for making a bar plot down here at the bottom. To make a bar chart in R, you can use the function `barplot()`. In the simplest case, you have a vector of numbers and a vector of labels. For example, if I were plotting the number of points scored by each team in the NFL Conference Championships this year, I would have the following vectors:
 
 
@@ -443,7 +445,7 @@ barplot(points, names = teams,
 
 As the data get more complicated, you might want to start grouping bars (for example to put the teams that actually played each other close together, with larger spaces between matchup pairs), but we will leave that for another time. 
 
-### ggplot2 bar charts
+### `ggplot2` bar charts
 Bar charts can be done in `ggplot2` by adding the argument `geom = "bar"` to a `qplot()` function that has `x` and `y` values. If you want to avoid getting a warning from `ggplot2`, you also have to add an argument of `stat = "identity"`, and you have to wrap the fill colors up in that `I()` function again.  It isn't the prettiest thing in the world, but it does work.
 
 
