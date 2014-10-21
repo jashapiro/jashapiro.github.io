@@ -157,17 +157,18 @@ hist(large_norm,
 {: .text-center}
 
 ### `ggplot2` Histograms
-The basic plotting function in in `ggplot2` is `qplot()`, which can actually make a large number of different kinds of plots, depending on what options you give it. To make a histogram, we will first load the `ggplot2` library (you only need to do this once per session) and then call `qplot()` with a single vector of numbers. Unlike `plot()`, `qplot()` will actually do something reasonable here, and make a histogram rather than just a series of points.
+The basic plotting function in in `ggplot2` is `qplot()`, which can actually make a large number of different kinds of plots, depending on what options you give it. (Saying this is the *basic* plotting function is a bit misleading as it is actually a layer on top of lower level functions, but it is the easiest one to use, at least at first.) 
+
+To make a histogram, we will first load the `ggplot2` package (you only need to do this once per session) and then call `qplot()` with a single vector of numbers. Unlike `plot()`, `qplot()` will actually do something reasonable here, and make a histogram rather than just a series of points.
 
 
 {% highlight r %}
-require(ggplot2)
+library(ggplot2)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## Loading required package: ggplot2
 ## Loading required package: methods
 {% endhighlight %}
 
@@ -228,7 +229,7 @@ qplot(x = Sepal.Width,
 <img src="plots/basic_graphics-sepalcolor.png" title="plot of chunk sepalcolor" alt="plot of chunk sepalcolor" width="504" />
 {: .text-center}
 
-While pretty it can be a bit hard to see what each species histogram would look like on its own. In this case, the *setosa* histogram is easy to interpret, but the ones stacked on top of it are a bit rough. It might be better to separate those plots onto separate plots. When we do this, we do want all of our plots to still have the same binwidths and to be nicely aligned. This is called facetting, and can be done with the `facets` argument. To use this, you specify what you want to split the data up by, with vertical splits (rows) first, then a `~` (tilde) followed by horizontal splits (columns). In this case I want to the plots vertically so the data are stacked one on top of the other by Species, but I don't want to split by anything on the other axis, so I just use a period (`.`) to specify no splitting on the other axis. So facetting variable is `Species ~ .` as shown below.
+While pretty it can be a bit hard to see what each species histogram would look like on its own. In this case, the *setosa* histogram is easy to interpret, but the ones stacked on top of it are a bit rough. It might be better to separate each set of data onto distinct sets of axes. When we do this, we do want all of our plots to still have the same binwidths and to be nicely aligned. This is called facetting, and can be done with the `facets` argument. To use this, you specify what you want to split the data up by, with vertical splits (rows) first, then a `~` (tilde) followed by horizontal splits (columns). In this case I want to the plots vertically so the data are stacked one on top of the other by Species, but I don't want to split by anything on the other axis, so I just use a period (`.`) to specify no splitting on the other axis. So facetting variable is `Species ~ .` as shown below.
 
 
 
