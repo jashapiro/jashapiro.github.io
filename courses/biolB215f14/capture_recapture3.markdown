@@ -14,7 +14,7 @@ nav: teaching
 ## Capturing Lizards
 Now that the class has agreed on the sampling scheme, it is time to do it! Each of you will come up and "catch" some lizards, marking each with a stripe on its tail. If we were doing a real experiment, we would be remiss not to take some measurements of the lizards. Measurements on toy lizards are a bit silly, but do record how many of each color you capture. After all of the lizards are marked, we will throw them back in the box and mix thoroughly. Then you can catch the second sample, again recording how many of each color were caught, and how many were marked with tail stripes (by color and total). *Do not return these lizards to the box.* We will keep them for later experiments.
 
-{: .problem-nonum}
+{: .question}
 Estimate the following quantities from the pooled class data:  
 **a.** The total number of lizards in the box.  
 **b.** The number of lizards of each color in the box.  
@@ -30,22 +30,20 @@ You calculated the true error for your simulation runs last time when you looked
 
 ### Standard Error
 It is possible to calculate the standard deviation of the estimate of population size using frequentist statistics. We won't derive this equation, but it is a reasonable place to start:
+
 $$\mathrm{SE}(N) = \sqrt{\frac{(M+1)(C+1)(M-R)(C-R)}{(R+1)(R+1)(R+2)}}$$
 
-Using the standard approximation of the 95% confidence interval as $\hat{N} \pm 1.96 \cdot \mathrm{SE}(N)$ it is possible calculate the confidence intervals for the previous simulations.
+{: .question}
+Using the standard approximation of the 95% confidence interval as $\hat{N} \pm 1.96 \cdot \mathrm{SE}(N)$ calculate the standard error and a 95% confidence interval for your estimate of the number of lizards in the box.
 
-{: .problem-nonum}
-Write a function to calculate the standard error and 95% confidence intervals from a capture-recapture experiment using the numbers of individuals captured in the first and second trappings and number of marked (recaptured) individuals in the second trapping.  
-**a.**  Calculate the standard error and a 95% confidence interval for your estimate of the number of lizards in the box.  
-**b.**  Calculate the standard errors and confidence intervals for your previous simulations. Generate histograms of the minimum and maximum for each confidence intervals from the the of simulations where you captured 100 individuals the first time.  
-**c.**  Do these confidence intervals make sense? Why or why not?  
-**d.**  What fraction of the time does your confidence interval include the true size of the population? Does this agree with what you know about confidence intervals?  
-
+This confidence interval is symmetrical, but that may not be the best way to think about  error in this case. Do you think you are more likely to over or underestimate the population size? 
 
 ### Likelihood Analysis
 
 The likelihood is the probability of the data we observed given some set of particular parameter values. In this situation, it is the probability that we would capture $R$ marked lizards in our second trapping, given a certain population size $N$: $\Pr(R\mid N)$. As I mentioned earlier, in this case that probability is given by the hypergeometric distribution:
+
 $$\Pr(R \mid N=x) = \frac{\binom{M}{R}\binom{N-M}{C-R}}{\binom{N}{C}}$$
+
 We can calculate this probability using the `dhyper()` function. This takes the same `m`, `n`, and `k` arguments as `rhyper()`, but returns the value of the hypergeometric probability distribution at some value `x`. (The `d` here stands for "density", as what we are looking for is the value of the probability density function. For a discrete distribution like the hypergeometric, this is the same as a probability, but for continuous distributions it is somewhat different.)
 
 So if we want to know the probability of catching 5 marked lizards among 50 lizards  in our second round of trapping, assuming the population size was 3000 and we marked 150 individuals on the first trapping, that would look like this:
@@ -57,7 +55,7 @@ dhyper(x = 5, m = 150, n = 3000 - 150, k = 50)
 
 
 {% highlight text %}
-## [1] 0.06545
+## [1] 0.06545096
 {% endhighlight %}
 
 In fact, we could calculate it for a range of numbers of marked individuals, using the fact that `R` loves to work with vectors. We could go ahead and calculate the entire probability  distribution; the chance of catching 0, 1, 2, ... , 50 marked individuals in a sample of 50, which I have plotted for your edification. What you may not be able to see exactly, but should be aware of, is that the sum of these probabilities is equal to 1. Check this for yourself using `sum()`.
@@ -69,17 +67,6 @@ recaptured <- 0:50
 probs <- dhyper(recaptured, m = 150, n = 3000 - 150, k = 50)
 
 library(ggplot2) #load ggplot2
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Loading required package: methods
-{% endhighlight %}
-
-
-
-{% highlight r %}
 qplot(x = recaptured, y = probs,
       color = I("blue"), 
       geom = "line",
@@ -88,7 +75,8 @@ qplot(x = recaptured, y = probs,
       ylab = "Probability")
 {% endhighlight %}
 
-![plot of chunk probdist](plots/capture_recapture3-probdist.png) 
+<img src="plots/capture_recapture3-probdist-1.png" title="plot of chunk probdist" alt="plot of chunk probdist" width="468" />
+{: .text-center}
 
 Of course, for a given experiment, we only see one outcome; we capture one group of animals and see one number of marked individuals among them. What we want to know is what the chance is that we would have seen that number of marked individuals given some range of population sizes. Again, this is the *likelihood* of the data given a particular parameter value. `R` is happy enough to calculate `dhyper()` for a variety of population sizes as well, and we can generate a plot of the likelihood of observing 5 marked individuals given a variety of total population sizes. 
 
@@ -104,12 +92,13 @@ qplot(x = popsize, y =  likes,
       ylab = "Likelihood")
 {% endhighlight %}
 
-![plot of chunk likelihood](plots/capture_recapture3-likelihood.png) 
+<img src="plots/capture_recapture3-likelihood-1.png" title="plot of chunk likelihood" alt="plot of chunk likelihood" width="468" />
+{: .text-center}
 
 
 The likelihood of the data across a range of parameters is often used directly to estimate the true value of a paprameter. To do this, you find the *maximum likelihood*, the value of the parameter that results in the largest likelihood value under your model.  
 
-{: .problem-nonum}
+{: .question}
 Calculate the likelihood values for lizard population sizes between 200 and 100,000 individuals, using the capture-recapture data from class. Generate a plot of the population sizes and the corresponding likelihoods.  
 **a.**  What is the maximum likelihood, and what population size does it correspond to? You will find the functions `max()` and  `which.max()`, which is also discussed on the next page, to be quite helpful.  
 **b.**  How does the maximum likelihood value you calculate compare to a naive estimate of the population size ($N = \frac{MC}{R}$). What about the Schnabel estimate?  

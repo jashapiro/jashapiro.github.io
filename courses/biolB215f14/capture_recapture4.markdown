@@ -12,7 +12,9 @@ nav: teaching
 
 ## Bayesian Analysis
 To calculate Bayesian Credible Intervals, we will use, as you might have guessed, Bayes' Theorem. Stated for this context, it is:
+
 $$\Pr(N=x \mid R) = \frac{\Pr(R \mid N=x)\Pr(N=x)}{\Pr(R)}$$ 
+
 or in words:
 
 The probability that the total population size ($N$) is $x$ given that we observed $R$ marked (recaptured) individuals in our second trapping is equal to the probability that we would capture $R$ marked individuals given that the population size is $x$ times the prior probability that the population size is $x$, divided by the probability that we would capture $R$ marked individuals, across all possible population sizes. (All given that we captured $M$ individuals in the first trapping and $C$ in the second)
@@ -21,7 +23,9 @@ The probability that the total population size ($N$) is $x$ given that we observ
 So what parts of this do know from our data? Well, we know $R$, and we can calculate $\Pr(R \mid N=x)$ (the likelihood of $R$ given $N=x$) using the hypergeometric distribution as shown previously.
 
 Leaving aside the prior, $\Pr(N=x)$, for a moment, we will go on to $\Pr(R)$. By the law of total probability, we can calculate that:
+
 $$\Pr(R) = \sum_x{\Pr(R \mid N=x)\Pr(N=x)}$$
+
 which is to say that the total probability of the observed $R$ is equal to the sums of the probabilities of observing $R$ for each possible value of $N$ times the probability of that value of $N$.
 
 
@@ -81,7 +85,8 @@ qplot(data = plotdata,
   guides(color = guide_legend(title = "Distribution"))
 {% endhighlight %}
 
-![plot of chunk priorplot](plots/capture_recapture4-priorplot.png) 
+<img src="plots/capture_recapture4-priorplot-1.png" title="plot of chunk priorplot" alt="plot of chunk priorplot" width="540" />
+{: .text-center}
 
 
 One thing we might want to know from this is what the most probable value is for the population size. One way to do this is to use the function `which.max()` to get the index of the largest of the probability values from the posterior distribution, selecting the whole row from data frame.
@@ -94,8 +99,8 @@ posterior[which.max(posterior$prob), ]
 
 
 {% highlight text %}
-##         N      prob
-## 1801 2000 0.0003756
+##         N         prob
+## 1801 2000 0.0003756175
 {% endhighlight %}
 
 ### Calculating credible intervals
@@ -150,11 +155,11 @@ bayesPopSize(marked = 5, first = 100, second = 100)
 ## 1      5   100    100  2000  2687        1183        8819
 {% endhighlight %}
 
-{: .problem-nonum}
+{: .question}
 Using your lizard count data from class, calculate the posterior probability of the population size, using a uniform (flat) prior distribution with a maximum possible population size of 10,000 lizards.  
 **a.**  What is the most probable value, and what is the credible interval? How does it compare to the estimate based on the likelihood values?  
 **b.**  Think about an intuitive explanation of the differences between the maximum likelihood confidence interval and the Bayesian credible interval. (Don't just state the definitions of confidence interval and credible interval, but think about how they were calculated here.)  
-**c.**  How do these values change if you had presupposed a maximum possible population size of 1,000 lizards? Explain this result. Is the maximum of 1,000 individuals a good choice for a prior?  
+**c.**  How do these values change if you had presupposed a maximum possible population size of 1,000 lizards? Explain this result. Is the maximum of 1,000 individuals a good choice for a prior?  Why or why not?
 **d.**  Capture-recapture experiments assume that an individual's chance of being caught does not depend on whether it was marked or not. How do you think your results be affected if marking animals made them more likely to be caught by predators? What if marking individuals has no effect, but some individuals are more attracted to the bait you use to trap them than others?  
 
 

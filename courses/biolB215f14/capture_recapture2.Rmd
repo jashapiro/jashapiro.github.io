@@ -144,4 +144,4 @@ Write up your calculations and simulations in an Rmarkdown document that describ
 ## Next
 Once we have a sampling scheme, we will try to get the best estimate of the number of lizards in the population *and our uncertainty about that number*.
 
-<!-- **[Error and likelihood](capture_recapture3.html)** -->
+**[Error and likelihood](capture_recapture3.html)**
