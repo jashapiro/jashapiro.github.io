@@ -5,28 +5,9 @@ This is an example of the kinds of simulation code you could use for designing y
 ## Setup R and knitr
 
 ```r
-opts_chunk$set(tidy=FALSE, 
-               cache=TRUE, 
-               cache.extra=rand_seed, 
-               fig.path="plots/cr_example-")
-```
-
-```
-## Error: object 'opts_chunk' not found
-```
-
-```r
+library(knitr)
+opts_chunk$set(tidy=FALSE, cache=TRUE, cache.extra=rand_seed, fig.path="plots/cr_example-")
 options(width=60)
-
-library(ggplot2)
-```
-
-```
-## Loading required package: methods
-```
-
-```r
-library(plyr)
 
 # set random number seed for reproducibility
 set.seed(20130703)
@@ -36,9 +17,28 @@ set.seed(20130703)
 
 ## Required Functions
 
-We need a few functions just to start off with, before we get to the full simulation. 
+We need a few functions just to start off with, before we get to the full simulation. First we will load a couple of libraries:
 
-First is the function to calculate the Schnabel estimate of population size.
+
+```r
+library(ggplot2)
+library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+## 
+## The following object is masked from 'package:stats':
+## 
+##     filter
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+Next is the function to calculate the Schnabel estimate of population size.
 
 ```r
 schnabel <- function(first, second, recaught){
@@ -50,7 +50,7 @@ schnabel(150, 50, 3)
 ```
 
 ```
-## [1] 1924
+## [1] 1924.25
 ```
 
 Then we need our basic simulator, same as in the instructions, just with Schnabel substituted for the previous population size estimator. Note that this returns a data frame with all of the parameters and the results.
@@ -60,22 +60,17 @@ Then we need our basic simulator, same as in the instructions, just with Schnabe
 simRecapture<- function(popsize, first, second, reps = 1){
   recaught <- rhyper(nn = reps, m = first, n = popsize - first, k = second)
   pop_est <- schnabel(first, second, recaught)
-  return(data.frame(popsize, 
-                    first, 
-                    second, 
-                    recaught, 
-                    pop_est)
-         )
+  data.frame(popsize, first, second, recaught, pop_est)
 }
 # test it
 simRecapture(100, 50, 50, reps = 3)
 ```
 
 ```
-##   popsize first second recaught pop_est
-## 1     100    50     50       28   88.69
-## 2     100    50     50       26   95.33
-## 3     100    50     50       27   91.89
+##   popsize first second recaught  pop_est
+## 1     100    50     50       27 91.89286
+## 2     100    50     50       28 88.68966
+## 3     100    50     50       26 95.33333
 ```
 
 I will also write a function to calculate mean squared error from a data frame with the format returned by my simulation. I will take adavantage of the fact that the data frame always has the true population size listed for every row.
@@ -83,7 +78,7 @@ I will also write a function to calculate mean squared error from a data frame w
 ```r
 mseSim <- function(sim_df){
   sq_err <- (sim_df$pop_est - sim_df$popsize)^2
-  return(mean(sq_err))
+  data.frame(MSE = mean(sq_err))
 }
 
 # test it
@@ -92,7 +87,8 @@ mseSim(my_sims)
 ```
 
 ```
-## [1] 112.2
+##        MSE
+## 1 161.6428
 ```
 
 ## First simulations
@@ -106,7 +102,8 @@ mseSim(sim_100x100)
 ```
 
 ```
-## [1] 1101336
+##       MSE
+## 1 1102344
 ```
 
 ```r
@@ -115,7 +112,8 @@ mseSim(sim_150x50)
 ```
 
 ```
-## [1] 1156806
+##       MSE
+## 1 1155491
 ```
 
 ```r
@@ -124,7 +122,8 @@ mseSim(sim_50x150)
 ```
 
 ```
-## [1] 1121572
+##       MSE
+## 1 1121887
 ```
 
 ```r
@@ -137,7 +136,7 @@ qplot(data = three_sims,
       xlab = "Population size estimate")
 ```
 
-![plot of chunk sim_3cond](figure/sim_3cond.png) 
+![plot of chunk sim_3cond](plots/cr_example-sim_3cond-1.png) 
 
 ## More simulations
 Three categories is a bit too few to really judge where the best sampling scheme is, so I will go ahead and test all possible sampling schemes. To do this all at once, I will use plyr, specifically the `mdply()` function, which allows me to give a data frame of arguments to a function, combining all of the results together into a single data frame. So the first step is to make that data frame of arguments (all possible pairs first and second trapping counts), then pass it to `mdply()` with my `simRecapture()` function. The arguments that don't vary I will give separately when I call mdply; it will use the same ones for each call to simRecapture.
@@ -145,44 +144,52 @@ Three categories is a bit too few to really judge where the best sampling scheme
 ```r
 sim_args <- data.frame(first = 1:199,
                        second = 199:1)
-bigsim <- mdply(.data = sim_args, .fun = simRecapture,
-                 popsize = truepop,
-                 reps = 1000)
+bigsim <- sim_args %>% 
+            group_by(first) %>%
+            do(simRecapture(popsize = truepop,
+                            first = .$first,
+                            second = .$second,
+                            reps = 100))
 ```
 
 I can then calculate the MSE for each of those simulations using `ddply()` and my `mseSim()` function. 
 
 ```r
-bigsim_mse <- ddply(.data = bigsim, 
-                    .variables = .(first),
-                    .fun ="mseSim")
+bigsim_mse <- bigsim %>% 
+                group_by(first) %>%
+                do(mseSim(.))
 qplot(data = bigsim_mse,
       x = first,
-      y = mseSim,
+      y = MSE,
       xlab = "First sample size",
       ylab = "Mean squared error")
 ```
 
-![plot of chunk mseSims](figure/mseSims.png) 
+![plot of chunk mseSims](plots/cr_example-mseSims-1.png) 
 
 That is pretty ugly, especially in the middle, so lets do more replicates per condition to see if we can sort that out.
 
 
 ```r
-biggersim <- mdply(.data = sim_args, .fun = simRecapture,
-                   popsize = truepop,
-                   reps = 1e4)
-biggersim_mse <- ddply(.data = biggersim, 
-                       .variables = .(first),
-                       .fun = "mseSim")
+biggersim <- sim_args %>% 
+            group_by(first) %>%
+            do(simRecapture(popsize = truepop,
+                            first = .$first,
+                            second = .$second,
+                            reps = 1e4))
+
+biggersim_mse <-biggersim %>% 
+                group_by(first) %>%
+                do(mseSim(.))
+
 qplot(data = biggersim_mse,
       x = first,
-      y = mseSim,
+      y = MSE,
       xlab = "First sample size",
       ylab = "Mean squared error")
 ```
 
-![plot of chunk bigger](figure/bigger.png) 
+![plot of chunk bigger](plots/cr_example-bigger-1.png) 
 
 Well, that is certainly interesting... We seem to do well if we are close to 100 & 100, or if we take 11-12 on the first or second try. I wonder if it depends on the true population size... Lets try a few different population sizes. I'll use a function called `expand.grid()` to generate all combinations of two vectors: the true population sizes and the first sample size. 
 
@@ -191,32 +198,36 @@ Well, that is certainly interesting... We seem to do well if we are close to 100
 sim_combos <- expand.grid(popsize = c( 500, 750, 1000, 1500, 2000, 5000), first = 1:199)
 sim_combos$second <- 200 - sim_combos$first 
 
-hugesim <- mdply(.data = sim_combos, .fun = simRecapture,
-                 reps = 1e4)
+hugesim <- sim_combos %>% 
+            group_by(popsize, first) %>%
+            do(simRecapture(popsize = .$popsize,
+                            first = .$first,
+                            second = .$second,
+                            reps = 1e4))
 ```
 
 ```r
 # simulation in a separate chunk for caching efficiency
-hugesim_mse <- ddply(.data = hugesim, 
-                     .variables = .(popsize, first),
-                     .fun = "mseSim")
+hugesim_mse <- hugesim %>% 
+                group_by(popsize, first) %>%
+                do(mseSim(.))
 
 qplot(data = hugesim_mse,
       x = first,
-      y = mseSim,
+      y = MSE,
       color = popsize,
       xlab = "First sample size",
       ylab = "Mean squared error")
 ```
 
-![plot of chunk hugesim_plot](figure/hugesim_plot.png) 
+![plot of chunk hugesim_plot](plots/cr_example-hugesim_plot-1.png) 
 A bit hard to read, that. Let's convert the popsize to a factor when plotting to make the colors more distinct, transform the MSE to a coefficient of variation(ish) by taking the square root and dividing by the true population size, make the data points smaller, fade them by making them partly transparent with the `alpha` argument, and then add on as smoothing function. If you want details on all of these options, the [ggplot2 website](http://docs.ggplot2.org/) is a good, if technical, resource, as is [Google](http://google.com), as always. You can find a lot by searching.
 
 
 ```r
 qplot(data = hugesim_mse,
       x = first,
-      y = sqrt(mseSim)/popsize,
+      y = sqrt(MSE)/popsize,
       color = factor(popsize),
       alpha = I(0.5),
       xlab = "First sample size",
@@ -229,7 +240,7 @@ qplot(data = hugesim_mse,
 ## geom_smooth: method="auto" and size of largest group is <1000, so using loess. Use 'method = x' to change the smoothing method.
 ```
 
-![plot of chunk simplot2](figure/simplot2.png) 
+![plot of chunk simplot2](plots/cr_example-simplot2-1.png) 
 Well, that is still a bit mysterious. Looks like the lowest error is out toward the ends for many population sizes, but the exact location varies a fair amount. If the population size is very large, you might be better off with a unbalanced strategy, but it seems like the ideal ratio of first to second is pretty sensitive to the assumed population size.  If you think the actual population size is in the thousands, you might want to bias your sample, but what is best for 5000 is not very good for 1500, and vice-versa. Maybe sticking with 100 & 100 would be the best thing to do overall... 
 
 All of this is a pretty good argument for not really trusting a simple point estimate of the population size, and definitely not putting too much weight on our initial guesses.
