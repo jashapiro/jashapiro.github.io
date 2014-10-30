@@ -96,7 +96,7 @@ qplot(x = popsize, y =  likes,
 {: .text-center}
 
 
-The likelihood of the data across a range of parameters is often used directly to estimate the true value of a paprameter. To do this, you find the *maximum likelihood*, the value of the parameter that results in the largest likelihood value under your model.  
+The likelihood of the data across a range of parameters is often used directly to estimate the true value of a parameter. To do this, you find the *maximum likelihood*, the value of the parameter that results in the largest likelihood value under your model.  
 
 {: .question}
 Calculate the likelihood values for lizard population sizes between 200 and 100,000 individuals, using the capture-recapture data from class. Generate a plot of the population sizes and the corresponding likelihoods.  
