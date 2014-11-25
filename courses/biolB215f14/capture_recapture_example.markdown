@@ -6,6 +6,13 @@ This is an example of the kinds of simulation code you could use for designing y
 
 ```r
 library(knitr)
+```
+
+```
+## Warning: package 'knitr' was built under R version 3.1.2
+```
+
+```r
 opts_chunk$set(tidy=FALSE, cache=TRUE, cache.extra=rand_seed, fig.path="plots/cr_example-")
 options(width=60)
 
@@ -23,19 +30,6 @@ We need a few functions just to start off with, before we get to the full simula
 ```r
 library(ggplot2)
 library(dplyr)
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-## 
-## The following object is masked from 'package:stats':
-## 
-##     filter
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
 ```
 
 Next is the function to calculate the Schnabel estimate of population size.

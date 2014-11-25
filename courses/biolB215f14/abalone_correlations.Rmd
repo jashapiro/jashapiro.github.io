@@ -9,17 +9,16 @@ nav: teaching
 
 ```{r setup, include=FALSE, cache=FALSE}
 source("../../_knitr/knit_jekyll_setup.R")
-opts_chunk$set(fig.path="plots/abalone_analysis-", tidy=FALSE, fig.width=6.5, fig.height=5, cache=TRUE, cache.extra=rand_seed)
+opts_chunk$set(fig.path="plots/abalone_analysis-", tidy=FALSE, fig.width=6.5, fig.height=5, fig.align="center", fig.retina = 2)
 set.seed(20130409)
 ```
 
 [back to Cleaning](abalone_cleaning.html)
 
 ## Correlations 
-First, if you have created a new environment, you will need to reload the abalone data and make sure that you have the `plyr` and  `ggplot2` libraries are loaded.  I had saved my abalone data frame as `abalone_trimmed.Rdata`, so I will use `load()` to pull that back into my fresh workspace, where it will again be named `abalone`. Just to check, it should still have 4157 rows. (Even if you are still in the same project as last time, it is a good idea to reload the abalone data from a file that you know has all the right data, just to be safe. It is a nice checkpoint that you can always go back to if things get messed up.)
+First, if you have created a new environment, you will need to reload the abalone data and make sure that you have the `ggplot2` library  loaded.  I had saved my abalone data frame as `abalone_trimmed.Rdata`, so I will use `load()` to pull that back into my fresh workspace, where it will again be named `abalone`. Just to check, it should still have 4157 rows. (Even if you are still in the same project as last time, it is a good idea to reload the abalone data from a file that you know has all the right data, just to be safe. It is a nice checkpoint that you can always go back to if things get messed up.)
 
 ```{r read}
-library(plyr)
 library(ggplot2)
 load("abalone_trimmed.Rdata")
 # check the size
@@ -128,7 +127,7 @@ lm_multi <- lm(Age ~ Length * Height, data = abalone)
 summary(lm_multi)
 ```
 
-Now all the terms are significant, including length! How much better is the fit? WE can look at the Multiple R-squared values for each fit, or we can compare them visually, as below.
+Now all the terms are significant, including length! How much better is the fit? We can look at the Multiple R-squared values for each fit, or we can compare them visually, as below.
 
 ```{r fitplots, fig.width=8}
 fits <- rbind(data.frame(fit = "sum", 

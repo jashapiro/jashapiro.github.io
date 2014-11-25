@@ -119,7 +119,7 @@ sim_recaptures
 
 
 {% highlight text %}
-##  [1] 3 4 5 2 7 2 3 6 3 3
+##  [1] 3 4 5 2 8 2 3 6 3 3
 {% endhighlight %}
 
 
@@ -131,7 +131,7 @@ recapturePopSize(first_capture, second_capture, sim_recaptures)
 
 
 {% highlight text %}
-##  [1] 2500 1875 1500 3750 1071 3750 2500 1250 2500 2500
+##  [1] 2500.0 1875.0 1500.0 3750.0  937.5 3750.0 2500.0 1250.0 2500.0 2500.0
 {% endhighlight %}
 
 
@@ -155,7 +155,7 @@ sim_recaptured
 
 
 {% highlight text %}
-##  [1] 3 4 5 2 3 3 4 1 2 3
+##  [1] 4 5 2 3 3 4 1 2 3 4
 {% endhighlight %}
 
 We can wrap the simulation and estimation into a single function to do the simulation and estimation in one step, then return a data frame with each row representing all of the parameters for each simulation and its results.
@@ -175,11 +175,11 @@ simEstimate(2000, 50, 150, reps = 5)
 
 {% highlight text %}
 ##   popsize first second recaught pop_est
-## 1    2000    50    150        6    1250
-## 2    2000    50    150        4    1875
-## 3    2000    50    150        1    7500
+## 1    2000    50    150        4    1875
+## 2    2000    50    150        1    7500
+## 3    2000    50    150        3    2500
 ## 4    2000    50    150        3    2500
-## 5    2000    50    150        3    2500
+## 5    2000    50    150        6    1250
 {% endhighlight %}
 
 ### A Better Estimate

@@ -12,12 +12,22 @@ nav: teaching
 [back to Cleaning](abalone_cleaning.html)
 
 ## Correlations 
-First, if you have created a new environment, you will need to reload the abalone data and make sure that you have the `plyr` and  `ggplot2` libraries are loaded.  I had saved my abalone data frame as `abalone_trimmed.Rdata`, so I will use `load()` to pull that back into my fresh workspace, where it will again be named `abalone`. Just to check, it should still have 4157 rows. (Even if you are still in the same project as last time, it is a good idea to reload the abalone data from a file that you know has all the right data, just to be safe. It is a nice checkpoint that you can always go back to if things get messed up.)
+First, if you have created a new environment, you will need to reload the abalone data and make sure that you have the `ggplot2` library  loaded.  I had saved my abalone data frame as `abalone_trimmed.Rdata`, so I will use `load()` to pull that back into my fresh workspace, where it will again be named `abalone`. Just to check, it should still have 4157 rows. (Even if you are still in the same project as last time, it is a good idea to reload the abalone data from a file that you know has all the right data, just to be safe. It is a nice checkpoint that you can always go back to if things get messed up.)
 
 
 {% highlight r %}
-library(plyr)
 library(ggplot2)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Loading required package: methods
+{% endhighlight %}
+
+
+
+{% highlight r %}
 load("abalone_trimmed.Rdata")
 # check the size
 dim(abalone)
@@ -76,19 +86,19 @@ summary(lm_height)
 ## lm(formula = Age ~ Height, data = abalone)
 ## 
 ## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -6.026 -1.671 -0.538  0.817 16.718 
+##     Min      1Q  Median      3Q     Max 
+## -6.0259 -1.6709 -0.5382  0.8167 16.7179 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  4.30357    0.15016    28.7   <2e-16 ***
-## Height       0.25618    0.00519    49.3   <2e-16 ***
+## (Intercept) 4.303566   0.150155   28.66   <2e-16 ***
+## Height      0.256176   0.005192   49.34   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 2.56 on 4155 degrees of freedom
-## Multiple R-squared:  0.369,	Adjusted R-squared:  0.369 
-## F-statistic: 2.43e+03 on 1 and 4155 DF,  p-value: <2e-16
+## Residual standard error: 2.557 on 4155 degrees of freedom
+## Multiple R-squared:  0.3695,	Adjusted R-squared:  0.3693 
+## F-statistic:  2435 on 1 and 4155 DF,  p-value: < 2.2e-16
 {% endhighlight %}
 
 
@@ -102,7 +112,8 @@ qplot(x = Height,
   geom_smooth(method = lm)
 {% endhighlight %}
 
-![plot of chunk basic_lm](plots/abalone_analysis-basic_lm.png) 
+<img src="plots/abalone_analysis-basic_lm-1.png" title="plot of chunk basic_lm" alt="plot of chunk basic_lm" width="468" />
+{: .text-center}
 
 {: .problem}
 To find what the actual equation of the fit is, you will have to run the `lm()` function on its own.
@@ -128,7 +139,7 @@ mse
 
 
 {% highlight text %}
-## [1] 6.537
+## [1] 6.536942
 {% endhighlight %}
 
 For the fit of the log measurements, things are just a bit more complicated. The residuals that `R` calculated are in log space, so we can't directly translate them into the actual estimation error. Luckliy `R` also provides us with the predicted ages for each height (I bet you thought you were going to have to write a function). We can get those from  `lm_logheight` using the `fitted()` function. Translate those back out of log space:
@@ -167,20 +178,20 @@ summary(lm_sum)
 ## lm(formula = Age ~ Length + Height, data = abalone)
 ## 
 ## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -6.041 -1.644 -0.555  0.831 16.684 
+##     Min      1Q  Median      3Q     Max 
+## -6.0411 -1.6443 -0.5545  0.8312 16.6840 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  4.20868    0.18074   23.29   <2e-16 ***
-## Length       0.00362    0.00384    0.94     0.35    
-## Height       0.24595    0.01202   20.46   <2e-16 ***
+## (Intercept) 4.208681   0.180738  23.286   <2e-16 ***
+## Length      0.003623   0.003841   0.943    0.346    
+## Height      0.245950   0.012020  20.462   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 2.56 on 4154 degrees of freedom
-## Multiple R-squared:  0.37,	Adjusted R-squared:  0.369 
-## F-statistic: 1.22e+03 on 2 and 4154 DF,  p-value: <2e-16
+## Residual standard error: 2.557 on 4154 degrees of freedom
+## Multiple R-squared:  0.3696,	Adjusted R-squared:  0.3693 
+## F-statistic:  1218 on 2 and 4154 DF,  p-value: < 2.2e-16
 {% endhighlight %}
 
 As you can see, when I do that, there seems to be no significant correlation of age with length. Once height is accounted for, the length component is no longer significant! In some ways this is not too surprising, as height and length are well correlated, but height is somewhat more correlated with age than length is, so you might think that adding in the length data doesn't really add much. 
@@ -201,24 +212,24 @@ summary(lm_multi)
 ## lm(formula = Age ~ Length * Height, data = abalone)
 ## 
 ## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -5.821 -1.625 -0.577  0.874 17.095 
+##     Min      1Q  Median      3Q     Max 
+## -5.8209 -1.6248 -0.5770  0.8738 17.0954 
 ## 
 ## Coefficients:
-##                Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)    1.181500   0.455258    2.60   0.0095 ** 
-## Length         0.031527   0.005426    5.81  6.7e-09 ***
-## Height         0.395589   0.023881   16.57  < 2e-16 ***
-## Length:Height -0.001318   0.000182   -7.24  5.5e-13 ***
+##                 Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)    1.1815001  0.4552585   2.595  0.00949 ** 
+## Length         0.0315270  0.0054259   5.810 6.70e-09 ***
+## Height         0.3955887  0.0238810  16.565  < 2e-16 ***
+## Length:Height -0.0013180  0.0001821  -7.236 5.46e-13 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 2.54 on 4153 degrees of freedom
-## Multiple R-squared:  0.377,	Adjusted R-squared:  0.377 
-## F-statistic:  839 on 3 and 4153 DF,  p-value: <2e-16
+## Residual standard error: 2.542 on 4153 degrees of freedom
+## Multiple R-squared:  0.3774,	Adjusted R-squared:  0.377 
+## F-statistic: 839.3 on 3 and 4153 DF,  p-value: < 2.2e-16
 {% endhighlight %}
 
-Now all the terms are significant, including length! How much better is the fit? WE can look at the Multiple R-squared values for each fit, or we can compare them visually, as below.
+Now all the terms are significant, including length! How much better is the fit? We can look at the Multiple R-squared values for each fit, or we can compare them visually, as below.
 
 
 {% highlight r %}
@@ -243,7 +254,8 @@ qplot(data = fits,
   theme(legend.position="none")
 {% endhighlight %}
 
-![plot of chunk fitplots](plots/abalone_analysis-fitplots.png) 
+<img src="plots/abalone_analysis-fitplots-1.png" title="plot of chunk fitplots" alt="plot of chunk fitplots" width="576" />
+{: .text-center}
 
 It is a bit hard to tell the difference, isn't it? The "multi" model seems to do a bit better at predicting the ages of young abalone, but other than that, it is hard to draw strong conclusions. This brings up a very large topic that we are not really going to explore at this point, that of model choice. How do you know what data to use to contstruct the best predictor of a variable? How do you avoid overfitting, so that you are not risking having a predictor that works perfectly for your data set, but fails miserably when applied to a new sample? If these are questions that interest you, there is plenty to explore...
 
