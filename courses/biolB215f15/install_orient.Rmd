@@ -18,7 +18,7 @@ In order to apply statistics effectively, we need to be able to perform calculat
 
 ### Base `R`
 
-To use `R`, we first have to install it. Luckily, this is fairly straightforward. `R` is an open source project, and the latest version (along with the latest versions of many of the packages that we will get to later in the course) is available for download at "The Comprehensive R Archive Network" (CRAN): <http://cran.r-project.org>. Simply go to the CRAN website, and choose the link for the system that you are using. If you are on a Mac, be sure to select the version that corresponds to your operating system version: the "snowleopard" version for operating system versions below 10.9, and "mavericks" for versions 10.9 and above. For Windows you will want to select the "base" package. As of this writing, the current version was `3.2.2`.
+To use `R`, we first have to install it. Luckily, this is fairly straightforward. `R` is an open source project, and the latest version (along with the latest versions of many of the packages that we will get to later in the course) is available for download at "The Comprehensive R Archive Network" (CRAN): <http://cran.r-project.org>. Simply go to the CRAN website, and choose the link for the system that you are using. If you are on a Mac, be sure to select the version that corresponds to your operating system version: in partifular the "snowleopard" version for operating system versions below 10.9, and the main release for versions 10.9 and above. For Windows you will want to select the "base" package. As of this writing, the current version was `3.2.2`.
 
 ### RStudio
 
