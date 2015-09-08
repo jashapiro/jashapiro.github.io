@@ -117,7 +117,7 @@ plot(1:20,
 
 Notice how I can give the `pch` and `col` arguments vectors, so each point gets a different shape and the colors alternate (because `R` is recycling the vector). You can do the same thing for any other option that affects the appearance of data points, which can be useful for visually separating different subsets of data, or highlighting individual points. 
 
-{: .question}
+{: .problem}
 Create a plot of the `med_norm` vector where all the points greater than or equal to 5 are blue and all the points less than 5 are green. You will need to create a vector of color names to do this; the easiest way is to start with a vector of all one color that the same length as the `med_norm` vector, using the `rep()` function, then replace the values that need to change in the next step.  
 
 
@@ -164,24 +164,13 @@ To make a histogram, we will first load the `ggplot2` package (you only need to 
 
 {% highlight r %}
 library(ggplot2)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Loading required package: methods
-{% endhighlight %}
-
-
-
-{% highlight r %}
 qplot(med_norm)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 {% endhighlight %}
 
 <img src="plots/basic_graphics-gghist-1.png" title="plot of chunk gghist" alt="plot of chunk gghist" width="360" />
@@ -229,7 +218,7 @@ qplot(x = Sepal.Width,
 <img src="plots/basic_graphics-sepalcolor-1.png" title="plot of chunk sepalcolor" alt="plot of chunk sepalcolor" width="504" />
 {: .text-center}
 
-While pretty it can be a bit hard to see what each species histogram would look like on its own. In this case, the *setosa* histogram is easy to interpret, but the ones stacked on top of it are a bit rough. It might be better to separate each set of data onto distinct sets of axes. When we do this, we do want all of our plots to still have the same binwidths and to be nicely aligned. This is called facetting, and can be done with the `facets` argument. To use this, you specify what you want to split the data up by, with vertical splits (rows) first, then a `~` (tilde) followed by horizontal splits (columns). In this case I want to the plots vertically so the data are stacked one on top of the other by Species, but I don't want to split by anything on the other axis, so I just use a period (`.`) to specify no splitting on the other axis. So facetting variable is `Species ~ .` as shown below.
+While pretty it can be a bit hard to see what each species histogram would look like on its own. In this case, the *setosa* histogram is easy to interpret, but the ones stacked on top of it are a bit rough. It might be better to separate each set of data onto distinct sets of axes. When we do this, we do want all of our plots to still have the same binwidths and to be nicely aligned. This is called faceting, and can be done with the `facets` argument. To use this, you specify what you want to split the data up by, with vertical splits (rows) first, then a `~` (tilde) followed by horizontal splits (columns). In this case I want to the plots vertically so the data are stacked one on top of the other by Species, but I don't want to split by anything on the other axis, so I just use a period (`.`) to specify no splitting on the other axis. So facetting variable is `Species ~ .` as shown below.
 
 
 
@@ -244,7 +233,20 @@ qplot(x = Sepal.Width,
 <img src="plots/basic_graphics-sepalfacet-1.png" title="plot of chunk sepalfacet" alt="plot of chunk sepalfacet" width="504" />
 {: .text-center}
 
+At this point, as your plots start to get complicated, we are starting to get out of the range of things that `qplot()` does very well, and it is better to start to switch to the full power of `ggplot2`, which has a bit of a different syntax. `ggplot2` follows a "Grammar of Graphics" to arrange and plot data. Briefly, this means that we separate out things like the data being plotted from statistics that we calclated on it (such as means and medians) and the geometries (shapes) that we use to plot those results. The first step is to specify the data, and what we will call aesthetics: what is going to go on each axis, or determine colors of points. This is done with the `ggplot()` function, which takes exactly those two arguments: data and mapping of data to axis or other aesthetic properties (color, size, etc.), which are defined by the `aes()` function. We then litterally add on (with a plus sign!) the kind of plot we want (the geometry) with one of the `geom_()` functions and its options, and finally add on other misc additions like facets and labels. To create the same plot as above, the full call would would look as follows (I have added coloring the bars by species to show you how that might work):
 
+
+{% highlight r %}
+ggplot(data = iris, mapping = aes(x = Sepal.Width, fill = Species)) +
+  geom_histogram(binwidth = 0.2) +
+  facet_grid(Species ~ .) +
+  xlab("Sepal Width (cm)")
+{% endhighlight %}
+
+<img src="plots/basic_graphics-sepalfacet2-1.png" title="plot of chunk sepalfacet2" alt="plot of chunk sepalfacet2" width="504" />
+{: .text-center}
+
+While this looks like more typing at first, it can actually be much more explicit about what you are trying to plot, and should become easier to use with time. You will almost certainly want to keep as a reference the [Data Visualization with ggplot2 cheatsheet (pdf)](https://www.rstudio.com/wp-content/uploads/2015/08/ggplot2-cheatsheet.pdf) available at [RStudio.com](https://www.rstudio.com/resources/cheatsheets/). For most of the further examples in this course, I will be using `ggplot()` in preference to `qplot()`
 
 ## Adding to plots
 Often you might want to add extra points or lines to a plot, and `R` does allow you do to this in a few different ways. With the base graphics (we'll explore another system later), you can add points, lines, line segments, and rectangles to a plot you have made with commands `points()`, `abline()`, `segments()`, and `rect()`, respectively. For now, we will just use `abline()` to annotate our histogram a bit. Feel free to explore the other commands as well.
@@ -269,13 +271,13 @@ abline(v = c(large_mean + large_sd, large_mean - large_sd),
 <img src="plots/basic_graphics-annotated_hist-1.png" title="plot of chunk annotated_hist" alt="plot of chunk annotated_hist" width="360" />
 {: .text-center}
 
-For `ggplot2`, you add elements to a plot by literally adding things to the `qplot()` function using a `+` sign. To add a vertical line, you add the `geom_vline()` function and specify the `xintercept` argument. As you will see, `ggplot2` tends to be a bit more verbose than the basic graphics. You have to type out things like `color` and `linetype`, but this can make it a bit easier to see what is really going on.
+For `ggplot2`, you add elements like additional geometries to a plot by literally adding things to the intial functions using a `+` sign. To add a vertical line, you add the `geom_vline()` function and specify the `xintercept` argument. As you will see, `ggplot2` tends to be a bit more verbose than the basic graphics. You have to type out things like `color` and `linetype`, but this can make it a bit easier to see what is really going on.
 
 
 {% highlight r %}
-qplot(large_norm, 
-      binwidth = 10,
-      xlab = "x") +
+ggplot(mapping = aes(x = large_norm)) +
+  geom_histogram(binwidth = 10) +
+  xlab("x") +
   geom_vline(xintercept = large_mean,
              color = "purple") +
   geom_vline(xintercept = c(large_mean + large_sd, large_mean - large_sd),
@@ -286,7 +288,7 @@ qplot(large_norm,
 <img src="plots/basic_graphics-ggannotated_hist-1.png" title="plot of chunk ggannotated_hist" alt="plot of chunk ggannotated_hist" width="360" />
 {: .text-center}
 
-{: .question}
+{: .problem}
 Create a histogram of the `large_norm` data with about 100 breakpoints. Is this a good number? Play around with different numbers of breakpoints until you find one that you think is a good representation of the data. Then add vertical lines indicating the median and interquartile range of the data. You will want to use the `quantile()` function to find those quantities.
 
 ## Box Plots
@@ -329,17 +331,13 @@ boxplot(Petal.Length ~ Species,
 You should be able to see pretty clearly why plotting all of the species together as we did earlier was a bad idea...
 
 ### ggplot2 boxplots
-`ggplot2` doesn't use the formula notation for boxplots. Instead you just specify the x and y axis as you might have otherwise expected, then use `geom="boxplot"`:
+`ggplot2` doesn't use the formula notation for boxplots. Instead you just specify the x and y axis as you might have otherwise expected, then use `geom_boxplot()`:
 
 
 {% highlight r %}
-qplot(x = Species,
-      y = Petal.Length,
-      data = iris,
-      geom = "boxplot",
-      fill = Species,
-      ylab = "Sepal Length (cm)"
-      )
+ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
+  geom_boxplot() +
+  ylab("Sepal Length (cm)")
 {% endhighlight %}
 
 <img src="plots/basic_graphics-ggboxplot-1.png" title="plot of chunk ggboxplot" alt="plot of chunk ggboxplot" width="432" />
@@ -374,23 +372,24 @@ With `ggplot2`, making these kinds of plots is much simpler, as long as we are w
 
 
 {% highlight r %}
-qplot(x = Sepal.Width, y = Sepal.Length,
-      data = iris,
-      color = Species,
-      shape = Species)
+ggplot(iris, aes(x = Sepal.Width, 
+                 y = Sepal.Length,
+                 color = Species,
+                 shape = Species)) +
+  geom_point()
 {% endhighlight %}
 
 <img src="plots/basic_graphics-ggcolorscatter-1.png" title="plot of chunk ggcolorscatter" alt="plot of chunk ggcolorscatter" width="432" />
 {: .text-center}
 
-One little problem with this data that you can see is that there are multiple points that overlap, so you can't see all of the points. This is known as overplotting, and one way to get around it is to add a bit of random error ("jitter") to our data, moving all the points just a little bit from their true position. This is easy to do in `ggplot2` without affecting the original data. (This would be much more annoying to do using basic `R` plotting commands.)
+One little problem with this data that you can see is that there are multiple points that overlap, so you can't see all of the points. This is known as overplotting, and one way to get around it is to add a bit of random error ("jitter") to the position of each, moving all the points just a little bit from their true values (without affecting the original data at all). This is easy to do in `ggplot2` without affecting the original data. (This would be much more annoying to do using basic `R` plotting commands.)
 
 {% highlight r %}
-qplot(x = Sepal.Width, y = Sepal.Length,
-      data = iris,
-      color = Species,
-      shape = Species,
-      position = "jitter")
+ggplot(iris, aes(x = Sepal.Width, 
+                 y = Sepal.Length,
+                 color = Species,
+                 shape = Species)) +
+  geom_point(position = "jitter")
 {% endhighlight %}
 
 <img src="plots/basic_graphics-ggcolorscatter2-1.png" title="plot of chunk ggcolorscatter2" alt="plot of chunk ggcolorscatter2" width="432" />
@@ -447,27 +446,24 @@ barplot(points, names = teams,
 As the data get more complicated, you might want to start grouping bars (for example to put the teams that actually played each other close together, with larger spaces between matchup pairs), but we will leave that for another time. 
 
 ### `ggplot2` bar charts
-Bar charts can be done in `ggplot2` by adding the argument `geom = "bar"` to a `qplot()` function that has `x` and `y` values. If you want to avoid getting a warning from `ggplot2`, you also have to add an argument of `stat = "identity"`, and you have to wrap the fill colors up in that `I()` function again.  It isn't the prettiest thing in the world, but it does work.
+Bar charts can be done in `ggplot2` by adding the argument `geom = "bar"` to a `qplot()` function that has `x` and `y` values. If you want to avoid getting a warning from `ggplot2`, you also have to add an argument of `stat = "identity"`.
+
 
 
 {% highlight r %}
-qplot(x = teams, y = points, 
-      geom = "bar", 
-      stat = "identity", 
-      fill = I(team_colors))
+ggplot(mapping = aes(x = teams, y = points)) +
+  geom_bar(stat = "identity", fill = team_colors)
 {% endhighlight %}
 
 <img src="plots/basic_graphics-ggbarplot-1.png" title="plot of chunk ggbarplot" alt="plot of chunk ggbarplot" width="360" />
 {: .text-center}
-If you don't use the `I()` function, `ggplot2` will try to intepret the vector you give to `fill` as a factor, and it will assign its own colors (and generate a legend), which can actually be handy:
+If you put the `team_colors` in the overall aesthetics instead of in the `geom_bar()` function, `ggplot2` will try to intepret the vector you give to `fill` as a factor, and it will assign its own colors (and generate a legend), which can actually be handy:
 
 
 {% highlight r %}
 league <- c("NFC", "NFC", "AFC", "AFC")
-qplot(x = teams, y = points, 
-      geom="bar", 
-      stat = "identity", 
-      fill = league)
+ggplot(mapping = aes(x = teams, y = points, fill = league)) +
+  geom_bar(stat = "identity")
 {% endhighlight %}
 
 <img src="plots/basic_graphics-ggbarplot2-1.png" title="plot of chunk ggbarplot2" alt="plot of chunk ggbarplot2" width="432" />
