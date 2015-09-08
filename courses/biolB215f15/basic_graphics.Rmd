@@ -246,7 +246,7 @@ ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
 
 ```
 
-{: .question}
+{: .problem}
 Make a boxplot that shows the distribution of the product of petal width and petal length for each individual iris in the data set, split by species. Add a solid horizontal line to your plot that shows the mean of this product across all three the species. Also add a dotted horizontal line that shows the product of mean width and mean length, calculated separately. Are these the same? Why or why not?
 
 ## Scatterplots
