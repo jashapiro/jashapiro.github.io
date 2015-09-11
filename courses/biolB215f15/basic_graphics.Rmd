@@ -311,7 +311,7 @@ barplot(points, names = teams,
         ylab = "Points Scored", 
         xlab = "Team")
 ```
-One thing you might have noticed is that the y-axis in this plot does not extend to cover all of the data. `R` has a tendency to do this in its attempts to find "pretty" (their word, not mine) places to put the axis ticks, but you might disagree with its decision about how long a given axis should be. Luckily, you can control this using `xlim` and `ylim`, each of which takes a vector of length 2 with the minimum and maximum values for the axis.
+One thing you might have noticed is that the y-axis in this plot does not extend to cover all of the data. `R` has a tendency to do this in its attempts to find "pretty" (their word, not mine) places to put the axis ticks, but you might disagree with its decision about how long a given axis should be. Luckily, you can control this using `xlim` and `ylim`, each of which takes a vector of length 2 with the minimum and maximum values for the axis. Note: Bar charts should *always* start at zero. *Always*.
 
 ```{r barplot_unpretty}
 barplot(points, names = teams, 
@@ -324,7 +324,7 @@ barplot(points, names = teams,
 As the data get more complicated, you might want to start grouping bars (for example to put the teams that actually played each other close together, with larger spaces between matchup pairs), but we will leave that for another time. 
 
 ### `ggplot2` bar charts
-Bar charts can be done in `ggplot2` by adding the argument `geom = "bar"` to a `qplot()` function that has `x` and `y` values. If you want to avoid getting a warning from `ggplot2`, you also have to add an argument of `stat = "identity"`.
+Bar charts can be done in `ggplot2` by using the `geom_bar()` function. If your data is individual observations, this will count up the occurances of each category in the `x` variable. For raw data, this is pretty handy, but in cases where you already have summary data (as in the scores here), you will want to add a `y` variable and include the argument `stat = "identity"` in the call to `geom_bar()`.  Note how I set the fill color in the `geom_bar()` function as well.
 
 
 ```{r ggbarplot}
