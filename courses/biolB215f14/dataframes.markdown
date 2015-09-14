@@ -209,13 +209,13 @@ fruits
 
 
 {% highlight text %}
-##       fruit  color grams n_per_kg
-## 1     apple    red 180.0    5.556
-## 2    banana yellow 120.0    8.333
-## 3    cherry    red   8.0  125.000
-## 4 blueberry   blue   0.5 2000.000
-## 5     grape purple   2.0  500.000
-## 6    orange orange 140.0    7.143
+##       fruit  color grams    n_per_kg
+## 1     apple    red 180.0    5.555556
+## 2    banana yellow 120.0    8.333333
+## 3    cherry    red   8.0  125.000000
+## 4 blueberry   blue   0.5 2000.000000
+## 5     grape purple   2.0  500.000000
+## 6    orange orange 140.0    7.142857
 {% endhighlight %}
 
 
@@ -228,13 +228,13 @@ fruits
 
 
 {% highlight text %}
-##       fruit  color grams n_per_kg  peel
-## 1     apple    red 180.0    5.556 FALSE
-## 2    banana yellow 120.0    8.333  TRUE
-## 3    cherry    red   8.0  125.000 FALSE
-## 4 blueberry   blue   0.5 2000.000 FALSE
-## 5     grape purple   2.0  500.000 FALSE
-## 6    orange orange 140.0    7.143  TRUE
+##       fruit  color grams    n_per_kg  peel
+## 1     apple    red 180.0    5.555556 FALSE
+## 2    banana yellow 120.0    8.333333  TRUE
+## 3    cherry    red   8.0  125.000000 FALSE
+## 4 blueberry   blue   0.5 2000.000000 FALSE
+## 5     grape purple   2.0  500.000000 FALSE
+## 6    orange orange 140.0    7.142857  TRUE
 {% endhighlight %}
 
 
@@ -295,20 +295,20 @@ summary(crabs)
 
 
 {% highlight text %}
-##  sp      sex         index            FL             RW      
-##  B:100   F:100   Min.   : 1.0   Min.   : 7.2   Min.   : 6.5  
-##  O:100   M:100   1st Qu.:13.0   1st Qu.:12.9   1st Qu.:11.0  
-##                  Median :25.5   Median :15.6   Median :12.8  
-##                  Mean   :25.5   Mean   :15.6   Mean   :12.7  
-##                  3rd Qu.:38.0   3rd Qu.:18.1   3rd Qu.:14.3  
-##                  Max.   :50.0   Max.   :23.1   Max.   :20.2  
-##        CL             CW             BD      
-##  Min.   :14.7   Min.   :17.1   Min.   : 6.1  
-##  1st Qu.:27.3   1st Qu.:31.5   1st Qu.:11.4  
-##  Median :32.1   Median :36.8   Median :13.9  
-##  Mean   :32.1   Mean   :36.4   Mean   :14.0  
-##  3rd Qu.:37.2   3rd Qu.:42.0   3rd Qu.:16.6  
-##  Max.   :47.6   Max.   :54.6   Max.   :21.6
+##  sp      sex         index            FL              RW       
+##  B:100   F:100   Min.   : 1.0   Min.   : 7.20   Min.   : 6.50  
+##  O:100   M:100   1st Qu.:13.0   1st Qu.:12.90   1st Qu.:11.00  
+##                  Median :25.5   Median :15.55   Median :12.80  
+##                  Mean   :25.5   Mean   :15.58   Mean   :12.74  
+##                  3rd Qu.:38.0   3rd Qu.:18.05   3rd Qu.:14.30  
+##                  Max.   :50.0   Max.   :23.10   Max.   :20.20  
+##        CL              CW              BD       
+##  Min.   :14.70   Min.   :17.10   Min.   : 6.10  
+##  1st Qu.:27.27   1st Qu.:31.50   1st Qu.:11.40  
+##  Median :32.10   Median :36.80   Median :13.90  
+##  Mean   :32.11   Mean   :36.41   Mean   :14.03  
+##  3rd Qu.:37.23   3rd Qu.:42.00   3rd Qu.:16.60  
+##  Max.   :47.60   Max.   :54.60   Max.   :21.60
 {% endhighlight %}
 
 All that is nice, but it doesn't really tell us too much, since what we really might want to know about this data is how the different kinds of crabs compare to each other. We have males and females, blue and orange crabs, so we should see if we can look at just one kind at a time. Lets look at the blue females first; we can select rows from the data frame by testing which rows have `sp == "B"` and `sex == "F"`. Notice the double equals sign. This is the test for equality, as distinct from the single equal sign that you can use for assigning a value to a variable or function argument. We will also use the ampersand, `&`, to combine the two tests. Make sure you include the comma at the end; that indicates we are selecting the data by row. Then we will calculate the mean and standard deviation of frontal lobe size (`FL`) for the female blue crabs.
@@ -334,7 +334,7 @@ sd(blue_females$FL)
 
 
 {% highlight text %}
-## [1] 2.628
+## [1] 2.627814
 {% endhighlight %}
 
 ### Another subsetting command: `filter()`
@@ -383,7 +383,7 @@ sd(blue_females2$FL)
 
 
 {% highlight text %}
-## [1] 2.628
+## [1] 2.627814
 {% endhighlight %}
 
 Note that you will only need to include the line `library(dplyr)` part once per session (or once per file). Including it more is not a problem, but not necessary either. If you do not have the dplyr package installed, you can install it with `install.packages("dplyr")`, but you should only need to do this once, ever.
@@ -473,10 +473,10 @@ summarize(grouped_crabs,
 ## Groups: sex
 ## 
 ##   sex sp count meanFL minRW
-## 1   F  B    50  13.27   6.5
-## 2   F  O    50  17.59   9.2
-## 3   M  B    50  14.84   6.7
-## 4   M  O    50  16.63   6.9
+## 1   F  B    50 13.270   6.5
+## 2   F  O    50 17.594   9.2
+## 3   M  B    50 14.842   6.7
+## 4   M  O    50 16.626   6.9
 {% endhighlight %}
 
 
@@ -516,7 +516,7 @@ qplot(data = crabs, x = CW,
   scale_fill_manual(values = c("blue", "orange")) #choose logical colors, rather than using defaults
 {% endhighlight %}
 
-<img src="plots/dataframes-qplots1.png" title="plot of chunk qplots" alt="plot of chunk qplots" width="432" />
+<img src="plots/dataframes-qplots-1.png" title="plot of chunk qplots" alt="plot of chunk qplots" width="432" />
 {: .text-center}
 
 
@@ -533,7 +533,7 @@ qplot(data = crabs,
   scale_fill_manual(values = c("blue", "orange"))
 {% endhighlight %}
 
-<img src="plots/dataframes-qplots2.png" title="plot of chunk qplots" alt="plot of chunk qplots" width="432" />
+<img src="plots/dataframes-qplots-2.png" title="plot of chunk qplots" alt="plot of chunk qplots" width="432" />
 {: .text-center}
 
 {% highlight r %}
@@ -549,7 +549,7 @@ qplot(data = crabs,
   scale_color_manual(values = c("blue", "orange")) 
 {% endhighlight %}
 
-<img src="plots/dataframes-qplot_scatter.png" title="plot of chunk qplot_scatter" alt="plot of chunk qplot_scatter" width="504" />
+<img src="plots/dataframes-qplot_scatter-1.png" title="plot of chunk qplot_scatter" alt="plot of chunk qplot_scatter" width="504" />
 {: .text-center}
 
 
