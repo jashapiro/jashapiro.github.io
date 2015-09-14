@@ -160,83 +160,12 @@ subset(my_df, grams > 10 & color =="red")
 ## 1 apple   red   180
 {% endhighlight %}
 
-The subset command can also be used to select particular columns for the output, with the `select` argument:
-
-
-{% highlight r %}
-subset(my_df, grams > 10 & color =="red", select = c(fruit, color))
-{% endhighlight %}
-
-
-
-{% highlight text %}
-##   fruit color
-## 1 apple   red
-{% endhighlight %}
-
-### The new alternative
-
-There is at least one other way to work with factors, which is found in the `dplyr` package. This package is heavily optimized for large data, so it is a bit of overkill here, but worth a mention, partly because it is what I have mostly switched over to for my own work. You can find much more about it at the RStudio site, and in particular with the [Data Wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
-
-To do the same selection as above, we use two different commands: `filter()` to select rows based on criteria, and `select()` to choose particular columns. Note that wiht filter we can set criteria in separate arguments (separated by commas), rather than having to use the `&` symbol. Similarly, I don't need to use `c()` for the column names.
-
-
-{% highlight r %}
-library(dplyr)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## 
-## Attaching package: 'dplyr'
-## 
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-{% endhighlight %}
-
-
-
-{% highlight r %}
-temp_df <- filter(my_df, grams > 10, color == "red")
-select(temp_df, fruit, color)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-##   fruit color
-## 1 apple   red
-{% endhighlight %}
-
-Note that you will only need to include the line `library(dplyr)` part once per session (or once per file). Including it more is not a problem, but not necessary either. If you do not have the dplyr package installed, you can install it with `install.packages("dplyr")`, but you should only need to do this once per computer.
-
-If you want to get really fancy, you can take advantage of the "piping" feature of `dplyr` (which actually comes from a package called `magrittr`: *Ceci n'est pas une pipe.*). The way this works is that the `%>%` symbol puts whatever is to its left into the first argument of the function on its right (which you can then omit), allowing you to save typing, and also saving you the hassle of intermediate arguments. So the command above could be rewritten as follows:
-
-
-{% highlight r %}
-my_df %>% filter(grams > 10, color == "red") %>%select(fruit, color)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-##   fruit color
-## 1 apple   red
-{% endhighlight %}
-
-
 ### A note on strings and factors
 You may have noticed that while we put a vector of strings into our data frame for fruit names and colors, what came out was not a vector of strings, but a factor. This is sometimes what you want, but not always. If you want to keep strings as strings, you can add one more argument to `data.frame()` *after* you specify all of the columns: `stringsAsFactors = FALSE`. If you want to, you can then convert individual rows to factors as I have done below, or you could create the data frame with explicitly described factors using `factor()`.
 
 
 {% highlight r %}
-my_df <- data.frame(fruit = x, color = y , grams = z, 
+my_df <- data.frame(fruit = x, color = y , grams = z,
                     stringsAsFactors = FALSE)
 my_df$color
 {% endhighlight %}
@@ -272,21 +201,21 @@ my_df2 <- data.frame(fruit = c("blueberry", "grape", "orange"),
                      grams = c(0.5, 2, 140),
                      stringsAsFactors = FALSE)
 fruits <- rbind(my_df, my_df2)
-sold_individually <- c(TRUE, TRUE, FALSE, FALSE, FALSE, TRUE)
-fruits <- cbind(fruits, sold_individually) 
+n_per_kg <- 1000 / fruits$grams 
+fruits <- cbind(fruits, n_per_kg) 
 fruits
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##       fruit  color grams sold_individually
-## 1     apple    red 180.0              TRUE
-## 2    banana yellow 120.0              TRUE
-## 3    cherry    red   8.0             FALSE
-## 4 blueberry   blue   0.5             FALSE
-## 5     grape purple   2.0             FALSE
-## 6    orange orange 140.0              TRUE
+##       fruit  color grams    n_per_kg
+## 1     apple    red 180.0    5.555556
+## 2    banana yellow 120.0    8.333333
+## 3    cherry    red   8.0  125.000000
+## 4 blueberry   blue   0.5 2000.000000
+## 5     grape purple   2.0  500.000000
+## 6    orange orange 140.0    7.142857
 {% endhighlight %}
 
 
@@ -299,33 +228,17 @@ fruits
 
 
 {% highlight text %}
-##       fruit  color grams sold_individually  peel
-## 1     apple    red 180.0              TRUE FALSE
-## 2    banana yellow 120.0              TRUE  TRUE
-## 3    cherry    red   8.0             FALSE FALSE
-## 4 blueberry   blue   0.5             FALSE FALSE
-## 5     grape purple   2.0             FALSE FALSE
-## 6    orange orange 140.0              TRUE  TRUE
-{% endhighlight %}
-There is also a function from `dplyr()` that is handy here: `mutate()` which is nice for creating new variables that depend on others:
-
-
-{% highlight r %}
-fruits <- mutate(fruits, n_per_kg = 1000/grams)
-fruits
+##       fruit  color grams    n_per_kg  peel
+## 1     apple    red 180.0    5.555556 FALSE
+## 2    banana yellow 120.0    8.333333  TRUE
+## 3    cherry    red   8.0  125.000000 FALSE
+## 4 blueberry   blue   0.5 2000.000000 FALSE
+## 5     grape purple   2.0  500.000000 FALSE
+## 6    orange orange 140.0    7.142857  TRUE
 {% endhighlight %}
 
 
 
-{% highlight text %}
-##       fruit  color grams sold_individually  peel    n_per_kg
-## 1     apple    red 180.0              TRUE FALSE    5.555556
-## 2    banana yellow 120.0              TRUE  TRUE    8.333333
-## 3    cherry    red   8.0             FALSE FALSE  125.000000
-## 4 blueberry   blue   0.5             FALSE FALSE 2000.000000
-## 5     grape purple   2.0             FALSE FALSE  500.000000
-## 6    orange orange 140.0              TRUE  TRUE    7.142857
-{% endhighlight %}
 ## Manipulating Data
 Once you have your data in a data frame, it is time to start characterizing and describing it. There are a number of special functions you can use to make all of this easier, and I will go over some of those now. But first, we need some data to work with. The data we will use this time is measurements from rock crabs of the species *Leptograpsus variegatus* which were collected in Western Australia. The original data is from:  
 Campbell, N.A. and Mahon, R.J. (1974) A multivariate study of variation in two species of rock crab of genus Leptograpsus. *Australian Journal of Zoology* 22, 417–425. 
@@ -398,11 +311,11 @@ summary(crabs)
 ##  Max.   :47.60   Max.   :54.60   Max.   :21.60
 {% endhighlight %}
 
-All that is nice, but it doesn't really tell us too much, since what we really might want to know about this data is how the different kinds of crabs compare to each other. We have males and females, blue and orange crabs, so we should see if we can look at just one kind at a time. Lets look at the blue females first; we can select rows from the data frame by testing which rows have `sp == "B"` and `sex == "F"`. Notice the double equals sign. This is the test for equality, as distinct from the single equal sign that you can use for assigning a value to a variable or function argument.  Then we will calculate the mean and standard deviation of frontal lobe size (`FL`) for the female blue crabs.
+All that is nice, but it doesn't really tell us too much, since what we really might want to know about this data is how the different kinds of crabs compare to each other. We have males and females, blue and orange crabs, so we should see if we can look at just one kind at a time. Lets look at the blue females first; we can select rows from the data frame by testing which rows have `sp == "B"` and `sex == "F"`. Notice the double equals sign. This is the test for equality, as distinct from the single equal sign that you can use for assigning a value to a variable or function argument. We will also use the ampersand, `&`, to combine the two tests. Make sure you include the comma at the end; that indicates we are selecting the data by row. Then we will calculate the mean and standard deviation of frontal lobe size (`FL`) for the female blue crabs.
 
 
 {% highlight r %}
-blue_females <- filter(crabs, sp == "B", sex == "F")
+blue_females <- subset(crabs, sp == "B" & sex == "F")
 mean(blue_females$FL)
 {% endhighlight %}
 
@@ -424,6 +337,58 @@ sd(blue_females$FL)
 ## [1] 2.627814
 {% endhighlight %}
 
+### Another subsetting command: `filter()`
+
+The subset command is great, but it has recently been supplemented with another version of the same idea which can be a bit easier to use. This new version is called `filter()` and is part of the `dplyr` package, which we will use more below. The only difference is that rather than using '`&`' to combine conditions, you can simply separate them with commas, which can be more convenient. So the equivalent to the command above would be:
+
+
+{% highlight r %}
+library(dplyr) #load the dplyr package (there may be warnings, but you can ignore these)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## 
+## Attaching package: 'dplyr'
+## 
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+{% endhighlight %}
+
+
+
+{% highlight r %}
+blue_females2 <- filter(crabs, sp == "B", sex == "F")
+mean(blue_females2$FL)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] 13.27
+{% endhighlight %}
+
+
+
+{% highlight r %}
+sd(blue_females2$FL)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] 2.627814
+{% endhighlight %}
+
+Note that you will only need to include the line `library(dplyr)` part once per session (or once per file). Including it more is not a problem, but not necessary either. If you do not have the dplyr package installed, you can install it with `install.packages("dplyr")`, but you should only need to do this once, ever.
+
+
 
 {: .problem}
 If you were trying to put all the crabs in a storage cage that had a hole size of 25 mm, you might expect that any crabs with a carapace length (CL) smaller than the holes would be able to escape (since they move sideways).  
@@ -440,13 +405,14 @@ Doing these calculations separately for each possible grouping of variables can 
 Below is a brief introduction to working with `dplyr`; I highly recommend you check out the more complete description available at the [dplyr website](http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html).
 
 ### `group_by()` and `summarize()`
-Some of the most common functions we will use are `group_by()` and `summarize()`, which do just what they say. `group_by()` divides a data frame in to subgroups based on some condition, and `summarize()` (or `summarise()` if you are more comfortable with that) calculates statistics based on the data in those subgroups, returning the results as a new data frame, with one row per group. A simple example of its use is to find out how many observations (rows) are in each subset of the data, taking advantage of the function `n()`, which is also part of `dplyr`. (`n()` is largely equivalent to the base function `nrow()` which will tell you how many rows there are in a data frame, but it works with grouped data.) 
+Some of the most common functions we will use are `group_by()` and `summarise()`, which do just what they say. `group_by()` divides a data frame in to subgroups based on some condition, and `summarize()` (or `summarise()` if you are more comfortable with that) calculates statistics based on the data in those subgroups, returning the results as a new data frame, with one row per group. A simple example of its use is to find out how many observations (rows) are in each subset of the data, taking advantage of the function `n()`, which is also part of `dplyr`. (`n()` is largely equivalent to the base function `nrow()` which will tell you how many rows there are in a data frame, but it works with grouped data.) 
 
 So the steps are these: first divide up the data with `group_by()`. To do this you give the data frame as the first argument (this will become a pattern), then the remaining variables are the names of the columns that you want to divide the data based on. You don't need to put them in quotes.
 
 
 
 {% highlight r %}
+library(dplyr) #load the package if you have not done so already
 grouped_crabs <- group_by(crabs, sex, sp)
 {% endhighlight %}
 
@@ -540,10 +506,12 @@ levels(crabs$Sex) <- c("Female", "Male")
 levels(crabs$Species) <- c("Blue", "Orange")
 
 library(ggplot2)
-ggplot(crabs, aes(x = CW, fill = Species)) + 
-  geom_histogram(binwidth = 5) +
-  facet_grid(Sex ~ Species) +
-  xlab("carapace width (mm)") +
+qplot(data = crabs, x = CW,
+      binwidth = 5,
+      facets = Sex ~ Species,
+      fill = Species,
+      xlab = "carapace width (mm)"
+      ) +
   theme(legend.position = "none") + # hide the redundant legend
   scale_fill_manual(values = c("blue", "orange")) #choose logical colors, rather than using defaults
 {% endhighlight %}
@@ -553,11 +521,14 @@ ggplot(crabs, aes(x = CW, fill = Species)) +
 
 
 {% highlight r %}
-ggplot(crabs, aes(x = Sex, y = FL, fill = Species)) +
-  geom_boxplot() +
-  facet_grid(. ~ Species) +
-  xlab("") + 
-  ylab("frontal lobe width (mm)") +
+qplot(data = crabs, 
+      x = Sex, y = FL,
+      geom = "boxplot",
+      facets = . ~ Species,
+      fill = Species, alpha = I(0.8),
+      xlab = "",
+      ylab = "frontal lobe width (mm)"
+      ) +
   theme(legend.position = "none") + 
   scale_fill_manual(values = c("blue", "orange"))
 {% endhighlight %}
@@ -566,15 +537,16 @@ ggplot(crabs, aes(x = Sex, y = FL, fill = Species)) +
 {: .text-center}
 
 {% highlight r %}
-ggplot(crabs, aes(x = RW, y = BD, 
-                  color = Species, fill = Species, 
-                  shape = Sex, linetype = Sex)) +
-  geom_point() + 
-  geom_smooth() + 
-  xlab("rear width (mm)") +
-  ylab("body depth (mm)")+
-  scale_color_manual(values = c("blue", "orange")) +
-  scale_fill_manual(values = c("blue", "orange")) 
+qplot(data = crabs, 
+      x = RW, y = BD,
+      geom = c("point", "smooth"),
+      color = Species,
+      shape = Sex,
+      linetype = Sex,
+      xlab = "rear width (mm)",
+      ylab = "body depth (mm)"
+      ) +
+  scale_color_manual(values = c("blue", "orange")) 
 {% endhighlight %}
 
 <img src="plots/dataframes-qplot_scatter-1.png" title="plot of chunk qplot_scatter" alt="plot of chunk qplot_scatter" width="504" />
