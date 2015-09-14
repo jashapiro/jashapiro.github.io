@@ -169,7 +169,7 @@ Doing these calculations separately for each possible grouping of variables can 
 Below is a brief introduction to working with `dplyr`; I highly recommend you check out the more complete description available at the [dplyr website](http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html).
 
 ### `group_by()` and `summarize()`
-Some of the most common functions we will use are `group_by()` and `summarise()`, which do just what they say. `group_by()` divides a data frame in to subgroups based on some condition, and `summarize()` (or `summarise()` if you are more comfortable with that) calculates statistics based on the data in those subgroups, returning the results as a new data frame, with one row per group. A simple example of its use is to find out how many observations (rows) are in each subset of the data, taking advantage of the function `n()`, which is also part of `dplyr`. (`n()` is largely equivalent to the base function `nrow()` which will tell you how many rows there are in a data frame, but it works with grouped data.) 
+Some of the most common functions we will use are `group_by()` and `summarize()`, which do just what they say. `group_by()` divides a data frame in to subgroups based on some condition, and `summarize()` (or `summarise()` if you are more comfortable with that) calculates statistics based on the data in those subgroups, returning the results as a new data frame, with one row per group. A simple example of its use is to find out how many observations (rows) are in each subset of the data, taking advantage of the function `n()`, which is also part of `dplyr`. (`n()` is largely equivalent to the base function `nrow()` which will tell you how many rows there are in a data frame, but it works with grouped data.) 
 
 So the steps are these: first divide up the data with `group_by()`. To do this you give the data frame as the first argument (this will become a pattern), then the remaining variables are the names of the columns that you want to divide the data based on. You don't need to put them in quotes.
 
@@ -238,37 +238,31 @@ levels(crabs$Sex) <- c("Female", "Male")
 levels(crabs$Species) <- c("Blue", "Orange")
 
 library(ggplot2)
-qplot(data = crabs, x = CW,
-      binwidth = 5,
-      facets = Sex ~ Species,
-      fill = Species,
-      xlab = "carapace width (mm)"
-      ) +
+ggplot(crabs, aes(x = CW, fill = Species)) + 
+  geom_histogram(binwidth = 5) +
+  facet_grid(Sex ~ Species) +
+  xlab("carapace width (mm)") +
   theme(legend.position = "none") + # hide the redundant legend
   scale_fill_manual(values = c("blue", "orange")) #choose logical colors, rather than using defaults
 
-qplot(data = crabs, 
-      x = Sex, y = FL,
-      geom = "boxplot",
-      facets = . ~ Species,
-      fill = Species, alpha = I(0.8),
-      xlab = "",
-      ylab = "frontal lobe width (mm)"
-      ) +
+ggplot(crabs, aes(x = Sex, y = FL, fill = Species)) +
+  geom_boxplot() +
+  facet_grid(. ~ Species) +
+  xlab("") + 
+  ylab("frontal lobe width (mm)") +
   theme(legend.position = "none") + 
   scale_fill_manual(values = c("blue", "orange"))
 ```
 ```{r qplot_scatter, message=FALSE, fig.width = 7, fig.height = 6}
-qplot(data = crabs, 
-      x = RW, y = BD,
-      geom = c("point", "smooth"),
-      color = Species,
-      shape = Sex,
-      linetype = Sex,
-      xlab = "rear width (mm)",
-      ylab = "body depth (mm)"
-      ) +
-  scale_color_manual(values = c("blue", "orange")) 
+ggplot(crabs, aes(x = RW, y = BD, 
+                  color = Species, fill = Species, 
+                  shape = Sex, linetype = Sex)) +
+  geom_point() + 
+  geom_smooth() + 
+  xlab("rear width (mm)") +
+  ylab("body depth (mm)")+
+  scale_color_manual(values = c("blue", "orange")) +
+  scale_fill_manual(values = c("blue", "orange"))
 ```
 
 
