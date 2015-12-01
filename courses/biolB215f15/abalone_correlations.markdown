@@ -11,23 +11,28 @@ nav: teaching
 
 [back to Cleaning](abalone_cleaning.html)
 
-## Correlations 
-First, if you have created a new environment, you will need to reload the abalone data and make sure that you have the `ggplot2` library  loaded.  I had saved my abalone data frame as `abalone_trimmed.Rdata`, so I will use `load()` to pull that back into my fresh workspace, where it will again be named `abalone`. Just to check, it should still have 4157 rows. (Even if you are still in the same project as last time, it is a good idea to reload the abalone data from a file that you know has all the right data, just to be safe. It is a nice checkpoint that you can always go back to if things get messed up.)
+## Data 
+If you did the (optional) data cleaning steps, you should have a data frame called `abalone`, as described at the end of the [Abalone Cleaning](abalone_cleaning.html) page. If not, you will have to download the R data file [abalone_trimmed.Rdata](abalone_trimmed.Rdata). Create a new project in RStudio, and put the downloaded file in the folder associated with that project. You will then use `load()` to pull that back into your fresh workspace, where it will create the data frame named `abalone`. Just to check, it should  have 4157 rows. 
+
+The columns are as described on the Cleaning page, but to reiterate: 
+
+{: .table .table-hover .table-condensed .table-narrow .table-center}
+Variable | Unit | Description
+-------- | :----: | -----------
+`Sex` | | `M` (male), `F` (female), or `I` (immature)
+`Length` | mm | longest shell measurement 
+`Diam` | mm	 | shell measurement perpendicular to length 
+`Height` | mm | height of abalone (including body) 
+`Whole` | g| weight of whole abalone 
+`Shucked` | g | weight of meat 
+`Viscera` | g| gut weight
+`Shell` | g | shell weight after drying 
+`Rings` | | number of rings in the shell 
+`Age` | years| The age of the abalone in years 
 
 
 {% highlight r %}
 library(ggplot2)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Loading required package: methods
-{% endhighlight %}
-
-
-
-{% highlight r %}
 load("abalone_trimmed.Rdata")
 # check the size
 dim(abalone)
@@ -39,6 +44,7 @@ dim(abalone)
 ## [1] 4157   10
 {% endhighlight %}
 
+## Correlations 
 What we would like to do, ultimately, is to be able to estimate the age of the abalone based on measurements that we can do more easily than drilling into the shell to count the rings. If we are looking at fishery samples, we won't care if the abalone is dead, but we would also like to be able to estimate the age of  abalone that are still alive. 
 
 We can get a a quick estimate of which measurements will be the best predictors of age by looking at the correlation matrix, but while we are doing that we may as well look at the relationships among all of the groups. For now, we will leave the males, females and immature abalone all together. We can calculate the whole correlation matrix (Pearson correlation) with `cor()`, but be aware that this matrix will have a lot of redundant data, as each comparison appears twice in the table.
@@ -104,12 +110,9 @@ summary(lm_height)
 
 
 {% highlight r %}
-qplot(x = Height, 
-      y = Age, 
-      data = abalone,
-      alpha = I(0.2), # alpha makes the points semitransparent so you can see stacked points
-      geom = "jitter") + # jitter helps spread the points so they don't stack so much
-  geom_smooth(method = lm)
+ggplot(abalone, aes(x = Height, y = Age)) +
+  geom_point(alpha = 0.2, position = "jitter") + # alpha makes the points semitransparent so you can see stacked points; jitter helps spread the points a bit so they don't stack so much
+  geom_smooth(method = lm) # add the linear fit
 {% endhighlight %}
 
 <img src="plots/abalone_analysis-basic_lm-1.png" title="plot of chunk basic_lm" alt="plot of chunk basic_lm" width="468" />
@@ -240,14 +243,11 @@ fits <- rbind(data.frame(fit = "sum",
                          predicted = fitted(lm_multi), 
                          actual = abalone$Age)
               )
-qplot(data = fits,
-      x = predicted,
-      y = actual,
-      facets = .~fit,
-      color = fit,
-      alpha = I(0.1),
-      xlab = "Predicted Age",
-      ylab = "Actual Age") +
+ggplot(fits, aes(x = predicted, y = actual, color = fit)) +
+  geom_point(alpha = 0.1) +
+  facet_grid(.~fit) +
+  xlab("Predicted Age") +
+  ylab ("Actual Age") +
   geom_abline( slope = 1, 
                intercept = 0,
                color = "darkgray")+
