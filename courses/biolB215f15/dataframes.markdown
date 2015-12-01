@@ -220,7 +220,7 @@ If you want to get really fancy, you can take advantage of the "piping" feature 
 
 
 {% highlight r %}
-my_df %>% filter(grams > 10, color == "red") %>%select(fruit, color)
+my_df %>% filter(grams > 10, color == "red") %>% select(fruit, color)
 {% endhighlight %}
 
 
@@ -461,13 +461,14 @@ summarize(grouped_crabs, n())
 
 {% highlight text %}
 ## Source: local data frame [4 x 3]
-## Groups: sex
+## Groups: sex [?]
 ## 
-##   sex sp n()
-## 1   F  B  50
-## 2   F  O  50
-## 3   M  B  50
-## 4   M  O  50
+##      sex     sp   n()
+##   (fctr) (fctr) (int)
+## 1      F      B    50
+## 2      F      O    50
+## 3      M      B    50
+## 4      M      O    50
 {% endhighlight %}
 
 As you can see, this makes a new data frame with the variables you split by in the first two columns, and the result of the calculation in the third. The title of that third function is a bit nasty, but we can actually provide a better name quite easily, by 'naming' the argument, just as we did with the data frames before:
@@ -481,13 +482,14 @@ summarize(grouped_crabs, count = n())
 
 {% highlight text %}
 ## Source: local data frame [4 x 3]
-## Groups: sex
+## Groups: sex [?]
 ## 
-##   sex sp count
-## 1   F  B    50
-## 2   F  O    50
-## 3   M  B    50
-## 4   M  O    50
+##      sex     sp count
+##   (fctr) (fctr) (int)
+## 1      F      B    50
+## 2      F      O    50
+## 3      M      B    50
+## 4      M      O    50
 {% endhighlight %}
 
 Counting rows is not exactly the most useful thing we could do with this data. What we really wanted to do was to calculate statistics on subsets of the data. If we wanted to calculate the mean of `FL` and the minimum of `RW` for the grouped crab data set, we could do that as follows.
@@ -504,13 +506,14 @@ summarize(grouped_crabs,
 
 {% highlight text %}
 ## Source: local data frame [4 x 5]
-## Groups: sex
+## Groups: sex [?]
 ## 
-##   sex sp count meanFL minRW
-## 1   F  B    50 13.270   6.5
-## 2   F  O    50 17.594   9.2
-## 3   M  B    50 14.842   6.7
-## 4   M  O    50 16.626   6.9
+##      sex     sp count meanFL minRW
+##   (fctr) (fctr) (int)  (dbl) (dbl)
+## 1      F      B    50 13.270   6.5
+## 2      F      O    50 17.594   9.2
+## 3      M      B    50 14.842   6.7
+## 4      M      O    50 16.626   6.9
 {% endhighlight %}
 
 

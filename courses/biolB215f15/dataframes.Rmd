@@ -87,8 +87,7 @@ Note that you will only need to include the line `library(dplyr)` part once per 
 If you want to get really fancy, you can take advantage of the "piping" feature of `dplyr` (which actually comes from a package called `magrittr`: *Ceci n'est pas une pipe.*). The way this works is that the `%>%` symbol puts whatever is to its left into the first argument of the function on its right (which you can then omit), allowing you to save typing, and also saving you the hassle of intermediate arguments. So the command above could be rewritten as follows:
 
 ```{r dplyr_pipe}
-my_df %>% filter(grams > 10, color == "red") %>%select(fruit, color)
-
+my_df %>% filter(grams > 10, color == "red") %>% select(fruit, color)
 ```
 
 

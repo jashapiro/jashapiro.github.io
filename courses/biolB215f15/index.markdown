@@ -17,7 +17,7 @@ We have learned huge amounts in biology by doing experiments which generate clea
 
 * to introduce to the field of statistics and its uses for describing data and testing hypothesis, with a special emphasis on biological examples.
 * to develop an understanding of the considerations of designing experiments to answer biological questions clearly and efficiently.
-* to learn how to implement statistical tests and calculations using classical formulae, as well as through computational tools, specifically the R language.
+* to learn how to implement statistical tests and calculations using classical formulas, as well as through computational tools, specifically the R language.
 * to develop the ability to communicate biological, statistical, and computational concepts, results, and techniques through prose and statistical graphics.
 
 
@@ -52,11 +52,11 @@ Also recommended:
 
 **[Plotting in R](basic_graphics.html)**
 
-{% comment %}
+
 **[Lizard Lab](capture_recapture.html)**
  
-**[Abalone Lab](abalone_cleaning.html)**
-{% endcomment %}
+**[Abalone Lab](abalone_correlations.html)**
+
 
 ## External Resources {#external}
 
