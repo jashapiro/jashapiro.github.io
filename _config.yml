@@ -1,4 +1,4 @@
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 exclude: [Rakefile, shapbio.me.Rproj, Gemfile]
 markdown_ext: markdown
