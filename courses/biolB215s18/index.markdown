@@ -24,8 +24,8 @@ We have learned huge amounts in biology by doing experiments which generate clea
 
 ### Meeting Time & Location {#logistics}
 
-**Lecture** MWF 11AM-12PM, 100 Park Science Center
-**Lab** Tues 1-4PM, 10 Park Science Center
+**Lecture** MWF 10—11AM, 100 Park Science Center
+**Lab** Thurs 1-4PM, 10 Park Science Center
 
 
 ### Textbook
