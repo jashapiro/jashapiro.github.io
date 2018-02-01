@@ -297,11 +297,11 @@ my_tbl
 
 {% highlight text %}
 ## # A tibble: 3 x 3
-##    fruit  color grams
-##    <chr>  <chr> <dbl>
-## 1  apple    red   180
-## 2 banana yellow   120
-## 3 cherry    red     8
+##   fruit  color   grams
+##   <chr>  <chr>   <dbl>
+## 1 apple  red    180   
+## 2 banana yellow 120   
+## 3 cherry red      8.00
 {% endhighlight %}
 
 
@@ -378,14 +378,14 @@ fruits
 
 {% highlight text %}
 ## # A tibble: 6 x 4
-##       fruit  color grams sold_individually
-##       <chr>  <chr> <dbl>             <lgl>
-## 1     apple    red 180.0              TRUE
-## 2    banana yellow 120.0              TRUE
-## 3    cherry    red   8.0             FALSE
-## 4 blueberry   blue   0.5             FALSE
-## 5     grape purple   2.0             FALSE
-## 6    orange orange 140.0              TRUE
+##   fruit     color    grams sold_individually
+##   <chr>     <chr>    <dbl> <lgl>            
+## 1 apple     red    180     T                
+## 2 banana    yellow 120     T                
+## 3 cherry    red      8.00  F                
+## 4 blueberry blue     0.500 F                
+## 5 grape     purple   2.00  F                
+## 6 orange    orange 140     T
 {% endhighlight %}
 
 
@@ -399,17 +399,17 @@ fruits
 
 {% highlight text %}
 ## # A tibble: 6 x 5
-##       fruit  color grams sold_individually  peel
-##       <chr>  <chr> <dbl>             <lgl> <lgl>
-## 1     apple    red 180.0              TRUE FALSE
-## 2    banana yellow 120.0              TRUE  TRUE
-## 3    cherry    red   8.0             FALSE FALSE
-## 4 blueberry   blue   0.5             FALSE FALSE
-## 5     grape purple   2.0             FALSE FALSE
-## 6    orange orange 140.0              TRUE  TRUE
+##   fruit     color    grams sold_individually peel 
+##   <chr>     <chr>    <dbl> <lgl>             <lgl>
+## 1 apple     red    180     T                 F    
+## 2 banana    yellow 120     T                 T    
+## 3 cherry    red      8.00  F                 F    
+## 4 blueberry blue     0.500 F                 F    
+## 5 grape     purple   2.00  F                 F    
+## 6 orange    orange 140     T                 T
 {% endhighlight %}
 
-There is also a function from `dplyr()` that is handy here: `mutate()` which is nice for creating new variables that depend on others:
+There is also a function from `dplyr()` that is handy here: `mutate()` which is nice for creating new variables that depend on others (or modifying existing columns, though that can be dangerous):
 
 
 {% highlight r %}
@@ -421,14 +421,14 @@ fruits
 
 {% highlight text %}
 ## # A tibble: 6 x 6
-##       fruit  color grams sold_individually  peel    n_per_kg
-##       <chr>  <chr> <dbl>             <lgl> <lgl>       <dbl>
-## 1     apple    red 180.0              TRUE FALSE    5.555556
-## 2    banana yellow 120.0              TRUE  TRUE    8.333333
-## 3    cherry    red   8.0             FALSE FALSE  125.000000
-## 4 blueberry   blue   0.5             FALSE FALSE 2000.000000
-## 5     grape purple   2.0             FALSE FALSE  500.000000
-## 6    orange orange 140.0              TRUE  TRUE    7.142857
+##   fruit     color    grams sold_individually peel  n_per_kg
+##   <chr>     <chr>    <dbl> <lgl>             <lgl>    <dbl>
+## 1 apple     red    180     T                 F         5.56
+## 2 banana    yellow 120     T                 T         8.33
+## 3 cherry    red      8.00  F                 F       125   
+## 4 blueberry blue     0.500 F                 F      2000   
+## 5 grape     purple   2.00  F                 F       500   
+## 6 orange    orange 140     T                 T         7.14
 {% endhighlight %}
 ## Manipulating Data
 Once you have your data in a data frame, it is time to start characterizing and describing it. There are a number of special functions you can use to make all of this easier, and I will go over some of those now. But first, we need some data to work with. The data we will use this time is measurements from rock crabs of the species *Leptograpsus variegatus* which were collected in Western Australia. The original data is from:  
@@ -437,7 +437,7 @@ Campbell, N.A. and Mahon, R.J. (1974) A multivariate study of variation in two s
 but I actually got the data from a book on `S`, the predecessor to `R`:   
 Venables, W. N. and Ripley, B. D. (2002) *Modern Applied Statistics with S.* Fourth edition. Springer.
 
-A file with the data can be downloaded at the following link: [crabs.csv](crabs.csv). Put it into the project folder on your computer, then you can load the data as follows with `read.csv()`, then have a look at it with the `str()` command.
+A file with the data can be downloaded at the following link: [crabs.csv](crabs.csv). Put it into the current project folder on your computer, then you can load the data as follows with `read.csv()`, then have a look at it with the `str()` command.
 
 
 {% highlight r %}
@@ -609,12 +609,12 @@ grouped_crabs %>% summarize(n())
 {% highlight text %}
 ## # A tibble: 4 x 3
 ## # Groups:   sex [?]
-##     sex    sp `n()`
+##   sex   sp    `n()`
 ##   <chr> <chr> <int>
-## 1     F     B    50
-## 2     F     O    50
-## 3     M     B    50
-## 4     M     O    50
+## 1 F     B        50
+## 2 F     O        50
+## 3 M     B        50
+## 4 M     O        50
 {% endhighlight %}
 
 As you can see, this makes a new tibble with the variables you split by in the first two columns, and the result of the calculation in the third. The title of that third function is a bit nasty, but we can actually provide a better name quite easily, by 'naming' the argument, just as we did with the data frames before:
@@ -629,12 +629,12 @@ grouped_crabs %>% summarize(count = n())
 {% highlight text %}
 ## # A tibble: 4 x 3
 ## # Groups:   sex [?]
-##     sex    sp count
+##   sex   sp    count
 ##   <chr> <chr> <int>
-## 1     F     B    50
-## 2     F     O    50
-## 3     M     B    50
-## 4     M     O    50
+## 1 F     B        50
+## 2 F     O        50
+## 3 M     B        50
+## 4 M     O        50
 {% endhighlight %}
 
 Counting rows is not exactly the most useful thing we could do with this data. What we really wanted to do was to calculate statistics on subsets of the data. If we wanted to calculate the mean of `FL` and the minimum of `RW` for the grouped crab data set, we could do that as follows.
@@ -652,12 +652,12 @@ grouped_crabs %>%
 {% highlight text %}
 ## # A tibble: 4 x 5
 ## # Groups:   sex [?]
-##     sex    sp count meanFL minRW
+##   sex   sp    count meanFL minRW
 ##   <chr> <chr> <int>  <dbl> <dbl>
-## 1     F     B    50 13.270   6.5
-## 2     F     O    50 17.594   9.2
-## 3     M     B    50 14.842   6.7
-## 4     M     O    50 16.626   6.9
+## 1 F     B        50   13.3  6.50
+## 2 F     O        50   17.6  9.20
+## 3 M     B        50   14.8  6.70
+## 4 M     O        50   16.6  6.90
 {% endhighlight %}
 
 

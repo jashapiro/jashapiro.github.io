@@ -141,7 +141,7 @@ fruits$peel <- c(FALSE, TRUE, FALSE, FALSE, FALSE, TRUE)
 fruits
 ```
 
-There is also a function from `dplyr()` that is handy here: `mutate()` which is nice for creating new variables that depend on others:
+There is also a function from `dplyr()` that is handy here: `mutate()` which is nice for creating new variables that depend on others (or modifying existing columns, though that can be dangerous):
 
 ```{r mutate}
 fruits <- mutate(fruits, n_per_kg = 1000/grams)
@@ -154,7 +154,7 @@ Campbell, N.A. and Mahon, R.J. (1974) A multivariate study of variation in two s
 but I actually got the data from a book on `S`, the predecessor to `R`:   
 Venables, W. N. and Ripley, B. D. (2002) *Modern Applied Statistics with S.* Fourth edition. Springer.
 
-A file with the data can be downloaded at the following link: [crabs.csv](crabs.csv). Put it into the project folder on your computer, then you can load the data as follows with `read.csv()`, then have a look at it with the `str()` command.
+A file with the data can be downloaded at the following link: [crabs.csv](crabs.csv). Put it into the current project folder on your computer, then you can load the data as follows with `read.csv()`, then have a look at it with the `str()` command.
 
 ```{r}
 library(readr)

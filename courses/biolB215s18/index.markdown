@@ -46,9 +46,9 @@ Also recommended:
 
 **[First Steps with R](first_steps.html)** 
 
-<!--
-**[Working with Data Frames](dataframes.html)**
 
+**[Working with Data Frames](dataframes.html)**
+<!--
 **[Matrices and Lists](list_matrix.html)**
 
 **[Plotting in R](basic_graphics.html)**
