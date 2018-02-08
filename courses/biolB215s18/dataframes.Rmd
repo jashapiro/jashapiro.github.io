@@ -104,7 +104,7 @@ my_df$color <- as.factor(my_df$color)
 my_df$color
 ```
 
-Alternatively, you can use tibbles, which does not use factors by default, and in general tries to avoid modifying data as much as possible.
+Alternatively, you can use a tibble, a variant of a data frame with a few nice properties, one of which is that it does not use factors by default, and in general tries to avoid modifying data as much as possible.
 ```{r tibblestring}
 library(tibble)
 my_tbl <- tibble(fruit = x, color = y , grams = z)
@@ -154,7 +154,8 @@ Campbell, N.A. and Mahon, R.J. (1974) A multivariate study of variation in two s
 but I actually got the data from a book on `S`, the predecessor to `R`:   
 Venables, W. N. and Ripley, B. D. (2002) *Modern Applied Statistics with S.* Fourth edition. Springer.
 
-A file with the data can be downloaded at the following link: [crabs.csv](crabs.csv). Put it into the current project folder on your computer, then you can load the data as follows with `read.csv()`, then have a look at it with the `str()` command.
+
+A file with the data can be downloaded at the following link: [crabs.csv](crabs.csv). Put it into the project folder you are currently using, then you can load the data as follows with `read_csv()`, then have a look at it with the `str()` command. (Note that I am using `read_csv()`, from the `readr` package, rather than the standard `read.csv()`, because it does not automatically make strings into factors. If you want to stick with read.csv, that would be fine, but you will have some slight differences in your data frames.)
 
 ```{r}
 library(readr)
