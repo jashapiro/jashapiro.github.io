@@ -48,12 +48,12 @@ Also recommended:
 
 
 **[Working with Data Frames](dataframes.html)**
-<!--
+
 **[Matrices and Lists](list_matrix.html)**
 
-**[Plotting in R](basic_graphics.html)**
+**[Plotting in R](graphics.html)**
 
-
+<!--
 **[Lizard Lab](capture_recapture.html)**
  
 **[Abalone Lab](abalone_correlations.html)**
