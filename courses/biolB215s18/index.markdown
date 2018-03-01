@@ -53,9 +53,9 @@ Also recommended:
 
 **[Plotting in R](graphics.html)**
 
-<!--
+
 **[Lizard Lab](capture_recapture.html)**
- 
+<!-- 
 **[Abalone Lab](abalone_correlations.html)**
 -->
 
