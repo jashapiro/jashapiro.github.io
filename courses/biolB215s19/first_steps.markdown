@@ -1018,3 +1018,5 @@ If any of this is confusing for now, don't worry. There was a lot to take in. Ev
 
 ## Next
 Now that you know something about the basic data types, we will start to move on to learning about how to read in data, organize it, and create beautiful plots.
+
+[Part 2: Dataframes](dataframes.html)
