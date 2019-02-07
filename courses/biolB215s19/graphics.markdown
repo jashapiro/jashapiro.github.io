@@ -320,7 +320,7 @@ Another thing we might want to do is to take the iris data and separate out the 
 boxplot(Petal.Length ~ Species, 
         data = iris,
         col = c("orange", "purple", "blue"),
-        ylab = "Sepal Length (cm)")
+        ylab = "Petal Length (cm)")
 {% endhighlight %}
 
 <img src="plots/graphics-box_formula-1.png" title="plot of chunk box_formula" alt="plot of chunk box_formula" width="360" />

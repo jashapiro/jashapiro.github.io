@@ -229,7 +229,7 @@ Another thing we might want to do is to take the iris data and separate out the 
 boxplot(Petal.Length ~ Species, 
         data = iris,
         col = c("orange", "purple", "blue"),
-        ylab = "Sepal Length (cm)")
+        ylab = "Petal Length (cm)")
 ```
 
 You should be able to see pretty clearly why plotting all of the species together as we did earlier was a bad idea...
