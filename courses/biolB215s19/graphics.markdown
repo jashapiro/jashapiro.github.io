@@ -89,7 +89,7 @@ plot(small_norm,
 <img src="plots/graphics-unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" width="360" />
 {: .text-center}
 
-`R` has a number of ways to define the color you want, but often the easiest is to just use one of the predefined colors, like `"blue"`, `"red"`, `"green"`, or `"lemonchiffon3"`. Yeah, the color names get strange. For a complete list of the colors, you can use the `colors()` command, or you could look at the following color chart: <http://research.stowers-institute.org/efg/R/Color/Chart/ColorChart.pdf> to see what they all look like. Note that color names have to be given  as strings with quotes around them (unless you store the color names in your own variable).
+`R` has a number of ways to define the color you want, but often the easiest is to just use one of the predefined colors, like `"blue"`, `"red"`, `"green"`, or `"lemonchiffon3"`. Yeah, the color names get strange. For a complete list of the colors, you can use the `colors()` command, or you could look at the following color chart: <http://research.stowers.org/mcm/efg/R/Color/Chart/> to see what they all look like. Note that color names have to be given  as strings with quotes around them (unless you store the color names in your own variable).
 
 
 {% highlight r %}
