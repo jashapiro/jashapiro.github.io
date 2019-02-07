@@ -335,7 +335,7 @@ You should be able to see pretty clearly why plotting all of the species togethe
 {% highlight r %}
 ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
   geom_boxplot() +
-  ylab("Sepal Length (cm)")
+  ylab("Petal Length (cm)")
 {% endhighlight %}
 
 <img src="plots/graphics-ggboxplot-1.png" title="plot of chunk ggboxplot" alt="plot of chunk ggboxplot" width="432" />

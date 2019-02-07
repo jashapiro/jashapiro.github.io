@@ -240,7 +240,7 @@ You should be able to see pretty clearly why plotting all of the species togethe
 ```{r ggboxplot, fig.width = 6}
 ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
   geom_boxplot() +
-  ylab("Sepal Length (cm)")
+  ylab("Petal Length (cm)")
 
 ```
 
