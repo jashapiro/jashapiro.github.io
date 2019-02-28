@@ -111,9 +111,11 @@ simEstimate(2000, 50, 150, reps = 5)
 ```
 
 ### A Better Estimate
-It turns out that this simple estimate of the population size is somewhat biased. This is perhaps easiest to see if you think about the case when you don't capture any marked individuals (you may have some of those in the data you simulated). Then $R = 0$, and the population is estimated to be of infinite size, which is never a good thing. A somewhat better estimator is the **Schnabel** method: 
+It turns out that this simple estimate of the population size is somewhat biased. This is perhaps easiest to see if you think about the case when you don't capture any marked individuals (you may have some of those in the data you simulated). Then $R = 0$, and the population is estimated to be of infinite size, which is almost certainly an overestimate of the actual population size. A somewhat better estimator is the **Schnabel** method: 
 
 $$\hat{N} = \frac{(M+1)(C+1)}{R+1} - 1 $$
+
+Notice that in this method, the denominator can never be zero, so we will never get an infinite population size.
 
 {: .question}
 Write a function to estimate the number of individuals in the population using the Schnabel method.  
@@ -122,9 +124,9 @@ Write a function to estimate the number of individuals in the population using t
 
 
 ### Quantifying Error in each design
-For each simulated experimental design, we would like to calculate some estimate of the overall error of our estimates, compared to the true population size. One measure we could use is the Mean Squared Error, the average of the squared difference between an estimate and the true value: 
+For each simulated experimental design, we would like to calculate some estimate of the overall error of our estimates, compared to the true population size. One measure we can use is the Mean Squared Error, the average of the squared difference between an estimate and the true value: 
 
-$$\mathrm{MSE} = \frac{\sum(\hat{N}_i - N)^2}{n}$$
+$$\mathrm{MSE} = \frac{\sum\limits_{i=1}^n(\hat{N}_i - N)^2}{n}$$
 
 where $\hat{N}_i$ is the popilation size estimate from the $i^\mathrm{th}$ simulation, $N$ is the population size you simulated, and $n$ is the number of simulations. (This should look somewhat familiar... what statistical quantity we have discussed in the past is this analagous to?) If we can minimize this MSE by adjusting our sampling scheme, then we will have a pretty good sense that we are getting good estimates of the total number of lizards in the population.
 

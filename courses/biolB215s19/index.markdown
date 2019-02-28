@@ -46,7 +46,7 @@ Also recommended:
 
 **[First Steps with R](first_steps.html)** 
 
-<!-- 
+
 **[Working with Data Frames](dataframes.html)**
 
 **[Matrices and Lists](list_matrix.html)**
@@ -55,7 +55,7 @@ Also recommended:
 
 
 **[Lizard Lab](capture_recapture.html)**
-
+<!-- 
 **[Abalone Lab](abalone_correlations.html)**
 -->
 
