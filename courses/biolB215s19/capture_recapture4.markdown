@@ -67,21 +67,23 @@ Nowe we can construct a simple prior and calculate the posteriors, using the cou
 
 
 {% highlight r %}
+library(ggplot2)
+library(dplyr)
 prior <- makeUniformPrior(10000,100, 100)
 posterior <- calcPosterior(marked = 5, 100, 100, prior)
 
 # reformat data for plotting ease:
 # combine prior and posterior into a single data frame, 
-# with an extra column to identify the two distributions.
-plotdata <- rbind( cbind(prior, dist = "Prior"),
-                   cbind(posterior, dist = "Posterior") )
-require(ggplot2)
-qplot(data = plotdata,
-      x = N, y = prob, 
-      color = dist,
-      geom = "line", 
-      xlab = "Population Size", 
-      ylab = "Probability") +
+# making an extra column to identify the two distributions.
+plotdata <- bind_rows(Prior = prior, 
+                      Posterior = posterior, 
+                      .id = "dist")
+
+
+ggplot(plotdata, aes(x = N, y = prob, color = dist)) +
+  geom_line() +
+  xlab("Population Size") + 
+  ylab("Probability") +
   guides(color = guide_legend(title = "Distribution"))
 {% endhighlight %}
 

@@ -63,12 +63,11 @@ recaptured <- 0:50
 probs <- dhyper(recaptured, m = 150, n = 3000 - 150, k = 50)
 
 library(ggplot2) #load ggplot2
-qplot(x = recaptured, y = probs,
-      color = I("blue"), 
-      geom = "line",
-      main = "Recapture count probabilities\nN = 3000, 150 marked, 50 captured",
-      xlab = "Number of marked individuals recaptured", 
-      ylab = "Probability")
+ggplot(data.frame(recaptured, probs), aes(x = recaptured, y = probs))+ 
+  geom_bar(fill = "darkblue", stat = "identity", width = 1)+
+  ggtitle("Recapture count probabilities\nN = 3000, 150 marked, 50 captured") +
+  xlab("Number of marked individuals recaptured") +  
+  ylab("Probability")
 ```
 
 Of course, for a given experiment, we only see one outcome; we capture one group of animals and see one number of marked individuals among them. What we want to know is what the chance is that we would have seen that number of marked individuals given some range of population sizes. Again, this is the *likelihood* of the data given a particular parameter value. `R` is happy enough to calculate `dhyper()` for a variety of population sizes as well, and we can generate a plot of the likelihood of observing 5 marked individuals given a variety of total population sizes. 
@@ -76,12 +75,11 @@ Of course, for a given experiment, we only see one outcome; we capture one group
 ```{r likelihood}
 popsize <- 200:5000
 likes <- dhyper(5, m = 150, n = popsize - 150, k = 50)
-qplot(x = popsize, y =  likes,
-      color = I("blue"), 
-      geom = "line",
-      main = "Population size likelihoods\n150 initially marked; 5 of 50 recaught",
-      xlab = "Population Size", 
-      ylab = "Likelihood")
+ggplot(data.frame(popsize, likes), aes(x = popsize, y = likes))+ 
+  geom_line(color = "blue")+
+  ggtitle("Population size likelihoods\n150 initially marked; 5 of 50 recaught")+
+  xlab("Population Size") +
+  ylab("Likelihood")
 ```
 
 
