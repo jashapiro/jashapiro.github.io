@@ -114,7 +114,7 @@ And a nicer version of that which shows all the data is the Sina Plot, which we 
 ```{r sina}
 library(ggforce)
 ggplot(abalone, aes(x = Sex, y = Whole, color = Sex)) + 
-  geom_sina(alpha = 0.5)
+  geom_sina(alpha = 0.2)
 ```
 
 

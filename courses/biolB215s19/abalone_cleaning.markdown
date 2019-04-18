@@ -175,13 +175,13 @@ ggplot(abalone, aes(x = Sex, y = Whole, fill = Sex)) +
 <img src="plots/abalone_cleaning-violins-1.png" title="plot of chunk violins" alt="plot of chunk violins" width="468" />
 {: .text-center}
 
-And a nicer version of that which shows all the data is the Sina Plot, which we can get with the `ggforce` library (which you may have to install). *Note: there is a bug in the current version that produces a strange error. If you run into that but want to use this package, let me know, and I will try to help you work around it.* 
+And a nicer version of that which shows all the data is the Sina Plot, which we can get with the `ggforce` library (which you may have to install). I am also using the `alpha` argument to make the points somewhat transparent. *Note: there is a bug in the current version that produces a strange error. If you run into that but want to use this package, let me know, and I will try to help you work around it.* 
 
 
 {% highlight r %}
 library(ggforce)
 ggplot(abalone, aes(x = Sex, y = Whole, color = Sex)) + 
-  geom_sina()
+  geom_sina(alpha = 0.2)
 {% endhighlight %}
 
 <img src="plots/abalone_cleaning-sina-1.png" title="plot of chunk sina" alt="plot of chunk sina" width="468" />
