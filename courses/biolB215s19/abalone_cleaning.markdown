@@ -24,42 +24,59 @@ You can find the data in CSV format at the following link: [abalone.csv](abalone
 
 [^excel]: To save a CSV file from Excel or most other spreadsheet programs, use the "Save As..." command and select "Comma Separated Values (.csv)" from the format options. Excel will complain that there are features of Excel that won't work with that format. Tell it to continue.
 
-To read the file, we will use the `read.csv()` command[^readtable], and store it in a variable called `abalone`. While we are at it, we'll also load up `dplyr`, as it will come in handy later.
+To read the file, we will use the `read_csv()` command, and store it in a variable called `abalone`. While we are at it, we'll also load up `tidyverse`, (as that is where `read_csv()` lives anyway)
 
-[^readtable]: The `read.csv()` function is one of many functions in R that are part of the `read.table()` group. All of them read in simple text file tables with individual fields separated in various ways (tabs, spaces, commas, you name it). The base function `read.table()` is quite customizable; you can explore the various options available by looking at the help page in `R`. One particular note is that `R` will read text strings in as factors unless you tell it not to with the argument `stringsAsFactors = FALSE`. For these data, we wanted to leave male and female as factors, but if you have a column of things like sample names or DNA sequences, you might not want to do that. You can always convert a column from text to a factor later, as needed.
-
-
-{% highlight r %}
-library(dplyr)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## 
-## Attaching package: 'dplyr'
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-{% endhighlight %}
 
 
 
 {% highlight r %}
-abalone <- read.csv("abalone.csv")
+library(tidyverse)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## ── Attaching packages ─────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## ✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
+## ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
+## ✔ tidyr   0.8.3       ✔ stringr 1.4.0  
+## ✔ readr   1.3.1       ✔ forcats 0.4.0
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## ── Conflicts ────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+{% endhighlight %}
+
+
+
+{% highlight r %}
+abalone <- read_csv("abalone.csv")
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Parsed with column specification:
+## cols(
+##   Sex = col_character(),
+##   Length = col_double(),
+##   Diam = col_double(),
+##   Height = col_double(),
+##   Whole = col_double(),
+##   Shucked = col_double(),
+##   Viscera = col_double(),
+##   Shell = col_double(),
+##   Rings = col_double()
+## )
 {% endhighlight %}
 
 
@@ -89,14 +106,13 @@ Make a new column called `Age` in the `abalone` data frame taking advantage of t
 ## Data summaries
 This is a big data set, so it is hard to get a sense of how it looks just by scanning it. It is always a good idea to make some preliminary graphs, just to get a sense of the data. 
 
-Start by loading the `ggplot2` library and making a histogram of the abalone weights using `qplot()`. 
+Start by loading the `ggplot2` library and making a histogram of the abalone weights. 
 
 
 {% highlight r %}
 library(ggplot2)
-qplot(Whole, 
-      data = abalone, 
-      geom = "histogram")
+ggplot(abalone, aes(x = Whole)) + 
+  geom_histogram()
 {% endhighlight %}
 
 
@@ -112,11 +128,9 @@ Isn't that pretty? Sure, but it might not really be what we are interested in lo
 
 
 {% highlight r %}
-qplot(Whole, 
-      data = abalone, 
-      geom = "histogram", 
-      facets = Sex~., 
-      binwidth = 20)
+ggplot(abalone, aes(x = Whole)) + 
+  geom_histogram(binwidth = 20) +
+  facet_grid(Sex~.)
 {% endhighlight %}
 
 <img src="plots/abalone_cleaning-weighthistfacet-1.png" title="plot of chunk weighthistfacet" alt="plot of chunk weighthistfacet" width="468" />
@@ -131,40 +145,46 @@ abalone$Sex <- ordered(abalone$Sex,
                        levels = c("I", "M", "F"), 
                        labels = c("Immature", "Male", "Female"))
 #redo the histogram
-qplot(Whole, 
-      data = abalone, 
-      geom = "histogram", 
-      facets = Sex~., 
-      binwidth = 20)
+ggplot(abalone, aes(x = Whole)) + 
+  geom_histogram(binwidth = 20) +
+  facet_grid(Sex~.)
 {% endhighlight %}
 
 <img src="plots/abalone_cleaning-reorder-1.png" title="plot of chunk reorder" alt="plot of chunk reorder" width="468" />
 {: .text-center}
 
-We can also use `qplot()` to make boxplots, which may be a bit nicer for this application, as it is easier to see some of the critical points in the data than it was with the histograms. We do this by putting the weight on the Y axis, and separating by sex on the x axis. Change the `geom` to boxplot and there you have it. I also added in a bit of color with the `fill` argument, which is a bit redundant here, but why not. Notice how `qplot()` automatically turned the factor column into a reasonable color scheme.
+We can also use  make boxplots, which may be a bit nicer for this application, as it is easier to see some of the critical points in the data than it was with the histograms. We do this by putting the weight on the Y axis, and separating by sex on the x axis. Change the `geom` to boxplot and there you have it. I also added in a bit of color with the `fill` argument, which is a bit redundant here, but why not. 
 
 
 {% highlight r %}
-qplot(Sex, Whole, 
-      data = abalone, 
-      geom = "boxplot", 
-      fill = Sex)
+ggplot(abalone, aes(x = Sex, y = Whole, fill = Sex)) + 
+  geom_boxplot()
 {% endhighlight %}
 
 <img src="plots/abalone_cleaning-boxplots-1.png" title="plot of chunk boxplots" alt="plot of chunk boxplots" width="468" />
 {: .text-center}
 
-While we are playing around, one more plot... An alternative to the box plot that you occasionally see is the violin plot, which is sot of like a histogram thrown on its side. It is not quite as useful for quantification, but it can look pretty nifty and display aspects of the data that are not immediately obvious from the boxplots.
+While we are playing around, two more plots... An alternative to the box plot that you occasionally see is the violin plot, which is sot of like a histogram thrown on its side. It is not quite as useful for quantification, but it can look pretty nifty and display aspects of the data that are not immediately obvious from the boxplots. And a nicer version of that which shows all the data is the sina_plot.
 
 
 {% highlight r %}
-qplot(Sex, Whole, 
-      data = abalone, 
-      geom = "violin", 
-      fill = Sex)
+ggplot(abalone, aes(x = Sex, y = Whole, fill = Sex)) + 
+  geom_violin()
 {% endhighlight %}
 
 <img src="plots/abalone_cleaning-violins-1.png" title="plot of chunk violins" alt="plot of chunk violins" width="468" />
+{: .text-center}
+
+And a nicer version of that which shows all the data is the Sina Plot, which we can get with the `ggforce` library (which you may have to install). *Note: there is a bug in the current version that produces a strange error. If you run into that but want to use this package, let me know, and I will try to help you work around it.* 
+
+
+{% highlight r %}
+library(ggforce)
+ggplot(abalone, aes(x = Sex, y = Whole, color = Sex)) + 
+  geom_sina()
+{% endhighlight %}
+
+<img src="plots/abalone_cleaning-sina-1.png" title="plot of chunk sina" alt="plot of chunk sina" width="468" />
 {: .text-center}
 
 
@@ -190,13 +210,11 @@ Are there significant differences between Males and Females for any of these tra
 
 With a general picture of the data, and having removed some of the problematic data points, we can start to look at how the measurements of the abalone relate to each other. But again, before getting to calculating the statistics, it is worth having a look at the data. We will focus on the length, height, whole weight, shucked weight, shell weight, and age of the abalone.
 
-Scatter plots in `ggplot` are just as easy as with standard plotting, and possibly easier. As an example, here is a plot of the whole weight vs shucked weight, colored by sex. Notice how `ggplot` adds a nice legend, something that is really annoying to do in base `R`. 
 
 
 {% highlight r %}
-qplot(Whole, Shucked, 
-      data = abalone, 
-      color = Sex)
+ggplot(abalone, aes(x = Whole, y = Shucked, color = Sex)) +
+  geom_point()
 {% endhighlight %}
 
 <img src="plots/abalone_cleaning-simplescatter-1.png" title="plot of chunk simplescatter" alt="plot of chunk simplescatter" width="468" />
@@ -207,9 +225,8 @@ That looks pretty nice, but do you notice anything strange about the data in the
 
 
 {% highlight r %}
-qplot(Whole, Shucked, 
-      data = abalone, 
-      color = Sex) +
+ggplot(abalone, aes(x = Whole, y = Shucked, color = Sex)) +
+  geom_point() + 
   geom_abline(slope = 1)
 {% endhighlight %}
 

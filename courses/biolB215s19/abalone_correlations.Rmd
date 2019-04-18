@@ -35,7 +35,7 @@ Variable | Unit | Description
 `Age` | years| The age of the abalone in years 
 
 ```{r read}
-library(ggplot2)
+library(tidyverse)
 load("abalone_trimmed.Rdata")
 # check the size
 dim(abalone)
@@ -67,7 +67,7 @@ Create a new version of the `abalone` data frame called `logabalone` where you t
 
 
 ```{r logabalone, echo=FALSE, include=FALSE}
-logabalone <- cbind(Sex = abalone[,1], log10(abalone[,-1]))
+logabalone <- bind_cols(Sex = abalone[,1], log10(abalone[,-1]))
 ```
 
 
@@ -144,10 +144,10 @@ summary(lm_multi)
 Now all the terms are significant, including length! How much better is the fit? We can look at the Multiple R-squared values for each fit, or we can compare them visually, as below.
 
 ```{r fitplots, fig.width=8}
-fits <- rbind(data.frame(fit = "sum", 
+fits <- bind_rows(tibble(fit = "sum", 
                          predicted = fitted(lm_sum), 
                          actual = abalone$Age),
-              data.frame(fit = "multi",
+                  tibble(fit = "multi",
                          predicted = fitted(lm_multi), 
                          actual = abalone$Age)
               )

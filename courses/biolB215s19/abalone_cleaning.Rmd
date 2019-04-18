@@ -28,13 +28,13 @@ You can find the data in CSV format at the following link: [abalone.csv](abalone
 
 [^excel]: To save a CSV file from Excel or most other spreadsheet programs, use the "Save As..." command and select "Comma Separated Values (.csv)" from the format options. Excel will complain that there are features of Excel that won't work with that format. Tell it to continue.
 
-To read the file, we will use the `read.csv()` command[^readtable], and store it in a variable called `abalone`. While we are at it, we'll also load up `dplyr`, as it will come in handy later.
+To read the file, we will use the `read_csv()` command, and store it in a variable called `abalone`. While we are at it, we'll also load up `tidyverse`, (as that is where `read_csv()` lives anyway)
 
-[^readtable]: The `read.csv()` function is one of many functions in R that are part of the `read.table()` group. All of them read in simple text file tables with individual fields separated in various ways (tabs, spaces, commas, you name it). The base function `read.table()` is quite customizable; you can explore the various options available by looking at the help page in `R`. One particular note is that `R` will read text strings in as factors unless you tell it not to with the argument `stringsAsFactors = FALSE`. For these data, we wanted to leave male and female as factors, but if you have a column of things like sample names or DNA sequences, you might not want to do that. You can always convert a column from text to a factor later, as needed.
+
 
 ```{r read}
-library(dplyr)
-abalone <- read.csv("abalone.csv")
+library(tidyverse)
+abalone <- read_csv("abalone.csv")
 ```
 
 
@@ -66,23 +66,20 @@ abalone <- mutate(abalone, Age = Rings + 1.5)
 ## Data summaries
 This is a big data set, so it is hard to get a sense of how it looks just by scanning it. It is always a good idea to make some preliminary graphs, just to get a sense of the data. 
 
-Start by loading the `ggplot2` library and making a histogram of the abalone weights using `qplot()`. 
+Start by loading the `ggplot2` library and making a histogram of the abalone weights. 
 
 ```{r weighthist}
 library(ggplot2)
-qplot(Whole, 
-      data = abalone, 
-      geom = "histogram")
+ggplot(abalone, aes(x = Whole)) + 
+  geom_histogram()
 ```
 
 Isn't that pretty? Sure, but it might not really be what we are interested in looking at, as it is a combination of all sexes. We might want to see if the different sexes had different distributions. So we would like to make separate plots for each sex. This is quite easy to do in `ggplot2`, with the `facets` argument, which takes an R formula, like the one we used for ANOVAs (and will shortly use for regressions). The left side of the tilde (`~`) tells what variable you want to separate the data by for vertically arranged panels and the right side tells what variable to separate by for horizonal panels. You can do both, but if you only want to do one, you use a period for the other axis, as shown below. (I also added in a `binwidth` argument, so `ggplot` will stop complaining... )
 
 ```{r weighthistfacet}
-qplot(Whole, 
-      data = abalone, 
-      geom = "histogram", 
-      facets = Sex~., 
-      binwidth = 20)
+ggplot(abalone, aes(x = Whole)) + 
+  geom_histogram(binwidth = 20) +
+  facet_grid(Sex~.)
 ```
 
 You will note that the labels for each panel are shown on the right side, and the ordering is by alphabetical order. We probably don't care too much, but it might be nice to make the @Sex@ column into an ordered factor, and we might as well make the labels nicer while we are at it. I do this below in one step, but it is worth checking that everything is correct before you replace the data in the data frame, lest you unwittingly create random errors.
@@ -93,29 +90,31 @@ abalone$Sex <- ordered(abalone$Sex,
                        levels = c("I", "M", "F"), 
                        labels = c("Immature", "Male", "Female"))
 #redo the histogram
-qplot(Whole, 
-      data = abalone, 
-      geom = "histogram", 
-      facets = Sex~., 
-      binwidth = 20)
+ggplot(abalone, aes(x = Whole)) + 
+  geom_histogram(binwidth = 20) +
+  facet_grid(Sex~.)
 ```
 
-We can also use `qplot()` to make boxplots, which may be a bit nicer for this application, as it is easier to see some of the critical points in the data than it was with the histograms. We do this by putting the weight on the Y axis, and separating by sex on the x axis. Change the `geom` to boxplot and there you have it. I also added in a bit of color with the `fill` argument, which is a bit redundant here, but why not. Notice how `qplot()` automatically turned the factor column into a reasonable color scheme.
+We can also use  make boxplots, which may be a bit nicer for this application, as it is easier to see some of the critical points in the data than it was with the histograms. We do this by putting the weight on the Y axis, and separating by sex on the x axis. Change the `geom` to boxplot and there you have it. I also added in a bit of color with the `fill` argument, which is a bit redundant here, but why not. 
 
 ```{r boxplots}
-qplot(Sex, Whole, 
-      data = abalone, 
-      geom = "boxplot", 
-      fill = Sex)
+ggplot(abalone, aes(x = Sex, y = Whole, fill = Sex)) + 
+  geom_boxplot()
 ```
 
-While we are playing around, one more plot... An alternative to the box plot that you occasionally see is the violin plot, which is sot of like a histogram thrown on its side. It is not quite as useful for quantification, but it can look pretty nifty and display aspects of the data that are not immediately obvious from the boxplots.
+While we are playing around, two more plots... An alternative to the box plot that you occasionally see is the violin plot, which is sot of like a histogram thrown on its side. It is not quite as useful for quantification, but it can look pretty nifty and display aspects of the data that are not immediately obvious from the boxplots. And a nicer version of that which shows all the data is the sina_plot.
 
 ```{r violins}
-qplot(Sex, Whole, 
-      data = abalone, 
-      geom = "violin", 
-      fill = Sex)
+ggplot(abalone, aes(x = Sex, y = Whole, fill = Sex)) + 
+  geom_violin()
+```
+
+And a nicer version of that which shows all the data is the Sina Plot, which we can get with the `ggforce` library (which you may have to install). *Note: there is a bug in the current version that produces a strange error. If you run into that but want to use this package, let me know, and I will try to help you work around it.* 
+
+```{r sina}
+library(ggforce)
+ggplot(abalone, aes(x = Sex, y = Whole, color = Sex)) + 
+  geom_sina()
 ```
 
 
@@ -143,21 +142,19 @@ Are there significant differences between Males and Females for any of these tra
 
 With a general picture of the data, and having removed some of the problematic data points, we can start to look at how the measurements of the abalone relate to each other. But again, before getting to calculating the statistics, it is worth having a look at the data. We will focus on the length, height, whole weight, shucked weight, shell weight, and age of the abalone.
 
-Scatter plots in `ggplot` are just as easy as with standard plotting, and possibly easier. As an example, here is a plot of the whole weight vs shucked weight, colored by sex. Notice how `ggplot` adds a nice legend, something that is really annoying to do in base `R`. 
 
 ```{r simplescatter}
-qplot(Whole, Shucked, 
-      data = abalone, 
-      color = Sex)
+ggplot(abalone, aes(x = Whole, y = Shucked, color = Sex)) +
+  geom_point()
+
 ```
 
 ### More cleaning
 That looks pretty nice, but do you notice anything strange about the data in the plot? Shucked weight is supposed to be the weight without the shell, so it seems more than a bit odd that there are some abalone that are heavier after removing the shell. Just to look at it a bit more clearly, I'll add a line to the plot. Recall that to add to a plot with `ggplot`, we literally add, with a `+`, to the plot command. In this case we will use`geom_abline`, which works like the `abline` in base R, to add a line with a slope of 1 and an intercept of 0 (the default).
 
 ```{r scatter_ref}
-qplot(Whole, Shucked, 
-      data = abalone, 
-      color = Sex) +
+ggplot(abalone, aes(x = Whole, y = Shucked, color = Sex)) +
+  geom_point() + 
   geom_abline(slope = 1)
 ```
 
@@ -184,9 +181,8 @@ If you did everything as I did, you should now have an abalone data frame with `
 There is one more obviously bad point I want to get rid of, which you can see in the plot of length and height that appears below. 
 
 ```{r shortfemaleplot, echo=FALSE}
-qplot(Length, Height, 
-      data = abalone, 
-      color = Sex)
+ggplot(abalone, aes(x = Length, y = Height, color = Sex)) +
+  geom_point() 
 ```
 
 The female with a length of 127 mm but a height of only 3 mm (in the lower right of the plot) seems like she must have been mismeasured somehow, so I will remove that single point as well.

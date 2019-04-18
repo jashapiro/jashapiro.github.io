@@ -115,15 +115,13 @@ mseSim(sim_50x150)
 
 ```r
 three_sims <- rbind( sim_100x100, sim_150x50, sim_50x150)
-qplot(data = three_sims,
-      x = pop_est,
-      geom = "histogram",
-      binwidth = 50,
-      facets = first ~ . , 
-      xlab = "Population size estimate")
+ggplot(three_sims, aes(x = pop_est)) +
+  geom_histogram(binwidth = 200) +
+  facet_grid(first ~ .) +
+  xlab("Population size estimate")
 ```
 
-![plot of chunk sim_3cond](plots/cr_example-sim_3cond-1.png) 
+![plot of chunk plot3](plots/cr_example-plot3-1.png)
 
 ## More simulations
 Three categories is a bit too few to really judge where the best sampling scheme is, so I will go ahead and test all possible sampling schemes. To do this all at once, I will use plyr, specifically the `mdply()` function, which allows me to give a data frame of arguments to a function, combining all of the results together into a single data frame. So the first step is to make that data frame of arguments (all possible pairs first and second trapping counts), then pass it to `mdply()` with my `simRecapture()` function. The arguments that don't vary I will give separately when I call mdply; it will use the same ones for each call to simRecapture.
@@ -139,20 +137,19 @@ bigsim <- sim_args %>%
                             reps = 100))
 ```
 
-I can then calculate the MSE for each of those simulations using `ddply()` and my `mseSim()` function. 
+I can then calculate the MSE for each of those simulations using `do()` and my `mseSim()` function. 
 
 ```r
 bigsim_mse <- bigsim %>% 
                 group_by(first) %>%
                 do(mseSim(.))
-qplot(data = bigsim_mse,
-      x = first,
-      y = MSE,
-      xlab = "First sample size",
-      ylab = "Mean squared error")
+ggplot(bigsim_mse, aes(x = first, y = MSE)) +
+  geom_point() +
+  xlab("First sample size") +
+  ylab("Mean squared error")
 ```
 
-![plot of chunk mseSims](plots/cr_example-mseSims-1.png) 
+![plot of chunk mseSims](plots/cr_example-mseSims-1.png)
 
 That is pretty ugly, especially in the middle, so lets do more replicates per condition to see if we can sort that out.
 
@@ -169,14 +166,13 @@ biggersim_mse <-biggersim %>%
                 group_by(first) %>%
                 do(mseSim(.))
 
-qplot(data = biggersim_mse,
-      x = first,
-      y = MSE,
-      xlab = "First sample size",
-      ylab = "Mean squared error")
+ggplot(biggersim_mse, aes(x = first, y = MSE)) +
+  geom_point() +
+  xlab("First sample size") +
+  ylab("Mean squared error")
 ```
 
-![plot of chunk bigger](plots/cr_example-bigger-1.png) 
+![plot of chunk bigger](plots/cr_example-bigger-1.png)
 
 Well, that is certainly interesting... We seem to do well if we are close to 100 & 100, or if we take 11-12 on the first or second try. I wonder if it depends on the true population size... Lets try a few different population sizes. I'll use a function called `expand.grid()` to generate all combinations of two vectors: the true population sizes and the first sample size. 
 
@@ -199,35 +195,32 @@ hugesim_mse <- hugesim %>%
                 group_by(popsize, first) %>%
                 do(mseSim(.))
 
-qplot(data = hugesim_mse,
-      x = first,
-      y = MSE,
-      color = popsize,
-      xlab = "First sample size",
-      ylab = "Mean squared error")
+ggplot(hugesim_mse, aes(x = first, y = MSE, color = as.factor(popsize))) +
+  geom_point() +
+  xlab("First sample size") +
+  ylab("Mean squared error")
 ```
 
-![plot of chunk hugesim_plot](plots/cr_example-hugesim_plot-1.png) 
+![plot of chunk hugesim_plot](plots/cr_example-hugesim_plot-1.png)
+
 A bit hard to read, that. Let's convert the popsize to a factor when plotting to make the colors more distinct, transform the MSE to a coefficient of variation(ish) by taking the square root and dividing by the true population size, make the data points smaller, fade them by making them partly transparent with the `alpha` argument, and then add on as smoothing function. If you want details on all of these options, the [ggplot2 website](http://docs.ggplot2.org/) is a good, if technical, resource, as is [Google](http://google.com), as always. You can find a lot by searching.
 
 
 ```r
-qplot(data = hugesim_mse,
-      x = first,
-      y = sqrt(MSE)/popsize,
-      color = factor(popsize),
-      alpha = I(0.5),
-      xlab = "First sample size",
-      ylab = "Mean squared error / True population size") +
+ggplot(hugesim_mse, aes(x = first, y = sqrt(MSE)/popsize, color = as.factor(popsize))) +
+  geom_point(alpha = 0.5) +
+  xlab("First sample size") +
+  ylab("Square root mean squared error / True population size") +
   geom_smooth(span = 0.2) + # `span` determines the degree of smoothing in curve
   guides(color = guide_legend("True Population Size"))
 ```
 
 ```
-## geom_smooth: method="auto" and size of largest group is <1000, so using loess. Use 'method = x' to change the smoothing method.
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk simplot2](plots/cr_example-simplot2-1.png) 
+![plot of chunk simplot2](plots/cr_example-simplot2-1.png)
+
 Well, that is still a bit mysterious. Looks like the lowest error is out toward the ends for many population sizes, but the exact location varies a fair amount. If the population size is very large, you might be better off with a unbalanced strategy, but it seems like the ideal ratio of first to second is pretty sensitive to the assumed population size.  If you think the actual population size is in the thousands, you might want to bias your sample, but what is best for 5000 is not very good for 1500, and vice-versa. Maybe sticking with 100 & 100 would be the best thing to do overall... 
 
 All of this is a pretty good argument for not really trusting a simple point estimate of the population size, and definitely not putting too much weight on our initial guesses.

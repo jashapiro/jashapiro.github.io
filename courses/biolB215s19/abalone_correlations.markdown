@@ -32,7 +32,35 @@ Variable | Unit | Description
 
 
 {% highlight r %}
-library(ggplot2)
+library(tidyverse)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## ── Attaching packages ─────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## ✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
+## ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
+## ✔ tidyr   0.8.3       ✔ stringr 1.4.0  
+## ✔ readr   1.3.1       ✔ forcats 0.4.0
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## ── Conflicts ────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+{% endhighlight %}
+
+
+
+{% highlight r %}
 load("abalone_trimmed.Rdata")
 # check the size
 dim(abalone)
@@ -236,10 +264,10 @@ Now all the terms are significant, including length! How much better is the fit?
 
 
 {% highlight r %}
-fits <- rbind(data.frame(fit = "sum", 
+fits <- bind_rows(tibble(fit = "sum", 
                          predicted = fitted(lm_sum), 
                          actual = abalone$Age),
-              data.frame(fit = "multi",
+                  tibble(fit = "multi",
                          predicted = fitted(lm_multi), 
                          actual = abalone$Age)
               )
