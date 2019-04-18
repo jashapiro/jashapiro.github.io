@@ -16,7 +16,7 @@ set.seed(20130409)
 [back to Cleaning](abalone_cleaning.html)
 
 ## Data 
-If you did the (optional) data cleaning steps, you should have a data frame called `abalone`, as described at the end of the [Abalone Cleaning](abalone_cleaning.html) page. If not, you will have to download the R data file [abalone_trimmed.Rdata](abalone_trimmed.Rdata). Create a new project in RStudio, and put the downloaded file in the folder associated with that project. You will then use `load()` to pull that back into your fresh workspace, where it will create the data frame named `abalone`. Just to check, it should  have 4157 rows. 
+If you did the data cleaning steps, you should have a data frame called `abalone`, as described at the end of the [Abalone Cleaning](abalone_cleaning.html) page. If not, you will have to download the R data file [abalone_trimmed.Rdata](abalone_trimmed.Rdata). Create a new project in RStudio, and put the downloaded file in the folder associated with that project. You will then use `load()` to pull that back into your fresh workspace, where it will create the data frame named `abalone`. Just to check, it should  have 4157 rows. 
 
 The columns are as described on the Cleaning page, but to reiterate: 
 
