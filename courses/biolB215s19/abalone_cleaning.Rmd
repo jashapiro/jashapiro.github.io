@@ -8,8 +8,8 @@ nav: teaching
 ---
 
 ```{r setup, include=FALSE, cache=FALSE}
-source("../../_knitr/knit_jekyll_setup.R")
-opts_chunk$set(fig.path="plots/abalone_cleaning-", tidy=FALSE, fig.width=6.5, fig.height=5, fig.align="center", fig.retina = 2)
+
+
 set.seed(20130409)
 ```
 

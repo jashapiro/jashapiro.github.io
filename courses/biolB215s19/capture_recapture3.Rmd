@@ -10,8 +10,8 @@ nav: teaching
 [back to Calculations & Simulations](capture_recapture2.html)
 
 ```{r setup, include=FALSE, cache=FALSE}
-source("../../_knitr/knit_jekyll_setup.R")
-opts_chunk$set(fig.path="plots/capture_recapture3-", tidy=FALSE, fig.width=6.5, fig.height=5, fig.align="center", fig.retina = 2, cache=TRUE, cache.extra=rand_seed)
+
+
 set.seed(20130306)
 ```
 

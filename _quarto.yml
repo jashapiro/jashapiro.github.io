@@ -15,7 +15,6 @@ website:
 format:
   html:
     theme: litera
-    css: styles.css
     toc: true
 
 reference-location: margin

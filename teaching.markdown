@@ -9,7 +9,7 @@ Below are brief descriptions of some the courses that I have designed and taught
 
 <h2>Introduction to Genomics<span class="file-link"><a href="/docs/BiolB216_syllabus_fall2012.pdf">syllabus</a></span></h2>
 
-<blockquote class="blockquote-reverse"> 
+<blockquote class="blockquote-reverse">
 <p>We shift over our fingers the first grains of this great outpouring of information and say to ourselves that the world be helped by it. …one small link in the chain from biochemistry and mathematics to sociology and medicine.</p>
 <footer> <cite><a href="http://en.wikipedia.org/wiki/Margaret_Oakley_Dayhoff">Margaret Dayhoff</a> (<a href="http://dx.doi.org/10.1007/s10739-009-9221-0">Strasser 2010</a>)</cite> </footer>
 </blockquote>
@@ -17,7 +17,7 @@ Below are brief descriptions of some the courses that I have designed and taught
 **What is a genome and what is it good for?**
 This course introduces the questions that can be asked and answered with genomic data, and the  computational methods and resources available for analysis of such large biological data sets. Recent advances in technologies such as microarrays, DNA sequencing, and protein mass spectrometry have  transformed biology, making experiments easier, cheaper, and more accurate, while generating much more data than ever before. Taking advantage of this genomic data requires not only the ability to manage these data, but often new ways of thinking about biological questions. The course covers key concepts in bioinformatics, such as the use of public databases, sequence alignment and assembly, gene expression analysis, and structural modeling. The computational lab component of the course provides the opportunity to explore the applications of these concepts using both small-scale and genomic data. Because genomics is a rapidly progressing field, an important component of the course is the discussion of recent articles from the primary and popular science literature. We explore these advances not only for their scientific content, but also to examine their potential impacts on society.
 
-<h2><a href="/courses/biolB215s19/">Experimental Design and Statistics</a> <span class="file-link"><a href="/courses/biolB215s18/BiolB215_syllabus_Sp2019.pdf">syllabus</a></span></h2>
+<h2><a href="/courses/biolB215s19/index.html">Experimental Design and Statistics</a> <span class="file-link"><a href="/courses/biolB215s18/BiolB215_syllabus_Sp2019.pdf">syllabus</a></span></h2>
 
 <blockquote class="blockquote-reverse pull-right">
 <p>Statistics is applied philosophy of science.</p>
