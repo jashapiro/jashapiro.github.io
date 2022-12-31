@@ -1,0 +1,24 @@
+project:
+  type: website
+
+website:
+  title: "ShapBio"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: teaching.markdown
+        text: Teaching
+      - href: cv.html
+        text: CV
+
+format:
+  html:
+    theme: litera
+    css: styles.css
+    toc: true
+
+reference-location: margin
+
+editor: visual
+

@@ -1,0 +1,11 @@
+---
+title: Welcome to ShapBio
+---
+
+This is the personal website of Joshua A. Shapiro, PhD[^1]. I am a genomic data scientist, currently working on providing tools and support for pediatric cancer researchers through my role as a Senior Data Scientist at the [Childhood Cancer Data Lab](https://ccdatalab.org) of [Alex's Lemonade Stand Foundation](https://alexslemonade.org).
+
+[^1]: Not to be confused with [Josh Shapiro](https://joshshapiro.org), Governor of Pennsylvania (who happens to be from the same county that I live in).
+    Unless you are providing services, in which case you should feel free to treat me as you would a governor.
+
+Previously, I was an Assistant Professor of Biology at [Bryn Mawr College](https://brynmawr.edu), where I worked in evolutionary genomics.
+This website includes some of my teaching materials from my time there, including computational labs and exercises from my biostatistics course.
