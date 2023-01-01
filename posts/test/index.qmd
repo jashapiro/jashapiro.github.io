@@ -1,0 +1,20 @@
+---
+title: "Test Post"
+description: "Post description"
+author: "Josh"
+date: "2023-01-01"
+---
+
+
+
+## Session information
+
+<details>
+<summary>R session information</summary>
+
+```{r}
+#| label: session info
+sessioninfo::session_info()
+```
+
+</details>
