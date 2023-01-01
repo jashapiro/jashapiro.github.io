@@ -3,6 +3,8 @@ title: "Test Post"
 description: "Post description"
 author: "Josh"
 date: "2023-01-01"
+categories:
+  - test
 ---
 
 
