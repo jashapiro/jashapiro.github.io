@@ -1,0 +1,4 @@
+# options apply to all posts in this folder
+date-format: iso
+# freeze computational output
+freeze: true
