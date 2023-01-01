@@ -16,3 +16,6 @@ AutoAppendNewline: Yes
 StripTrailingWhitespace: Yes
 
 UseNativePipeOperator: Yes
+
+MarkdownWrap: Sentence
+MarkdownCanonical: Yes
