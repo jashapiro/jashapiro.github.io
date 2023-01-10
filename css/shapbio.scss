@@ -1,0 +1,50 @@
+
+/*-- scss:rules --*/
+
+figure.boxed {
+  border: 1px solid var(--bs-secondary);
+  border-radius: 0.25rem;
+  display: table;
+  padding:0.5rem;
+  margin: 0.5rem 1rem;
+  width: 200px; /*makes this shrink to figure size*/
+}
+figure.boxed img{
+  display: table-row;
+  margin:0;
+  margin-bottom: 0.5rem;
+}
+figure.boxed figcaption {
+  display: table-row;
+  font-size: 80%;
+  line-height: 1.1;
+  text-align: justify;
+}
+
+figure.pull-right {
+	float: right;
+	margin-right: 0;
+}
+
+figure.pull-left {
+	float: left;
+	margin-left: 0;
+}
+
+
+
+/* Special classes */
+.file-link{
+  color: var(--bs-primary);
+  font-size: 70%;
+  font-weight: var(--bs-body-font-weight);
+  padding-left: 1rem;
+}
+.file-link:before {
+  content: "[";
+}
+.file-link:after {
+  content: "]";
+}
+
+

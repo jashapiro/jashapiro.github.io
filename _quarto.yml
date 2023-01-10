@@ -19,9 +19,12 @@ website:
 
 format:
   html:
-    theme: litera
+    theme:
+     - litera
+     - css/shapbio.scss
     toc: true
 reference-location: margin
+fig-format: retina
 
 editor: source
 
