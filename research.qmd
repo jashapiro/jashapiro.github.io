@@ -7,21 +7,18 @@ format: html
 ## Current projects
 
 As a member of the Childhood Cancer Data Lab of Alex's Lemonade Stand Foundation, my current work is focused on bringing the power of computational tools and publicly available data to the study of pediatric cancers.
-We work on projects 
+We work on projects
 
 ### OpenPBTA
 
-
 ### ScPCA
-
 
 ### refine.bio
 
-
 ## Earlier academic research
 
-While I am no longer directly active in academic research, my projects from that time are still areas of substantial interest to me, as it is hard to escape the appeal of the projects that brought you to do research for the first time. 
-The vignettes below include highlights from this earlier phase of my career, though the descriptions were written many years ago and do not reflect more recent research that has followed and expanded on many of the topics that I explored during those years. 
+While I am no longer directly active in academic research, my projects from that time are still areas of substantial interest to me, as it is hard to escape the appeal of the projects that brought you to do research for the first time.
+The vignettes below include highlights from this earlier phase of my career, though the descriptions were written many years ago and do not reflect more recent research that has followed and expanded on many of the topics that I explored during those years.
 
 My academic research focused on the relationship between genetic variation and the path of evolution.
 Natural selection requires genetic variation to act upon, but the action of selection removes that variation from the population.
@@ -39,15 +36,19 @@ The brewers yeast, *Saccharomyces cerevisiae*, was the first eukaryote to have i
 It has long been a favorite model organism for the studies in genetics and cell biology, and over time the yeast research community has built fantastic genomic and functional resources that make it an ideal system for the study of evolutionary genetics, both in the lab and in natural populations.
 
 <figure class="boxed pull-right">
-<img src="images/yeast_tree.png" alt="Phylogenetic tree of yeast strains" width=400px>
-<figcaption>A neighbor-joining tree illustrating the relationships among a global sample of <em>S. cerevisiae</em> strains, determined by genome-wide array-based genotyping. There is little geographic structure among the strains, but they are strongly clustered by environment, particularly strains derived from wineries, sake production and laboratory research.</figcaption>
+
+<img src="images/yeast_tree.png" alt="Phylogenetic tree of yeast strains" width="400px"/>
+
+<figcaption>A neighbor-joining tree illustrating the relationships among a global sample of <em>S.
+cerevisiae</em> strains, determined by genome-wide array-based genotyping.
+There is little geographic structure among the strains, but they are strongly clustered by environment, particularly strains derived from wineries, sake production and laboratory research.</figcaption>
+
 </figure>
 
 Working with [Joseph Schacherer](http://gmgm.u-strasbg.fr/~js/Joseph_Schacherer.html), I examined genomic variation in strains of yeast collected from around the world in different environments, both natural and industrial.
 These data clearly demonstrated strong population structure in *S. cerevisiae*, most likely largely driven by strong selection of domestication for winemaking, sake production, and laboratory work.
 In addition to these major groups, there were also many strains that appeared to be the results of more recent hybridization between groups, including many of the strains which were isolated from human infections (*S. cerevisiae* is not normally pathogenic, but it can infect immunocompromised individuals).
 Again, the best way to find out more is to read the original publication: [Comprehensive polymorphism survey elucidates population structure of *Saccharomyces cerevisiae*](http://dx.doi.org/10.1038/nature07670) ([free version at PMC](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2782482/)).
-
 
 ### Global selective sweeps in *C. elegans*
 
@@ -59,8 +60,14 @@ Despite having having large population sizes, which tends to increase diversity,
 Even mutations with very small negative effects will tend to be eliminated fairly quickly by natural selection, taking with them neutral variation, in a process called [background selection](http://www.ncbi.nlm.nih.gov/pubmed/8375663?dopt=Abstract "Charlesworth et al. The effect of deleterious mutations on neutral molecular variation.").
 
 <figure class="boxed pull-left">
-<img src="images/two_chroms.png" alt="Illustration of haplotype blocks" width=400px>
-<figcaption>Haplotypes in a global sample of <em>C. elegans</em>. On the left, chromosome III shows the expected pattern without positive selection, with many different haplotypes shared among a few individuals each. By contrast, chromosome V, on the right, shows evidence for a very recent strong selective sweep, which has spread the large red haplotype across almost all sampled strains.</figcaption>
+
+<img src="images/two_chroms.png" alt="Illustration of haplotype blocks" width="400px"/>
+
+<figcaption>Haplotypes in a global sample of <em>C.
+elegans</em>.
+On the left, chromosome III shows the expected pattern without positive selection, with many different haplotypes shared among a few individuals each.
+By contrast, chromosome V, on the right, shows evidence for a very recent strong selective sweep, which has spread the large red haplotype across almost all sampled strains.</figcaption>
+
 </figure>
 
 Together with [Erik Andersen](https://andersenlab.org) and Justin Gerke, I undertook a large-scale study of the global and genomic diversity of *C. elegans*, using high-throughput sequencing of restriction site associated DNA ([RADseq](http://dx.doi.org/10.1371/journal.pone.0003376 "Baird et al. 2008")) to examine over 200 wild isolates.
@@ -74,4 +81,3 @@ Complete genomic sequences for the strains will help, as will data from more str
 These data, especially from strains that do not contain the common haplotypes, will also allow me to explore whether the recent sweeps are unusual within the history of *C. elegans*, potentially driven by human interactions, or if such sweeps have much more common through the history of the species than we had anticipated.
 
 This project was published as: [Chromosome-scale selective sweeps shape *Caenorhabditis elegans* genomic diversity](http://dx.doi.org/10.1038/ng.1050) ([free version at PMC](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3365839)).
-

@@ -1,0 +1,13 @@
+---
+title: About Joshua A. Shapiro
+---
+
+![](images/JAS_headshot.jpg){.image-fluid .rounded .float-left width="295px" alt="Joshua A. Shapiro"} I am a biologist.
+
+Some links to my profiles on other sites:
+
+-   [ORCID](https://orcid.org/0000-0002-6224-0347)
+-   [Google Scholar](http://scholar.google.com/citations?user=MOeyMcoAAAAJ)
+-   [Mastodon](https://genomic.social/@jashapiro)
+-   [LinkedIn](https://www.linkedin.com/in/jashapiro/)
+

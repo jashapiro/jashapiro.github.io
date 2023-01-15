@@ -1,5 +1,6 @@
 ---
 title: Lab Notes
+subtitle: An irregularly updated blog
 listing:
   contents: labnotes
   sort: "date desc"

@@ -18,4 +18,5 @@ StripTrailingWhitespace: Yes
 UseNativePipeOperator: Yes
 
 MarkdownWrap: Sentence
-MarkdownCanonical: Yes
+MarkdownReferences: Block
+MarkdownCanonical: No
