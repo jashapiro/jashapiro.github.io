@@ -1,0 +1,339 @@
+---
+css: css/cv.css
+---
+
+# Joshua A. Shapiro, Ph.D.
+
+<section id="summary">
+
+## Research Interests
+
+<ul class="bullets">
+
+<li class="tight">
+
+[Causes and consequences of genotypic and phenotypic diversity]{style="color:black"}
+
+</li>
+
+<li class="tight">
+
+[Genomic signatures of selection and demography]{style="color:black"}
+
+</li>
+
+<li class="tight">
+
+[Evolution of expression patterns and expression regulation]{style="color:black"}
+
+</li>
+
+<li class="tight">
+
+[Processes underlying population structure and speciation]{style="color:black"}
+
+</li>
+
+</ul>
+
+</section>
+
+<section id="education">
+
+## Education 
+
+<ul>
+
+<li>
+
+<p class="tight">
+
+**Ph.D.
+<a href="http://www.uchicago.edu/">University of Chicago</a>** Department of Ecology and Evolution   2007
+
+</p>
+
+<p class="tight">
+
+Dissertation: Selection and Structure in [Drosophila]{.species} Populations During the Process of Speciation
+
+</p>
+
+<p>Advisor: Dr. Chung-I Wu</p>
+
+</li>
+
+<li>
+
+<p class="tight">
+
+**B.A.
+<a href="http://www.williams.edu/">Williams College</a> ** Biology   1998
+
+</p>
+
+<p class="tight">
+
+<em>Summa Cum Laude</em> with Highest Honors
+
+</p>
+
+<p class="tight">
+
+Thesis: Population Structure and Gene Flow in Chorus Frog Tadpoles ([Pseudacris triseriata]{.species}) on North Government Island
+
+</p>
+
+<p>Advisor: Dr. David Smith</p>
+
+</li>
+
+</ul>
+
+</section>
+
+<section id="experience">
+
+## Experience
+
+<ul>
+
+<li><p>
+**Senior Data Scientist** 2022-present <br> 
+**Data Scientist** 2019-2022 <br>
+[Childhood Cancer Data Lab](https://www.ccdatalab.org) of [Alex's Lemonade Stand Foundation](https://www.alexslemonade.org)
+</li>
+
+<li><p>
+**Assistant Professor** 2013-2019 <br> 
+**Visiting Assistant Professor** 2011-2013 <br> <a href="https://www.brynmawr.edu/biology/">Department of Biology</a>, Bryn Mawr College
+</li>
+
+<li><p>
+**Associate Professional Specialist** 2011-2013 <br> 
+**Lecturer** 2008-2009 <br> 
+**Post-Doctoral Research Associate** 2006-2011 <br> 
+<a href="https://www.princeton.edu/genomics/">Lewis-Sigler Institute for Integrative Genomics</a>, Princeton University <br> 
+Advisor: Dr. Leonid Kruglyak
+</li>
+
+<li><p>
+**Graduate Research** 2000-2006 <br> 
+<a href="https://pondside.uchicago.edu/ecol-evol/">Department of Ecology and Evolution</a>, University of Chicago 
+<br> Advisor: Dr. Chung-I Wu
+</li>
+
+<li><p>
+**Laboratory Technician** 2000 <br> 
+Department of Cell Biology, University of Virginia <br>
+Supervisor: Dr. P. Prabhakara Reddi
+</li>
+
+<li><p>
+**Fulbright Scholar** 1999 <br>
+Centre for Research on Introduced Marine Pests, CSIRO, Australia
+</li>
+
+</ul>
+
+</section>
+
+<section id="publications">
+
+## Publications
+
+<ul>
+
+<li class="pub">
+
+EC Andersen\*, JP Gerke\*, [JA Shapiro]{.self}\*, JR Crissman, R Ghosh, JS Bloom, M-A Félix, L Kruglyak (2012) Chromosome-scale selective sweeps shape [Caenorhabditis elegans]{.species} genomic diversity.<br> <a href="http://dx.doi.org/10.1038/ng.1050"> [Nature Genetics]{.journal} [44]{.issue}:[285-290]{.pages} </a>
+
+</li>
+
+<li class="pub">
+
+R Ghosh, EC Andersen, [JA Shapiro]{.self}, JP Gerke, L Kruglyak (2012) Natural variation in a chloride channel subunit confers avermectin resistance in [C. elegans]{.species}.<br> <a href="http://dx.doi.org/10.1126/science.1214318"> [Science]{.journal} [355]{.issue}:[574-578]{.pages} </a>
+
+</li>
+
+<li class="pub">
+
+X-M Lu\*, [JA Shapiro]{.self}\*, C-T Ting, Y Li, C Li, J, Xu, Y-J Chen, AJ Greenberg, S-H Li, C-I Wu (2010) Genome-wide mis-expression of X-linked vs. autosomal genes associated with hybrid male sterility.<br> <a href="http://dx.doi.org/10.1101/gr.076620.108"> [Genome Research]{.journal} [20]{.issue}:[1097-1102]{.pages} </a>
+
+</li>
+
+<li class="pub">
+
+IM Ehrenreich, N Torabi, Y Jia, J Kent, S Martis, [JA Shapiro]{.self}, D Gresham, A Caudy, L Kruglyak (2010) Dissection of genetically complex traits with extremely large pools of yeast segregants.<br> <a href="http://dx.doi.org/10.1038/nature08923"> [Nature]{.journal} [464]{.issue}:[1039-1042]{.pages} </a>
+
+</li>
+
+<li class="pub">
+
+J Schacherer\*, [JA Shapiro]{.self}\*, DM Ruderfer, L Kruglyak (2009) [Comprehensive polymorphism survey elucidates population structure of]{.title}[Saccharomyces cerevisiae]{.species}.<br> <a href="http://dx.doi.org/10.1038/nature07670"> [Nature]{.journal} [458]{.issue}:[342-345]{.pages} </a>
+
+</li>
+
+<li class="pub">
+
+MH Kohn, [JA Shapiro]{.self}, C-I Wu (2008) Decoupled differentiation of gene expression and coding sequence among [Drosophila]{.species} populations.<br> <a href="http://dx.doi.org/10.1266/ggs.83.265"> [Genes & Genetic Systems]{.journal} [83]{.issue}:[265-273]{.pages} </a>
+
+</li>
+
+<li class="pub">
+
+[JA Shapiro]{.self}, W Huang, C Zhang, J Lu, DA Turissini, S Fang, H-Y Wang, RR Hudson, C-I Wu (2007) Adaptive genic evolution in the [Drosophila]{.species} genomes.<br> <a href="http://dx.doi.org/10.1073/pnas.0610385104"> [Proceedings of the National Academy of Sciences USA]{.journal} [104]{.issue}:[2271-2276]{.pages} </a>
+
+</li>
+
+<li class="pub">
+
+S Lee, J Bao, G Zhou, [JA Shapiro]{.self}, J Xu, RZ Shi, X Lu, T Clark, D Johnson, YX Kim, C Wing, C Tseng, M Sun, W Lin, J Wang, H Yang, J Wang, W Du, C-I Wu, X Zhang, SM Wang (2005) Detecting novel low-abundant transcripts in [Drosophila]{.species}.<br> <a href="http://dx.doi.org/10.1261/rna.7239605"> [RNA]{.journal} [11]{.issue}:[939-946]{.pages} </a>
+
+</li>
+
+<li class="pub">
+
+PP Reddi, Am Shore, [JA Shapiro]{.self}, A Anderson, MH Stoler, KK Acharya (2003) Spermatid specific promoter of the SP-10 gene function as a insulator in somatic cells.<br> <a href="http://dx.doi.org/10.1016/S0012-1606(03)00349-X"> [Developmental Biology]{.journal} [262]{.issue}:[173-182]{.pages} </a>
+
+</li>
+
+</ul>
+
+<p style="text-align:right">
+
+\*<em>Equal authorship contribution</em>
+
+</p>
+
+</section>
+
+<section id="presentations">
+
+## Presentations
+
+<ul>
+
+<li class="pub">
+
+Chromosome-scale selective sweeps shape [Caenorhabditis elegans]{.species} genomic diversity.
+<br>Evolution 2011, platform presentation
+
+</li>
+
+<li class="pub">
+
+A survey of global [C. elegans]{.species} diversity by RAD-Seq.
+<br>2nd UK RAD Sequencing Meeting, August 2010, invited speaker
+
+</li>
+
+<li class="pub">
+
+Selective effects of polymorphisms affecting gene expression in a global sample of [Saccharomyces cerevisiae]{.species} <br>Annual Meeting of the Society for Molecular Biology and Evolution 2010, poster
+
+</li>
+
+<li class="pub">
+
+Genome-wide association mapping of gene expression variation in [Saccharomyces cerevisiae]{.species} <br>Annual Meeting of the Society for Molecular Biology and Evolution 2009, poster
+
+</li>
+
+<li class="pub">
+
+Association mapping of gene expression in [Saccharomyces cerevisiae]{.species} <br>Gordon Research Conference on Quantitative Genetics 2009, poster
+
+</li>
+
+<li class="pub">
+
+Analysis and mapping of gene expression variation in [Saccharomyces cerevisiae]{.species} <br>Yeast Genetics and Molecular Biology Meeting 2008, poster
+
+</li>
+
+<li class="pub">
+
+Gene expression variation in [Saccharomyces cerevisiae]{.species} <br>Evolution 2008, platform presentation
+
+</li>
+
+<li class="pub">
+
+Population structure and evolutionary history of [Saccharomyces cerevisiae]{.species} <br>Cold Spring Harbor Labs: The Biology of Genomes 2007, poster
+
+</li>
+
+<li class="pub">
+
+Genetic differentiation between behavioral races of [Drosophila melanogaster]{.species} <br>[Drosophila]{.species} Research Conference 2005, platform presentation
+
+</li>
+
+<li class="pub">
+
+Changes in gene expression associated with [Ods]{.species} introgression-induced hybrid male sterility <br>[Drosophila]{.species} Research Conference 2004, poster
+
+</li>
+
+</ul>
+
+</section>
+
+<section id="honors">
+
+## Honors & Awards
+
+<ul>
+
+<li class="pub">
+
+Post Doctoral Poster Prize, Annual Meeting of the Society for Molecular Biology and Evolution 2009
+
+</li>
+
+<li class="pub">
+
+Howard Hughes Medical Institute Pre-Doctoral Fellowship in Biological Sciences 2001-2006
+
+</li>
+
+<li class="pub">
+
+NSF Graduate Research Fellowship (Declined) 2001
+
+</li>
+
+<li class="pub">
+
+Honorable Mention NSF Graduate Research Fellowship 1999
+
+</li>
+
+<li class="pub">
+
+Fulbright Award (U.S. Student Program) full grant to Australia 1998
+
+</li>
+
+<li class="pub">
+
+Erastus C Benedict First Prize in Biology, Williams College 1998
+
+</li>
+
+<li class="pub">
+
+Phi Beta Kappa, elected 1998
+
+</li>
+
+<li class="pub">
+
+Sigma Xi, elected 1998
+
+</li>
+
+</ul>
+
+</section>
