@@ -1,0 +1,58 @@
+--
+title: Auto-rendered CV
+--
+
+```{r setup}
+#| include: false
+
+library(rorcid)
+```
+
+```{r personal}
+orcid <- "0000-0002-6224-0347"
+
+```
+
+```{r education}
+#| include: false
+#| echo: false
+education <- orcid_educations(orcid) |>
+  purrr::pluck(orcid, "affiliation-group", "summaries") |>
+  dplyr::bind_rows() |>
+  dplyr::rename_all(\(x)stringr::str_remove(x, "education-summary.")) |>
+  dplyr::select(
+    degree = `role-title`,
+    year = `end-date.year.value`,
+    school = `organization.name`,
+    department = `department-name`,
+    city = `organization.address.city`,
+    state = `organization.address.region`
+  )
+```
+
+```{r employment}
+#| include: false
+#| echo: false
+employment <- orcid_employments(orcid) |>
+  purrr::pluck(orcid, "affiliation-group", "summaries") |>
+  dplyr::bind_rows() |>
+  dplyr::rename_all(\(x)stringr::str_remove(x, "employment-summary.")) |>
+  dplyr::select(
+    org = `organization.name`,
+    dept = `department-name`,
+    org_city = `organization.address.city`,
+    org_state = `organization.address.region`,
+    title= `role-title`,
+    start_year = `start-date.year.value`,
+    start_month = `start-date.month.value`,
+    end_year = `end-date.year.value`,
+    end_month = `end-date.month.value`
+  )
+```
+
+```{r publications}
+#| include: false
+#| echo: false
+publications <- orcid_citations(orcid) 
+```
+

@@ -5,9 +5,8 @@ _site
 *.Rhistory
 .Rapp.Rhistory
 knitr/*.html
-
 Gemfile.lock
 courses/*/cache
 courses/*/capture_recapture_example_cache
-
 /.quarto/
+.httr-oauth
