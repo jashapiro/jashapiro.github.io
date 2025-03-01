@@ -4,16 +4,34 @@ permalink: /research/index.html
 format: html
 ---
 
-## Current projects
+## Current Projects
 
 As a member of the Childhood Cancer Data Lab of Alex's Lemonade Stand Foundation, my current work is focused on bringing the power of computational tools and publicly available data to the study of pediatric cancers.
-We work on projects
+I hope that some of these projects will be broadly useful across the pediatric cancer community and beyond.
 
-### OpenPBTA
+Some the recent projects I have worked on at the Data Lab include:
 
-### ScPCA
+### ScPCA: The Single-cell Pediatric Cancer Atlast
 
-### refine.bio
+The [Single-cell Pediatric Cancer Atlas](https://scpca.alexslemonade.org) is a free public repository of, well, single-cell data from pediatric cancer samples.
+The data include single-cell and single-nucleus RNA-seq data, with a smattering of spatial RNA-seq data.
+All of the data were uniformly processed using [scpca-nf](https://github.com/AlexsLemonade/scpca-nf), an open-source [Nextflow](https://nextflow.io) workflow that we designed and maintain.
+
+You can read more about the project in our preprint: [Hawkins et. al (2024)](https://doi.org/10.1101/2024.04.19.590243)
+
+### OpenScPCA
+
+Following creation of the Single-cell Pediatric Cancer Atlas, the Data Lab began an open analysis of the ScPCA data, which is being conducted with all analyses [available through GitHub](https://github.com/AlexsLemonade/OpenScPCA-analysis).
+
+We are interested first in improving annotation of cell types within the project and beyond.
+Automated cell typing remains fairly limited, especially in the context of cancer cells, which means that the initial steps of annotation are often a limiting factor in data analysis.
+We welcome outside researchers to contribute to the analysis as well, and even provide [small grants](https://github.com/AlexsLemonade/OpenScPCA-analysis/discussions/1062) for contributions.
+
+### OpenPBTA: The Open Pediatric Brain Tumor Atlas
+
+OpenPBTA was our first collaborative open analysis project, organized in collaboration with the [Center for Data-Driven Discovery in Biomedicine](https://d3b.center/) at Children's Hospital of Philadelphia.
+Together, we analyzed a large cohort of pediatric brain tumor samples, including genomics sequencing and RNA-seq data.
+All of the analysis code is [available on GitHub](https://github.com/AlexsLemonade/OpenPBTA-analysis), and the paper describing the work was published as [Shapiro et al. (2023)](https://doi.org/10.1016/j.xgen.2023.100340).
 
 ## Earlier academic research
 
@@ -45,10 +63,10 @@ There is little geographic structure among the strains, but they are strongly cl
 
 </figure>
 
-Working with [Joseph Schacherer](http://gmgm.u-strasbg.fr/~js/Joseph_Schacherer.html), I examined genomic variation in strains of yeast collected from around the world in different environments, both natural and industrial.
+Working with [Joseph Schacherer](https://viseg.unistra.fr/en/), I examined genomic variation in strains of yeast collected from around the world in different environments, both natural and industrial.
 These data clearly demonstrated strong population structure in *S. cerevisiae*, most likely largely driven by strong selection of domestication for winemaking, sake production, and laboratory work.
 In addition to these major groups, there were also many strains that appeared to be the results of more recent hybridization between groups, including many of the strains which were isolated from human infections (*S. cerevisiae* is not normally pathogenic, but it can infect immunocompromised individuals).
-Again, the best way to find out more is to read the original publication: [Comprehensive polymorphism survey elucidates population structure of *Saccharomyces cerevisiae*](http://dx.doi.org/10.1038/nature07670) ([free version at PMC](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2782482/)).
+Again, the best way to find out more is to read the original publication: [Schacherer et al. (2009)](http://dx.doi.org/10.1038/nature07670) ([free version at PMC](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2782482/)).
 
 ### Global selective sweeps in *C. elegans*
 
@@ -80,4 +98,4 @@ Unfortunately, the size of the haplotypes and their high frequency in the popula
 Complete genomic sequences for the strains will help, as will data from more strains, as the global collection of *C. elegans* continues to expand.
 These data, especially from strains that do not contain the common haplotypes, will also allow me to explore whether the recent sweeps are unusual within the history of *C. elegans*, potentially driven by human interactions, or if such sweeps have much more common through the history of the species than we had anticipated.
 
-This project was published as: [Chromosome-scale selective sweeps shape *Caenorhabditis elegans* genomic diversity](http://dx.doi.org/10.1038/ng.1050) ([free version at PMC](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3365839)).
+This project was published as: [Andersen et al. (2012)](http://dx.doi.org/10.1038/ng.1050) ([free version at PMC](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3365839)).

@@ -1,0 +1,14 @@
+{
+  "hash": "b67badc028171fc29346f97a309a0e5f",
+  "result": {
+    "markdown": "---\ntitle: \"Test Post\"\ndescription: \"Post description\"\nauthor: \"Josh\"\ndate: \"2023-01-01\"\n---\n\n\n\n\n## Session information\n\n<details>\n<summary>R session information</summary>\n\n\n::: {.cell}\n\n```{.r .cell-code}\nsessioninfo::session_info()\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.2.2 (2022-10-31)\n os       macOS Ventura 13.1\n system   aarch64, darwin20\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-01-01\n pandoc   2.19.2 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package     * version date (UTC) lib source\n cli           3.3.0   2022-04-25 [1] CRAN (R 4.2.0)\n digest        0.6.29  2021-12-01 [1] CRAN (R 4.2.0)\n evaluate      0.16    2022-08-09 [1] CRAN (R 4.2.0)\n fastmap       1.1.0   2021-01-25 [1] CRAN (R 4.2.0)\n htmltools     0.5.3   2022-07-18 [1] CRAN (R 4.2.0)\n jsonlite      1.8.4   2022-12-06 [1] CRAN (R 4.2.0)\n knitr         1.39    2022-04-26 [1] CRAN (R 4.2.0)\n magrittr      2.0.3   2022-03-30 [1] CRAN (R 4.2.0)\n rlang         1.0.4   2022-07-12 [1] CRAN (R 4.2.0)\n rmarkdown     2.15    2022-08-16 [1] CRAN (R 4.2.0)\n rstudioapi    0.13    2020-11-12 [1] CRAN (R 4.2.0)\n sessioninfo   1.2.2   2021-12-06 [1] CRAN (R 4.2.0)\n stringi       1.7.8   2022-07-11 [1] CRAN (R 4.2.0)\n stringr       1.4.0   2019-02-10 [1] CRAN (R 4.2.0)\n xfun          0.32    2022-08-10 [1] CRAN (R 4.2.0)\n yaml          2.3.5   2022-02-21 [1] CRAN (R 4.2.0)\n\n [1] /Users/josh/Library/R/arm64/4.2/library\n [2] /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────\n```\n:::\n:::\n\n\n</details>\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
