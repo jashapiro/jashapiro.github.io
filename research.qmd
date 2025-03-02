@@ -4,14 +4,14 @@ permalink: /research/index.html
 format: html
 ---
 
-## Current Projects
+## Recent work
 
 As a member of the Childhood Cancer Data Lab of Alex's Lemonade Stand Foundation, my current work is focused on bringing the power of computational tools and publicly available data to the study of pediatric cancers.
 I hope that some of these projects will be broadly useful across the pediatric cancer community and beyond.
 
 Some the recent projects I have worked on at the Data Lab include:
 
-### ScPCA: The Single-cell Pediatric Cancer Atlast
+### ScPCA: The Single-cell Pediatric Cancer Atlas
 
 The [Single-cell Pediatric Cancer Atlas](https://scpca.alexslemonade.org) is a free public repository of, well, single-cell data from pediatric cancer samples.
 The data include single-cell and single-nucleus RNA-seq data, with a smattering of spatial RNA-seq data.

@@ -20,4 +20,4 @@ UseNativePipeOperator: Yes
 
 MarkdownWrap: Sentence
 MarkdownReferences: Block
-MarkdownCanonical: No
+MarkdownCanonical: Yes
