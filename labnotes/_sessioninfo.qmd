@@ -1,0 +1,25 @@
+## Session information
+
+<details>
+
+<summary>R session information</summary>
+
+```{r}
+#| label: session info
+
+strip_paths <- function(path){
+  # replace user paths with variables
+  path |>
+    stringr::str_replace(renv::paths$root(), "${RENV_PATHS_ROOT}") |>
+    stringr::str_replace(here::here(), "${PROJECT_ROOT}") |>
+    stringr::str_replace("^/(Users|home)/.+?/", "${HOME}/")
+}
+
+
+si <- sessioninfo::session_info()
+si$packages$library <- forcats::fct_relabel(si$packages$library, strip_paths)
+
+si
+```
+
+</details>

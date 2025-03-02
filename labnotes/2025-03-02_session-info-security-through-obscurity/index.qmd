@@ -1,0 +1,51 @@
+---
+title: "Session info and security through obscurity"
+description: "Do we need full paths everywhere?"
+author: "Josh"
+date: "2025-03-02"
+categories:
+  - R
+  - meta
+---
+
+In my work at the Data Lab, I have become accustomed to always including session information at the end of a computational notebook.
+It is kind a minimal step toward reproducibility to record what versions of all of the R packages were used to generate the output.[^1]
+
+[^1]: We also use [renv](https://rstudio.github.io/renv/articles/renv.html) as much as possible to make it easier to reproduce the environment we are using, but it is nice to have both.
+
+The [`session_info` package](https://sessioninfo.r-lib.org) makes some of the formatting and information provided nicer, so I try to use that most places, including on this blog, though I will happily fall back to the built in `sessionInfo()` function if I don't want to add dependencies.
+
+That said, there is one thing that does annoy me, which is that the paths that are printed are full paths.
+I get it, but I don't particularly like it, because it seems a minor breach of best security practices to be printing full paths on your computer all over the place.
+I mean, we all do it, but it doesn't mean I like it.
+I also don't think this information is particularly useful to anyone, so it seems kind of silly to include it.
+
+For this blog then, I wanted to strip out as much of that info as possible.
+Since I use [`renv`](https://rstudio.github.io/renv/) most of the time, I expect most paths to be nestled somewhere under the path given by `renv::paths$root()`.
+Anything else in the project directory will be somewhere inside the path defined by `here::here()` (the core function of the wonderful [`here` package](https://here.r-lib.org)).
+So I start by stripping those out, as well as anything under a common home path, replacing the values with the environment variable that they would use.
+
+Here is the function I wrote to do that[^2]:
+
+[^2]: The last line strips out anything in `/User` or `/home`, which may not *actually* be the same as `${HOME}`, but it is likely *somebody's* home.
+    So that seemed reasonable to me.
+
+```{r}
+#| label: path stripping
+
+strip_paths <- function(path){
+  # replace user paths with variables
+  path |>
+    stringr::str_replace(renv::paths$root(), "${RENV_PATHS_ROOT}") |>
+    stringr::str_replace(here::here(), "${PROJECT_ROOT}") |>
+    stringr::str_replace("^/(Users|home)/.+?/", "${HOME}/")
+}
+```
+
+I then use that function to relabel the factors in the `$packages$library` slot of the object created by `sessioninfo::session_info()`.
+Print that out instead of the original object, and there we are.
+
+You can see the full code and results below.
+It's not perfect, but it seems to do what I want, at least for now.
+
+{{< include ../_sessioninfo.qmd >}}

@@ -45,16 +45,4 @@ Just a couple of programming notes as we get started:
     This is probably a subject for a future post, if I can arrange my thoughts.
     But for now, let's just see what we were starting with as we got started with this new version of the site:
 
-## Session information
-
-<details>
-
-<summary>R session information</summary>
-
-```{r}
-#| label: session info
-sessioninfo::session_info()
-```
-
-</details>
-
+{{< include ../_sessioninfo.qmd >}}

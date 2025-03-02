@@ -22,15 +22,4 @@ Might.
 
 I do want to get this up, warts and all, to at least have something up to correct the embarrassing situation that there is still a website up that claims I hold a position I haven't held for 5 years at this point.
 
-## Session information
-
-<details>
-
-<summary>R session information</summary>
-
-```{r}
-#| label: session info
-sessioninfo::session_info()
-```
-
-</details>
+{{< include ../_sessioninfo.qmd >}}
