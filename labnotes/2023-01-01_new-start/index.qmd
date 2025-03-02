@@ -6,7 +6,6 @@ date: "2023-01-01"
 categories:
   - personal
   - meta
-draft: true
 ---
 
 I'm waiting on the new year as I write this.
@@ -22,7 +21,8 @@ Just a couple of programming notes as we get started:
 
 -   I'm rebuilding my website with [Quarto](https://quarto.org), which is the literate programming engine mentioned above.
     As an evolution of Rmarkdown, I'm pretty familiar with the basics, but not as much the full website features.
-    Previously, I had used Jekyll, and had a fair amount of customization that I had built up in there... Most of that is being ripped out for now.
+    Previously, I had used Jekyll, and had a fair amount of customization that I had built up in there...
+    Most of that is being ripped out for now.
     Maybe I will customize more in the future, but as I age I have gotten less and less interested in tweaking things to be *just so*, as I usually regret it later.
     So, back to basics, sort of.
 
@@ -57,3 +57,4 @@ sessioninfo::session_info()
 ```
 
 </details>
+

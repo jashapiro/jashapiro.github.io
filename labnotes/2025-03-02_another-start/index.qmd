@@ -1,0 +1,36 @@
+---
+title: "It's only been two years"
+description: "So that restarting thing..."
+author: "Josh"
+date: "2025-03-02"
+categories:
+  - personal
+  - meta
+---
+
+Right, so it has been a bit over two years since I said I was starting to write this blog.
+Obviously, I didn't get too far.
+
+Well, that isn't fair to myself, as I have done many things in the time since I started reformatting my website.
+I just haven't gotten around to actually writing more, or finishing things off.
+At least I knew then that I would only be posting irregularly.
+
+Today I updated a bunch of the formatting, and even updated the [CV page](../../cv.qmd) with publications from after I started at the [Data Lab](https://ccdatalab.org).
+
+I might even push all of these changes and have the site go live this week.
+Might.
+
+I do want to get this up, warts and all, to at least have something up to correct the embarrassing situation that there is still a website up that claims I hold a position I haven't held for 5 years at this point.
+
+## Session information
+
+<details>
+
+<summary>R session information</summary>
+
+```{r}
+#| label: session info
+sessioninfo::session_info()
+```
+
+</details>
