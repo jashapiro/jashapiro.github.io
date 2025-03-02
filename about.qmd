@@ -2,7 +2,7 @@
 title: About Joshua A. Shapiro
 ---
 
-![](images/JAS_headshot.jpg){.image-fluid .rounded .float-left alt="Joshua A. Shapiro" width="100"} I am a biologist.
+![](images/JAS_headshot.jpg){.image-fluid .rounded .pull-left alt="Joshua A. Shapiro" width="120"} I am a biologist.
 These days mostly computational, but I used to do wet lab work as well.
 I've done plenty of PCR and sequencing (Sanger, Illumina, and Nanopore, even).
 I've spent time pushing flies and dissecting yeast tetrads.

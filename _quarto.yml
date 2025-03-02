@@ -6,16 +6,20 @@ website:
   site-url: https://shapbio.me/
   navbar:
     left:
-      - href: index.qmd
-        text: home
-      - href: about.qmd
-        text: about
-      - href: labnotes.qmd
-        text: blog
-      - href: teaching.qmd
-        text: teaching
-      - href: cv.qmd
-        text: cv
+      - text: home
+        href: index.qmd
+      - text: about
+        menu:
+          - text: about Josh
+            href: about.qmd
+          - text: research
+            href: research.qmd
+          - text: teaching
+            href: teaching.qmd
+          - text: cv
+            href: cv.qmd
+      - text: blog
+        href: labnotes.qmd
   page-footer:
     left: |
       Except as noted, all content on [shapbio.me]{xmlns:dct="http://purl.org/dc/terms/" property="dct:title"} by <a xmlns:cc="http://creativecommons.org/ns#" href="http://shapbio.me" property="cc:attributionName" rel="cc:attributionURL">Joshua A Shapiro</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
