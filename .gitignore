@@ -10,3 +10,5 @@ courses/*/cache
 courses/*/capture_recapture_example_cache
 /.quarto/
 .httr-oauth
+
+.Renviron
