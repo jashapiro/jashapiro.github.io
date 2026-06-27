@@ -6,6 +6,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Personal website for Joshua A. Shapiro (shapbio.me), built with Quarto. It is mid-migration from a Jekyll/Rmarkdown site — the `master` branch holds the old Jekyll site; all active work is on the `quarto` branch.
 
+## Formatting
+
+- **Text** (`.qmd`, `.md`): one sentence per line.
+- **R code**: format with `air` (default settings).
+- **Python code**: format with `ruff` (default settings).
+
+## Key constraint: never write site content
+
+Do not write prose that will appear on the published site.
+Fixing spelling or grammar errors is fine.
+Reformatting existing text (e.g. one-sentence-per-line) is fine.
+Copying text verbatim from a source the owner has provided is fine.
+Generating original prose for pages, blog posts, the CV, or any other published content is not permitted under any circumstances.
+
 ## Key constraint: no git commands
 
 Do not run any git commands. The owner handles all git operations.
