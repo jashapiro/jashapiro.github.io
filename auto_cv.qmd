@@ -1,6 +1,7 @@
---
+---
 title: Auto-rendered CV
---
+bibliography: papers.bib
+---
 
 ```{r setup}
 #| include: false
@@ -56,3 +57,6 @@ employment <- orcid_employments(orcid) |>
 publications <- orcid_citations(orcid) 
 ```
 
+```{r}
+vitae::bibliography_entries("papers.bib", "Publications")
+```

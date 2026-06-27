@@ -1,0 +1,14 @@
+{
+  "hash": "25b41f8fe75f9f8cd932b2a04560764e",
+  "result": {
+    "markdown": "---\ntitle: \"Test Post\"\ndescription: \"Post description\"\nauthor: \"Josh\"\ndate: \"2023-01-01\"\ncategories:\n  - test\n---\n\n\n\n\n## Session information\n\n<details>\n<summary>R session information</summary>\n\n\n::: {.cell}\n\n```{.r .cell-code}\nsessioninfo::session_info()\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.2.2 (2022-10-31)\n os       macOS Big Sur ... 10.16\n system   x86_64, darwin17.0\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-01-01\n pandoc   2.19.2 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package     * version date (UTC) lib source\n cli           3.5.0   2022-12-20 [1] CRAN (R 4.2.0)\n digest        0.6.31  2022-12-11 [1] CRAN (R 4.2.0)\n evaluate      0.19    2022-12-13 [1] CRAN (R 4.2.0)\n fastmap       1.1.0   2021-01-25 [1] CRAN (R 4.2.0)\n glue          1.6.2   2022-02-24 [1] CRAN (R 4.2.0)\n htmltools     0.5.4   2022-12-07 [1] CRAN (R 4.2.0)\n jsonlite      1.8.4   2022-12-06 [1] CRAN (R 4.2.0)\n knitr         1.41    2022-11-18 [1] CRAN (R 4.2.0)\n lifecycle     1.0.3   2022-10-07 [1] CRAN (R 4.2.0)\n magrittr      2.0.3   2022-03-30 [1] CRAN (R 4.2.0)\n rlang         1.0.6   2022-09-24 [1] CRAN (R 4.2.0)\n rmarkdown     2.19    2022-12-15 [1] CRAN (R 4.2.0)\n rstudioapi    0.14    2022-08-22 [1] CRAN (R 4.2.0)\n sessioninfo   1.2.2   2021-12-06 [1] CRAN (R 4.2.0)\n stringi       1.7.8   2022-07-11 [1] CRAN (R 4.2.0)\n stringr       1.5.0   2022-12-02 [1] CRAN (R 4.2.0)\n vctrs         0.5.1   2022-11-16 [1] CRAN (R 4.2.0)\n xfun          0.36    2022-12-21 [1] CRAN (R 4.2.0)\n yaml          2.3.6   2022-10-18 [1] CRAN (R 4.2.0)\n\n [1] /Users/josh/Library/R/x86_64/4.2/library\n [2] /Library/Frameworks/R.framework/Versions/4.2/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────\n```\n:::\n:::\n\n\n</details>\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
