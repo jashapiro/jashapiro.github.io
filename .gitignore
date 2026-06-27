@@ -12,3 +12,5 @@ courses/*/capture_recapture_example_cache
 .httr-oauth
 
 .Renviron
+
+**/*.quarto_ipynb

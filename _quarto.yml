@@ -1,5 +1,12 @@
 project:
   type: website
+  render:
+    - "*.qmd"
+    - "*.md"
+    - "!auto_cv.qmd"
+    - "labnotes/**/*.qmd"
+    - "courses/biolB215s19/*.Rmd"
+    - "courses/biolB216s14/darwinAssembly.Rmd"
 
 website:
   title: "ShapBio"
