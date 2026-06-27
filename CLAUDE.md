@@ -4,7 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Personal website for Joshua A. Shapiro (shapbio.me), built with Quarto. It is mid-migration from a Jekyll/Rmarkdown site — the `master` branch holds the old Jekyll site; all active work is on the `quarto` branch.
+Personal website for Joshua A. Shapiro (shapbio.me), built with Quarto.
+It is mid-migration from a Jekyll/Rmarkdown site — the `master` branch holds the old Jekyll site; all active work is on the `quarto` branch.
 
 ## Formatting
 
@@ -22,7 +23,8 @@ Generating original prose for pages, blog posts, the CV, or any other published 
 
 ## Key constraint: no git commands
 
-Do not run any git commands. The owner handles all git operations.
+Do not run any git commands.
+The owner handles all git operations.
 
 ## Build commands
 
@@ -37,7 +39,8 @@ R package dependencies are managed via `renv`.
 
 ### Render scope
 
-`_quarto.yml` has an explicit `render:` list. Not everything in the tree is rendered:
+`_quarto.yml` has an explicit `render:` list.
+Not everything in the tree is rendered:
 - `auto_cv.qmd` is **excluded** from the render list (it requires a live ORCID API call via `.httr-oauth`; excluded until it is frozen — see `_tasks/04-cv-auto-build.md`).
 - `courses/biolB215s19/index.markdown` is a Jekyll file — **not rendered** by Quarto (task 02 will convert it to `index.qmd`).
 - `error.markdown` is a Jekyll 404 — **not rendered** (task 03 will replace it with `404.qmd`).
@@ -49,7 +52,8 @@ Computational R outputs are frozen so the site renders without re-executing R:
 - `_freeze/labnotes/` — frozen blog post session-info outputs.
 - `auto_cv.qmd` has **no freeze yet** — that's why it's excluded from the render list.
 
-`_freeze/` is committed to the repo (not gitignored). `_site/` is gitignored.
+`_freeze/` is committed to the repo (not gitignored).
+`_site/` is gitignored.
 
 ### Styling
 
@@ -63,11 +67,14 @@ Two CV files coexist:
 - `cv.qmd` — hand-written HTML CV; currently linked in the navbar. Source of truth for content today.
 - `auto_cv.qmd` — ORCID + vitae-based auto CV (work in progress, excluded from render). When complete it will replace `cv.qmd` in the navbar.
 
-Publications are driven by `papers.bib` (14 BibTeX entries). `auto_cv.qmd` uses `vitae::bibliography_entries("papers.bib", "Publications")` — no live Crossref/ORCID call needed for the bibliography itself.
+Publications are driven by `papers.bib` (14 BibTeX entries).
+`auto_cv.qmd` uses `vitae::bibliography_entries("papers.bib", "Publications")` — no live Crossref/ORCID call needed for the bibliography itself.
 
 ### Blog (labnotes)
 
-Posts live at `labnotes/<YYYY-MM-DD>_<slug>/index.qmd`. Shared session-info block is in `labnotes/_sessioninfo.qmd` — include it with `{{< include ../_sessioninfo.qmd >}}`. Per-post `freeze: true` and `date-format: iso` are inherited from `labnotes/_metadata.yml`.
+Posts live at `labnotes/<YYYY-MM-DD>_<slug>/index.qmd`.
+Shared session-info block is in `labnotes/_sessioninfo.qmd` — include it with `{{< include ../_sessioninfo.qmd >}}`.
+Per-post `freeze: true` and `date-format: iso` are inherited from `labnotes/_metadata.yml`.
 
 ### Courses
 
@@ -79,7 +86,9 @@ The `f14/f15/s13/s14/s18` course dirs contain only syllabus PDFs — their tutor
 
 ## Task tracking
 
-Remaining work is tracked as markdown files in `_tasks/` (the `_` prefix prevents Quarto from publishing the directory). Each file has a checklist of steps and a "done when" criterion. Current tasks:
+Remaining work is tracked as markdown files in `_tasks/` (the `_` prefix prevents Quarto from publishing the directory).
+Each file has a checklist of steps and a "done when" criterion.
+Current tasks:
 
 | File | Topic |
 |---|---|
