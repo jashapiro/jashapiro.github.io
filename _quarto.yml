@@ -10,6 +10,9 @@ project:
     - "courses/**/*.pdf"
     - "docs/*.pdf"
 
+execute:
+  freeze: auto
+
 website:
   title: "ShapBio"
   site-url: https://shapbio.me/
