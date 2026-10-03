@@ -23,8 +23,9 @@ Generating original prose for pages, blog posts, the CV, or any other published 
 
 ## Key constraint: no git commands
 
-Do not run any git commands.
+Do not run any git commands that modify the repository (commit, add, rm, checkout, reset, stash, branch, merge, rebase, push, etc.).
 The owner handles all git operations.
+Read-only commands (`git show`, `git log`, `git diff`, `git status`, `git blame`) are allowed, e.g. to recover content from history.
 
 ## Build commands
 
@@ -42,8 +43,6 @@ R package dependencies are managed via `renv`.
 `_quarto.yml` has an explicit `render:` list.
 Not everything in the tree is rendered:
 - `auto_cv.qmd` is **excluded** from the render list (it requires a live ORCID API call via `.httr-oauth`; excluded until it is frozen — see `_tasks/04-cv-auto-build.md`).
-- `courses/biolB215s19/index.markdown` is a Jekyll file — **not rendered** by Quarto (task 02 will convert it to `index.qmd`).
-- `error.markdown` is a Jekyll 404 — **not rendered** (task 03 will replace it with `404.qmd`).
 
 ### Freeze
 
@@ -58,7 +57,7 @@ Computational R outputs are frozen so the site renders without re-executing R:
 ### Styling
 
 Two CSS/SCSS files are wired into the build:
-- `css/shapbio.scss` — site-wide theme overlay on top of Bootstrap `litera`. Contains `figure.boxed`, `.pull-left/.pull-right`, `.file-link`.
+- `css/shapbio.scss` — site-wide theme overlay on top of Bootstrap `litera`. Contains `figure.boxed`, `.pull-left/.pull-right`, `.file-link`, `.subhead` (pulls a line up under the preceding heading; pair with Bootstrap `.text-end` to right-align).
 - `css/cv.css` — CV-specific span styles (`.self`, `.species`, `.journal`, `.issue`, `.pub`). Referenced from `cv.qmd` front matter. Task 05 will fold this into `shapbio.scss` and remove it.
 
 ### CV
@@ -78,9 +77,8 @@ Per-post `freeze: true` and `date-format: iso` are inherited from `labnotes/_met
 
 ### Courses
 
-Only two course dirs still have renderable content:
-- `courses/biolB215s19/` — 10 tutorial `.Rmd` files + `index.markdown` (Jekyll, needs conversion to `.qmd`).
-- `courses/biolB216s14/` — `darwinAssembly.Rmd` only; no index yet.
+Only one course dir still has renderable content:
+- `courses/biolB215s19/` — 12 tutorial `.qmd` files (converted from Jekyll-era `.Rmd`) + `index.qmd`.
 
 The `f14/f15/s13/s14/s18` course dirs contain only syllabus PDFs — their tutorial pages were intentionally removed and those old deep links are accepted 404s.
 
@@ -92,7 +90,7 @@ Current tasks:
 
 | File | Topic |
 |---|---|
-| `02-courses-url-preservation.md` | Convert `biolB215s19/index.markdown` → `.qmd`; add `biolB216s14/index.qmd` |
+| `02-courses-url-preservation.md` | Convert `biolB215s19/index.markdown` → `.qmd`; remove unfinished `biolB216s14` |
 | `03-frontmatter-and-404.md` | Strip stale Jekyll front matter; add `404.qmd` |
 | `04-cv-auto-build.md` | Complete `auto_cv.qmd` (render edu/employment, freeze, wire into navbar) |
 | `05-cv-and-site-styling.md` | Fold `css/cv.css` into `css/shapbio.scss`; remove standalone file |

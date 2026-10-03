@@ -20,7 +20,7 @@ what Jekyll produced.
 
 ## Steps
 
-- [ ] Convert `courses/biolB215s19/index.markdown` → `courses/biolB215s19/index.qmd`.
+- [x] Convert `courses/biolB215s19/index.markdown` → `courses/biolB215s19/index.qmd`.
   - Strip Jekyll front matter keys (`layout`, `pretitle`, `nav`).
   - Keep `title: Experimental Design and Statistics` (and `pretitle` as a subtitle
     if wanted, or drop it).
@@ -30,7 +30,8 @@ what Jekyll produced.
     output paths — no changes to the link text needed.
   - Delete the old `index.markdown` file.
 
-- [ ] Add a minimal `courses/biolB216s14/index.qmd`:
+- [x] ~~Add a minimal `courses/biolB216s14/index.qmd`~~ — superseded: the owner removed `courses/biolB216s14/` (unfinished `darwinAssembly.Rmd`) from the site entirely.
+  Original plan:
   ```yaml
   ---
   title: Introduction to Genomics — Computational Lab (Spring 2014)
@@ -39,30 +40,29 @@ what Jekyll produced.
   With a link to `darwinAssembly.html` — matching the structure that existed on the
   old Jekyll site's `biolB216s14` index.
 
-- [ ] Confirm in `_site/` after a render:
+- [x] Confirm in `_site/` after a render:
   - `_site/courses/biolB215s19/index.html` exists.
   - Each tutorial `_site/courses/biolB215s19/<name>.html` exists (these come from
     the frozen `.Rmd` → `.html` pipeline already committed in `_freeze/`).
-  - `_site/courses/biolB216s14/index.html` and `darwinAssembly.html` exist.
   - All course syllabus PDFs are copied verbatim to their original paths.
 
-- [ ] **Document accepted URL gaps** (these will 404 — by design):
+- [x] **Document accepted URL gaps** (these will 404 — by design):
   - `/courses/biolB215f14/<tutorial>.html`
   - `/courses/biolB215f15/<tutorial>.html`
   - `/courses/biolB215s13/<tutorial>.html`
   - `/courses/biolB215s14/<tutorial>.html`
   - `/courses/biolB215s18/<tutorial>.html`
+  - `/courses/biolB216s14/darwinAssembly.html` (unfinished; removed by owner)
   Syllabus PDFs for those years are still served (the PDF files remain in the
   respective course dirs).
 
 ## Files changed
 
 `courses/biolB215s19/index.markdown` → deleted; new `courses/biolB215s19/index.qmd`,
-new `courses/biolB216s14/index.qmd`
+(`courses/biolB216s14/` and its `_freeze/` outputs removed)
 
 ## Done when
 
 - `/courses/biolB215s19/` and every linked tutorial `.html` render at their original
   paths.
 - `teaching.qmd`'s `courses/biolB215s19/index.html` link resolves in the built site.
-- `/courses/biolB216s14/index.html` exists.

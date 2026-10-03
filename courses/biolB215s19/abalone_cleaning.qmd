@@ -1,10 +1,6 @@
 ---
-layout: Rmd
 title: "Cleaning Abalone (data)"
-pretitle: Biol B215
-parent: index.html
-tags: [R, tutorial, RStudio, BiolB215]
-nav: teaching
+subtitle: Biol B215
 ---
 
 ```{r setup, include=FALSE, cache=FALSE}
@@ -40,7 +36,7 @@ abalone <- read_csv("abalone.csv")
 
 Look at the data. The column names are fairly informative in general, but some are not, so I have defined them below:
 
-{: .table .table-hover .table-condensed .table-narrow .table-center}
+::: {.table .table-hover .table-condensed .table-narrow .table-center}
 Variable | Unit | Description
 -------- | :----: | -----------
 `Sex` | | `M` (male), `F` (female), or `I` (immature)
@@ -52,11 +48,13 @@ Variable | Unit | Description
 `Viscera` | g| gut weight
 `Shell` | g | shell weight after drying 
 `Rings` | | number of rings in the shell 
+:::
 
 The abalone add one ring to their shell every year, except in their first year, and we can estimate the age of the abalone quite accurately by adding 1.5 to the number of rings. 
 
-{: .problem}
+::: {.problem}
 Make a new column called `Age` in the `abalone` data frame taking advantage of this fact.
+:::
 
 
 ```{r age, include = F, echo = F}
@@ -118,11 +116,12 @@ ggplot(abalone, aes(x = Sex, y = Whole, color = Sex)) +
 ```
 
 
-{: .problem}
+::: {.problem}
 Look at all of the continuous variables using your preferred visualization method. You do not need to turn in all of these plots, but use them to answer the questions below.  
 **a.** Describe the shape of the distributions for each variable. Do they appear normal overall (with the sexes combined)? Does separating by Sex make them appear normal?  
 **b.** Are there any values that look particularly strange? What do you think caused those?  
 **c.** Show me your favorite of the plots you generated. Make sure it is well labeled.
+:::
 
 
 **Before proceeding, remove any rows from the data frame with obviously bad data.** This should include any rows where a measurement is equal to 0.  
@@ -135,8 +134,9 @@ abalone <- filter(abalone, Height < 80,  Height > 0)
 One question you might have wanted to address right away is whether there are significant differences between the sexes. It should not be surprising that the immature abalone are smaller (and younger), so we can ignore them for now. While the book might suggest a planned comparison test here to improve power, the variances among groups seem to vary (do you agree?), so we will stick with the *t*-test, or the Mann-Whitney *U*, whichever is appropriate for these data. You find it convenient to take a subset of the original data frame with only the adults. 
 
 
+::: {.question}
 Are there significant differences between Males and Females for any of these traits? Report your results in a table that includes descriptive statistics for each group, as well as the test statistics and *P* values for whichever tests you decide to perform.  
-{: .question}
+:::
 
 ## Scatter Plots
 
@@ -165,10 +165,11 @@ abalone <- filter(abalone, Whole > Shucked)
 ```
 
 
+::: {.question}
 The shell weight of the abalone is measured after drying, wheras the whole weight and shucked weight are measured wet. We can calculate the wet weight of the shell then, by subtracting the shucked weight from the total. This should be greater than or equal to the dry shell weight in the data.  
 **a.** Calculate the predicted wet shell weight, and make a scatter plot showing the relationship between that and the dry shell weight.  
 **b.** Does the plot follow the standard mentioned above (shell wet weight greater than shell dry weight), in general? How many samples seem to have been measured incorrectly by the standard mentioned above? Include only those samples that are clearly wrong, not the ones that just seem a bit off.  
-{: .question}
+:::
 
 **Before proceeding, remove the samples that are clearly erroneous.**  
 
@@ -191,12 +192,13 @@ The female with a length of 127 mm but a height of only 3 mm (in the lower right
 abalone <- filter(abalone, !(Sex == "Female" & Height == 3))
 ```
 
+::: {.question}
 A few quick questions about that plot of length and height that you just made. For now, ignore differences among the sexes.  
 **a.** Are length and height significantly correlated in abalone?  
 **b.** What is the correlation coefficient?  
 **c.** What is the coefficient of determination ($r^2$)?  
 **d.** Do the data meet the strict assumptions of correlation tests or linear regression? In particular, do the data appear homoscedastic?  
-{: .question}
+:::
 
 ## Saving your work
 So now, finally, you should have an abalone data frame with `r nrow(abalone)` rows. Remember how I said that dealing with bad data was a big part of the job? Exactly.

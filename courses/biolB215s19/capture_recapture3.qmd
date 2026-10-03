@@ -1,10 +1,6 @@
 ---
-layout: Rmd
 title: "Recapture: Error & Likelihood"
-pretitle: Biol B215
-parent: index.html
-tags: [R, tutorial, RStudio, BiolB215]
-nav: teaching
+subtitle: Biol B215
 ---
 
 [back to Calculations & Simulations](capture_recapture2.html)
@@ -18,12 +14,13 @@ set.seed(20130306)
 ## Capturing Lizards
 Now that the class has agreed on the sampling scheme, it is time to do it! Each of you will come up and "catch" some lizards, marking each with a stripe on its tail. If we were doing a real experiment, we would be remiss not to take some measurements of the lizards. Measurements on toy lizards are a bit silly, but do record how many of each color you capture. After all of the lizards are marked, we will throw them back in the box and mix thoroughly. Then you can catch the second sample, again recording how many of each color were caught, and how many were marked with tail stripes (by color and total). *Do not return these lizards to the box.* We will keep them for later experiments.
 
-{: .question}
+::: {.question}
 Estimate the following quantities from the pooled class data:  
 **a.** The total number of lizards in the box.  
 **b.** The number of lizards of each color in the box.  
 **c.** The proportion of lizards that are each color.   
 **d.** There are at least two ways to do the second two calculations. Which do you think is more accurate? If you are motivated, design and perform some simulations to test your intuition.
+:::
 
  
 
@@ -37,8 +34,9 @@ It is possible to calculate the standard deviation of the estimate of population
 
 $$\mathrm{SE}(N) = \sqrt{\frac{(M+1)(C+1)(M-R)(C-R)}{(R+1)(R+1)(R+2)}}$$
 
-{: .question}
+::: {.question}
 Using the standard approximation of the 95% confidence interval as $\hat{N} \pm 1.96 \cdot \mathrm{SE}(N)$ calculate the standard error and a 95% confidence interval for your estimate of the number of lizards in the box.
+:::
 
 This confidence interval is symmetrical, but that may not be the best way to think about  error in this case. Do you think you are more likely to over or underestimate the population size? 
 
@@ -85,12 +83,13 @@ ggplot(data.frame(popsize, likes), aes(x = popsize, y = likes))+
 
 The likelihood of the data across a range of parameters is often used directly to estimate the true value of a parameter. To do this, you find the *maximum likelihood*, the value of the parameter that results in the largest likelihood value under your model.  
 
-{: .question}
+::: {.question}
 Calculate the likelihood values for lizard population sizes between 200 and 100,000 individuals, using the capture-recapture data from class. Generate a plot of the population sizes and the corresponding likelihoods.  
 **a.**  What is the maximum likelihood, and what population size does it correspond to? You will find the functions `max()` and  `which.max()`, which is also discussed on the next page, to be quite helpful.  
 **b.**  How does the maximum likelihood value you calculate compare to a naive estimate of the population size ($N = \frac{MC}{R}$). What about the Schnabel estimate?  
 **c.**  Do the values of the likelihood distribution sum to 1? Why or why not? (An intuitive explanation is fine.)  
 **d.**  A common way of estimating a confidence interval on a maximum likelihood calculation is to find the range of values such that  $\log({\rm Max}({\rm Likelihood}(\theta))/{\rm Likelihood}(\theta = x)) \le 1.92$. Based on this method, what confidence interval would you calculate for the population size? Does this method seem better or worse than the standard error-based calculation presented earlier? Why?  
+:::
 
 ## Next
 [Reverend Bayes and the Lizard Posterior](capture_recapture4.html)

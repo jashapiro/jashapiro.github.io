@@ -1,5 +1,8 @@
 ---
 title: About Joshua A. Shapiro
+# no TOC on this page; also drop the empty left TOC column so content isn't offset
+toc: false
+toc-location: right
 ---
 
 ![](images/JAS_headshot.jpg){.image-fluid .rounded .pull-left alt="Joshua A. Shapiro" width="120"} I am a biologist.

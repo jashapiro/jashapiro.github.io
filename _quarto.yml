@@ -5,8 +5,10 @@ project:
     - "*.md"
     - "!auto_cv.qmd"
     - "labnotes/**/*.qmd"
-    - "courses/biolB215s19/*.Rmd"
-    - "courses/biolB216s14/darwinAssembly.Rmd"
+    - "courses/biolB215s19/*.qmd"
+  resources:
+    - "courses/**/*.pdf"
+    - "docs/*.pdf"
 
 website:
   title: "ShapBio"
@@ -35,9 +37,10 @@ website:
 format:
   html:
     theme:
-     - litera
+     - default
      - css/shapbio.scss
     toc: true
+    toc-location: left
 reference-location: margin
 fig-format: retina
 

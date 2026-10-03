@@ -1,5 +1,9 @@
 ---
 title: Welcome to ShapBio
+# no TOC on this page; also drop the empty left TOC column so content isn't offset
+toc: false
+toc-location: right
+body-classes: home
 ---
 
 ![](images/yeast_envs.jpg){.rounded .column-page-right}

@@ -5,10 +5,16 @@ title: Teaching
 My current teaching through Alex's Lemonade Stand Foundation is centered around short workshops, rather than semester-long courses outlined below.
 For more on these workshops, see the [Childhood Cancer Data Lab website](https://www.ccdatalab.org/data-science-workshops) and the Github repository that holds our [workshop tranining materials](https://github.com/AlexsLemonade/training-modules).
 
+## Previous courses
+
 Below are brief descriptions of some the courses that I have designed and taught in the past, including links to syllabi.
 These are mostly for historical interest; If I were to teach these courses again or ones like them, there would almost certainly be major revisions!
 
-## Introduction to Genomics [syllabus](docs/BiolB216_syllabus_fall2012.pdf){.file-link}
+### Introduction to Genomics
+
+::: {.subhead .text-end}
+[syllabus](docs/BiolB216_syllabus_fall2012.pdf){.file-link}
+:::
 
 <blockquote>
 <p>We shift over our fingers the first grains of this great outpouring of information and say to ourselves that the world be helped by it. …one small link in the chain from biochemistry and mathematics to sociology and medicine.</p>
@@ -24,7 +30,11 @@ The computational lab component of the course provides the opportunity to explor
 Because genomics is a rapidly progressing field, an important component of the course is the discussion of recent articles from the primary and popular science literature.
 We explore these advances not only for their scientific content, but also to examine their potential impacts on society.
 
-## [Experimental Design and Statistics](courses/biolB215s19/index.html) [syllabus](courses/biolB215s19/BiolB215_syllabus_Sp2019.pdf){.file-link}
+### [Experimental Design and Statistics](courses/biolB215s19/index.html)
+
+::: {.subhead .text-end}
+[syllabus](courses/biolB215s19/BiolB215_syllabus_Sp2019.pdf){.file-link}
+:::
 
 <blockquote>
 <p>Statistics is applied philosophy of science.</p>
@@ -39,7 +49,11 @@ A critical component of the class is the computational lab which introduces the 
 We work with actual biological data as much as possible, learning how to handle issues like violations of assumptions, non-standard distributions, and multiple testing.
 Using `R` also allows the exploration of computationally intensive techniques such as simulation, permutation testing, and bootstrapping.
 
-## Evolutionary Genetics and Genomics [syllabus](docs/BiolB327_syllabus_spring2012.pdf){.file-link}
+### Evolutionary Genetics and Genomics
+
+::: {.subhead .text-end}
+[syllabus](docs/BiolB327_syllabus_spring2012.pdf){.file-link}
+:::
 
 <blockquote>
 <p>…nothing makes sense in biology <br> except in the light of evolution, <em>sub specie evolutionis</em>.</p>

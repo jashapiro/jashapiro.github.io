@@ -1,10 +1,6 @@
 ---
-layout: Rmd
 title: First steps with R
-pretitle: Biol B215
-parent: index.html
-tags: [R, tutorial, RStudio, BiolB215]
-nav: teaching
+subtitle: Biol B215
 ---
 
 ```{r setup, include=FALSE, cache=FALSE}
@@ -103,8 +99,9 @@ x <- 3
 1:(x/3)
 ```
 
-{: .problem}
+::: {.problem}
 Create a vector of the numbers from 1 to 9 and store it in a variable called `digits`. Use `R`'s vector recycling to divide every even number by 2, then multiply every multiple of 3 by 3. (6, being both even and a multiple of 3 should become 9). Store the result in a new variable.
+:::
 
 
 ### Selecting from vectors
@@ -188,8 +185,9 @@ odd & threes #elements that are odd AND divisible by 3
 even | threes #elements that are even OR divisible by 3
 ```
 
-{: .problem}
+::: {.problem}
 Calculate the sum of the integers from 1 to 1000 with every number divisible by 7 excluded. There are many ways to do this; show at least two methods.
+:::
 
 
 
