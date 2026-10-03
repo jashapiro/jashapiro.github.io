@@ -63,14 +63,7 @@ Using `R` also allows the exploration of computationally intensive techniques su
 **How do changes in DNA sequences affect the evolution of organisms?**
 This seminar focuses on topics in population genetics and molecular evolution, beginning our discussions by examining classic papers from the primary literature.
 Many of these classic papers are based on data from only one or a few genes, but advances in technology are now making it possible to revisit those questions with data from entire genomes.
-By comparing the classic papers with more recent work at done at genomic scales, we can see how the orignal models have been adapted and updated with the addition of more complete data.
+By comparing the classic papers with more recent work at done at genomic scales, we can see how the original models have been adapted and updated with the addition of more complete data.
 This new genomic data answers many long-standing questions, but also raises new questions and avenues of inquiry that we are only beginning to explore.
 Topics include the roles of selection and drift in molecular evolution, evolution of gene expression, genomic approaches to the study of quantitative variation, evolutionary history of humans, and evolutionary perspectives on the study of human disease.
 Students write weekly responses to the assigned readings, lead and participate in class discussions and debates, and write a final review paper on a topic of their choice.
-
-
-
-
-
-
-

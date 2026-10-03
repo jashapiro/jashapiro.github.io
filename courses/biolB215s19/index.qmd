@@ -37,8 +37,8 @@ To that end, the primary goals of the course are:
 
 *[The Analysis of Biological Data, Second Edition][ws]* by M Whitlock and D Schluter
 
-Also recommended:  
-*[R Cookbook][rcook]* by P Teetor  
+Also recommended:
+*[R Cookbook][rcook]* by P Teetor
 *[R Graphics Cookbook][rgraph]* by W Chang
 
 [ws]: http://whitlockschluter.zoology.ubc.ca
@@ -47,9 +47,9 @@ Also recommended:
 
 ## Course Lab Instructions and Tutorials {#lab}
 
-**[Installing R and RStudio](install_orient.html)**  
+**[Installing R and RStudio](install_orient.html)**
 
-**[First Steps with R](first_steps.html)** 
+**[First Steps with R](first_steps.html)**
 
 
 **[Working with Data Frames](dataframes.html)**
@@ -71,15 +71,15 @@ Also recommended:
 **[DataCamp](http://datacamp.com)**
 Online tutorials in data science, with a number of different courses for different levels of learning.
 Some of these will be assigned as part of the class.
-They will be free while you are in the class, but if you want to continue afterward they ask you to pay for some of the more advanced courses. 
+They will be free while you are in the class, but if you want to continue afterward they ask you to pay for some of the more advanced courses.
 
-**[Try R](http://tryr.codeschool.com)**  
+**[Try R](http://tryr.codeschool.com)**
 Another online introduction to R that runs in your browser. Nothing to install, and a goofy pirate theme.
 
-**[Swirl](http://swirlstats.com)**  
+**[Swirl](http://swirlstats.com)**
 An R package for learning about R from within R.
 You can install and run this on your own computer, which is good for getting used to the RStudio interface.
-A number of modules are available, including both basic and more advanced tutorials. 
+A number of modules are available, including both basic and more advanced tutorials.
 
 
 
@@ -89,17 +89,15 @@ A number of modules are available, including both basic and more advanced tutori
 
 ### Reference
 
-**[Quick R](http://www.statmethods.net/)**    
+**[Quick R](http://www.statmethods.net/)**
 
-**[RStudio Documentation](http://www.rstudio.com/ide/docs/)**     
+**[RStudio Documentation](http://www.rstudio.com/ide/docs/)**
 
-**[R Markdown Documentation](http://rmarkdown.rstudio.com)**    
+**[R Markdown Documentation](http://rmarkdown.rstudio.com)**
 
 **[R Cheatsheets](https://www.rstudio.com/resources/cheatsheets/)** Particularly handy are the [Data Wrangling](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) (`dplyr` and `tidyr`) and [Data Visualization](https://www.rstudio.com/wp-content/uploads/2015/05/ggplot2-cheatsheet.pdf) (`ggplot2`) sheets.
 You may also find the R Markdown [Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) and [Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) helpful to have. (note: PDF links)
 
-**[ggplot2 Documentation](http://docs.ggplot2.org/)**    
+**[ggplot2 Documentation](http://docs.ggplot2.org/)**
 
-**[dplyr introduction](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)**    
-
-
+**[dplyr introduction](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)**

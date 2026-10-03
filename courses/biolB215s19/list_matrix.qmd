@@ -6,11 +6,10 @@ subtitle: Biol B215
 
 ```{r setup, include=FALSE, cache=FALSE}
 
-
 ```
 
 ## Introduction
-Up to now, we have been dealing mostly with vectors, simple one dimensional lists of R objects that are all the same type (numbers, booleans, strings). But what if you want to arrange things in more than one dimension, or include objects of more than one type? That is where **matrices**, **arrays** and **lists** come in. Matrices and arrays allow you to have multidimensional arrangements of objects that are all the same type, and lists allow one dimensional (mostly) arrangements of objects of different types. (If you want to have a two dimensional table where each column can be a different type of object (*i.e.* a spreadsheet), then you would probably want to use a **data frame**, wich I cover on [its own page](dataframes.html)
+Up to now, we have been dealing mostly with vectors, simple one dimensional lists of R objects that are all the same type (numbers, booleans, strings). But what if you want to arrange things in more than one dimension, or include objects of more than one type? That is where **matrices**, **arrays** and **lists** come in. Matrices and arrays allow you to have multidimensional arrangements of objects that are all the same type, and lists allow one dimensional (mostly) arrangements of objects of different types. (If you want to have a two dimensional table where each column can be a different type of object (*i.e.* a spreadsheet), then you would probably want to use a **data frame**, which I cover on [its own page](dataframes.html)
 
 ## Matrices
 A matrix is a two or more dimensional version of a vector. You construct them by calling `matrix()`, which takes up at least two arguments: a vector of values, the number of rows (`nrow`) and/or the number of columns(`ncol`) of the matrix. If you only give the rows or columns, `R` will guess the other dimension by dividing the length of the vector by the dimension you specified. By default, it will fill the matrix with the vector you give it column by column, but you can tell it to fill by row by adding the argument, `byrow = TRUE`. For example:
@@ -26,8 +25,11 @@ wide_matrix
 You can also name the rows and columns by giving a list of the names in the `dimnames` argument, with the first element being a vector of row names and the second the column names as a list (see below about lists):
 
 ```{r named}
-my_table <- matrix(c(1, 4, 9 ,36), nrow = 2,
-                   dimnames = list( c("a", "b"), c("z", "y") ) )
+my_table <- matrix(
+  c(1, 4, 9, 36),
+  nrow = 2,
+  dimnames = list(c("a", "b"), c("z", "y"))
+)
 my_table
 ```
 
@@ -35,7 +37,7 @@ If you want to select a specific element from the matrix, you can do that just l
 
 ```{r selecting}
 tall_matrix[3, 1]
-wide_matrix[ , 2:3]
+wide_matrix[, 2:3]
 my_table['a', ]
 my_table[1, 2]
 ```
@@ -46,10 +48,10 @@ See what happens if you try to select from a matrix using only a single number i
 
 
 One other way of building matrixes is to combine vectors using `rbind()` and `cbind()`, which join vectors into a matrix by rows or by columns, respectively:
- 
+
 ```{r binding}
 a <- 1:10
-b <- 1:5 
+b <- 1:5
 c <- 101:110
 cbind(a, c)
 rbind(a, b, c)
@@ -58,7 +60,7 @@ rbind(a, b, c)
 Notice how `R` automatically named one of the dimensions, using the names of the vectors that you gave to the bind command. You should also have notice how the vector `b` was recycled automatically to be the same length as the other vectors (or the longest vector, if there were many lengths of vectors).
 
 ### Arrays
-If you want to store things in more than two dimensions, you can do that as well, using arrays, which are constructed with `array()`. Rather than specifying the the number of rows or columns with `ncol` or `nrow`, you give it a vector of the array dimensions using the `dim` argument.  Otherwise these are mostly analagous to matrices, extended to an arbitrary  number of dimensions. I'm not going to go into detail here, as they don't come up all that often for basic analyses, but feel free to explore on your own...
+If you want to store things in more than two dimensions, you can do that as well, using arrays, which are constructed with `array()`. Rather than specifying the the number of rows or columns with `ncol` or `nrow`, you give it a vector of the array dimensions using the `dim` argument.  Otherwise these are mostly analogous to matrices, extended to an arbitrary  number of dimensions. I'm not going to go into detail here, as they don't come up all that often for basic analyses, but feel free to explore on your own...
 
 ## Lists
 You have already seen lists, as with the list of dimension names in the last section, so just a couple of quick notes here. You can use lists to put together vectors that might be different lengths, or of different types. Unlike with the bind commands, vectors of different length won't be expanded when putting together a list. Lists don't actually have to contain just vectors, but they can contain any `R` object, whether it be a matrix, data frame (coming next) or another list. Yes, you can have lists of lists. Some examples:
@@ -83,8 +85,10 @@ lol[[1]][[3]][2]
 Lists can also name their elements by specifying the name as if it were an argument name when calling `list()`, and this is how many functions actually return their results. If a list has named elements, you can access them with a `$`, in addition to the double square bracket notation.
 
 ```{r foodlist}
-food <- list(fruit = c("apple", "banana"),
-             veg = c("asparagus", "brussels sprout", "carrot"))
+food <- list(
+  fruit = c("apple", "banana"),
+  veg = c("asparagus", "brussels sprout", "carrot")
+)
 food
 food$fruit
 food[[2]]
@@ -95,9 +99,6 @@ As these lists get complicated, you might start to find the `str()` function han
 str(lol)
 ```
 
-To translate: the `lol` variable contains a list of two objects. The lines with &#8220;`$`" in the first column then indicate what each of those objects contains. The first object is a list of 3 objects, which repectively contain (indicated by the &#8220;`..$`" lines) a vector of 10 integers, a vector of 5 integers, and a vector of 2 strings/character objects (indicated by `chr`). The second object in the top level list (`lol`) is also a list (with two objects in it), which contains a vector of 10 integers, and a 2x2 matrix of numeric objects (indicated by `num`). That matrix also has an "attribute": the list of named dimensions that was stored in `dimnames`.
+To translate: the `lol` variable contains a list of two objects. The lines with &#8220;`$`" in the first column then indicate what each of those objects contains. The first object is a list of 3 objects, which respectively contain (indicated by the &#8220;`..$`" lines) a vector of 10 integers, a vector of 5 integers, and a vector of 2 strings/character objects (indicated by `chr`). The second object in the top level list (`lol`) is also a list (with two objects in it), which contains a vector of 10 integers, and a 2x2 matrix of numeric objects (indicated by `num`). That matrix also has an "attribute": the list of named dimensions that was stored in `dimnames`.
 
-Obviously, these kinds of objects can get a bit complicated, so in general it is best to try to keep things as simple as possible. If you find yourself wanting to store lots of complicated data together, you are probably at the point where you want to start using object-oriented programming, which is beyond the scope of this class. But you will run into commands that return complicated lists/objects like this (most of the statistical test commands do). Most of the time you can ignore what is going on under the hood in those cases, but at times you may want to pull out just one part of the test results, in which case being able to figure out how the data is stored can be useful. 
-
-
-
+Obviously, these kinds of objects can get a bit complicated, so in general it is best to try to keep things as simple as possible. If you find yourself wanting to store lots of complicated data together, you are probably at the point where you want to start using object-oriented programming, which is beyond the scope of this class. But you will run into commands that return complicated lists/objects like this (most of the statistical test commands do). Most of the time you can ignore what is going on under the hood in those cases, but at times you may want to pull out just one part of the test results, in which case being able to figure out how the data is stored can be useful.

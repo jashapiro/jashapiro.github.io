@@ -54,7 +54,7 @@ employment <- orcid_employments(orcid) |>
 ```{r publications}
 #| include: false
 #| echo: false
-publications <- orcid_citations(orcid) 
+publications <- orcid_citations(orcid)
 ```
 
 ```{r}
