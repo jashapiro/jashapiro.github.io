@@ -32,115 +32,43 @@ css: css/cv.css
 
 </section>
 
-<section id="education">
+## Experience
+
+- **Senior Data Scientist** 2022-present\
+  **Data Scientist** 2019-2022\
+  [Childhood Cancer Data Lab](https://www.ccdatalab.org) of [Alex's Lemonade Stand Foundation](https://www.alexslemonade.org)
+
+- **Assistant Professor** 2013-2019\
+  **Visiting Assistant Professor** 2011-2013\
+  [Department of Biology](https://www.brynmawr.edu/biology/), Bryn Mawr College
+
+- **Associate Professional Specialist** 2011-2013\
+  **Lecturer** 2008-2009\
+  **Post-Doctoral Research Associate** 2006-2011\
+  [Lewis-Sigler Institute for Integrative Genomics](https://www.princeton.edu/genomics/), Princeton University\
+  Advisor: Dr. Leonid Kruglyak
+
+- **Graduate Research** 2000-2006\
+  [Department of Ecology and Evolution](https://pondside.uchicago.edu/ecol-evol/), University of Chicago\
+  Advisor: Dr. Chung-I Wu
+
+- **Laboratory Technician** 2000\
+  Department of Cell Biology, University of Virginia\
+  Supervisor: Dr. P. Prabhakara Reddi
+
+- **Fulbright Scholar** 1999\
+  Centre for Research on Introduced Marine Pests, CSIRO, Australia
 
 ## Education
 
-<ul>
+- **Ph.D.** [University of Chicago](http://www.uchicago.edu/) Department of Ecology and Evolution    2007\
+  Dissertation: Selection and Structure in [Drosophila]{.species} Populations During the Process of Speciation\
+  Advisor: Dr. Chung-I Wu
 
-<li>
-
-<p class="tight">
-
-**Ph.D.** <a href="http://www.uchicago.edu/">University of Chicago</a> Department of Ecology and Evolution   2007
-
-</p>
-
-<p class="tight">
-
-Dissertation: Selection and Structure in [Drosophila]{.species} Populations During the Process of Speciation
-
-</p>
-
-<p>Advisor: Dr. Chung-I Wu</p>
-
-</li>
-
-<li>
-
-<p class="tight">
-
-**B.A.** <a href="http://www.williams.edu/">Williams College</a> Biology   1998
-
-</p>
-
-<p class="tight">
-
-<em>Summa Cum Laude</em> with Highest Honors
-
-</p>
-
-<p class="tight">
-
-Thesis: Population Structure and Gene Flow in Chorus Frog Tadpoles ([Pseudacris triseriata]{.species}) on North Government Island
-
-</p>
-
-<p>Advisor: Dr. David Smith</p>
-
-</li>
-
-</ul>
-
-</section>
-
-<section id="experience">
-
-## Experience
-
-<ul>
-
-<li>
-
-<p>
-
-**Senior Data Scientist** 2022-present <br> **Data Scientist** 2019-2022 <br> [Childhood Cancer Data Lab](https://www.ccdatalab.org) of [Alex's Lemonade Stand Foundation](https://www.alexslemonade.org)
-
-</li>
-
-<li>
-
-<p>
-
-**Assistant Professor** 2013-2019 <br> **Visiting Assistant Professor** 2011-2013 <br> <a href="https://www.brynmawr.edu/biology/">Department of Biology</a>, Bryn Mawr College
-
-</li>
-
-<li>
-
-<p>
-
-**Associate Professional Specialist** 2011-2013 <br> **Lecturer** 2008-2009 <br> **Post-Doctoral Research Associate** 2006-2011 <br> <a href="https://www.princeton.edu/genomics/">Lewis-Sigler Institute for Integrative Genomics</a>, Princeton University <br> Advisor: Dr. Leonid Kruglyak
-
-</li>
-
-<li>
-
-<p>
-
-**Graduate Research** 2000-2006 <br> <a href="https://pondside.uchicago.edu/ecol-evol/">Department of Ecology and Evolution</a>, University of Chicago <br> Advisor: Dr. Chung-I Wu
-
-</li>
-
-<li>
-
-<p>
-
-**Laboratory Technician** 2000 <br> Department of Cell Biology, University of Virginia <br> Supervisor: Dr. P. Prabhakara Reddi
-
-</li>
-
-<li>
-
-<p>
-
-**Fulbright Scholar** 1999 <br> Centre for Research on Introduced Marine Pests, CSIRO, Australia
-
-</li>
-
-</ul>
-
-</section>
+- **B.A.** [Williams College](http://www.williams.edu/) Biology    1998\
+  *Summa Cum Laude* with Highest Honors\
+  Thesis: Population Structure and Gene Flow in Chorus Frog Tadpoles ([Pseudacris triseriata]{.species}) on North Government Island\
+  Advisor: Dr. David Smith
 
 <section id="publications">
 
@@ -150,15 +78,15 @@ Thesis: Population Structure and Gene Flow in Chorus Frog Tadpoles ([Pseudacris 
 
 <li class="pub">
 
-Hawkins AG, [Shapiro JA]{.self}, Spielman SJ, Mejia DS, Prasad DV, Ichihara N, et al. 2024.
+Hawkins AG, [Shapiro JA]{.self}, Spielman SJ, Mejia DS, Prasad DV, Ichihara N, et al. 2026.
 The Single-cell Pediatric Cancer Atlas: Data portal and open-source tools for single-cell transcriptomics of pediatric tumors.
-<a href="https://doi.org/10.1101/2024.04.19.590243"> \[bioRxiv\]\<.journal\> doi:10.1101/2024.04.19.590243.</a>
+<br> <a href="https://doi.org/10.1016/j.xgen.2026.101283">[Cell Genomics]{.journal}  [6]{.issue}:[101283]{.pages}</a>.
 
 </li>
 
 <li class="pub">
 
-Lee MK, Azizgolshani N, [Shapiro JA]{.self}, Nguyen LN, Kolling FW, Zanazzi GJ, et al.2024 Identifying tumor type and cell type-specific gene expression alterations in pediatric central nervous system tumors.
+Lee MK, Azizgolshani N, [Shapiro JA]{.self}, Nguyen LN, Kolling FW, Zanazzi GJ, et al. 2024 Identifying tumor type and cell type-specific gene expression alterations in pediatric central nervous system tumors.
 <br> <a href="https://doi.org/10.1038/s41467-024-47712-8">[Nature Communications]{.journal} [15]{.issue}:[3634]{.pages}</a>.
 
 </li>
@@ -189,7 +117,7 @@ evolution of fungal pathogen [Candida glabrata]{.species} by genome-wide analysi
 
 <li class="pub">
 
-Hyson P, Shapiro JA, Wien MW.
+Hyson P, [Shapiro JA]{.self}, Wien MW.
 2015.
 Draft genome sequence of [Exiguobacterium sp.]{.species}
 strain BMC-KP, an environmental isolate from Bryn Mawr, Pennsylvania.
@@ -201,8 +129,8 @@ strain BMC-KP, an environmental isolate from Bryn Mawr, Pennsylvania.
 
 Naseer N, [Shapiro JA]{.self}, Chander M.
 2014.
-RNA-seq analysis reveals a six-gene SoxR regulon in [Streptomyces coelicolor]{.species}.<br> <a href="https://doi.org/10.1371/journal.pone.0106181
-">[PLOS One]{.journal} [9(8)]{.issue}:[e106181]{.pages}</a>.
+RNA-seq analysis reveals a six-gene SoxR regulon in [Streptomyces coelicolor]{.species}.
+<br> <a href="https://doi.org/10.1371/journal.pone.0106181">[PLOS One]{.journal} [9(8)]{.issue}:[e106181]{.pages}</a>.
 
 </li>
 
