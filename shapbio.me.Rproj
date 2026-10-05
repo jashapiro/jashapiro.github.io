@@ -1,8 +1,9 @@
 Version: 1.0
+ProjectId: 734c114c-1c98-4476-ad8f-355eccf1e474
 
-RestoreWorkspace: Default
-SaveWorkspace: Default
-AlwaysSaveHistory: Default
+RestoreWorkspace: No
+SaveWorkspace: No
+AlwaysSaveHistory: Yes
 
 EnableCodeIndexing: Yes
 UseSpacesForTab: Yes
@@ -11,3 +12,12 @@ Encoding: UTF-8
 
 RnwWeave: knitr
 LaTeX: pdfLaTeX
+
+AutoAppendNewline: Yes
+StripTrailingWhitespace: Yes
+
+UseNativePipeOperator: Yes
+
+MarkdownWrap: Sentence
+MarkdownReferences: Block
+MarkdownCanonical: Yes

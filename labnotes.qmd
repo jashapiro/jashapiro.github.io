@@ -1,0 +1,16 @@
+---
+title: Lab Notes
+subtitle: An irregularly updated blog
+listing:
+  contents: labnotes
+  sort: "date desc"
+  date-format: iso
+  type: default
+  sort-ui: false
+  filter-ui: false
+  feed:
+    title: ShapBio Lab Notes
+    description: "An irregular posting of thoughts and code fragments"
+page-layout: full
+title-block-banner: true
+---

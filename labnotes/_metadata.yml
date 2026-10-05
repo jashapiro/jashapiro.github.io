@@ -1,0 +1,9 @@
+# options apply to all posts in this folder
+date-format: iso
+# freeze computational output
+freeze: true
+# no table of contents on posts
+toc: false
+# empty margin element so every post reserves the sidenote column
+include-after-body:
+  text: '<div class="column-margin"></div>'

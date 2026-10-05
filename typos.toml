@@ -1,0 +1,14 @@
+[files]
+extend-exclude = [
+    "_freeze",
+    "_site"
+]
+
+[default.extend-words]
+
+[default.extend-identifiers]
+
+[default]
+extend-ignore-re = [
+  "mis-expression"
+]
