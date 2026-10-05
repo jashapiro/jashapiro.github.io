@@ -44,6 +44,8 @@ Just a couple of programming notes as we get started:
     Quarto makes it fairly easy to freeze results as they were produced, but I still want that record for future reference.
     It's neat to see how code and conventions evolve.
     This is probably a subject for a future post, if I can arrange my thoughts.
-    But for now, let's just see what we were starting with as we got started with this new version of the site:
+    But for now, let's just see what we were starting with as we got started with this new version of the site[^1]:
+
+    [^1]: Update from the future: this was not what we started with, as it took me a while to get everything done, and I wanted to change some formatting nonsense, and that meant rerendering things, including this session info.
 
 {{< include ../_sessioninfo.qmd >}}
