@@ -6,7 +6,7 @@ toc-location: right
 body-classes: home
 ---
 
-![](images/yeast_envs.jpg){.rounded .column-page-right}
+![](images/inside_passage.jpeg){.rounded .column-page-right fig-alt="A view of the Inside Passage in Alaska, with mountains and water."}
 
 This is the personal website of Joshua A. Shapiro, PhD[^1]. I am a genomic data scientist, currently working on providing tools and support for pediatric cancer researchers through my role as a Senior Data Scientist at the [Childhood Cancer Data Lab](https://ccdatalab.org) of [Alex's Lemonade Stand Foundation](https://alexslemonade.org).
 
