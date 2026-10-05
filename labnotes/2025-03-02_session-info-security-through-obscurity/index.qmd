@@ -33,12 +33,16 @@ Here is the function I wrote to do that[^2]:
 ```{r}
 #| label: path stripping
 
-strip_paths <- function(path){
+strip_paths <- function(path) {
   # replace user paths with variables
   path |>
     stringr::str_replace(renv::paths$root(), "${RENV_PATHS_ROOT}") |>
     stringr::str_replace(here::here(), "${PROJECT_ROOT}") |>
-    stringr::str_replace("^/(Users|home)/.+?/", "${HOME}/")
+    stringr::str_replace(
+      "^/(Users|home)/.+?/",
+      "${HOME}/",
+      case_insensitive = TRUE
+    )
 }
 ```
 

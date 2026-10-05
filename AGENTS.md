@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) and other agents when working with code in this repository.
 
 ## What this is
 
@@ -17,7 +17,7 @@ It is mid-migration from a Jekyll/Rmarkdown site — the `master` branch holds t
 
 Do not write prose that will appear on the published site.
 Fixing spelling or grammar errors is fine.
-Reformatting existing text (e.g. one-sentence-per-line) is fine.
+Reformatting existing text (e.g., one-sentence-per-line) is fine.
 Copying text verbatim from a source the owner has provided is fine.
 Generating original prose for pages, blog posts, the CV, or any other published content is not permitted under any circumstances.
 
