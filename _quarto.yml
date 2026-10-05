@@ -30,7 +30,7 @@ website:
             href: teaching.qmd
           - text: cv
             href: cv.qmd
-      - text: blog
+      - text: lab notes
         href: labnotes.qmd
   page-footer:
     left: |
