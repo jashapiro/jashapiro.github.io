@@ -36,6 +36,20 @@ $footer-bg: #f5f5f5;
   }
 }
 
+/* the footer only uses the left slot; drop the empty center/right slots so the
+   license text spans the full width instead of a third of it */
+.nav-footer .nav-footer-center,
+.nav-footer .nav-footer-right {
+  display: none;
+}
+.nav-footer .nav-footer-left {
+  flex: 1 1 100%;
+}
+/* size the footer bar to its text rather than Quarto's 3.5em minimum */
+.nav-footer {
+  min-height: 0;
+}
+
 /* underline page titles, like the Jekyll site's Bootstrap 3 .page-header */
 #title-block-header {
   padding-bottom: 9px;
