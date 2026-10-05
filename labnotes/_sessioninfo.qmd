@@ -1,5 +1,3 @@
-## Session information
-
 <details>
 
 <summary>R session information</summary>

@@ -3,6 +3,7 @@ title: "Maybe this time"
 description: "Look, I said it was irregular"
 author: "Josh"
 date: "2027-10-04"
+order: -20271004
 categories:
   - personal
   - meta
@@ -20,7 +21,7 @@ What I did not do (and specifically banned in my [AGENTS.md file](https://github
 Everything you see as content is written by me, with some possible use of autocomplete suggestions within code blocks.
 
 I can imagine a time when I may include some more AI-written code sections, but honestly I have some doubts about the extent to which I will include code much at all.
-I had some plans to do that a couple of years ago (see [my post about path stripping](../2025-03-02_session-info-security-through-obscurity)), but writing code is usually well handled by LLMs, so it seems a bit pointless these days.
+I had some plans to do that a couple of years ago (see [my post about path stripping](../2025-03-03_session-info-security-through-obscurity)), but writing code is usually well handled by LLMs, so it seems a bit pointless these days.
 On the other hand, the code I see the LLMs writing is often not really well done, so maybe more good examples are worth the effort.
 Not that my code is always good!
 I just had a look back through the code I had written for [my biostats class](../../courses/biolB215s19/index.qmd) and let's just say I wouldn't teach with that code these days.
