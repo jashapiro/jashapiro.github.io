@@ -6,22 +6,34 @@
 
 ```{r}
 #| label: session info
+#| code-fold: true
 
 strip_paths <- function(path) {
   # replace user paths with variables
   path |>
-    stringr::str_replace(renv::paths$root(), "${RENV_PATHS_ROOT}") |>
-    stringr::str_replace(here::here(), "${PROJECT_ROOT}") |>
     stringr::str_replace(
-      "^/(Users|home)/.+?/",
-      "${HOME}/",
-      case_insensitive = TRUE
+      renv::paths$root(),
+      "${RENV_PATHS_ROOT}"
+    ) |>
+    stringr::str_replace(
+      here::here(),
+      "${PROJECT_ROOT}"
+    ) |>
+    stringr::str_replace(
+      stringr::regex(
+        "^/(Users|home)/.+?/",
+        ignore_case = TRUE
+      ),
+      "${HOME}/"
     )
 }
 
 
 si <- sessioninfo::session_info()
-si$packages$library <- forcats::fct_relabel(si$packages$library, strip_paths)
+si$packages$library <- forcats::fct_relabel(
+  si$packages$library,
+  strip_paths
+)
 
 si
 ```
