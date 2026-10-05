@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>ShapBio Lab Notes</title>
+<link>https://shapbio.me/labnotes.html</link>
+<atom:link href="https://shapbio.me/labnotes.xml" rel="self" type="application/rss+xml"/>
+<description>An irregular posting of thoughts and code fragments</description>
+<generator>quarto-1.9.38</generator>
+<lastBuildDate>Mon, 04 Oct 2027 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Maybe this time</title>
+  <dc:creator>Josh </dc:creator>
+  <link>https://shapbio.me/labnotes/2027-10-04_two-more-years/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>I really did think two years ago that I was going to get the website up and running. I really did. I think I even got kind of close, but not close enough. But now I think it might really happen, so I’m writing another post<sup>1</sup>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;I think part of the reason I am motivated again is that for the first time in a while I have my own personal computer that I am explicitly not using for work. This has to do with some changes in policies at work, but also the fact that I could get a cute little MacBook Neo, and dang if it isn’t cute and fun. Blue, if you were wondering.</p></div></div><p>If you look at the <a href="https://github.com/jashapiro/jashapiro.github.io">code here</a>, you will see that this time around I got some help with rewriting the code using Claude. Specifically, I got it to help with the long-planned and long-delayed transition from Jekyll to Quarto.</p>
+<p>What I did not do (and specifically banned in my <a href="https://github.com/jashapiro/jashapiro.github.io/blob/main/AGENTS.md">AGENTS.md file</a>) is any AI assistance with writing content. Everything you see as content is written by me, with some possible use of autocomplete suggestions within code blocks.</p>
+<p>I can imagine a time when I may include some more AI-written code sections, but honestly I have some doubts about the extent to which I will include code much at all. I had some plans to do that a couple of years ago (see <a href="../2025-03-03_session-info-security-through-obscurity">my post about path stripping</a>), but writing code is usually well handled by LLMs, so it seems a bit pointless these days. On the other hand, the code I see the LLMs writing is often not really well done, so maybe more good examples are worth the effort. Not that my code is always good! I just had a look back through the code I had written for <a href="../../courses/biolB215s19/index.html">my biostats class</a> and let’s just say I wouldn’t teach with that code these days. So we’ll see.</p>
+<p>I’m kind of hopeful that I will be inspired to write some more, but I have been hopeful before.</p>
+
+
+
+
+ ]]></description>
+  <category>personal</category>
+  <category>meta</category>
+  <guid>https://shapbio.me/labnotes/2027-10-04_two-more-years/</guid>
+  <pubDate>Mon, 04 Oct 2027 04:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Session info and security through obscurity</title>
+  <dc:creator>Josh </dc:creator>
+  <link>https://shapbio.me/labnotes/2025-03-03_session-info-security-through-obscurity/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>In my work at the Data Lab, I have become accustomed to always including session information at the end of a computational notebook. It is kind a minimal step toward reproducibility to record what versions of all of the R packages were used to generate the output.<sup>1</sup></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;We also use <a href="https://rstudio.github.io/renv/articles/renv.html">renv</a> as much as possible to make it easier to reproduce the environment we are using, but it is nice to have both.</p></div></div><p>The <a href="https://sessioninfo.r-lib.org"><code>{session_info}</code> package</a> makes some of the formatting and information provided nicer, so I try to use that most places, including on this blog, though I will happily fall back to the built in <code>sessionInfo()</code> function if I don’t want to add dependencies.</p>
+<p>That said, there is one thing that does annoy me, which is that the paths that are printed are full paths. I get it, but I don’t particularly like it, because it seems a minor breach of best security practices to be printing full paths on your computer all over the place. I mean, we all do it, but it doesn’t mean I like it. I also don’t think this information is particularly useful to anyone, so it seems kind of silly to include it.</p>
+<p>For this blog then, I wanted to strip out as much of that info as possible. Since I use <a href="https://rstudio.github.io/renv/"><code>{renv}</code></a> most of the time, I expect most paths to be nestled somewhere under the path given by <code>renv::paths$root()</code>. Anything else in the project directory will be somewhere inside the path defined by <code>here::here()</code> (the core function of the wonderful <a href="https://here.r-lib.org"><code>{here}</code> package</a>). So I start by stripping those out, as well as anything under a common home path, replacing the values with the environment variable that they would use.</p>
+<p>Here is the function I wrote to do that<sup>2</sup>:</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;The last <code>str_replace()</code> strips out anything in <code>/User</code> or <code>/home</code> subdirectories, which may not <em>actually</em> be the same as <code>${HOME}</code>, but it is likely <em>somebody’s</em> home. So that seemed reasonable to me.</p></div></div><div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">strip_paths <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(path) {</span>
+<span id="cb1-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># replace user paths with variables</span></span>
+<span id="cb1-3">  path <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-4">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb1-5">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fixed</span>(renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>paths<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">root</span>()),</span>
+<span id="cb1-6">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${RENV_PATHS_ROOT}"</span></span>
+<span id="cb1-7">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-8">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb1-9">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fixed</span>(here<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">here</span>()),</span>
+<span id="cb1-10">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${PROJECT_ROOT}"</span></span>
+<span id="cb1-11">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-12">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb1-13">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fixed</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(fs<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">path_home</span>(), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/"</span>)),</span>
+<span id="cb1-14">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${HOME}/"</span></span>
+<span id="cb1-15">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-16">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb1-17">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">regex</span>(</span>
+<span id="cb1-18">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/(Users|home)/[^/]+/"</span>,</span>
+<span id="cb1-19">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ignore_case =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span></span>
+<span id="cb1-20">      ),</span>
+<span id="cb1-21">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${HOME}/"</span></span>
+<span id="cb1-22">    )</span>
+<span id="cb1-23">}</span></code></pre></div></div>
+</div>
+<p>I then use that function to relabel the factors in the <code>$packages$library</code> slot of the object created by <code>sessioninfo::session_info()</code>. Print that out instead of the original object, and there we are.</p>
+<p>You can see the full code and results below. It’s not perfect, but it seems to do what I want, at least for now.</p>
+<details>
+<summary>
+<strong>R session information</strong>
+</summary>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">strip_paths <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(path) {</span>
+<span id="cb2-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># replace user paths with variables</span></span>
+<span id="cb2-3">  path <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-4">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb2-5">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fixed</span>(renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>paths<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">root</span>()),</span>
+<span id="cb2-6">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${RENV_PATHS_ROOT}"</span></span>
+<span id="cb2-7">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-8">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb2-9">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fixed</span>(here<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">here</span>()),</span>
+<span id="cb2-10">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${PROJECT_ROOT}"</span></span>
+<span id="cb2-11">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-12">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb2-13">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fixed</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(fs<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">path_home</span>(), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/"</span>)),</span>
+<span id="cb2-14">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${HOME}/"</span></span>
+<span id="cb2-15">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-16">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb2-17">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">regex</span>(</span>
+<span id="cb2-18">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/(Users|home)/[^/]+/"</span>,</span>
+<span id="cb2-19">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ignore_case =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span></span>
+<span id="cb2-20">      ),</span>
+<span id="cb2-21">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${HOME}/"</span></span>
+<span id="cb2-22">    )</span>
+<span id="cb2-23">}</span>
+<span id="cb2-24"></span>
+<span id="cb2-25"></span>
+<span id="cb2-26">si <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> sessioninfo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">session_info</span>()</span>
+<span id="cb2-27">si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>packages<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>library <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> forcats<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fct_relabel</span>(</span>
+<span id="cb2-28">  si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>packages<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>library,</span>
+<span id="cb2-29">  strip_paths</span>
+<span id="cb2-30">)</span>
+<span id="cb2-31">si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pandoc <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">strip_paths</span>(si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pandoc)</span>
+<span id="cb2-32">si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>quarto <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">strip_paths</span>(si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>quarto)</span>
+<span id="cb2-33"></span>
+<span id="cb2-34">si</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.6.1 (2026-06-24)
+ os       macOS Golden Gate 27.0.1
+ system   aarch64, darwin23
+ ui       X11
+ language (EN)
+ collate  en_US.UTF-8
+ ctype    en_US.UTF-8
+ tz       America/New_York
+ date     2026-10-04
+ pandoc   3.8.3 @ ${HOME}/.pixi/envs/quarto/bin/ (via rmarkdown)
+ quarto   1.9.38 @ ${HOME}/.pixi/envs/quarto/bin/quarto
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ ! package     * version date (UTC) lib source
+ P cli           3.6.6   2026-04-09 [?] CRAN (R 4.6.0)
+ P digest        0.6.39  2025-11-19 [?] CRAN (R 4.6.0)
+ P evaluate      1.0.5   2025-08-27 [?] CRAN (R 4.6.0)
+ P fastmap       1.2.0   2024-05-15 [?] CRAN (R 4.6.0)
+ P htmltools     0.5.9   2025-12-04 [?] CRAN (R 4.6.0)
+ P htmlwidgets   1.6.4   2023-12-06 [?] CRAN (R 4.6.0)
+ P jsonlite      2.0.0   2025-03-27 [?] CRAN (R 4.6.0)
+ P knitr         1.52    2026-09-06 [?] CRAN (R 4.6.1)
+ P otel          0.2.0   2025-08-29 [?] CRAN (R 4.6.0)
+ P renv          1.3.0   2026-09-29 [?] CRAN (R 4.6.1)
+ P rlang         1.3.0   2026-07-05 [?] CRAN (R 4.6.1)
+ P rmarkdown     2.32    2026-09-01 [?] CRAN (R 4.6.1)
+ P sessioninfo   1.2.4   2026-06-04 [?] CRAN (R 4.6.0)
+ P xfun          0.61    2026-09-16 [?] CRAN (R 4.6.1)
+ P yaml          2.3.12  2025-12-10 [?] CRAN (R 4.6.0)
+
+ [1] ${PROJECT_ROOT}/renv/library/macos/R-4.6/aarch64-apple-darwin23
+ [2] ${RENV_PATHS_ROOT}/sandbox/macos/R-4.6/aarch64-apple-darwin23/46003b10
+
+ P ── Loaded and on-disk path mismatch.
+
+──────────────────────────────────────────────────────────────────────────────</code></pre>
+</div>
+</div>
+</details>
+
+
+
+
+ ]]></description>
+  <category>R</category>
+  <category>meta</category>
+  <guid>https://shapbio.me/labnotes/2025-03-03_session-info-security-through-obscurity/</guid>
+  <pubDate>Mon, 03 Mar 2025 05:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>It’s only been two years</title>
+  <dc:creator>Josh </dc:creator>
+  <link>https://shapbio.me/labnotes/2025-03-02_another-start/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Right, so it has been a bit over two years since I said I was starting to write this blog. Obviously, I didn’t get too far.</p>
+<p>Well, that isn’t fair to myself, as I have done many things in the time since I started reformatting my website. I just haven’t gotten around to actually writing more, or finishing things off. At least I knew then that I would only be posting irregularly.</p>
+<p>Today I updated a bunch of the formatting, and even updated the <a href="../../cv.html">CV page</a> with publications from after I started at the <a href="https://ccdatalab.org">Data Lab</a>.</p>
+<p>I might even push all of these changes and have the site go live this week. Might.</p>
+<p>I do want to get this up, warts and all, to at least have something up to correct the embarrassing situation that there is still a website up that claims I hold a position I haven’t held for 5 years at this point.</p>
+<details>
+<summary>
+<strong>R session information</strong>
+</summary>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">strip_paths <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(path) {</span>
+<span id="cb1-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># replace user paths with variables</span></span>
+<span id="cb1-3">  path <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-4">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb1-5">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fixed</span>(renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>paths<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">root</span>()),</span>
+<span id="cb1-6">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${RENV_PATHS_ROOT}"</span></span>
+<span id="cb1-7">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-8">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb1-9">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fixed</span>(here<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">here</span>()),</span>
+<span id="cb1-10">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${PROJECT_ROOT}"</span></span>
+<span id="cb1-11">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-12">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb1-13">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fixed</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(fs<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">path_home</span>(), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/"</span>)),</span>
+<span id="cb1-14">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${HOME}/"</span></span>
+<span id="cb1-15">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-16">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb1-17">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">regex</span>(</span>
+<span id="cb1-18">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/(Users|home)/[^/]+/"</span>,</span>
+<span id="cb1-19">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ignore_case =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span></span>
+<span id="cb1-20">      ),</span>
+<span id="cb1-21">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${HOME}/"</span></span>
+<span id="cb1-22">    )</span>
+<span id="cb1-23">}</span>
+<span id="cb1-24"></span>
+<span id="cb1-25"></span>
+<span id="cb1-26">si <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> sessioninfo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">session_info</span>()</span>
+<span id="cb1-27">si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>packages<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>library <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> forcats<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fct_relabel</span>(</span>
+<span id="cb1-28">  si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>packages<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>library,</span>
+<span id="cb1-29">  strip_paths</span>
+<span id="cb1-30">)</span>
+<span id="cb1-31">si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pandoc <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">strip_paths</span>(si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pandoc)</span>
+<span id="cb1-32">si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>quarto <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">strip_paths</span>(si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>quarto)</span>
+<span id="cb1-33"></span>
+<span id="cb1-34">si</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.6.1 (2026-06-24)
+ os       macOS Golden Gate 27.0.1
+ system   aarch64, darwin23
+ ui       X11
+ language (EN)
+ collate  en_US.UTF-8
+ ctype    en_US.UTF-8
+ tz       America/New_York
+ date     2026-10-04
+ pandoc   3.8.3 @ ${HOME}/.pixi/envs/quarto/bin/ (via rmarkdown)
+ quarto   1.9.38 @ ${HOME}/.pixi/envs/quarto/bin/quarto
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ ! package     * version date (UTC) lib source
+ P cli           3.6.6   2026-04-09 [?] CRAN (R 4.6.0)
+ P digest        0.6.39  2025-11-19 [?] CRAN (R 4.6.0)
+ P evaluate      1.0.5   2025-08-27 [?] CRAN (R 4.6.0)
+ P fastmap       1.2.0   2024-05-15 [?] CRAN (R 4.6.0)
+ P htmltools     0.5.9   2025-12-04 [?] CRAN (R 4.6.0)
+ P htmlwidgets   1.6.4   2023-12-06 [?] CRAN (R 4.6.0)
+ P jsonlite      2.0.0   2025-03-27 [?] CRAN (R 4.6.0)
+ P knitr         1.52    2026-09-06 [?] CRAN (R 4.6.1)
+ P otel          0.2.0   2025-08-29 [?] CRAN (R 4.6.0)
+ P renv          1.3.0   2026-09-29 [?] CRAN (R 4.6.1)
+ P rlang         1.3.0   2026-07-05 [?] CRAN (R 4.6.1)
+ P rmarkdown     2.32    2026-09-01 [?] CRAN (R 4.6.1)
+ P sessioninfo   1.2.4   2026-06-04 [?] CRAN (R 4.6.0)
+ P xfun          0.61    2026-09-16 [?] CRAN (R 4.6.1)
+ P yaml          2.3.12  2025-12-10 [?] CRAN (R 4.6.0)
+
+ [1] ${PROJECT_ROOT}/renv/library/macos/R-4.6/aarch64-apple-darwin23
+ [2] ${RENV_PATHS_ROOT}/sandbox/macos/R-4.6/aarch64-apple-darwin23/46003b10
+
+ P ── Loaded and on-disk path mismatch.
+
+──────────────────────────────────────────────────────────────────────────────</code></pre>
+</div>
+</div>
+</details>
+
+
+
+ ]]></description>
+  <category>personal</category>
+  <category>meta</category>
+  <guid>https://shapbio.me/labnotes/2025-03-02_another-start/</guid>
+  <pubDate>Sun, 02 Mar 2025 05:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Let’s see how this goes</title>
+  <dc:creator>Josh </dc:creator>
+  <link>https://shapbio.me/labnotes/2023-01-01_new-start/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>I’m waiting on the new year as I write this. I probably won’t finish this post or publish it for a while yet, but it seemed a good time to start. My personal website is horribly out of date, I had a bit of free time while visiting the in-laws, and there is a not-so-new literate programming engine on the block, so I thought I would try to get things going.</p>
+<p>I’ve never had much luck with blogging. I usually don’t feel like I have much to say, and the effort to get posts up is usually beyond my motivation, so the blogs I’ve started in the past have never gotten more than a couple of posts. If this one does better, well, fantastic. We’ll see how we go.</p>
+<p>Just a couple of programming notes as we get started:</p>
+<ul>
+<li><p>I’m rebuilding my website with <a href="https://quarto.org">Quarto</a>, which is the literate programming engine mentioned above. As an evolution of Rmarkdown, I’m pretty familiar with the basics, but not as much the full website features. Previously, I had used Jekyll, and had a fair amount of customization that I had built up in there… Most of that is being ripped out for now. Maybe I will customize more in the future, but as I age I have gotten less and less interested in tweaking things to be <em>just so</em>, as I usually regret it later. So, back to basics, sort of.</p></li>
+<li><p>I expect most of my posts to include some code, mostly R, but probably some Python and Nextflow, since I’ve been spending chunks of time with each of those. I have no idea how long a post will usually be. Probably pretty short. If I set that expectation for myself, I might actually write some things. One thought is to try to use this blog as a place to make some notes as I discover tips and tricks that I want to record for myself, and others might find useful. I’ll probably complain some about things that have frustrated me, but I’ll try to be nice about it. And maybe people will read this and give tips.</p></li>
+<li><p>Most posts will include R session information. Why? Partly because it is a habit I have gotten into in my work at the <a href="https://ccdatalab.org">Childhood Cancer Data Lab</a>, but partly because it seems like a good thing to do. If there is code in the blog post, I want to be able to see what version of the various packages I was working with when I come back years later. When rebuilding this site, I found a number of places where my code was old and broken. Some of those I updated, some I just deleted. Quarto makes it fairly easy to freeze results as they were produced, but I still want that record for future reference. It’s neat to see how code and conventions evolve. This is probably a subject for a future post, if I can arrange my thoughts. But for now, let’s just see what we were starting with as we got started with this new version of the site<sup>1</sup>:</p></li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Update from the future: this was not what we started with, as it took me a while to get everything done, and I wanted to change some formatting nonsense, and that meant rerendering things, including this session info.</p></div></div><details>
+<summary>
+<strong>R session information</strong>
+</summary>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">strip_paths <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(path) {</span>
+<span id="cb1-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># replace user paths with variables</span></span>
+<span id="cb1-3">  path <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-4">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb1-5">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fixed</span>(renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>paths<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">root</span>()),</span>
+<span id="cb1-6">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${RENV_PATHS_ROOT}"</span></span>
+<span id="cb1-7">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-8">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb1-9">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fixed</span>(here<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">here</span>()),</span>
+<span id="cb1-10">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${PROJECT_ROOT}"</span></span>
+<span id="cb1-11">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-12">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb1-13">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fixed</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(fs<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">path_home</span>(), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/"</span>)),</span>
+<span id="cb1-14">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${HOME}/"</span></span>
+<span id="cb1-15">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-16">    stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(</span>
+<span id="cb1-17">      stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">regex</span>(</span>
+<span id="cb1-18">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/(Users|home)/[^/]+/"</span>,</span>
+<span id="cb1-19">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ignore_case =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span></span>
+<span id="cb1-20">      ),</span>
+<span id="cb1-21">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"${HOME}/"</span></span>
+<span id="cb1-22">    )</span>
+<span id="cb1-23">}</span>
+<span id="cb1-24"></span>
+<span id="cb1-25"></span>
+<span id="cb1-26">si <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> sessioninfo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">session_info</span>()</span>
+<span id="cb1-27">si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>packages<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>library <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> forcats<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fct_relabel</span>(</span>
+<span id="cb1-28">  si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>packages<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>library,</span>
+<span id="cb1-29">  strip_paths</span>
+<span id="cb1-30">)</span>
+<span id="cb1-31">si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pandoc <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">strip_paths</span>(si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pandoc)</span>
+<span id="cb1-32">si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>quarto <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">strip_paths</span>(si<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>quarto)</span>
+<span id="cb1-33"></span>
+<span id="cb1-34">si</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.6.1 (2026-06-24)
+ os       macOS Golden Gate 27.0.1
+ system   aarch64, darwin23
+ ui       X11
+ language (EN)
+ collate  en_US.UTF-8
+ ctype    en_US.UTF-8
+ tz       America/New_York
+ date     2026-10-04
+ pandoc   3.8.3 @ ${HOME}/.pixi/envs/quarto/bin/ (via rmarkdown)
+ quarto   1.9.38 @ ${HOME}/.pixi/envs/quarto/bin/quarto
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ ! package     * version date (UTC) lib source
+ P cli           3.6.6   2026-04-09 [?] CRAN (R 4.6.0)
+ P digest        0.6.39  2025-11-19 [?] CRAN (R 4.6.0)
+ P evaluate      1.0.5   2025-08-27 [?] CRAN (R 4.6.0)
+ P fastmap       1.2.0   2024-05-15 [?] CRAN (R 4.6.0)
+ P htmltools     0.5.9   2025-12-04 [?] CRAN (R 4.6.0)
+ P htmlwidgets   1.6.4   2023-12-06 [?] CRAN (R 4.6.0)
+ P jsonlite      2.0.0   2025-03-27 [?] CRAN (R 4.6.0)
+ P knitr         1.52    2026-09-06 [?] CRAN (R 4.6.1)
+ P otel          0.2.0   2025-08-29 [?] CRAN (R 4.6.0)
+ P renv          1.3.0   2026-09-29 [?] CRAN (R 4.6.1)
+ P rlang         1.3.0   2026-07-05 [?] CRAN (R 4.6.1)
+ P rmarkdown     2.32    2026-09-01 [?] CRAN (R 4.6.1)
+ P sessioninfo   1.2.4   2026-06-04 [?] CRAN (R 4.6.0)
+ P xfun          0.61    2026-09-16 [?] CRAN (R 4.6.1)
+ P yaml          2.3.12  2025-12-10 [?] CRAN (R 4.6.0)
+
+ [1] ${PROJECT_ROOT}/renv/library/macos/R-4.6/aarch64-apple-darwin23
+ [2] ${RENV_PATHS_ROOT}/sandbox/macos/R-4.6/aarch64-apple-darwin23/46003b10
+
+ P ── Loaded and on-disk path mismatch.
+
+──────────────────────────────────────────────────────────────────────────────</code></pre>
+</div>
+</div>
+</details>
+
+
+
+
+ ]]></description>
+  <category>personal</category>
+  <category>meta</category>
+  <guid>https://shapbio.me/labnotes/2023-01-01_new-start/</guid>
+  <pubDate>Sun, 01 Jan 2023 05:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,25 @@
+/* Bibliography styles */
+ul{
+  list-style-position: inside;
+  list-style-type: none;
+}
+
+li.pub{
+  text-indent: -1rem;
+  margin-left: 1rem;
+}
+
+.self {
+  font-weight: bold;
+}
+.species {
+  font-style: italic;
+}
+
+.journal {
+  font-style: italic;
+}
+
+.issue {
+  font-weight: bold;
+}
