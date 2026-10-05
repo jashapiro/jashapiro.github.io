@@ -9,8 +9,8 @@
 <link>https://shapbio.me/labnotes.html</link>
 <atom:link href="https://shapbio.me/labnotes.xml" rel="self" type="application/rss+xml"/>
 <description>An irregular posting of thoughts and code fragments</description>
-<generator>quarto-1.9.38</generator>
-<lastBuildDate>Mon, 04 Oct 2027 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.10.18</generator>
+<lastBuildDate>Mon, 04 Oct 2027 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Maybe this time</title>
   <dc:creator>Josh </dc:creator>
@@ -33,7 +33,7 @@
   <category>personal</category>
   <category>meta</category>
   <guid>https://shapbio.me/labnotes/2027-10-04_two-more-years/</guid>
-  <pubDate>Mon, 04 Oct 2027 04:00:00 GMT</pubDate>
+  <pubDate>Mon, 04 Oct 2027 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Session info and security through obscurity</title>
@@ -370,7 +370,7 @@ font-style: inherit;">$</span>quarto)</span>
   <category>R</category>
   <category>meta</category>
   <guid>https://shapbio.me/labnotes/2025-03-03_session-info-security-through-obscurity/</guid>
-  <pubDate>Mon, 03 Mar 2025 05:00:00 GMT</pubDate>
+  <pubDate>Mon, 03 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>It’s only been two years</title>
@@ -600,7 +600,7 @@ font-style: inherit;">$</span>quarto)</span>
   <category>personal</category>
   <category>meta</category>
   <guid>https://shapbio.me/labnotes/2025-03-02_another-start/</guid>
-  <pubDate>Sun, 02 Mar 2025 05:00:00 GMT</pubDate>
+  <pubDate>Sun, 02 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Let’s see how this goes</title>
@@ -834,7 +834,7 @@ font-style: inherit;">$</span>quarto)</span>
   <category>personal</category>
   <category>meta</category>
   <guid>https://shapbio.me/labnotes/2023-01-01_new-start/</guid>
-  <pubDate>Sun, 01 Jan 2023 05:00:00 GMT</pubDate>
+  <pubDate>Sun, 01 Jan 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
