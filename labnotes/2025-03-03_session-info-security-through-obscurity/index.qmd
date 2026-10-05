@@ -28,7 +28,7 @@ So I start by stripping those out, as well as anything under a common home path,
 
 Here is the function I wrote to do that[^2]:
 
-[^2]: The last line strips out anything in `/User` or `/home`, which may not *actually* be the same as `${HOME}`, but it is likely *somebody's* home.
+[^2]: The last `str_replace()` strips out anything in `/User` or `/home` subdirectories, which may not *actually* be the same as `${HOME}`, but it is likely *somebody's* home.
 So that seemed reasonable to me.
 
 ```{r}
@@ -38,16 +38,20 @@ strip_paths <- function(path) {
   # replace user paths with variables
   path |>
     stringr::str_replace(
-      renv::paths$root(),
+      stringr::fixed(renv::paths$root()),
       "${RENV_PATHS_ROOT}"
     ) |>
     stringr::str_replace(
-      here::here(),
+      stringr::fixed(here::here()),
       "${PROJECT_ROOT}"
     ) |>
     stringr::str_replace(
+      stringr::fixed(paste0(fs::path_home(), "/")),
+      "${HOME}/"
+    ) |>
+    stringr::str_replace(
       stringr::regex(
-        "^/(Users|home)/.+?/",
+        "/(Users|home)/[^/]+/",
         ignore_case = TRUE
       ),
       "${HOME}/"
