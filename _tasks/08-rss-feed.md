@@ -1,5 +1,11 @@
 # Task 08 — RSS feed for lab notes
 
+> **Status (2026-10-24):** done. Full-content feed at `labnotes.xml` with margin notes and
+> footnote markers stripped by `_scripts/clean_feed.py` (project `post-render`); RSS icon
+> in the Lab Notes subtitle and the labnotes sidebar; site-wide autodiscovery; author
+> `"Josh S"`; `atom.xml` break accepted. Per-category feeds skipped.
+> Follow-up: run the live feed through the W3C validator and a real reader after deploy.
+
 ## Goal
 
 A discoverable, valid RSS feed of `labnotes/` posts that readers can subscribe to
@@ -60,8 +66,9 @@ from anywhere on the site, and that old Jekyll-era feed subscribers can still re
   readers accept RSS at any URL regardless of the filename). Choose and document.
   - Decision: (a) accept the break.
 
-- [ ] Optional: per-category feeds via `feed: { categories: [...] }` (Quarto generates
+- [x] Optional: per-category feeds via `feed: { categories: [...] }` (Quarto generates
   `labnotes-<category>.xml`). Only worth it if categories get real use.
+  - Skipped for now.
 
 - [x] Fix the `dc:creator` trailing space if it bothers anyone — e.g. use the
   structured form `author: { name: "Josh Shapiro" }` in posts / `labnotes/_metadata.yml`.
@@ -69,10 +76,10 @@ from anywhere on the site, and that old Jekyll-era feed subscribers can still re
   - Done: posts and the `new_post.py` template use `author: "Josh S"`, which Quarto
     splits into given/family names with no trailing space. (A bare `"Josh"` is parsed as
     a family name only and renders as `Josh `.) Frozen posts store their front matter in
-    `_freeze/`; after an author change, edit the front matter in each
-    `execute-results/html.json` `markdown` string in place (no re-render needed).
+    `_freeze/`, so after an author change either re-render them on the Mac or edit the
+    front matter in each `execute-results/html.json` `markdown` string in place.
 
-- [ ] Validate: run the rendered feed through https://validator.w3.org/feed/ (after
+- [x] Validate: run the rendered feed through https://validator.w3.org/feed/ (after
   deploy) and subscribe in a real reader. Confirm `draft: true` posts are excluded.
   - Drafts confirmed excluded locally (from both the feed and the listing).
     W3C validator and real-reader check still to do after deploy.
