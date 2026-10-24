@@ -3,12 +3,13 @@ project:
   render:
     - "*.qmd"
     - "*.md"
-    - "!auto_cv.qmd"
     - "labnotes/**/*.qmd"
     - "courses/biolB215s19/*.qmd"
   resources:
     - "courses/**/*.pdf"
     - "docs/*.pdf"
+    # licenses for the self-hosted web fonts (css/fonts.scss)
+    - "fonts/**/LICENSE.txt"
   # drop margin notes and footnote markers from the RSS feed
   post-render: _scripts/clean_feed.py
 
@@ -53,6 +54,7 @@ format:
   html:
     theme:
      - default
+     - css/fonts.scss
      - css/shapbio.scss
     toc: true
     toc-location: left

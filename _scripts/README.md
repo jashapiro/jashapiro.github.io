@@ -66,8 +66,9 @@ If `CROSSREF_EMAIL` is set, it is sent to Crossref to identify the script.
 
 After a run, curate the new entries by hand:
 
-- Brace proper nouns and acronyms in titles (`{OpenPBTA}`) and italicize taxa as `{\textit{Drosophila}}`; the CV's NLM style puts titles in sentence case.
-- Check that author names use the full form `Shapiro, Joshua A`.
+- Keep author names as published.
+- The CV's NLM style puts titles in sentence case, so brace proper nouns and acronyms (`{OpenPBTA}`, `{Bryn Mawr}`) and wrap taxa as `{\textit{Drosophila}}`.
+- If your name appears in a new form (other than `Shapiro JA` / `Shapiro J` as the CV writes it), add it to `highlight-author` in `cv.qmd`.
 - Add equal-contribution papers to the CV's front-matter list (see `_tasks/04-cv-auto-build.md`).
 
 ## Formatting

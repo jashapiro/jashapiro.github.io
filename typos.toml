@@ -11,5 +11,7 @@ extend-exclude = [
 
 [default]
 extend-ignore-re = [
-  "mis-expression"
+  "mis-expression",
+  # Unicode code points and ranges, e.g. U+0100-02BA in css/fonts.scss
+  "U\\+[0-9A-Fa-f]{1,6}(-[0-9A-Fa-f]{1,6})?",
 ]

@@ -2,9 +2,8 @@
 
 /* Typography and colors carried over from the Jekyll site's Bootstrap 3 theme
    (master: _theme/variables.less, _theme/custom.less) */
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro:400,700");
-
-$font-family-sans-serif: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+// fonts are self-hosted; the @font-face rules are in css/fonts.scss
+$font-family-sans-serif: "Source Sans 3", "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-family-monospace: "Source Code Pro", Monaco, Menlo, Consolas, "Courier New", monospace;
 $font-size-root: 18px;
 $font-weight-base: 300;
