@@ -58,9 +58,9 @@ CV's NLM citation style depends on (see task 04).
 - [x] Add the `sync-papers` task to `pixi.toml` (no new dependencies expected; stdlib
   `urllib`/`json` plus typer).
 - [x] Document in `_scripts/README.md`, including the post-run curation checklist:
-  - Protect proper nouns in titles with braces and italicize taxa with `\textit{}`
-    (NLM applies sentence case; see task 04).
-  - Use the full author name form `Shapiro, Joshua A` (the bolding filter matches it).
+  - Keep author names as published; brace proper nouns in titles and wrap taxa as
+    `{\textit{...}}` (NLM sentence case; see task 04).
+  - Add any new form of the owner's name to `highlight-author` in `cv.qmd`.
   - Add new equal-contribution papers to the CV's front-matter list (task 04).
 - [x] Run it once (needs `pub.orcid.org`, `doi.org` and `api.crossref.org` allowed
   through the sandbox firewall) and confirm the three missing papers are added.

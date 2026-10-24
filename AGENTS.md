@@ -45,34 +45,32 @@ R and R package dependencies are managed separately via `renv`.
 
 ### Render scope
 
-`_quarto.yml` has an explicit `render:` list.
-Not everything in the tree is rendered:
-- `auto_cv.qmd` is **excluded** from the render list (it requires a live ORCID API call via `.httr-oauth`; excluded until it is frozen — see `_tasks/04-cv-auto-build.md`).
+`_quarto.yml` has an explicit `render:` list (root pages, labnotes posts, and the one remaining course).
 
 ### Freeze
 
 Computational R outputs are frozen so the site renders without re-executing R:
 - `_freeze/courses/` — frozen course tutorial outputs (committed; render without R).
 - `_freeze/labnotes/` — frozen blog post session-info outputs.
-- `auto_cv.qmd` has **no freeze yet** — that's why it's excluded from the render list.
 
 `_freeze/` is committed to the repo (not gitignored).
 `_site/` is gitignored.
 
 ### Styling
 
-Two CSS/SCSS files are wired into the build:
+These CSS/SCSS files are wired into the build:
+- Site fonts are self-hosted (no font CDN): Source Sans 3 and Source Code Pro `.woff2` subsets in `fonts/*/web/`, declared in `css/fonts.scss` (first in the theme list); Quarto copies them next to the compiled CSS, and `_quarto.yml` publishes their `LICENSE.txt` files. The CV PDF uses Source Sans 3 from the `.otf` files in `fonts/source-sans-3/`. See the README in each `fonts/` folder.
 - `css/shapbio.scss` — site-wide theme overlay on top of Bootstrap `litera`. Contains `figure.boxed`, `.pull-left/.pull-right`, `.file-link`, `.subhead` (pulls a line up under the preceding heading; pair with Bootstrap `.text-end` to right-align).
-- `css/cv.css` — CV-specific span styles (`.self`, `.species`, `.journal`, `.issue`, `.pub`). Referenced from `cv.qmd` front matter. Task 05 will fold this into `shapbio.scss` and remove it.
+- `css/cv.css` — old CV list styles (unbulleted lists, `.self`, `.species`, ...). Still referenced from `cv.qmd` front matter; task 05 removes it.
 
 ### CV
 
-Two CV files coexist:
-- `cv.qmd` — hand-written HTML CV; currently linked in the navbar. Source of truth for content today.
-- `auto_cv.qmd` — ORCID + vitae-based auto CV (work in progress, excluded from render). When complete it will replace `cv.qmd` in the navbar.
-
-Publications are driven by `papers.bib` (16 BibTeX entries; `pixi run sync-papers` adds new ORCID works).
-`auto_cv.qmd` uses `vitae::bibliography_entries("papers.bib", "Publications")` — no live Crossref/ORCID call needed for the bibliography itself.
+`cv.qmd` renders to the HTML CV page and to `cv.pdf` (Typst), which Quarto links from the page under "Other Formats". No R and no network access are needed.
+- Research Interests, Experience, Education and Honors are hand-written markdown in `cv.qmd`.
+- Publications are every entry in `papers.bib` (`nocite: "@*"`; 16 entries; `pixi run sync-papers` adds new ORCID works), formatted by `cv.csl`: the CSL project's NLM name-year style, modified to sort newest first (up to 6 authors, then "et al.").
+- The PDF layout is in `_typst/typst-template.typ` (a Quarto template partial replacing the default `article` function): section headings in the left margin, Source Sans 3 (from `fonts/source-sans-3/` via `font-paths`, so local and CI builds match), hanging indents instead of bullets, name and page number in the header after page 1.
+- `_filters/cv-publications.lua` runs citeproc itself (Quarto otherwise runs it after all filters), then bolds the `highlight-author` name and adds `*` to the names listed per citation key in `equal-contribution` (both in `cv.qmd` front matter).
+- Pandoc puts English BibTeX titles in sentence case, so `papers.bib` titles brace proper nouns (`{OpenPBTA}`) and wrap taxa as `{\textit{Drosophila}}`. Author names stay as published; `highlight-author` lists each form of the owner's name.
 
 ### Blog (labnotes)
 
@@ -97,7 +95,7 @@ Current tasks:
 |---|---|
 | `02-courses-url-preservation.md` | Convert `biolB215s19/index.markdown` → `.qmd`; remove unfinished `biolB216s14` |
 | `03-frontmatter-and-404.md` | Strip stale Jekyll front matter; add `404.qmd` |
-| `04-cv-auto-build.md` | Rebuild `cv.qmd` on Quarto citations (NLM `cv.csl`, Lua filters) with a Typst PDF download; retire `auto_cv.qmd`/`vitae` (after 07) |
+| `04-cv-auto-build.md` | Built: `cv.qmd` on Quarto citations (NLM `cv.csl`, `_filters/cv-publications.lua`) with a Typst PDF; open: et al. cases, PDF layout, old `docs/` PDF, `renv::snapshot()` |
 | `05-cv-and-site-styling.md` | Retire `css/cv.css`; any CV tweaks go in `css/shapbio.scss` (after 04) |
 | `06-new-post-script.md` | Done: `_scripts/new_post.py` (`pixi run new-post`); remaining: commit `pixi.lock`, check in preview |
 | `07-papers-bib-sync-script.md` | Done: `_scripts/sync_papers.py` (`pixi run sync-papers`) adds missing ORCID works to `papers.bib` |
