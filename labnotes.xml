@@ -9,6 +9,7 @@
 <link>https://shapbio.me/labnotes.html</link>
 <atom:link href="https://shapbio.me/labnotes.xml" rel="self" type="application/rss+xml"/>
 <description>An irregular posting of thoughts and code fragments</description>
+<language>en-us</language>
 <generator>quarto-1.10.19</generator>
 <lastBuildDate>Sun, 04 Oct 2026 00:00:00 GMT</lastBuildDate>
 <item>
@@ -23,7 +24,7 @@
 <p>I really did think two years ago (if I’m generous, only a year and a half) that I was going to get the website up and running. I really did. I think I even got kind of close, but not close enough. But now I think it might really happen, so I’m writing another post.</p>
 <p>If you look at the <a href="https://github.com/jashapiro/jashapiro.github.io">code here</a>, you will see that this time around I got some help with rewriting the code using Claude. Specifically, I got it to help with the long-planned and long-delayed transition from Jekyll to Quarto.</p>
 <p>What I did not do (and specifically banned in my <a href="https://github.com/jashapiro/jashapiro.github.io/blob/main/AGENTS.md">AGENTS.md file</a>) is any AI assistance with writing content. Everything you see as content is written by me, with some possible use of autocomplete suggestions within code blocks.</p>
-<p>I can imagine a time when I may include some more AI-written code sections, but honestly I have some doubts about the extent to which I will include code much at all. I had some plans to do that a couple of years ago (see <a href="../2025-03-03_session-info-security-through-obscurity">my post about path stripping</a>), but writing code is usually well handled by LLMs, so it seems a bit pointless these days. On the other hand, the code I see the LLMs writing is often not really well done, so maybe more good examples are worth the effort. Not that my code is always good! I just had a look back through the code I had written for <a href="../../courses/biolB215s19/index.html">my biostats class</a> and let’s just say I wouldn’t teach with that code these days. So we’ll see.</p>
+<p>I can imagine a time when I may include some more AI-written code sections, but honestly I have some doubts about the extent to which I will include code much at all. I had some plans to do that a couple of years ago (see <a href="https://shapbio.me/labnotes/2025-03-03_session-info-security-through-obscurity">my post about path stripping</a>), but writing code is usually well handled by LLMs, so it seems a bit pointless these days. On the other hand, the code I see the LLMs writing is often not really well done, so maybe more good examples are worth the effort. Not that my code is always good! I just had a look back through the code I had written for <a href="https://shapbio.me/courses/biolB215s19/index.html">my biostats class</a> and let’s just say I wouldn’t teach with that code these days. So we’ll see.</p>
 <p>I’m kind of hopeful that I will be inspired to write some more, but I have been hopeful before.</p>
 
 
@@ -383,7 +384,7 @@ font-style: inherit;">$</span>quarto)</span>
 
 <p>Right, so it has been a bit over two years since I said I was starting to write this blog. Obviously, I didn’t get too far.</p>
 <p>Well, that isn’t fair to myself, as I have done many things in the time since I started reformatting my website. I just haven’t gotten around to actually writing more, or finishing things off. At least I knew then that I would only be posting irregularly.</p>
-<p>Today I updated a bunch of the formatting, and even updated the <a href="../../cv.html">CV page</a> with publications from after I started at the <a href="https://ccdatalab.org">Data Lab</a>.</p>
+<p>Today I updated a bunch of the formatting, and even updated the <a href="https://shapbio.me/cv.html">CV page</a> with publications from after I started at the <a href="https://ccdatalab.org">Data Lab</a>.</p>
 <p>I might even push all of these changes and have the site go live this week. Might.</p>
 <p>I do want to get this up, warts and all, to at least have something up to correct the embarrassing situation that there is still a website up that claims I hold a position I haven’t held for 5 years at this point.</p>
 <details>
