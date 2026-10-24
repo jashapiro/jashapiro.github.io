@@ -46,12 +46,13 @@ entirely from files in the repo, so CI renders it with no network calls or freez
 
 - Entry tail: NLM default ends entries with `doi:…` and `PubMed PMID: …`; alternatively
   drop the PMID and make the DOI a link.
-- `docs/JAShapiro_CV.pdf`: delete, keep as-is, or replace with the new PDF at that URL
-  (old links may point there)? Left as-is for now.
 - Authors hidden by "et al.": NLM shows 6 authors, so the owner's name doesn't appear
   for Dang 2021 (16th author) or Guo 2020 (9th). The old CV hid Dang too but listed
   all of Guo's authors.
-- Typst PDF layout: done 2026-10-24 in `_typst/typst-template.typ`, modeled on
+- `docs/JAShapiro_CV.pdf`: decided 2026-10-24: the committed old PDF is removed, and
+  the post-render script `_scripts/copy_cv_pdf.py` copies the built `cv.pdf` to
+  that address in `_site`, so old links get the current CV.
+- Typst PDF layout: done 2026-10-24 in `_typst/cv/typst-template.typ`, modeled on
   `docs/JAShapiro_CV.pdf` (margin headings, blue accent, hanging indents, running
   header). Font: Source Sans 3 from `fonts/source-sans-3/`, matching the site's
   Source Sans (Helvetica Neue can't be committed and CI doesn't have it).

@@ -1,6 +1,6 @@
 # Scripts
 
-Helper scripts run by hand from the repository root, except `clean_feed.py`, which Quarto runs after every full render.
+Helper scripts run by hand from the repository root, except `clean_feed.py` and `copy_cv_pdf.py`, which Quarto runs after every render.
 
 Python scripts run in the [pixi](https://pixi.sh) environment defined in `pixi.toml` at the repository root (Python 3.14, typer, ruff, and Quarto).
 `pixi run <task>` installs the environment on first use; `pixi.lock` pins it.
@@ -38,6 +38,12 @@ Remove `draft: true` when the post is ready to publish.
 Removes margin notes (and the footnote markers pointing to them) from the lab notes RSS feed, `_site/labnotes.xml`.
 It is a project `post-render` script in `_quarto.yml`, so it runs automatically on `quarto render`; the rendered pages keep their margin notes.
 It uses only the standard library because CI runs it with the runner's system `python3`, not the pixi environment.
+
+## `copy_cv_pdf.py`
+
+Copies the CV PDF rendered from `cv.qmd` (`_site/cv.pdf`) to `_site/docs/JAShapiro_CV.pdf`, the address of the old hand-made CV, so links to it get the current one.
+Like `clean_feed.py`, it is a project `post-render` script that uses only the standard library.
+There is no committed `docs/JAShapiro_CV.pdf`; the build makes it.
 
 ## `sync_papers.py`
 
