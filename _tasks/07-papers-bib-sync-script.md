@@ -1,63 +1,68 @@
 # Task 07 — Refresh papers.bib programmatically
 
+> **Status (2026-10-24):** replanned. Now a Python script (`_scripts/sync_papers.py`,
+> run via pixi) using ORCID's public API with no login, instead of an R script using
+> `rorcid`/`rcrossref` with an OAuth token. Do this before task 04, which renders the
+> CV publications from `papers.bib`.
+
 ## Goal
 
-An on-demand R script that pulls works from ORCID / Crossref and updates `papers.bib`,
-so the bibliography stays current without hand-editing BibTeX. Live network/auth calls
-are intentionally confined to this script; rendering the CV never needs them.
+An on-demand script that adds any missing works from ORCID to `papers.bib`, so the
+bibliography stays current without hand-writing BibTeX. Live network calls are
+confined to this script; rendering the site never needs them. Existing entries are
+never rewritten, because they carry hand curation (title casing, italics) that the
+CV's NLM citation style depends on (see task 04).
 
 ## Current state
 
-- `papers.bib` is a committed 14-entry BibTeX file (13 `@ARTICLE` + 1 `@UNPUBLISHED`),
-  keys in Zotero/Better-BibTeX style (e.g. `Shapiro2007-of`). It is the source of
-  truth for the CV bibliography.
-- `dependencies.R` records `library(rcrossref)` — Crossref is preferred for BibTeX
-  retrieval (ORCID's own citation export is less well-formatted).
-- `rorcid` is already used in `auto_cv.qmd` for ORCID API access.
-- `.Renviron` (gitignored) can hold `CROSSREF_EMAIL=...` and the ORCID token path.
-  `.httr-oauth` (gitignored) caches the ORCID OAuth token.
+- `papers.bib`: 14 entries (13 `@ARTICLE` + 1 `@UNPUBLISHED`), Paperpile/Zotero-style
+  keys (e.g. `Shapiro2007-of`). It is the source of truth for the CV bibliography.
+- It is **behind** the hand-written `cv.qmd`, which also lists Hawkins 2026 (ScPCA,
+  *Cell Genomics*), Lee 2024 (*Nature Communications*) and the published OpenPBTA
+  (*Cell Genomics* 2023, doi:10.1016/j.xgen.2023.100340).
+- `Shapiro2022-kj` is the OpenPBTA bioRxiv preprint (doi:10.1101/2022.09.13.507832).
+- No `.httr-oauth` or `.Renviron` exists in the repo; the old plan's ORCID token is not
+  available, and isn't needed for public reads.
+- Python helper-script conventions are set by `_scripts/new_post.py`: pixi environment
+  (`pixi.toml`), typer CLI, ruff, a `pixi run` task, a section in `_scripts/README.md`.
 
 ## Steps
 
-- [ ] Write `_scripts/sync_papers.R`. Invocation:
-  ```
-  Rscript _scripts/sync_papers.R
-  ```
-  Recommended approach:
-  1. Pull the list of work DOIs from ORCID: `rorcid::orcid_works("0000-0002-6224-0347")`
-     → extract DOIs.
-  2. For each DOI, fetch a BibTeX entry via `rcrossref::cr_cn(dois, format = "bibtex")`.
-  3. Load the existing `papers.bib` (e.g. with `bib2df` or a simple regex parse, or
-     just track existing keys by scanning `@ARTICLE{<key>,`).
-  4. For each fetched entry, check if a matching entry already exists (match on DOI
-     field or title). If it does and the existing entry has hand-edits (e.g.
-     `abstract`, custom notes), preserve it (don't overwrite). If new, append.
-  5. Write `papers.bib` back, committing the changes by hand afterward.
-  - Consider a `--dry-run` flag that prints what would be added/changed without
-    writing.
-
-- [ ] Handle the `@UNPUBLISHED` entry (`Shapiro2022-kj`, the OpenPBTA atlas) — likely
-  it now has a DOI/published version. The script should detect it is now published
-  (DOI resolves) and offer to upgrade the entry type, or at least flag it.
-
-- [ ] Document in `_scripts/README.md` (task 06 creates this file; add a section here).
-
-- [ ] Update `renv.lock` if new packages are added (`renv::snapshot()`).
-
-## Required credentials (local only)
-
-- `CROSSREF_EMAIL` in `.Renviron` (polite pool for Crossref — recommended).
-- `.httr-oauth` for ORCID OAuth (already in place from `auto_cv.qmd` development).
+- [ ] Write `_scripts/sync_papers.py` (typer; `pixi run sync-papers`):
+  1. Fetch work DOIs from `https://pub.orcid.org/v3.0/0000-0002-6224-0347/works`
+     (JSON, no token).
+  2. Read `papers.bib` as text; collect existing DOIs (case-insensitive) and
+     normalized titles with a regex. No BibTeX parser, so existing entries are left
+     byte-for-byte unchanged.
+  3. For each ORCID DOI not already present, fetch BibTeX from `https://doi.org/<doi>`
+     with `Accept: application/x-bibtex`. Rename its key to the existing style,
+     `<FirstAuthorFamily><Year>-<2 letters>`, avoiding collisions.
+  4. Append new entries to `papers.bib`; print what was added, or "nothing new".
+  5. `--dry-run` prints what would be added without writing.
+- [ ] Preprints: for each `@UNPUBLISHED` (or bioRxiv-DOI) entry, check Crossref
+  (`https://api.crossref.org/works/<doi>`, `relation.is-preprint-of`) for a published
+  version. Print a flag naming both DOIs; don't edit or delete the preprint entry. If
+  the published DOI is missing, it's appended by the normal path.
+- [ ] Crossref "polite pool": if `CROSSREF_EMAIL` is set in the environment, send it
+  as `mailto`; otherwise send nothing. Never hard-code an address.
+- [ ] Add the `sync-papers` task to `pixi.toml` (no new dependencies expected; stdlib
+  `urllib`/`json` plus typer).
+- [ ] Document in `_scripts/README.md`, including the post-run curation checklist:
+  - Protect proper nouns in titles with braces and italicize taxa with `\textit{}`
+    (NLM applies sentence case; see task 04).
+  - Use the full author name form `Shapiro, Joshua A` (the bolding filter matches it).
+  - Add new equal-contribution papers to the CV's front-matter list (task 04).
+- [ ] Run it once (needs `pub.orcid.org`, `doi.org` and `api.crossref.org` allowed
+  through the sandbox firewall) and confirm the three missing papers are added.
 
 ## Files changed
 
-New: `_scripts/sync_papers.R`; updated: `_scripts/README.md`, possibly `renv.lock`,
-and `papers.bib` (on each run)
+New: `_scripts/sync_papers.py`; updated: `pixi.toml`, `pixi.lock` (if the task list
+changes it), `_scripts/README.md`, `papers.bib` (on each run).
 
 ## Done when
 
-- `Rscript _scripts/sync_papers.R` runs without error and either appends new entries
-  to `papers.bib` or reports "nothing new".
-- Existing entries with hand-curation are not clobbered.
-- The `@UNPUBLISHED` preprint status is handled (flagged or updated).
-- After running, `quarto render` picks up any new bib entries in the CV bibliography.
+- `pixi run sync-papers` runs without error and either appends new entries to
+  `papers.bib` or reports "nothing new"; `--dry-run` writes nothing.
+- Existing entries are untouched (`git diff papers.bib` shows only additions).
+- The OpenPBTA preprint is flagged as published.

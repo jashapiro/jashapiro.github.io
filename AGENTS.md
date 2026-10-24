@@ -12,6 +12,7 @@ It is mid-migration from a Jekyll/Rmarkdown site — the `master` branch holds t
 - **Text** (`.qmd`, `.md`): one sentence per line.
 - **R code**: format with `air` (default settings).
 - **Python code**: format with `ruff` (default settings).
+- **File names**: kebab-case. Use underscores only to separate distinct, machine-parseable chunks, such as the date and slug in `labnotes/2026-10-04_two-more-years/`. Python scripts keep snake_case (e.g. `_scripts/new_post.py`).
 
 ## Key constraint: never write site content
 
@@ -95,8 +96,8 @@ Current tasks:
 |---|---|
 | `02-courses-url-preservation.md` | Convert `biolB215s19/index.markdown` → `.qmd`; remove unfinished `biolB216s14` |
 | `03-frontmatter-and-404.md` | Strip stale Jekyll front matter; add `404.qmd` |
-| `04-cv-auto-build.md` | Complete `auto_cv.qmd` (render edu/employment, freeze, wire into navbar) |
-| `05-cv-and-site-styling.md` | Fold `css/cv.css` into `css/shapbio.scss`; remove standalone file |
+| `04-cv-auto-build.md` | Rebuild `cv.qmd` on Quarto citations (NLM `cv.csl`, Lua filters) with a Typst PDF download; retire `auto_cv.qmd`/`vitae` (after 07) |
+| `05-cv-and-site-styling.md` | Retire `css/cv.css`; any CV tweaks go in `css/shapbio.scss` (after 04) |
 | `06-new-post-script.md` | Done: `_scripts/new_post.py` (`pixi run new-post`); remaining: commit `pixi.lock`, check in preview |
-| `07-papers-bib-sync-script.md` | Write `_scripts/sync_papers.R` to refresh `papers.bib` from ORCID/Crossref |
+| `07-papers-bib-sync-script.md` | Write `_scripts/sync_papers.py` (`pixi run sync-papers`) to add missing ORCID works to `papers.bib` (do first) |
 | `08-rss-feed.md` | Done: feed cleanup via `_scripts/clean_feed.py`, RSS icons, autodiscovery; remaining: check in a real feed reader |
