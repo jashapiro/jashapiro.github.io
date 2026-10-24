@@ -30,11 +30,14 @@ Read-only commands (`git show`, `git log`, `git diff`, `git status`, `git blame`
 ## Build commands
 
 ```bash
-quarto render       # full build → _site/
-quarto preview      # live-reloading dev server
+pixi run render       # quarto render: full build → _site/
+pixi run preview      # quarto preview: live-reloading dev server
+pixi run new-post     # scaffold a new labnotes post (see _scripts/README.md)
+pixi run fmt          # ruff format + check for Python in _scripts/
 ```
 
-R package dependencies are managed via `renv`.
+Quarto, Python, and Python tooling come from the pixi environment (`pixi.toml`, locked by `pixi.lock`).
+R and R package dependencies are managed separately via `renv`.
 
 ## Architecture
 
@@ -94,5 +97,5 @@ Current tasks:
 | `03-frontmatter-and-404.md` | Strip stale Jekyll front matter; add `404.qmd` |
 | `04-cv-auto-build.md` | Complete `auto_cv.qmd` (render edu/employment, freeze, wire into navbar) |
 | `05-cv-and-site-styling.md` | Fold `css/cv.css` into `css/shapbio.scss`; remove standalone file |
-| `06-new-post-script.md` | Write `_scripts/new_post.R` to scaffold new blog posts |
+| `06-new-post-script.md` | Done: `_scripts/new_post.py` (`pixi run new-post`); remaining: commit `pixi.lock`, check in preview |
 | `07-papers-bib-sync-script.md` | Write `_scripts/sync_papers.R` to refresh `papers.bib` from ORCID/Crossref |

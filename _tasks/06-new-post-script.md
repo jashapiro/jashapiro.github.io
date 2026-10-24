@@ -1,5 +1,15 @@
 # Task 06 — Ruby-free new-post scaffolding
 
+> **Status (2026-10-09):** implemented in Python 3.14 + typer instead of R, as
+> `_scripts/new_post.py`, run via `pixi run new-post` (environment in `pixi.toml`, which
+> also provides Quarto); see `_scripts/README.md`.
+> Prompts for anything not given on the command line, writes the `order: -YYYYMMDD`
+> field, and supports `--slug`, `-d/--description` and repeatable `-c/--category`.
+> Remaining: commit `pixi.lock`, and confirm a generated post appears in `quarto preview` (drafts show in
+> preview only).
+> Verified 2026-10-24: creates the post, escapes quotes, refuses to overwrite.
+> Known pixi limitation: a straight `'` in a task argument breaks `pixi run new-post`; see README.
+
 ## Goal
 
 An on-demand R script that creates a new, ready-to-edit blog post under `labnotes/`,
