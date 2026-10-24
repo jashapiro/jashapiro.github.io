@@ -1,6 +1,6 @@
 ---
 title: Lab Notes
-subtitle: An irregularly updated blog
+subtitle: 'An irregularly updated blog [<i class="bi bi-rss"></i>](labnotes.xml){.ms-2 aria-label="RSS feed" title="RSS feed"}'
 listing:
   contents: labnotes
   sort: "date desc"
