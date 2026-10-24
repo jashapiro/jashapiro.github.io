@@ -14,3 +14,6 @@ courses/*/capture_recapture_example_cache
 .Renviron
 
 **/*.quarto_ipynb
+
+# pixi environments
+.pixi/

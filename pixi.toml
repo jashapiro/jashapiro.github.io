@@ -1,0 +1,17 @@
+[workspace]
+name = "shapbio"
+description = "Build tools and helper scripts for shapbio.me (R packages are managed by renv)"
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64", "linux-aarch64"]
+
+[dependencies]
+quarto = "1.9.*"
+python = "3.14.*"
+typer = ">=0.19"
+ruff = "*"
+
+[tasks]
+render = { cmd = "quarto render", description = "Build the site into _site/" }
+preview = { cmd = "quarto preview", description = "Live-reloading preview server" }
+new-post = { cmd = "python _scripts/new_post.py", description = "Create a new draft lab notes post" }
+fmt = { cmd = "ruff format _scripts && ruff check --fix _scripts", description = "Format and lint the helper scripts" }
