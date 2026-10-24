@@ -10,8 +10,11 @@ project:
     - "docs/*.pdf"
     # licenses for the self-hosted web fonts (css/fonts.scss)
     - "fonts/**/LICENSE.txt"
-  # drop margin notes and footnote markers from the RSS feed
-  post-render: _scripts/clean_feed.py
+  post-render:
+    # drop margin notes and footnote markers from the RSS feed
+    - _scripts/clean_feed.py
+    # copy the CV PDF to docs/JAShapiro_CV.pdf, the old CV's address
+    - _scripts/copy_cv_pdf.py
 
 execute:
   freeze: auto

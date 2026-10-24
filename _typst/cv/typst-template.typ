@@ -1,5 +1,6 @@
-// Typst layout for the CV's PDF (cv.qmd uses this file as a template partial,
-// replacing Quarto's default `article` function).
+// Typst layout for the CV's PDF. cv.qmd uses this file as a template partial
+// (replacing Quarto's default, which defines `article`); typst-show.typ, next
+// to it, calls `cv` instead of `article`.
 //
 // Section headings sit in the left margin; list items and publications have
 // no bullets and a hanging indent; pages after the first get a running header.
@@ -13,14 +14,18 @@
 #let label-width = 1.3in
 #let label-gap = 0.2in
 
-#let article(
+// a list item's content split at its line breaks, as arrays of elements
+#let item-lines(body) = {
+  let children = if body.has("children") { body.children } else { (body,) }
+  children.split(linebreak())
+}
+
+#let cv(
   title: none,
   lang: "en",
   region: "US",
   fontsize: 10pt,
   doc,
-  // other options Quarto passes (authors, toc, ...) aren't used
-  ..rest,
 ) = {
   set document(title: title)
   set page(
@@ -42,8 +47,19 @@
   // (no space above the first item, so it lines up with a margin heading)
   show list: it => for (i, item) in it.children.enumerate() {
     block(above: if i == 0 { 0pt } else { 0.85em }, below: 0.85em, width: 100%, {
-      item.body
-      parbreak()
+      // each line (`\` in cv.qmd) is its own paragraph: the first line and
+      // position titles (lines starting in bold) at the outer edge, the rest
+      // (institution, advisor, ...) indented
+      set par(spacing: 0.5em)
+      for (j, line) in item-lines(item.body).enumerate() {
+        let first = line.find(c => c != [ ])
+        if j == 0 or (first != none and first.func() == strong) {
+          line.join()
+        } else {
+          block(inset: (left: 1em), spacing: 0.5em, par(hanging-indent: 0pt, line.join()))
+        }
+        parbreak()
+      }
     })
   }
   show link: set text(fill: accent)

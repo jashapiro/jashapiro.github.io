@@ -14,6 +14,8 @@ equal-contribution:
 filters:
   - path: _filters/cv-publications.lua
     at: pre-quarto
+  # HTML layout of multi-line list items (the PDF's is in _typst/cv/)
+  - _filters/cv-lines.lua
 format:
   html:
     # listing a format by name stops Quarto adding its default "Typst" link
@@ -22,9 +24,10 @@ format:
       - format: typst
         text: PDF
   typst:
-    # layout (margin headings, fonts, running header) is in this partial
+    # layout (margin headings, fonts, running header) is in these partials
     template-partials:
-      - _typst/typst-template.typ
+      - _typst/cv/typst-template.typ
+      - _typst/cv/typst-show.typ
     font-paths:
       - fonts/source-sans-3
     fontsize: 10pt
