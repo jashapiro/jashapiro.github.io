@@ -24,16 +24,24 @@ from anywhere on the site, and that old Jekyll-era feed subscribers can still re
 
 ## Steps
 
-- [ ] Decide full vs. summary items. Options: keep `type: full` (readers see whole
+- [x] Decide full vs. summary items. Options: keep `type: full` (readers see whole
   post), or set `feed: { type: partial }` so items use the `description` field plus
   a link. Check how margin notes/footnotes render in a real reader (e.g. NetNewsWire)
   before deciding.
+  - Decision: keep full items, but drop margin notes and their footnote markers.
+    Quarto has no option for this, so `_scripts/clean_feed.py` runs as a project
+    `post-render` script and strips `.column-margin` divs and the matching `<sup>N</sup>`
+    markers from `_site/labnotes.xml`. Standard library only, since CI runs it with the
+    runner's system python3 rather than pixi.
 
-- [ ] Add a visible feed link: e.g. a `navbar.right` entry with
+- [x] Add a visible feed link: e.g. a `navbar.right` entry with
   `icon: rss` and `href: labnotes.xml` in `_quarto.yml`, and/or a line in
   `labnotes.qmd`'s subtitle area.
+  - Decision: icon only, at the end of the Lab Notes page subtitle in
+    `labnotes.qmd`, and as a `tools` icon in the labnotes sidebar (`_quarto.yml`), so it
+    shows on every post; no navbar entry.
 
-- [ ] Site-wide autodiscovery: add the alternate link to every page via
+- [x] Site-wide autodiscovery: add the alternate link to every page via
   `format.html.include-in-header` in `_quarto.yml`:
   ```html
   <link rel="alternate" type="application/rss+xml" title="ShapBio Lab Notes"
@@ -42,21 +50,29 @@ from anywhere on the site, and that old Jekyll-era feed subscribers can still re
   Use an absolute href so it resolves from post subdirectories. Confirm it doesn't
   duplicate the tag Quarto already emits on `labnotes.html` (if it does, either accept
   the duplicate or scope the include to non-listing pages).
+  - Done in `_quarto.yml`. `labnotes.html` gets two identical-target tags; a page-level
+    `include-in-header: []` doesn't override it (Quarto merges the arrays), so the
+    duplicate is accepted.
 
-- [ ] Legacy `atom.xml`: GitHub Pages can't do server-side redirects. Options:
+- [x] Legacy `atom.xml`: GitHub Pages can't do server-side redirects. Options:
   (a) accept the break — probably fine given how old the Jekyll feed is; or
   (b) add a render step / resource that copies `labnotes.xml` to `atom.xml` (most
   readers accept RSS at any URL regardless of the filename). Choose and document.
+  - Decision: (a) accept the break.
 
 - [ ] Optional: per-category feeds via `feed: { categories: [...] }` (Quarto generates
   `labnotes-<category>.xml`). Only worth it if categories get real use.
 
-- [ ] Fix the `dc:creator` trailing space if it bothers anyone — e.g. use the
+- [x] Fix the `dc:creator` trailing space if it bothers anyone — e.g. use the
   structured form `author: { name: "Josh Shapiro" }` in posts / `labnotes/_metadata.yml`.
   Coordinate with task 06's front-matter template.
+  - Done: posts and the `new_post.py` template use `author: { name: { literal: "Josh" } }`.
+    (`name: "Josh"` alone still gives the trailing space.)
 
 - [ ] Validate: run the rendered feed through https://validator.w3.org/feed/ (after
   deploy) and subscribe in a real reader. Confirm `draft: true` posts are excluded.
+  - Drafts confirmed excluded locally (from both the feed and the listing).
+    W3C validator and real-reader check still to do after deploy.
 
 ## Files changed
 

@@ -1,7 +1,6 @@
 # Scripts
 
-Helper scripts run by hand from the repository root.
-None of them run as part of `quarto render`.
+Helper scripts run by hand from the repository root, except `clean_feed.py`, which Quarto runs after every full render.
 
 Python scripts run in the [pixi](https://pixi.sh) environment defined in `pixi.toml` at the repository root (Python 3.14, typer, ruff, and Quarto).
 `pixi run <task>` installs the environment on first use; `pixi.lock` pins it.
@@ -33,6 +32,12 @@ pixi run python _scripts/new_post.py "Josh's Post"
 ```
 
 Remove `draft: true` when the post is ready to publish.
+
+## `clean_feed.py`
+
+Removes margin notes (and the footnote markers pointing to them) from the lab notes RSS feed, `_site/labnotes.xml`.
+It is a project `post-render` script in `_quarto.yml`, so it runs automatically on `quarto render`; the rendered pages keep their margin notes.
+It uses only the standard library because CI runs it with the runner's system `python3`, not the pixi environment.
 
 ## Formatting
 

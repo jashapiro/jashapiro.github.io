@@ -9,6 +9,8 @@ project:
   resources:
     - "courses/**/*.pdf"
     - "docs/*.pdf"
+  # drop margin notes and footnote markers from the RSS feed
+  post-render: _scripts/clean_feed.py
 
 execute:
   freeze: auto
@@ -35,6 +37,10 @@ website:
   page-navigation: true
   sidebar:
     - id: labnotes
+      tools:
+        - icon: rss
+          href: labnotes.xml
+          aria-label: RSS feed
       contents:
         - section: labnotes
           contents: "labnotes/*/index.qmd"
@@ -50,6 +56,9 @@ format:
      - css/shapbio.scss
     toc: true
     toc-location: left
+    # RSS autodiscovery on every page (absolute href so it resolves from post subdirectories)
+    include-in-header:
+      text: '<link rel="alternate" type="application/rss+xml" title="ShapBio Lab Notes" href="https://shapbio.me/labnotes.xml">'
 reference-location: margin
 fig-format: retina
 
