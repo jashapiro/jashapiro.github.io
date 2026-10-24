@@ -14,4 +14,5 @@ ruff = "*"
 render = { cmd = "quarto render", description = "Build the site into _site/" }
 preview = { cmd = "quarto preview", description = "Live-reloading preview server" }
 new-post = { cmd = "python _scripts/new_post.py", description = "Create a new draft lab notes post" }
+sync-papers = { cmd = "python _scripts/sync_papers.py", description = "Add missing ORCID works to papers.bib" }
 fmt = { cmd = "ruff format _scripts && ruff check --fix _scripts", description = "Format and lint the helper scripts" }

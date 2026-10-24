@@ -1,0 +1,10 @@
+# Settings for _scripts/sync_papers.py (pixi run sync-papers).
+
+# Works the script should not add to papers.bib, even though they are on ORCID.
+[[skip]]
+doi = "10.1101/2024.04.19.590243"
+reason = "ScPCA preprint; published as 10.1016/j.xgen.2026.101283, which Crossref doesn't link"
+
+[[skip]]
+doi = "10.64898/2026.09.14.750241"
+reason = "Liang et al. 2026 preprint; left off the CV for now"

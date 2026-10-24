@@ -39,6 +39,34 @@ Removes margin notes (and the footnote markers pointing to them) from the lab no
 It is a project `post-render` script in `_quarto.yml`, so it runs automatically on `quarto render`; the rendered pages keep their margin notes.
 It uses only the standard library because CI runs it with the runner's system `python3`, not the pixi environment.
 
+## `sync_papers.py`
+
+Adds works from the public ORCID record (`0000-0002-6224-0347`) that are missing from `papers.bib`, using Crossref metadata.
+No ORCID login is needed.
+
+```bash
+pixi run sync-papers --dry-run                        # show what would be added
+pixi run sync-papers                                  # append new entries
+pixi run sync-papers --doi 10.1016/j.xgen.2026.101283 # also add a DOI not on ORCID
+```
+
+Entries already in `papers.bib` (matched by DOI) are never changed; new ones are appended in the file's existing layout with keys like `Lee2024-id`.
+A preprint that Crossref links to a published article is replaced by the article, and existing `@UNPUBLISHED` entries that have since been published are reported (not removed).
+DOIs in the `[[skip]]` tables of `papers-sync.toml` are ignored, e.g. a preprint whose published version Crossref doesn't link, or a work left off the CV:
+
+```toml
+[[skip]]
+doi = "10.64898/2026.09.14.750241"
+reason = "Liang et al. 2026 preprint; left off the CV for now"
+```
+If `CROSSREF_EMAIL` is set, it is sent to Crossref to identify the script.
+
+After a run, curate the new entries by hand:
+
+- Brace proper nouns and acronyms in titles (`{OpenPBTA}`) and italicize taxa as `{\textit{Drosophila}}`; the CV's NLM style puts titles in sentence case.
+- Check that author names use the full form `Shapiro, Joshua A`.
+- Add equal-contribution papers to the CV's front-matter list (see `_tasks/04-cv-auto-build.md`).
+
 ## Formatting
 
 ```bash
