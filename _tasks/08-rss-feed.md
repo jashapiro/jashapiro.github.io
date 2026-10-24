@@ -4,7 +4,7 @@
 > footnote markers stripped by `_scripts/clean_feed.py` (project `post-render`); RSS icon
 > in the Lab Notes subtitle and the labnotes sidebar; site-wide autodiscovery; author
 > `"Josh S"`; `atom.xml` break accepted. Per-category feeds skipped.
-> Follow-up: run the live feed through the W3C validator and a real reader after deploy.
+> Follow-up: subscribe in a real reader.
 
 ## Goal
 
@@ -82,7 +82,12 @@ from anywhere on the site, and that old Jekyll-era feed subscribers can still re
 - [x] Validate: run the rendered feed through https://validator.w3.org/feed/ (after
   deploy) and subscribe in a real reader. Confirm `draft: true` posts are excluded.
   - Drafts confirmed excluded locally (from both the feed and the listing).
-    W3C validator and real-reader check still to do after deploy.
+  - 2026-10-24: live feed valid (0 errors), checked with the W3C validator's own code
+    (`w3c/feedvalidator`, run locally; the online validator's Cloudflare check blocks
+    scripted requests). Fixed its warnings by making relative links absolute in
+    `clean_feed.py` and adding `feed.language: en-us`. Remaining warning: Quarto's inline
+    `style` attributes on code (readers may strip them; harmless). Real-reader check
+    left to the owner.
 
 ## Files changed
 

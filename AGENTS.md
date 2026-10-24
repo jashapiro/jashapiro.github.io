@@ -99,3 +99,4 @@ Current tasks:
 | `05-cv-and-site-styling.md` | Fold `css/cv.css` into `css/shapbio.scss`; remove standalone file |
 | `06-new-post-script.md` | Done: `_scripts/new_post.py` (`pixi run new-post`); remaining: commit `pixi.lock`, check in preview |
 | `07-papers-bib-sync-script.md` | Write `_scripts/sync_papers.R` to refresh `papers.bib` from ORCID/Crossref |
+| `08-rss-feed.md` | Done: feed cleanup via `_scripts/clean_feed.py`, RSS icons, autodiscovery; remaining: check in a real feed reader |
