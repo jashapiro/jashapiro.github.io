@@ -2,14 +2,14 @@
 title: "Maybe this time"
 description: "Look, I said it was irregular"
 author: "Josh"
-date: "2027-10-04"
-order: -20271004
+date: "2026-10-04"
+order: -20261004
 categories:
   - personal
   - meta
 ---
 
-I really did think two years ago that I was going to get the website up and running.
+I really did think two years ago (if I'm generous, only a year and a half) that I was going to get the website up and running.
 I really did.
 I think I even got kind of close, but not close enough.
 But now I think it might really happen, so I'm writing another post[^1].
