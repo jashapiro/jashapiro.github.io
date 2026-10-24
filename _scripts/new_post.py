@@ -90,7 +90,8 @@ def render_post(
         "---\n"
         f"title: {yaml_quote(title)}\n"
         f"description: {yaml_quote(description)}\n"
-        f"author: {yaml_quote(AUTHOR)}\n"
+        # literal name avoids a trailing space in the RSS feed's dc:creator
+        f"author:\n  name:\n    literal: {yaml_quote(AUTHOR)}\n"
         f'date: "{date.isoformat()}"\n'
         f"order: -{date:%Y%m%d}\n"
         f"{category_lines}"
