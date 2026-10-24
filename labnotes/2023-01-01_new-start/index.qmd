@@ -1,7 +1,9 @@
 ---
 title: "Let's see how this goes"
 description: "A bit about starting a personal blog"
-author: "Josh"
+author:
+  name:
+    literal: "Josh"
 date: "2023-01-01"
 order: -20230101
 categories:

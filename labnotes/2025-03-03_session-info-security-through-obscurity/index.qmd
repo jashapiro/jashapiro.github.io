@@ -1,7 +1,9 @@
 ---
 title: "Session info and security through obscurity"
 description: "Do we need full paths everywhere?"
-author: "Josh"
+author:
+  name:
+    literal: "Josh"
 date: "2025-03-03"
 order: -20250303
 categories:
