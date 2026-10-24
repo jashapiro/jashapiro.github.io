@@ -9,6 +9,8 @@ Preprints that Crossref links to a published article are replaced by that articl
 Existing @UNPUBLISHED entries are checked the same way and reported if published.
 DOIs in the `[[skip]]` tables of papers-sync.toml are ignored (e.g. a preprint
 Crossref doesn't link to its published version, or a work left off the CV).
+New citation keys are `<FirstAuthorFamily><Year>-<word>`; the script asks for the
+word for each new paper, suggesting an acronym or distinctive word from the title.
 Set CROSSREF_EMAIL to identify the script to Crossref's "polite pool".
 """
 
@@ -16,6 +18,7 @@ import html
 import json
 import os
 import re
+import sys
 import textwrap
 import tomllib
 import unicodedata
@@ -47,6 +50,34 @@ MONTHS = [
     "nov",
     "dec",
 ]
+# title words skipped when suggesting a citation key word
+COMMON_WORDS = {
+    "a",
+    "an",
+    "and",
+    "as",
+    "at",
+    "by",
+    "for",
+    "from",
+    "in",
+    "into",
+    "of",
+    "on",
+    "or",
+    "the",
+    "to",
+    "via",
+    "with",
+    "analysis",
+    "genome",
+    "genomic",
+    "genomes",
+    "data",
+    "new",
+    "novel",
+    "study",
+}
 # field values start in this column; continuation lines are indented to match
 VALUE_COLUMN = 14
 WIDTH = 79
@@ -143,19 +174,63 @@ def author_name(author: dict) -> str:
     return f"{family}, {bib_text(given)}" if given else family
 
 
-def make_key(work: dict, keys: set[str]) -> str:
-    """`<FirstAuthorFamily><Year>-<xx>`, as in the existing Paperpile-style keys."""
+def key_stem(work: dict) -> str:
+    """`<FirstAuthorFamily><Year>`, the part of a citation key before the word."""
     authors = work.get("author") or [{}]
     family = authors[0].get("family") or authors[0].get("name") or "Anon"
     family = unicodedata.normalize("NFKD", family).encode("ascii", "ignore").decode()
-    family = re.sub(r"[^A-Za-z]", "", family)
-    stem = f"{family}{issued(work)[0]}"
-    title = re.sub(r"[^a-z]", "", bib_text(work["title"][0]).lower()) + "zz"
-    for i in range(len(title) - 1):
-        key = f"{stem}-{title[i : i + 2]}"
-        if key not in keys:
-            return key
-    raise ValueError(f"no free citation key for {stem}")
+    return re.sub(r"[^A-Za-z]", "", family) + str(issued(work)[0])
+
+
+def key_candidates(title: str) -> list[str]:
+    """Suggested key words: acronyms of capitalized names, then distinctive words.
+
+    "The Single-Cell Pediatric Cancer Atlas: Data portal" gives "scpca" first.
+    """
+    title = re.sub(r"\\textit\{(.*?)\}", r"\1", title)
+    acronyms = []
+    for part in re.split(r"[:;,.()]", title):
+        run = []
+        for token in re.findall(r"[A-Za-z0-9]+", part) + [""]:
+            if token[:1].isupper() and not (not run and token in ("The", "A", "An")):
+                run.append(token)
+                continue
+            acronym = "".join(t[0] for t in run).lower()
+            if len(run) >= 3 and acronym not in COMMON_WORDS:
+                acronyms.append(acronym)
+            run = []
+    words = [
+        w for w in re.findall(r"[a-z0-9]+", title.lower()) if w not in COMMON_WORDS
+    ]
+    return list(dict.fromkeys(acronyms + words))
+
+
+def make_key(work: dict, keys: set[str], interactive: bool) -> str:
+    """`<FirstAuthorFamily><Year>-<word>`, asking for the word when interactive."""
+    stem = key_stem(work)
+    title = bib_text(work["title"][0])
+    free = [w for w in key_candidates(title) if f"{stem}-{w}" not in keys]
+    suggestion = free[0] if free else None
+    if suggestion is None:
+        suggestion = next(str(n) for n in range(2, 100) if f"{stem}-{n}" not in keys)
+    if not interactive:
+        return f"{stem}-{suggestion}"
+
+    def check_word(value: str) -> str:
+        word = value.strip()
+        if not re.fullmatch(r"[A-Za-z0-9]+", word):
+            raise typer.BadParameter("use letters and digits only")
+        if f"{stem}-{word}" in keys:
+            raise typer.BadParameter(f"{stem}-{word} is already in papers.bib")
+        return word
+
+    typer.echo()
+    typer.secho(title, bold=True)
+    typer.echo(f"{work['DOI']}  |  suggestions: {', '.join(free[:8]) or 'none'}")
+    word = typer.prompt(
+        f"Key word for {stem}-", default=suggestion, value_proc=check_word
+    )
+    return f"{stem}-{word}"
 
 
 def issued(work: dict) -> list[int]:
@@ -223,8 +298,20 @@ def main(
     dry_run: Annotated[
         bool, typer.Option("--dry-run", help="Print new entries; don't write.")
     ] = False,
+    no_input: Annotated[
+        bool,
+        typer.Option(
+            "--no-input",
+            help="Don't ask for key words; use the suggestions. "
+            "Implied by --dry-run and when not run in a terminal.",
+        ),
+    ] = False,
 ) -> None:
-    """Append works from ORCID (and any --doi) that are missing from papers.bib."""
+    """Append works from ORCID (and any --doi) that are missing from papers.bib.
+
+    Asks for the citation key word of each new paper.
+    """
+    interactive = not (no_input or dry_run) and sys.stdin.isatty()
     bib = BIB.read_text(encoding="utf-8")
     have, keys, unpublished = existing_entries(bib)
     have |= skipped_dois()
@@ -250,7 +337,7 @@ def main(
             typer.echo(f"Preprint {doi} is published as {published}; adding that")
             seen.add(published)
             work = crossref(published)
-        key = make_key(work, keys)
+        key = make_key(work, keys, interactive)
         keys.add(key)
         new_entries.append(make_entry(work, key))
         typer.secho(f"New: {key} ({work['DOI']})", fg=typer.colors.GREEN)

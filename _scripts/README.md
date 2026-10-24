@@ -46,11 +46,14 @@ No ORCID login is needed.
 
 ```bash
 pixi run sync-papers --dry-run                        # show what would be added
-pixi run sync-papers                                  # append new entries
+pixi run sync-papers                                  # append new entries, asking for each key
 pixi run sync-papers --doi 10.1016/j.xgen.2026.101283 # also add a DOI not on ORCID
 ```
 
-Entries already in `papers.bib` (matched by DOI) are never changed; new ones are appended in the file's existing layout with keys like `Lee2024-id`.
+Entries already in `papers.bib` (matched by DOI) are never changed; new ones are appended in the file's existing layout.
+For each new paper the script shows the title and DOI and asks for the word in its key, `<Family><Year>-<word>` (e.g. `Hawkins2026-scpca`).
+Press Enter to accept the suggestion: the first acronym of a capitalized name in the title (`scpca` for "Single-Cell Pediatric Cancer Atlas"), otherwise the first distinctive title word.
+With `--no-input`, with `--dry-run`, or when not run in a terminal, it uses the suggestions without asking.
 A preprint that Crossref links to a published article is replaced by the article, and existing `@UNPUBLISHED` entries that have since been published are reported (not removed).
 DOIs in the `[[skip]]` tables of `papers-sync.toml` are ignored, e.g. a preprint whose published version Crossref doesn't link, or a work left off the CV:
 

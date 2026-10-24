@@ -34,6 +34,7 @@ Read-only commands (`git show`, `git log`, `git diff`, `git status`, `git blame`
 pixi run render       # quarto render: full build → _site/
 pixi run preview      # quarto preview: live-reloading dev server
 pixi run new-post     # scaffold a new labnotes post (see _scripts/README.md)
+pixi run sync-papers  # add missing ORCID works to papers.bib
 pixi run fmt          # ruff format + check for Python in _scripts/
 ```
 
@@ -70,7 +71,7 @@ Two CV files coexist:
 - `cv.qmd` — hand-written HTML CV; currently linked in the navbar. Source of truth for content today.
 - `auto_cv.qmd` — ORCID + vitae-based auto CV (work in progress, excluded from render). When complete it will replace `cv.qmd` in the navbar.
 
-Publications are driven by `papers.bib` (14 BibTeX entries).
+Publications are driven by `papers.bib` (16 BibTeX entries; `pixi run sync-papers` adds new ORCID works).
 `auto_cv.qmd` uses `vitae::bibliography_entries("papers.bib", "Publications")` — no live Crossref/ORCID call needed for the bibliography itself.
 
 ### Blog (labnotes)
@@ -99,5 +100,5 @@ Current tasks:
 | `04-cv-auto-build.md` | Rebuild `cv.qmd` on Quarto citations (NLM `cv.csl`, Lua filters) with a Typst PDF download; retire `auto_cv.qmd`/`vitae` (after 07) |
 | `05-cv-and-site-styling.md` | Retire `css/cv.css`; any CV tweaks go in `css/shapbio.scss` (after 04) |
 | `06-new-post-script.md` | Done: `_scripts/new_post.py` (`pixi run new-post`); remaining: commit `pixi.lock`, check in preview |
-| `07-papers-bib-sync-script.md` | Write `_scripts/sync_papers.py` (`pixi run sync-papers`) to add missing ORCID works to `papers.bib` (do first) |
+| `07-papers-bib-sync-script.md` | Done: `_scripts/sync_papers.py` (`pixi run sync-papers`) adds missing ORCID works to `papers.bib` |
 | `08-rss-feed.md` | Done: feed cleanup via `_scripts/clean_feed.py`, RSS icons, autodiscovery; remaining: check in a real feed reader |
