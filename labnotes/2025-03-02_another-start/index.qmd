@@ -1,9 +1,7 @@
 ---
 title: "It's only been two years"
 description: "So that restarting thing..."
-author:
-  name:
-    literal: "Josh"
+author: "Josh S"
 date: "2025-03-02"
 order: -20250302
 categories:

@@ -66,8 +66,11 @@ from anywhere on the site, and that old Jekyll-era feed subscribers can still re
 - [x] Fix the `dc:creator` trailing space if it bothers anyone — e.g. use the
   structured form `author: { name: "Josh Shapiro" }` in posts / `labnotes/_metadata.yml`.
   Coordinate with task 06's front-matter template.
-  - Done: posts and the `new_post.py` template use `author: { name: { literal: "Josh" } }`.
-    (`name: "Josh"` alone still gives the trailing space.)
+  - Done: posts and the `new_post.py` template use `author: "Josh S"`, which Quarto
+    splits into given/family names with no trailing space. (A bare `"Josh"` is parsed as
+    a family name only and renders as `Josh `.) Frozen posts store their front matter in
+    `_freeze/`; after an author change, edit the front matter in each
+    `execute-results/html.json` `markdown` string in place (no re-render needed).
 
 - [ ] Validate: run the rendered feed through https://validator.w3.org/feed/ (after
   deploy) and subscribe in a real reader. Confirm `draft: true` posts are excluded.

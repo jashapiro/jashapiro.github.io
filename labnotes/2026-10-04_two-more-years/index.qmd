@@ -1,9 +1,7 @@
 ---
 title: "Maybe this time"
 description: "Look, I said it was irregular"
-author:
-  name:
-    literal: "Josh"
+author: "Josh S"
 date: "2026-10-04"
 order: -20261004
 categories:
